@@ -39,9 +39,8 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Image.asset(
-                        "assets/images/logoaji.png",
-                        scale: 0.75,
+                      Image(
+                        image: Svg("assets/images/logoaji.svg"),
                       ),
                       SizedBox(
                         width: 5,
@@ -57,31 +56,19 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Row(
                     children: [
-                      Image.asset(
-                        "assets/images/notifications.png",
-                        scale: 0.75,
+                      Icon(
+                        Icons.notifications_outlined,
+                        color: ajired,
+                        size: ScreenSize.width / 12,
                       ),
                       SizedBox(
                         width: 10,
                       ),
-                      Image.asset(
-                        "assets/images/map.png",
-                        scale: 0.75,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Image.asset(
-                        "assets/images/EN.png",
-                        scale: 0.75,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Image.asset(
-                        "assets/images/profile.png",
-                        scale: 0.75,
-                      ),
+                      Icon(
+                        Icons.account_circle_outlined,
+                        color: ajired,
+                        size: ScreenSize.width / 12,
+                      )
                     ],
                   )
                 ],
