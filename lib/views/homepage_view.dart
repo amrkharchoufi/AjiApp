@@ -1,0 +1,469 @@
+import 'package:ajiapp/settings/colors.dart';
+import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/available_soon.dart';
+import 'package:ajiapp/widgets/matches_widget.dart';
+import 'package:ajiapp/widgets/morrcandoor_widget.dart';
+import 'package:ajiapp/widgets/service_widget.dart';
+import 'package:ajiapp/widgets/sitecard_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: ScreenSize.width / 20,
+              vertical: ScreenSize.height / 30),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/background.png"),
+                  fit: BoxFit.cover)),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Image.asset(
+                        "assets/images/logoaji.png",
+                        scale: 0.75,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "Hello,",
+                        style: TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        "assets/images/notifications.png",
+                        scale: 0.75,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Image.asset(
+                        "assets/images/map.png",
+                        scale: 0.75,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Image.asset(
+                        "assets/images/EN.png",
+                        scale: 0.75,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Image.asset(
+                        "assets/images/profile.png",
+                        scale: 0.75,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              FadeInRight(
+                duration: Duration(milliseconds: 1000),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Featured",
+                      style: TextStyle(
+                          fontFamily: "SFDisplay",
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "View all",
+                      style: TextStyle(
+                        fontFamily: "SFDisplay",
+                        fontSize: 19,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: FadeInUp(
+                  duration: Duration(milliseconds: 1200),
+                  child: Row(
+                    children: [
+                      FeatureCard(
+                        title: "Visit Dar Naji",
+                        subtitle: "Get an unmatched taste of Morocco",
+                        backgroundImage:
+                            AssetImage('assets/images/f-image.png'),
+                        description: 'Learn More',
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      FeatureCard(
+                        title: "Get your E-sim",
+                        subtitle: "Stay connected with inwi e-sim",
+                        backgroundImage: AssetImage('assets/images/e-sim.png'),
+                        description: 'Learn More',
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      FeatureCard(
+                        title: "Your Guide to Morroco",
+                        subtitle: "Aji app is your Companion",
+                        backgroundImage: AssetImage('assets/images/guide.png'),
+                        description: 'Learn More',
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      FeatureCard(
+                        title: "Hassan II Mosque",
+                        subtitle: "Visit the Largest mosque in Morroco",
+                        backgroundImage: AssetImage('assets/images/city.png'),
+                        description: 'Book a Tour',
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              FadeInRight(
+                duration: Duration(milliseconds: 1400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Services",
+                      style: TextStyle(
+                          fontFamily: "SFDisplay",
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "View all",
+                      style: TextStyle(
+                        fontFamily: "SFDisplay",
+                        fontSize: 19,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              FadeInUp(
+                duration: Duration(milliseconds: 1600),
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  spacing: ScreenSize.width / 25,
+                  runSpacing: ScreenSize.width / 25,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "e-sim",
+                          imgicon: true,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Visa",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/visa.png")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Tickets",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/tickets.png")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Flights",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/plane.png")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Accommodation",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/Home.png")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Transportation",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/car.png")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Discover",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/location.png")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Food",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/food.png")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Important\nContacts",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image.asset("assets/images/alert.png")),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              FadeInRight(
+                duration: Duration(milliseconds: 1800),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Coming up",
+                      style: TextStyle(
+                          fontFamily: "SFDisplay",
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "View all",
+                      style: TextStyle(
+                        fontFamily: "SFDisplay",
+                        fontSize: 19,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: FadeInUp(
+                  duration: Duration(milliseconds: 2000),
+                  child: Row(
+                    children: [
+                      Matchwidget(
+                          ImagePath: "assets/images/match.png",
+                          MatchTitle: "Morocco vs\nZambia",
+                          MatchDate: "16 December at 18:00",
+                          Matchplace: "Sport Complexe Prince",
+                          Price: "600"),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      Matchwidget(
+                          ImagePath: "assets/images/match1.png",
+                          MatchTitle: "Tunisia vs\nSouth Africa",
+                          MatchDate: "16 December at 18:00",
+                          Matchplace: "Sport Complexe Prince",
+                          Price: "600")
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              FadeInRight(
+                duration: Duration(milliseconds: 2200),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Discover",
+                      style: TextStyle(
+                          fontFamily: "SFDisplay",
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "View all",
+                      style: TextStyle(
+                        fontFamily: "SFDisplay",
+                        fontSize: 19,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: FadeInUp(
+                  duration: Duration(milliseconds: 2400),
+                  child: Row(
+                    children: [
+                      SiteCard(
+                          title: "Mausoleum of Mohammed V",
+                          backgroundImage:
+                              AssetImage("assets/images/city1.png")),
+                      SizedBox(
+                        width: ScreenSize.width / 30,
+                      ),
+                      SiteCard(
+                          title: "Hassan Tower",
+                          backgroundImage:
+                              AssetImage("assets/images/city2.png")),
+                      SizedBox(
+                        width: ScreenSize.width / 30,
+                      ),
+                      SiteCard(
+                          title: "Hassan II Mosque",
+                          backgroundImage:
+                              AssetImage("assets/images/mosque.png")),
+                      SizedBox(
+                        width: ScreenSize.width / 30,
+                      ),
+                      SiteCard(
+                          title: "Hercules Caves",
+                          backgroundImage:
+                              AssetImage("assets/images/hercules.png"))
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
