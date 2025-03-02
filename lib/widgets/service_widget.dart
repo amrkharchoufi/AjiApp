@@ -20,6 +20,7 @@ class ServiceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return Container(
       width: width,
       height: height,
@@ -42,7 +43,7 @@ class ServiceWidget extends StatelessWidget {
             style: TextStyle(
                 color: ajired,
                 fontWeight: FontWeight.bold,
-                fontSize: ScreenSize.width / 30),
+                fontSize: ScreenSize.width / 33),
           )
         ],
       ),

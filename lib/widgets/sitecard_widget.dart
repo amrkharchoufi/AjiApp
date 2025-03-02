@@ -6,13 +6,14 @@ class SiteCard extends StatelessWidget {
   final ImageProvider backgroundImage;
 
   const SiteCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.backgroundImage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return Container(
       width: ScreenSize.width / 1.3,
       height: ScreenSize.height / 4,

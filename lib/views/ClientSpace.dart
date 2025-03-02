@@ -1,14 +1,19 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/views/available_soon.dart';
+
 import 'package:ajiapp/views/homepage_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class Clientspace extends StatefulWidget {
+  const Clientspace({super.key});
+
   @override
   _ClientspaceState createState() => _ClientspaceState();
 }
 
 class _ClientspaceState extends State<Clientspace> {
+  
   int _selectedIndex = 0;
 
   static const List<Widget> _pages = <Widget>[
@@ -27,6 +32,8 @@ class _ClientspaceState extends State<Clientspace> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
+
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -41,7 +48,7 @@ class _ClientspaceState extends State<Clientspace> {
             icon: SizedBox(
               width: ScreenSize.width / 15,
               height: ScreenSize.width / 15,
-              child: Image.asset('assets/images/homeicon.png'),
+              child: Image(image:Svg('assets/icons/homeicon.svg')),
             ),
             label: 'Home',
           ),
@@ -49,7 +56,7 @@ class _ClientspaceState extends State<Clientspace> {
             icon: SizedBox(
               width: ScreenSize.width / 15,
               height: ScreenSize.width / 15,
-              child: Image.asset('assets/images/ticketicon.png'),
+              child: Image(image: Svg("assets/icons/eventicon.svg")),
             ),
             label: 'Events',
           ),
@@ -57,7 +64,7 @@ class _ClientspaceState extends State<Clientspace> {
             icon: SizedBox(
               width: ScreenSize.width / 15,
               height: ScreenSize.width / 15,
-              child: Image.asset('assets/images/services.png'),
+              child: Image(image: Svg("assets/icons/services.svg")),
             ),
             label: 'Services',
           ),
@@ -65,7 +72,7 @@ class _ClientspaceState extends State<Clientspace> {
             icon: SizedBox(
               width: ScreenSize.width / 15,
               height: ScreenSize.width / 15,
-              child: Image.asset('assets/images/Search.png'),
+              child: Image(image: Svg("assets/icons/search.svg")),
             ),
             label: 'Search',
           ),
@@ -73,7 +80,7 @@ class _ClientspaceState extends State<Clientspace> {
             icon: SizedBox(
               width: ScreenSize.width / 15,
               height: ScreenSize.width / 15,
-              child: Image.asset('assets/images/avatar.png'),
+              child: Image(image: Svg("assets/icons/avatar.svg")),
             ),
             label: 'Profile',
           ),

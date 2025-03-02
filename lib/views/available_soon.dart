@@ -1,12 +1,14 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class AvailableSoon extends StatelessWidget {
   const AvailableSoon({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return Scaffold(
         body: SingleChildScrollView(
             child: Container(
@@ -20,60 +22,47 @@ class AvailableSoon extends StatelessWidget {
                         image: AssetImage("assets/images/background.png"),
                         fit: BoxFit.cover)),
                 child: Column(children: [
+                    Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Image.asset(
-                            "assets/images/logoaji.png",
-                            scale: 0.75,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Hello,",
-                            style: TextStyle(
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                      Image(
+                        image: Svg("assets/images/logoaji.svg"),
                       ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/notifications.png",
-                            scale: 0.75,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Image.asset(
-                            "assets/images/map.png",
-                            scale: 0.75,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Image.asset(
-                            "assets/images/EN.png",
-                            scale: 0.75,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Image.asset(
-                            "assets/images/profile.png",
-                            scale: 0.75,
-                          ),
-                        ],
-                      )
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "Hello,",
+                        style: TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.notifications_outlined,
+                        color: ajired,
+                        size: ScreenSize.width / 12,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Icon(
+                        Icons.account_circle_outlined,
+                        color: ajired,
+                        size: ScreenSize.width / 12,
+                      )
+                    ],
+                  )
+                ],
+              ),
                   SizedBox(
                     height: ScreenSize.height / 3,
                   ),

@@ -8,15 +8,16 @@ class FeatureCard extends StatelessWidget {
   final String description;
 
   const FeatureCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.backgroundImage,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return SizedBox(
       width: ScreenSize.width / 2.2,
       height: ScreenSize.width / 1.4,
@@ -31,8 +32,9 @@ class FeatureCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.black, // Fallback color
                   image: DecorationImage(
+                    
                     image: backgroundImage,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
               ),

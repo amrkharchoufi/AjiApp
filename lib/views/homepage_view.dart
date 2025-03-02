@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -109,19 +110,19 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       FeatureCard(
-                        title: "Visit Dar Naji",
-                        subtitle: "Get an unmatched taste of Morocco",
-                        backgroundImage:
-                            AssetImage('assets/images/f-image.png'),
+                        title: "Get your E-sim",
+                        subtitle: "Stay connected with inwi e-sim",
+                        backgroundImage: AssetImage('assets/images/sim.jpg'),
                         description: 'Learn More',
                       ),
                       SizedBox(
                         width: ScreenSize.width / 20,
                       ),
                       FeatureCard(
-                        title: "Get your E-sim",
-                        subtitle: "Stay connected with inwi e-sim",
-                        backgroundImage: AssetImage('assets/images/e-sim.png'),
+                        title: "Morroco vs Comoros",
+                        subtitle: "Dec,21,2025 at 18:00",
+                        backgroundImage:
+                            AssetImage('assets/images/matchday.jpg'),
                         description: 'Learn More',
                       ),
                       SizedBox(
@@ -130,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                       FeatureCard(
                         title: "Your Guide to Morroco",
                         subtitle: "Aji app is your Companion",
-                        backgroundImage: AssetImage('assets/images/guide.png'),
+                        backgroundImage: AssetImage('assets/images/guide.jpg'),
                         description: 'Learn More',
                       ),
                       SizedBox(
@@ -139,7 +140,16 @@ class _HomePageState extends State<HomePage> {
                       FeatureCard(
                         title: "Hassan II Mosque",
                         subtitle: "Visit the Largest mosque in Morroco",
-                        backgroundImage: AssetImage('assets/images/city.png'),
+                        backgroundImage: AssetImage('assets/images/mosque.jpg'),
+                        description: 'Book a Tour',
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      FeatureCard(
+                        title: "Visit Dar Naji",
+                        subtitle: "Get an unmatched taset of Morroco",
+                        backgroundImage: AssetImage('assets/images/f-image.jpg'),
                         description: 'Book a Tour',
                       )
                     ],
@@ -194,9 +204,9 @@ class _HomePageState extends State<HomePage> {
                           width: ScreenSize.width / 3.7,
                           height: ScreenSize.width / 3.7,
                           text: "e-sim",
-                          imgicon: true,
+                          imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("")),
+                          img: Image(image: Svg("assets/icons/Phone.svg"),color: ajired,width: ScreenSize.width/14,)),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -212,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Visa",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/visa.png")),
+                          img: Image(image: Svg("assets/icons/Visa_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -228,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Tickets",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/tickets.png")),
+                          img: Image(image: Svg("assets/icons/Ticket_icon.svg"),color: ajired,width: ScreenSize.width/12,),)
                     ),
                     GestureDetector(
                       onTap: () {
@@ -244,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Flights",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/plane.png")),
+                          img: Image(image: Svg("assets/icons/flight_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -260,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Accommodation",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/Home.png")),
+                          img: Image(image: Svg("assets/icons/Home.svg"),color: ajired,width: ScreenSize.width/12,)),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -276,7 +286,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Transportation",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/car.png")),
+                          img: Image(image: Svg("assets/icons/car.svg"),color: ajired,width: ScreenSize.width/12,)),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -292,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Discover",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/location.png")),
+                          img: Image(image: Svg("assets/icons/location.svg"),color: ajired,width: ScreenSize.width/12,)),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -308,7 +318,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Food",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/food.png")),
+                          img: Image(image: Svg("assets/icons/food.svg"),color: ajired,width: ScreenSize.width/10,)),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -324,7 +334,7 @@ class _HomePageState extends State<HomePage> {
                           text: "Important\nContacts",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image.asset("assets/images/alert.png")),
+                          img:Image(image: Svg("assets/icons/alert.svg"),color: ajired,width: ScreenSize.width/12,)),
                     )
                   ],
                 ),
@@ -365,7 +375,7 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       Matchwidget(
-                          ImagePath: "assets/images/match.png",
+                          ImagePath: "assets/images/match.jpg",
                           MatchTitle: "Morocco vs\nZambia",
                           MatchDate: "16 December at 18:00",
                           Matchplace: "Sport Complexe Prince",
@@ -374,7 +384,7 @@ class _HomePageState extends State<HomePage> {
                         width: ScreenSize.width / 20,
                       ),
                       Matchwidget(
-                          ImagePath: "assets/images/match1.png",
+                          ImagePath: "assets/images/match2.jpg",
                           MatchTitle: "Tunisia vs\nSouth Africa",
                           MatchDate: "16 December at 18:00",
                           Matchplace: "Sport Complexe Prince",

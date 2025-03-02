@@ -18,8 +18,9 @@ class Matchwidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return Container(
-      width: ScreenSize.width / 1.3,
+      width: ScreenSize.width / 1.2,
       height: ScreenSize.height / 4,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
@@ -30,7 +31,7 @@ class Matchwidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            width: (ScreenSize.width / 1.3) / 2.1,
+            width: (ScreenSize.width / 1.2) / 2.1,
             height: ScreenSize.height / 4,
             child: Image.asset(
               ImagePath,
