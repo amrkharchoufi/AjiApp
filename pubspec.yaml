@@ -38,6 +38,7 @@ dependencies:
   path_drawing: ^1.0.1
   animations: ^2.0.11
   animate_do: ^4.2.0
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   flutter_test:

@@ -29,83 +29,93 @@ class _ComingUpState extends State<ComingUp> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Image.asset("assets/images/shape.png",
-                width: ScreenSize.width,
-                  fit: BoxFit.fitWidth,
-                ),
-                Positioned(
-                  left: ScreenSize.width/20,
-                  top: ScreenSize.height/20,
-                  child: Row(
-                    children: [
-                      Image(image: Svg("assets/images/logowhite.svg"),),
-                      SizedBox(width: ScreenSize.width/25,),
-                      Text("Coming Up", style: TextStyle(
-                        color: Colors.white,
-                        fontSize:ScreenSize.width/13.5,
-                        fontWeight: FontWeight.bold
-                      ),)
-                    ],
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: ScreenSize.height/60,),
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: ScreenSize.width/25),
-              child: Column(
+      body: Container(
+        width: ScreenSize.width,
+        height: ScreenSize.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
                 children: [
-                  Matchwidget(
-                    width: ScreenSize.width ,
-                    height: ScreenSize.height / 4.5,
-                    ImagePath: "assets/images/match.jpg",
-                    MatchTitle: "Morocco vs\nZambia",
-                    MatchDate: "16 December at 18:00",
-                    Matchplace: "Sport Complexe Prince",
-                    Price: "600"),
-                              SizedBox(
-                                height: ScreenSize.width / 20,
-                              ),
-                  Matchwidget(
-                   width: ScreenSize.width ,
-                   height: ScreenSize.height / 4.5,
-                   ImagePath: "assets/images/match2.jpg",
-                   MatchTitle: "Tunisia vs\nSouth Africa",
-                   MatchDate: "16 December at 18:00",
-                   Matchplace: "Sport Complexe Prince",
-                   Price: "600"),
-                   SizedBox(
-                                height: ScreenSize.width / 20,
-                              ),
-                  Matchwidget(
-                   width: ScreenSize.width ,
-                   height: ScreenSize.height / 4.5,
-                   ImagePath: "assets/images/match2.jpg",
-                   MatchTitle: "Tunisia vs\nSouth Africa",
-                   MatchDate: "16 December at 18:00",
-                   Matchplace: "Sport Complexe Prince",
-                   Price: "600"),
-                   SizedBox(
-                                height: ScreenSize.width / 20,
-                              ),
-                  Matchwidget(
-                   width: ScreenSize.width ,
-                   height: ScreenSize.height / 4.5,
-                   ImagePath: "assets/images/match2.jpg",
-                   MatchTitle: "Tunisia vs\nSouth Africa",
-                   MatchDate: "16 December at 18:00",
-                   Matchplace: "Sport Complexe Prince",
-                   Price: "600"),
-                   SizedBox(height: ScreenSize.height/20,),
+                  Image.asset("assets/images/shape.png",
+                  width: ScreenSize.width,
+                    fit: BoxFit.fitWidth,
+                  ),
+                  Positioned(
+                    left: ScreenSize.width/20,
+                    top: ScreenSize.height/20,
+                    child: Row(
+                      children: [
+                        Image(image: Svg("assets/images/logowhite.svg"),),
+                        SizedBox(width: ScreenSize.width/25,),
+                        Text("Coming Up", style: TextStyle(
+                          color: Colors.white,
+                          fontSize:ScreenSize.width/13.5,
+                          fontWeight: FontWeight.bold
+                        ),)
+                      ],
+                    ),
+                  )
                 ],
               ),
-            )
-          ],
+              SizedBox(height: ScreenSize.height/60,),
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: ScreenSize.width/25),
+                child: Column(
+                  children: [
+                    Matchwidget(
+                      width: ScreenSize.width ,
+                      height: ScreenSize.height / 4.5,
+                      ImagePath: "assets/images/match.jpg",
+                      MatchTitle: "Morocco vs\nZambia",
+                      MatchDate: "16 December at 18:00",
+                      Matchplace: "Sport Complexe Prince",
+                      Price: "600"),
+                                SizedBox(
+                                  height: ScreenSize.width / 20,
+                                ),
+                    Matchwidget(
+                     width: ScreenSize.width ,
+                     height: ScreenSize.height / 4.5,
+                     ImagePath: "assets/images/match2.jpg",
+                     MatchTitle: "Tunisia vs\nSouth Africa",
+                     MatchDate: "16 December at 18:00",
+                     Matchplace: "Sport Complexe Prince",
+                     Price: "600"),
+                     SizedBox(
+                                  height: ScreenSize.width / 20,
+                                ),
+                    Matchwidget(
+                     width: ScreenSize.width ,
+                     height: ScreenSize.height / 4.5,
+                     ImagePath: "assets/images/match2.jpg",
+                     MatchTitle: "Tunisia vs\nSouth Africa",
+                     MatchDate: "16 December at 18:00",
+                     Matchplace: "Sport Complexe Prince",
+                     Price: "600"),
+                     SizedBox(
+                                  height: ScreenSize.width / 20,
+                                ),
+                    Matchwidget(
+                     width: ScreenSize.width ,
+                     height: ScreenSize.height / 4.5,
+                     ImagePath: "assets/images/match2.jpg",
+                     MatchTitle: "Tunisia vs\nSouth Africa",
+                     MatchDate: "16 December at 18:00",
+                     Matchplace: "Sport Complexe Prince",
+                     Price: "600"),
+                     SizedBox(height: ScreenSize.height/20,),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       )
     );

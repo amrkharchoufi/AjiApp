@@ -1,6 +1,5 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/views/ClientSpace.dart';
-import 'package:ajiapp/views/homepage_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {

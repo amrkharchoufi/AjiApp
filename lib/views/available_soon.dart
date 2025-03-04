@@ -67,18 +67,21 @@ class AvailableSoon extends StatelessWidget {
                     height: ScreenSize.height / 3,
                   ),
                   Container(
+                width: ScreenSize.width/2,
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(19),
                       border: Border.all(width: 1, color: gold),
                     ),
-                    child: Text(
-                      "Available Soon",
-                      style: TextStyle(
-                          color: ajired,
-                          fontFamily: "SFDisplay",
-                          fontSize: ScreenSize.width / 10),
+                    child: Center(
+                      child: Text(
+                        "This Service will \nbe available soon",
+                        style: TextStyle(
+                            color: ajired,
+                            fontFamily: "SFDisplay",
+                            fontSize: ScreenSize.width / 19),
+                      ),
                     ),
                   )
                 ]))));

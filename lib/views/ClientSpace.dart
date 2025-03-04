@@ -1,4 +1,5 @@
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/Service_view.dart';
 import 'package:ajiapp/views/available_soon.dart';
 
 import 'package:ajiapp/views/homepage_view.dart';
@@ -9,17 +10,17 @@ class Clientspace extends StatefulWidget {
   const Clientspace({super.key});
 
   @override
-  _ClientspaceState createState() => _ClientspaceState();
+  ClientspaceState createState() => ClientspaceState();
 }
 
-class _ClientspaceState extends State<Clientspace> {
+class ClientspaceState extends State<Clientspace> {
   
   int _selectedIndex = 0;
 
   static const List<Widget> _pages = <Widget>[
     HomePage(),
     AvailableSoon(),
-    AvailableSoon(),
+    ServiceView(),
     AvailableSoon(),
     AvailableSoon(),
   ];

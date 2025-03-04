@@ -1,17 +1,16 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/widgets/discover_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-class Discover extends StatefulWidget {
-  const Discover({super.key});
+class EsimView extends StatefulWidget {
+  const EsimView({super.key});
 
   @override
-  State<Discover> createState() => _DiscoverState();
+  State<EsimView> createState() => _EsimViewState();
 }
 
-class _DiscoverState extends State<Discover> {
+class _EsimViewState extends State<EsimView> {
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
@@ -54,9 +53,9 @@ class _DiscoverState extends State<Discover> {
                       children: [
                         Image(image: Svg("assets/images/logowhite.svg"),),
                         SizedBox(width: ScreenSize.width/25,),
-                        Text("Discover", style: TextStyle(
+                        Text("E-sim", style: TextStyle(
                           color: Colors.white,
-                          fontSize:  ScreenSize.width/13.5,
+                          fontSize:ScreenSize.width/13.5,
                           fontWeight: FontWeight.bold
                         ),)
                       ],
@@ -64,23 +63,25 @@ class _DiscoverState extends State<Discover> {
                   )
                 ],
               ),
-              SizedBox(height: ScreenSize.height/60,),
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: ScreenSize.width/25),
-                child: Column(
-                  children: [
-                    DiscoverCard(ImagePath: "assets/images/city1.png", siteName: "Mausoluem of Hassan", sitePlace: "Rabat", Entry: "Paid Entry", width: ScreenSize.width, height: ScreenSize.height / 4.5),
-                    SizedBox(height: ScreenSize.height/60,),
-                    DiscoverCard(ImagePath: "assets/images/city2.png", siteName: "Hassan Tower", sitePlace: "Rabat", Entry: "Free Entry", width: ScreenSize.width, height: ScreenSize.height / 4.5),
-                    SizedBox(height: ScreenSize.height/60,),
-                    DiscoverCard(ImagePath: "assets/images/hercules.png", siteName: "Hercules Caves", sitePlace: "Tangier", Entry: "Free Entry", width: ScreenSize.width, height: ScreenSize.height / 4.5),
-                    SizedBox(height: ScreenSize.height/60,),
-                    DiscoverCard(ImagePath: "assets/images/mosque.jpg", siteName: "Medina of Fez", sitePlace: "Fez", Entry: "Paid Entry", width: ScreenSize.width, height: ScreenSize.height / 4.5),
-                    SizedBox(height: ScreenSize.height/20,),
-                  
-                  ],
-                ),
-              )
+              SizedBox(height: ScreenSize.height/6,),
+              Container(
+                width: ScreenSize.width/2,
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(19),
+                      border: Border.all(width: 1, color: gold),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "This Service will \nbe available soon",
+                        style: TextStyle(
+                            color: ajired,
+                            fontFamily: "SFDisplay",
+                            fontSize: ScreenSize.width / 19),
+                      ),
+                    ),
+                  )
             ],
           ),
         ),
