@@ -2,21 +2,19 @@ import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
 
-class Matchwidget extends StatelessWidget {
+class DiscoverCard extends StatelessWidget {
   final String ImagePath;
-  final String MatchTitle;
-  final String MatchDate;
-  final String Matchplace;
-  final String Price;
+  final String siteName;
+  final String sitePlace;
+  final String Entry;
   final double width;
   final double height;
-  const Matchwidget({
+  const DiscoverCard({
     super.key,
     required this.ImagePath,
-    required this.MatchTitle,
-    required this.MatchDate,
-    required this.Matchplace,
-    required this.Price,
+    required this.siteName,
+    required this.sitePlace,
+    required this.Entry,
     required this.width,
     required this.height,
   });
@@ -55,7 +53,7 @@ class Matchwidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        MatchTitle,
+                        siteName,
                         softWrap: true,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -66,27 +64,19 @@ class Matchwidget extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: ScreenSize.width / 50),
-                      Text(
-                        MatchDate,
-                        style: TextStyle(
-                          color: ajired,
-                          fontFamily: "SFDisplay",
-                          fontSize: ScreenSize.width / 35,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: ScreenSize.width / 50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(
                             Icons.location_on_outlined,
                             size: 20,
+                            color: ajired,
                           ),
                           Text(
-                            Matchplace,
+                            sitePlace,
                             style: TextStyle(
                               fontFamily: "SFDisplay",
+                              color: ajired,
                               fontSize: ScreenSize.width / 35,
                               fontWeight: FontWeight.bold,
                             ),
@@ -95,10 +85,10 @@ class Matchwidget extends StatelessWidget {
                       ),
                       SizedBox(height: ScreenSize.width / 50),
                       Text(
-                        "FROM $Price MAD",
+                        Entry,
                         style: TextStyle(
                           fontFamily: "SFDisplay",
-                          fontSize: ScreenSize.width / 23,
+                          fontSize: ScreenSize.width / 35,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -107,21 +97,21 @@ class Matchwidget extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor:  WidgetStatePropertyAll(gold),
-                      padding: WidgetStatePropertyAll(
-                        EdgeInsets.symmetric(
-                          vertical: ScreenSize.width / 70,
-                          horizontal: ScreenSize.width / 20,
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: gold,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 15,
                       ),
                     ),
                     child: Text(
-                      "Book now",
+                      "Learn More",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: ScreenSize.width / 22,
+                        fontSize: (ScreenSize.width / 22),
                       ),
                     ),
                   )

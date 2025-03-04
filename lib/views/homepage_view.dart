@@ -1,5 +1,7 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/ComingUp_view.dart';
+import 'package:ajiapp/views/Discover_view.dart';
 import 'package:ajiapp/views/available_soon.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
@@ -355,11 +357,20 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "View all",
-                      style: TextStyle(
-                        fontFamily: "SFDisplay",
-                        fontSize: 19,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ComingUp(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "View all",
+                        style: TextStyle(
+                          fontFamily: "SFDisplay",
+                          fontSize: 19,
+                        ),
                       ),
                     ),
                   ],
@@ -375,8 +386,10 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       Matchwidget(
+                        width: ScreenSize.width / 1.2,
+                        height: ScreenSize.height / 4,
                           ImagePath: "assets/images/match.jpg",
-                          MatchTitle: "Morocco vs\nZambia",
+                          MatchTitle: "Morocco vs Zambia",
                           MatchDate: "16 December at 18:00",
                           Matchplace: "Sport Complexe Prince",
                           Price: "600"),
@@ -384,8 +397,10 @@ class _HomePageState extends State<HomePage> {
                         width: ScreenSize.width / 20,
                       ),
                       Matchwidget(
+                        width: ScreenSize.width / 1.2,
+                        height: ScreenSize.height / 4,
                           ImagePath: "assets/images/match2.jpg",
-                          MatchTitle: "Tunisia vs\nSouth Africa",
+                          MatchTitle: "Tunisia vs South Africa",
                           MatchDate: "16 December at 18:00",
                           Matchplace: "Sport Complexe Prince",
                           Price: "600")
@@ -409,11 +424,20 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "View all",
-                      style: TextStyle(
-                        fontFamily: "SFDisplay",
-                        fontSize: 19,
+                      GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => Discover(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "View all",
+                        style: TextStyle(
+                          fontFamily: "SFDisplay",
+                          fontSize: 19,
+                        ),
                       ),
                     ),
                   ],
