@@ -3,15 +3,26 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-class WithoutVisaView extends StatefulWidget {
+class WithVisa extends StatefulWidget {
   final String country;
-  const WithoutVisaView({super.key, required this.country});
+  const WithVisa({super.key, required this.country});
 
   @override
-  State<WithoutVisaView> createState() => _WithoutVisaViewState();
+  State<WithVisa> createState() => _WithVisaState();
 }
 
-class _WithoutVisaViewState extends State<WithoutVisaView> {
+class _WithVisaState extends State<WithVisa> {
+  final Map<String, String> nationalitiesMap = {
+    "Algeria": "Algerian",
+    "Benin": "Beninese",
+    "Cameroon": "Cameroonian",
+    "Egypt": "Egyptian",
+    "Ghana": "Ghanaian",
+    "Ivory Coast": "Ivorian",
+    "Morocco": "Moroccan",
+    "Senegal": "Senegalese",
+  };
+
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
@@ -82,15 +93,19 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
                   height: ScreenSize.height / 120,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal:ScreenSize.height / 60),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
                   child: Row(
                     children: [
-                    Image(image: Svg("assets/icons/${widget.country}_icon.svg"),
-                    width: ScreenSize.width / 4.5,
-                    height: ScreenSize.width / 4.5,
-                    ),
-                    SizedBox(width: ScreenSize.width / 30,),
-                    Text(
+                      Image(
+                        image: Svg("assets/icons/${widget.country}_icon.svg"),
+                        width: ScreenSize.width / 4.5,
+                        height: ScreenSize.width / 4.5,
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 30,
+                      ),
+                      Text(
                         widget.country,
                         style: TextStyle(
                             fontFamily: "SFDisplay",
@@ -105,46 +120,46 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
                   child: Column(
                     children: [
                       Text(
-                        "Get visa information before your next trip to Morroco",
+                        "if you hold a ${nationalitiesMap[widget.country]} passport,you are required to obtain an eVisa or eTA to enter Morocco",
                         style: TextStyle(
                             fontFamily: "SFDisplay",
                             fontSize: ScreenSize.width / 21,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Search your nationality to find out the documents you need for your visa application",
+                        "Moroccan embassies and consulates handle visa applications for foreign nationals who wish to visit Morocco for various purposes, including tourism, work, study, business, or family visits.",
                         style: TextStyle(
                           fontFamily: "SFDisplay",
                           fontSize: ScreenSize.width / 25,
                         ),
                       ),
                       SizedBox(
-                        height: ScreenSize.width / 4,
+                        height: ScreenSize.width / 10,
                       ),
-                      ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: gold,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ScreenSize.width / 15,
-                        vertical: ScreenSize.width / 40,
-                      ),
-                    ),
-                    child: Text(
-                      "Book your Flight",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: (ScreenSize.width / 18),
-                      ),
-                    ),
-                  )
                     ],
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: gold,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenSize.width / 15,
+                      vertical: ScreenSize.width / 40,
+                    ),
+                  ),
+                  child: Text(
+                    "Apply for eVisa",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: (ScreenSize.width / 18),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

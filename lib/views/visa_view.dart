@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/with_visa.dart';
 import 'package:ajiapp/views/without_visa_view.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -143,7 +144,11 @@ final List<String> nationalities = [
                           ),
                         )
                       } else {
-                        Navigator.pushNamed(context, "/withoutvisa")
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => WithVisa(country: value!,),
+                          ),
+                        )
                       }
                      },
                       ),

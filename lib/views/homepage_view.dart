@@ -3,8 +3,11 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/views/ComingUp_view.dart';
 import 'package:ajiapp/views/Discover_view.dart';
 import 'package:ajiapp/views/Service_view.dart';
+import 'package:ajiapp/views/accomodation_view.dart';
 import 'package:ajiapp/views/available_soon.dart';
 import 'package:ajiapp/views/e-sim_view.dart';
+import 'package:ajiapp/views/notification_view.dart';
+import 'package:ajiapp/views/profile_view.dart';
 import 'package:ajiapp/views/visa_view.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
@@ -62,18 +65,36 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Row(
                     children: [
-                      Icon(
-                        Icons.notifications_outlined,
-                        color: ajired,
-                        size: ScreenSize.width / 12,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => NotificationView(),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.notifications_outlined,
+                          color: ajired,
+                          size: ScreenSize.width / 12,
+                        ),
                       ),
                       SizedBox(
                         width: 10,
                       ),
-                      Icon(
-                        Icons.account_circle_outlined,
-                        color: ajired,
-                        size: ScreenSize.width / 12,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProfileView(),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.account_circle_outlined,
+                          color: ajired,
+                          size: ScreenSize.width / 12,
+                        ),
                       )
                     ],
                   )
@@ -135,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       FeatureCard(
                         title: "Your Guide to Morroco",
-                        subtitle: "Aji app is your Companion",
+                        subtitle: "Aji app is your Companion in Morocco",
                         backgroundImage: AssetImage('assets/images/guide.jpg'),
                         description: 'Learn More',
                       ),
@@ -274,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AvailableSoon(),
+                            builder: (context) => AccomodationView(),
                           ),
                         );
                       },
