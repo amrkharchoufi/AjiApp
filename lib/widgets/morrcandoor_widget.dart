@@ -34,8 +34,7 @@ class FeatureCard extends StatelessWidget {
                   image: DecorationImage(
                     image: backgroundImage,
                     fit: BoxFit.cover,
-                  ),
-                ),
+                  )),
               ),
               // Gradient overlay
               Positioned(
@@ -62,7 +61,8 @@ class FeatureCard extends StatelessWidget {
                 left: ScreenSize.width / 30,
                 right: ScreenSize.width / 30,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal:ScreenSize.width / 50),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: ScreenSize.width / 50),
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(179, 0, 0, 0),
                     borderRadius: BorderRadius.circular(15),
@@ -149,7 +149,8 @@ class DoorFramePainter extends CustomPainter {
 
     final outerPath = _getOuterPath(size);
     final innerPath = _getInnerPath(size);
-    final framePath = Path.combine(PathOperation.difference, outerPath, innerPath);
+    final framePath =
+        Path.combine(PathOperation.difference, outerPath, innerPath);
     
     canvas.drawPath(framePath, paint);
   }
@@ -160,79 +161,449 @@ class DoorFramePainter extends CustomPainter {
 
 Path _getOuterPath(Size size) {
   final path = Path();
-  final scaleX = size.width / 154;
-  final scaleY = size.height / 252;
-
-  path.moveTo(144.921 * scaleX, 252 * scaleY);
-  path.lineTo(9.177 * scaleX, 252 * scaleY);
-  path.cubicTo(4.171 * scaleX, 252 * scaleY, 0.098 * scaleX, 247.928 * scaleY,
-      0.098 * scaleX, 242.923 * scaleY);
-  path.lineTo(0.098 * scaleX, 156.47 * scaleY);
-  path.cubicTo(0.098 * scaleX, 151.465 * scaleY, 4.171 * scaleX,
-      147.393 * scaleY, 9.177 * scaleX, 147.393 * scaleY);
-  path.cubicTo(5.644 * scaleX, 137.04 * scaleY, 2.11 * scaleX, 125.755 * scaleY,
-      0.736 * scaleX, 114.519 * scaleY);
-  path.cubicTo(0 * scaleX, 108.386 * scaleY, -0.834 * scaleX, 95.923 * scaleY,
-      2.012 * scaleX, 81.105 * scaleY);
-  path.cubicTo(16.195 * scaleX, 38.811 * scaleY, 29.298 * scaleX,
-      27.231 * scaleY, 35.58 * scaleX, 21.687 * scaleY);
-  path.cubicTo(47.996 * scaleX, 10.647 * scaleY, 61.688 * scaleX,
-      3.533 * scaleY, 76.264 * scaleX, 0.147 * scaleY);
-  path.lineTo(77 * scaleX, 0 * scaleY);
-  path.lineTo(77.736 * scaleX, 0.147 * scaleY);
-  path.cubicTo(92.312 * scaleX, 3.484 * scaleY, 106.004 * scaleX,
-      10.647 * scaleY, 117.389 * scaleX, 20.804 * scaleY);
-  path.cubicTo(124.702 * scaleX, 27.28 * scaleY, 137.805 * scaleX,
-      38.811 * scaleY, 146.491 * scaleX, 59.615 * scaleY);
-  path.cubicTo(154.883 * scaleX, 95.972 * scaleY, 154.049 * scaleX,
-      108.435 * scaleY, 153.264 * scaleX, 114.568 * scaleY);
-  path.cubicTo(151.89 * scaleX, 125.804 * scaleY, 148.356 * scaleX,
-      137.04 * scaleY, 142.958 * scaleX, 147.442 * scaleY);
-  path.lineTo(144.921 * scaleX, 147.442 * scaleY);
-  path.cubicTo(149.927 * scaleX, 147.442 * scaleY, 154 * scaleX,
-      151.514 * scaleY, 154 * scaleX, 156.519 * scaleY);
-  path.lineTo(154 * scaleX, 242.972 * scaleY);
-  path.cubicTo(154 * scaleX, 247.977 * scaleY, 149.927 * scaleX,
-      252.049 * scaleY, 144.921 * scaleX, 252.049 * scaleY);
-  path.close();
+  final _xScaling = size.width / 150; 
+  final _yScaling = size.height / 250; 
+  path.lineTo(144.896 * _xScaling, 252 * _yScaling);
+  path.cubicTo(
+    144.896 * _xScaling,
+    252 * _yScaling,
+    9.15173 * _xScaling,
+    252 * _yScaling,
+    9.15173 * _xScaling,
+    252 * _yScaling,
+  );
+  path.cubicTo(
+    4.146 * _xScaling,
+    252 * _yScaling,
+    0.0727008 * _xScaling,
+    247.928 * _yScaling,
+    0.0727008 * _xScaling,
+    242.923 * _yScaling,
+  );
+  path.cubicTo(
+    0.0727008 * _xScaling,
+    242.923 * _yScaling,
+    0.0727008 * _xScaling,
+    156.47 * _yScaling,
+    0.0727008 * _xScaling,
+    156.47 * _yScaling,
+  );
+  path.cubicTo(
+    0.0727008 * _xScaling,
+    151.465 * _yScaling,
+    4.146 * _xScaling,
+    147.393 * _yScaling,
+    9.15173 * _xScaling,
+    147.393 * _yScaling,
+  );
+  path.cubicTo(
+    9.15173 * _xScaling,
+    147.393 * _yScaling,
+    11.0166 * _xScaling,
+    147.393 * _yScaling,
+    11.0166 * _xScaling,
+    147.393 * _yScaling,
+  );
+  path.cubicTo(
+    5.61827 * _xScaling,
+    137.04 * _yScaling,
+    2.08481 * _xScaling,
+    125.755 * _yScaling,
+    0.710687 * _xScaling,
+    114.519 * _yScaling,
+  );
+  path.cubicTo(
+    -0.0254509 * _xScaling,
+    108.386 * _yScaling,
+    -0.85974 * _xScaling,
+    95.9229 * _yScaling,
+    1.98666 * _xScaling,
+    81.1051 * _yScaling,
+  );
+  path.cubicTo(
+    2.03573 * _xScaling,
+    80.7617 * _yScaling,
+    2.13389 * _xScaling,
+    80.222 * _yScaling,
+    2.23204 * _xScaling,
+    79.5351 * _yScaling,
+  );
+  path.cubicTo(
+    2.77187 * _xScaling,
+    75.8551 * _yScaling,
+    3.85154 * _xScaling,
+    68.25 * _yScaling,
+    7.48315 * _xScaling,
+    59.5654 * _yScaling,
+  );
+  path.cubicTo(
+    16.1696 * _xScaling,
+    38.8108 * _yScaling,
+    29.2728 * _xScaling,
+    27.2313 * _yScaling,
+    35.5545 * _xScaling,
+    21.6869 * _yScaling,
+  );
+  path.cubicTo(
+    35.9471 * _xScaling,
+    21.3435 * _yScaling,
+    36.2907 * _xScaling,
+    21.0491 * _yScaling,
+    36.5851 * _xScaling,
+    20.7547 * _yScaling,
+  );
+  path.cubicTo(
+    47.9707 * _xScaling,
+    10.6472 * _yScaling,
+    61.6629 * _xScaling,
+    3.53271 * _yScaling,
+    76.2384 * _xScaling,
+    0.147196 * _yScaling,
+  );
+  path.cubicTo(
+    76.2384 * _xScaling,
+    0.147196 * _yScaling,
+    76.9745 * _xScaling,
+    0 * _yScaling,
+    76.9745 * _xScaling,
+    0 * _yScaling,
+  );
+  path.cubicTo(
+    76.9745 * _xScaling,
+    0 * _yScaling,
+    77.7107 * _xScaling,
+    0.147196 * _yScaling,
+    77.7107 * _xScaling,
+    0.147196 * _yScaling,
+  );
+  path.cubicTo(
+    92.2862 * _xScaling,
+    3.48365 * _yScaling,
+    105.978 * _xScaling,
+    10.6472 * _yScaling,
+    117.364 * _xScaling,
+    20.8037 * _yScaling,
+  );
+  path.cubicTo(
+    117.658 * _xScaling,
+    21.0981 * _yScaling,
+    118.002 * _xScaling,
+    21.3925 * _yScaling,
+    118.395 * _xScaling,
+    21.736 * _yScaling,
+  );
+  path.cubicTo(
+    124.676 * _xScaling,
+    27.2804 * _yScaling,
+    137.78 * _xScaling,
+    38.8108 * _yScaling,
+    146.466 * _xScaling,
+    59.6145 * _yScaling,
+  );
+  path.cubicTo(
+    150.048 * _xScaling,
+    68.25 * _yScaling,
+    151.177 * _xScaling,
+    75.8551 * _yScaling,
+    151.717 * _xScaling,
+    79.5351 * _yScaling,
+  );
+  path.cubicTo(
+    151.815 * _xScaling,
+    80.222 * _yScaling,
+    151.913 * _xScaling,
+    80.8107 * _yScaling,
+    151.962 * _xScaling,
+    81.1542 * _yScaling,
+  );
+  path.cubicTo(
+    154.858 * _xScaling,
+    95.972 * _yScaling,
+    154.024 * _xScaling,
+    108.435 * _yScaling,
+    153.238 * _xScaling,
+    114.568 * _yScaling,
+  );
+  path.cubicTo(
+    151.864 * _xScaling,
+    125.804 * _yScaling,
+    148.331 * _xScaling,
+    137.04 * _yScaling,
+    142.932 * _xScaling,
+    147.442 * _yScaling,
+  );
+  path.cubicTo(
+    142.932 * _xScaling,
+    147.442 * _yScaling,
+    144.896 * _xScaling,
+    147.442 * _yScaling,
+    144.896 * _xScaling,
+    147.442 * _yScaling,
+  );
+  path.cubicTo(
+    149.901 * _xScaling,
+    147.442 * _yScaling,
+    153.975 * _xScaling,
+    151.514 * _yScaling,
+    153.975 * _xScaling,
+    156.519 * _yScaling,
+  );
+  path.cubicTo(
+    153.975 * _xScaling,
+    156.519 * _yScaling,
+    153.975 * _xScaling,
+    242.972 * _yScaling,
+    153.975 * _xScaling,
+    242.972 * _yScaling,
+  );
+  path.cubicTo(
+    153.975 * _xScaling,
+    247.977 * _yScaling,
+    149.901 * _xScaling,
+    252.049 * _yScaling,
+    144.896 * _xScaling,
+    252.049 * _yScaling,
+  );
+  path.cubicTo(
+    144.896 * _xScaling,
+    252.049 * _yScaling,
+    144.896 * _xScaling,
+    252 * _yScaling,
+    144.896 * _xScaling,
+    252 * _yScaling,
+  );
   return path;
 }
 
 Path _getInnerPath(Size size) {
   final path = Path();
-  final scaleX = size.width / 154;
-  final scaleY = size.height / 252;
+  final _xScaling = size.width / 150; 
+  final _yScaling = size.height / 250; 
 
-  path.moveTo(9.177 * scaleX, 153.771 * scaleY);
-  path.cubicTo(7.705 * scaleX, 153.771 * scaleY, 6.478 * scaleX,
-      154.998 * scaleY, 6.478 * scaleX, 156.47 * scaleY);
-  path.lineTo(6.478 * scaleX, 242.923 * scaleY);
-  path.cubicTo(6.478 * scaleX, 244.395 * scaleY, 7.705 * scaleX,
-      245.622 * scaleY, 9.177 * scaleX, 245.622 * scaleY);
-  path.lineTo(144.921 * scaleX, 245.622 * scaleY);
-  path.cubicTo(146.393 * scaleX, 245.622 * scaleY, 147.62 * scaleX,
-      244.395 * scaleY, 147.62 * scaleX, 242.923 * scaleY);
-  path.lineTo(147.62 * scaleX, 156.47 * scaleY);
-  path.cubicTo(147.62 * scaleX, 154.998 * scaleY, 146.393 * scaleX,
-      153.771 * scaleY, 144.921 * scaleX, 153.771 * scaleY);
-  path.lineTo(134.86 * scaleX, 153.771 * scaleY);
-  path.cubicTo(141.24 * scaleX, 138.07 * scaleY, 145.461 * scaleX,
-      125.902 * scaleY, 146.933 * scaleX, 113.734 * scaleY);
-  path.cubicTo(147.62 * scaleX, 107.993 * scaleY, 145.706 * scaleX,
-      82.332 * scaleY, 140.602 * scaleX, 62.068 * scaleY);
-  path.cubicTo(132.456 * scaleX, 42.638 * scaleY, 120.138 * scaleX,
-      31.745 * scaleY, 114.199 * scaleX, 26.495 * scaleY);
-  path.cubicTo(102.716 * scaleX, 16.29 * scaleY, 90.251 * scaleX,
-      9.715 * scaleY, 77 * scaleX, 6.526 * scaleY);
-  path.cubicTo(63.75 * scaleX, 9.715 * scaleY, 51.284 * scaleX, 16.29 * scaleY,
-      40.88 * scaleX, 25.563 * scaleY);
-  path.cubicTo(33.862 * scaleX, 31.745 * scaleY, 21.544 * scaleX,
-      42.638 * scaleY, 13.398 * scaleX, 62.068 * scaleY);
-  path.cubicTo(5.595 * scaleX, 96.266 * scaleY, 6.38 * scaleX, 107.993 * scaleY,
-      7.067 * scaleX, 113.734 * scaleY);
-  path.cubicTo(8.539 * scaleX, 125.853 * scaleY, 12.76 * scaleX,
-      138.021 * scaleY, 19.189 * scaleX, 148.963 * scaleY);
-  path.lineTo(19.14 * scaleX, 153.771 * scaleY);
-  path.close();
+  path.lineTo(9.15173 * _xScaling, 153.771 * _yScaling);
+  path.cubicTo(
+    7.67946 * _xScaling,
+    153.771 * _yScaling,
+    6.45256 * _xScaling,
+    154.998 * _yScaling,
+    6.45256 * _xScaling,
+    156.47 * _yScaling,
+  );
+  path.cubicTo(
+    6.45256 * _xScaling,
+    156.47 * _yScaling,
+    6.45256 * _xScaling,
+    242.923 * _yScaling,
+    6.45256 * _xScaling,
+    242.923 * _yScaling,
+  );
+  path.cubicTo(
+    6.45256 * _xScaling,
+    244.395 * _yScaling,
+    7.67946 * _xScaling,
+    245.622 * _yScaling,
+    9.15173 * _xScaling,
+    245.622 * _yScaling,
+  );
+  path.cubicTo(
+    9.15173 * _xScaling,
+    245.622 * _yScaling,
+    144.896 * _xScaling,
+    245.622 * _yScaling,
+    144.896 * _xScaling,
+    245.622 * _yScaling,
+  );
+  path.cubicTo(
+    146.368 * _xScaling,
+    245.622 * _yScaling,
+    147.595 * _xScaling,
+    244.395 * _yScaling,
+    147.595 * _xScaling,
+    242.923 * _yScaling,
+  );
+  path.cubicTo(
+    147.595 * _xScaling,
+    242.923 * _yScaling,
+    147.595 * _xScaling,
+    156.47 * _yScaling,
+    147.595 * _xScaling,
+    156.47 * _yScaling,
+  );
+  path.cubicTo(
+    147.595 * _xScaling,
+    154.998 * _yScaling,
+    146.368 * _xScaling,
+    153.771 * _yScaling,
+    144.896 * _xScaling,
+    153.771 * _yScaling,
+  );
+  path.cubicTo(
+    144.896 * _xScaling,
+    153.771 * _yScaling,
+    134.835 * _xScaling,
+    153.771 * _yScaling,
+    134.835 * _xScaling,
+    153.771 * _yScaling,
+  );
+  path.cubicTo(
+    133.559 * _xScaling,
+    153.771 * _yScaling,
+    132.774 * _xScaling,
+    152.397 * _yScaling,
+    133.412 * _xScaling,
+    151.269 * _yScaling,
+  );
+  path.cubicTo(
+    133.412 * _xScaling,
+    151.269 * _yScaling,
+    134.786 * _xScaling,
+    148.963 * _yScaling,
+    134.786 * _xScaling,
+    148.963 * _yScaling,
+  );
+  path.cubicTo(
+    141.215 * _xScaling,
+    138.07 * _yScaling,
+    145.435 * _xScaling,
+    125.902 * _yScaling,
+    146.908 * _xScaling,
+    113.734 * _yScaling,
+  );
+  path.cubicTo(
+    147.595 * _xScaling,
+    107.993 * _yScaling,
+    148.38 * _xScaling,
+    96.2664 * _yScaling,
+    145.681 * _xScaling,
+    82.3318 * _yScaling,
+  );
+  path.cubicTo(
+    145.583 * _xScaling,
+    81.8411 * _yScaling,
+    145.484 * _xScaling,
+    81.2033 * _yScaling,
+    145.386 * _xScaling,
+    80.4182 * _yScaling,
+  );
+  path.cubicTo(
+    144.896 * _xScaling,
+    77.0327 * _yScaling,
+    143.865 * _xScaling,
+    69.9182 * _yScaling,
+    140.577 * _xScaling,
+    62.0678 * _yScaling,
+  );
+  path.cubicTo(
+    132.43 * _xScaling,
+    42.6379 * _yScaling,
+    120.112 * _xScaling,
+    31.7453 * _yScaling,
+    114.174 * _xScaling,
+    26.4953 * _yScaling,
+  );
+  path.cubicTo(
+    113.781 * _xScaling,
+    26.1519 * _yScaling,
+    113.438 * _xScaling,
+    25.8575 * _yScaling,
+    113.094 * _xScaling,
+    25.5631 * _yScaling,
+  );
+    path.cubicTo(
+    102.69 * _xScaling,
+    16.2897 * _yScaling,
+    90.225 * _xScaling,
+    9.71495 * _yScaling,
+    76.9745 * _xScaling,
+    6.5257 * _yScaling,
+  );
+  path.cubicTo(
+    63.7241 * _xScaling,
+    9.71495 * _yScaling,
+    51.2588 * _xScaling,
+    16.2897 * _yScaling,
+    40.8547 * _xScaling,
+    25.5631 * _yScaling,
+  );
+  path.cubicTo(
+    40.5112 * _xScaling,
+    25.8575 * _yScaling,
+    40.1677 * _xScaling,
+    26.1519 * _yScaling,
+    39.7751 * _xScaling,
+    26.4953 * _yScaling,
+  );
+  path.cubicTo(
+    33.8369 * _xScaling,
+    31.7453 * _yScaling,
+    21.5188 * _xScaling,
+    42.6379 * _yScaling,
+    13.3723 * _xScaling,
+    62.0678 * _yScaling,
+  );
+  path.cubicTo(
+    10.0842 * _xScaling,
+    69.9673 * _yScaling,
+    9.05358 * _xScaling,
+    77.0818 * _yScaling,
+    8.56282 * _xScaling,
+    80.4673 * _yScaling,
+  );
+  path.cubicTo(
+    8.46467 * _xScaling,
+    81.2523 * _yScaling,
+    8.36652 * _xScaling,
+    81.8902 * _yScaling,
+    8.26837 * _xScaling,
+    82.3318 * _yScaling,
+  );
+  path.cubicTo(
+    5.5692 * _xScaling,
+    96.2664 * _yScaling,
+    6.35441 * _xScaling,
+    107.993 * _yScaling,
+    7.04147 * _xScaling,
+    113.734 * _yScaling,
+  );
+  path.cubicTo(
+    8.51375 * _xScaling,
+    125.853 * _yScaling,
+    12.7343 * _xScaling,
+    138.021 * _yScaling,
+    19.1632 * _xScaling,
+    148.963 * _yScaling,
+  );
+  path.cubicTo(
+    19.1632 * _xScaling,
+    148.963 * _yScaling,
+    20.5373 * _xScaling,
+    151.269 * _yScaling,
+    20.5373 * _xScaling,
+    151.269 * _yScaling,
+  );
+  path.cubicTo(
+    21.1753 * _xScaling,
+    152.348 * _yScaling,
+    20.3901 * _xScaling,
+    153.771 * _yScaling,
+    19.1141 * _xScaling,
+    153.771 * _yScaling,
+  );
+  path.cubicTo(
+    19.1141 * _xScaling,
+    153.771 * _yScaling,
+    9.15173 * _xScaling,
+    153.771 * _yScaling,
+    9.15173 * _xScaling,
+    153.771 * _yScaling,
+  );
+  path.cubicTo(
+    9.15173 * _xScaling,
+    153.771 * _yScaling,
+    9.15173 * _xScaling,
+    153.771 * _yScaling,
+    9.15173 * _xScaling,
+    153.771 * _yScaling,
+  );
   return path;
 }
