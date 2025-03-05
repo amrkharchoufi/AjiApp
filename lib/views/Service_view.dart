@@ -1,6 +1,10 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/accomodation_view.dart';
 import 'package:ajiapp/views/available_soon.dart';
+import 'package:ajiapp/views/e-sim_view.dart';
+import 'package:ajiapp/views/food_view.dart.dart';
+import 'package:ajiapp/views/visa_view.dart';
 import 'package:ajiapp/widgets/service_widget.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
@@ -70,156 +74,156 @@ Widget build(BuildContext context) {
                 FadeInUp(
                   duration: Duration(milliseconds: 1600),
                   child: Wrap(
-                    direction: Axis.horizontal,
-                    spacing: ScreenSize.width / 25,
-                    runSpacing: ScreenSize.width / 25,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "e-sim",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/Phone.svg"),color: ajired,width: ScreenSize.width/14,)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Visa",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/Visa_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Tickets",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/Ticket_icon.svg"),color: ajired,width: ScreenSize.width/12,),)
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Flights",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/flight_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Accommodation",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/Home.svg"),color: ajired,width: ScreenSize.width/12,)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Transportation",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/car.svg"),color: ajired,width: ScreenSize.width/12,)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Discover",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/location.svg"),color: ajired,width: ScreenSize.width/12,)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Food",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img: Image(image: Svg("assets/icons/food.svg"),color: ajired,width: ScreenSize.width/10,)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AvailableSoon(),
-                            ),
-                          );
-                        },
-                        child: ServiceWidget(
-                            width: ScreenSize.width / 3.7,
-                            height: ScreenSize.width / 3.7,
-                            text: "Important\nContacts",
-                            imgicon: false,
-                            icon: Icons.call_outlined,
-                            img:Image(image: Svg("assets/icons/alert.svg"),color: ajired,width: ScreenSize.width/12,)),
-                      )
-                    ],
-                  ),
+                  direction: Axis.horizontal,
+                  spacing: ScreenSize.width / 25,
+                  runSpacing: ScreenSize.width / 25,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => EsimView(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "e-sim",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/Phone.svg"),color: ajired,width: ScreenSize.width/14,)),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => VisaView(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Visa",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/Visa_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Tickets",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/Ticket_icon.svg"),color: ajired,width: ScreenSize.width/12,),)
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Flights",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/flight_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AccomodationView(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Accommodation",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/Home.svg"),color: ajired,width: ScreenSize.width/12,)),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Transportation",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/car.svg"),color: ajired,width: ScreenSize.width/12,)),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Discover",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/location.svg"),color: ajired,width: ScreenSize.width/12,)),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => FoodHomePage(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Food",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img: Image(image: Svg("assets/icons/food.svg"),color: ajired,width: ScreenSize.width/10,)),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AvailableSoon(),
+                          ),
+                        );
+                      },
+                      child: ServiceWidget(
+                          width: ScreenSize.width / 3.7,
+                          height: ScreenSize.width / 3.7,
+                          text: "Important\nContacts",
+                          imgicon: false,
+                          icon: Icons.call_outlined,
+                          img:Image(image: Svg("assets/icons/alert.svg"),color: ajired,width: ScreenSize.width/12,)),
+                    )
+                  ],
+                ),
                 ),
             
             ],
