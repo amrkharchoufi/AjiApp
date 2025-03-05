@@ -11,6 +11,7 @@ class FoodHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context); 
     return Scaffold(
       appBar: AppBar(
         actions: [

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class FeaturedCard extends StatelessWidget {
+class FoodFeaturedCard extends StatelessWidget {
   final String title, rating, reviews, address, imagePath;
   final bool fullWidth;
 
-  const FeaturedCard({
+  const FoodFeaturedCard({
     super.key,
     required this.title,
     required this.rating,

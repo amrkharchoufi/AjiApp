@@ -18,7 +18,7 @@ class FeaturedSection extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: const [
-                FeaturedCard(
+                FoodFeaturedCard(
                   title: "Dar Zaki",
                   rating: "4.5",
                   reviews: "494",
@@ -26,7 +26,7 @@ class FeaturedSection extends StatelessWidget {
                   imagePath: "assets/images/dar-zaki.png",
                   fullWidth: true,
                 ),
-                FeaturedCard(
+                FoodFeaturedCard(
                   title: "Sufra",
                   rating: "4.5",
                   reviews: "19",
