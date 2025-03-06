@@ -12,8 +12,6 @@ class VerifyemailView extends StatefulWidget {
 }
 
 class _VerifyemailViewState extends State<VerifyemailView> {
-  TextEditingController _email = TextEditingController();
-
   bool visible = true;
   bool remeberme = false;
   @override
@@ -57,8 +55,14 @@ class _VerifyemailViewState extends State<VerifyemailView> {
                       fontFamily: "SFDisplay"),
                 ),
                 SizedBox(
-                  height: ScreenSize.height / 20,),
-                  Text('Please Enter The 4 Digit Code Sent To\n admin@gmail.com',style: TextStyle(color: Colors.black,fontSize: ScreenSize.width/25),textAlign: TextAlign.center,),
+                  height: ScreenSize.height / 20,
+                ),
+                Text(
+                  'Please Enter The 4 Digit Code Sent To\n admin@gmail.com',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenSize.width / 25),
+                  textAlign: TextAlign.center,
+                ),
                 SizedBox(
                   height: ScreenSize.height / 15,
                 ),
@@ -69,51 +73,57 @@ class _VerifyemailViewState extends State<VerifyemailView> {
                   },
                 ),
                 SizedBox(
-                  height: ScreenSize.height / 20,),
-              
-          ElevatedButton(
-      onPressed: () {
-        // Action when button is pressed
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ajired, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/4, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Continue",
-        style: TextStyle(
-          color: Colors.white, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    SizedBox(
-                  height: ScreenSize.height / 60,),
-    ElevatedButton(
-      onPressed: () {
-      Navigator.pop(context);
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/3.6, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Cancel",
-        style: TextStyle(
-          color: ajired, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    
+                  height: ScreenSize.height / 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Action when button is pressed
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ajired, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 4,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                      color: Colors.white, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: ScreenSize.height / 60,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 3.6,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                      color: ajired, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

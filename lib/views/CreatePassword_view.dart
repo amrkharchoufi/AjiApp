@@ -11,8 +11,8 @@ class CreatepasswordView extends StatefulWidget {
 }
 
 class _CreatepasswordViewState extends State<CreatepasswordView> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _pwd = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _pwd = TextEditingController();
 
   bool visible = true;
   bool remeberme = false;
@@ -57,16 +57,29 @@ class _CreatepasswordViewState extends State<CreatepasswordView> {
                       fontFamily: "SFDisplay"),
                 ),
                 SizedBox(
-                  height: ScreenSize.height / 30,),
-                  Text('Enter Your New Password ',style: TextStyle(color: Colors.black,fontSize: ScreenSize.width/25),textAlign: TextAlign.center,),
+                  height: ScreenSize.height / 30,
+                ),
+                Text(
+                  'Enter Your New Password ',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenSize.width / 25),
+                  textAlign: TextAlign.center,
+                ),
                 SizedBox(
                   height: ScreenSize.height / 40,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Email Address*',style: TextStyle(color: Colors.black45,fontSize: ScreenSize.width/25),),
-                    SizedBox(height: ScreenSize.height / 120,),
+                    Text(
+                      'Email Address*',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: ScreenSize.width / 25),
+                    ),
+                    SizedBox(
+                      height: ScreenSize.height / 120,
+                    ),
                     SizedBox(
                       height: ScreenSize.height / 20,
                       child: TextField(
@@ -90,9 +103,18 @@ class _CreatepasswordViewState extends State<CreatepasswordView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: ScreenSize.height / 40,),
-                    Text('Password*',style: TextStyle(color: Colors.black45,fontSize: ScreenSize.width/25),),
-                    SizedBox(height: ScreenSize.height / 120,),
+                    SizedBox(
+                      height: ScreenSize.height / 40,
+                    ),
+                    Text(
+                      'Password*',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: ScreenSize.width / 25),
+                    ),
+                    SizedBox(
+                      height: ScreenSize.height / 120,
+                    ),
                     SizedBox(
                       height: ScreenSize.height / 20,
                       child: TextField(
@@ -117,55 +139,60 @@ class _CreatepasswordViewState extends State<CreatepasswordView> {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
                 SizedBox(
-                  height: ScreenSize.height / 20,),
-              
-          ElevatedButton(
-      onPressed: () {
-        // Action when button is pressed
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ajired, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/3.3, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Save",
-        style: TextStyle(
-          color: Colors.white, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    SizedBox(
-                  height: ScreenSize.height / 60,),
-    ElevatedButton(
-      onPressed: () {
-      Navigator.pop(context);
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/3.6, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Cancel",
-        style: TextStyle(
-          color: ajired, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    
+                  height: ScreenSize.height / 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Action when button is pressed
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ajired, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 3.3,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Save",
+                    style: TextStyle(
+                      color: Colors.white, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: ScreenSize.height / 60,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 3.6,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                      color: ajired, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

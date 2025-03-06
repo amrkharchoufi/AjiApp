@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -62,13 +64,17 @@ class DeliveryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  Text(subtitle, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                  Text(title,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(subtitle,
+                      style: const TextStyle(fontSize: 12, color: Colors.grey)),
                   const SizedBox(height: 8),
 
                   /// Badge "Free" ou "Paid"
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: price == "Free" ? Colors.amber : Colors.amber,
                       borderRadius: BorderRadius.circular(8),
@@ -76,9 +82,14 @@ class DeliveryCard extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.delivery_dining, size: 25, color: Colors.white),
+                        const Icon(Icons.delivery_dining,
+                            size: 25, color: Colors.white),
                         const SizedBox(width: 4),
-                        Text(price, style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: Colors.white)),
+                        Text(price,
+                            style: const TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
                       ],
                     ),
                   ),
@@ -98,7 +109,10 @@ class DeliveryCard extends StatelessWidget {
                       onPressed: () {},
                       child: const Text(
                         "Order Now",
-                        style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

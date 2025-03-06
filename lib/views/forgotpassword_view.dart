@@ -11,7 +11,7 @@ class ForgotpasswordView extends StatefulWidget {
 }
 
 class _ForgotpasswordViewState extends State<ForgotpasswordView> {
-TextEditingController _email = TextEditingController();
+  final TextEditingController _email = TextEditingController();
 
   bool visible = true;
   bool remeberme = false;
@@ -56,16 +56,29 @@ TextEditingController _email = TextEditingController();
                       fontFamily: "SFDisplay"),
                 ),
                 SizedBox(
-                  height: ScreenSize.height / 20,),
-                  Text('Please Enter Your Email Address To \nRecieve a Verification Code',style: TextStyle(color: Colors.black,fontSize: ScreenSize.width/25),textAlign: TextAlign.center,),
+                  height: ScreenSize.height / 20,
+                ),
+                Text(
+                  'Please Enter Your Email Address To \nRecieve a Verification Code',
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenSize.width / 25),
+                  textAlign: TextAlign.center,
+                ),
                 SizedBox(
                   height: ScreenSize.height / 15,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Email Address*',style: TextStyle(color: Colors.black45,fontSize: ScreenSize.width/25),),
-                    SizedBox(height: ScreenSize.height / 120,),
+                    Text(
+                      'Email Address*',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: ScreenSize.width / 25),
+                    ),
+                    SizedBox(
+                      height: ScreenSize.height / 120,
+                    ),
                     SizedBox(
                       height: ScreenSize.height / 20,
                       child: TextField(
@@ -89,55 +102,60 @@ TextEditingController _email = TextEditingController();
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
                 SizedBox(
-                  height: ScreenSize.height / 20,),
-              
-          ElevatedButton(
-      onPressed: () {
-        // Action when button is pressed
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ajired, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/4, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Continue",
-        style: TextStyle(
-          color: Colors.white, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    SizedBox(
-                  height: ScreenSize.height / 60,),
-    ElevatedButton(
-      onPressed: () {
-      Navigator.pop(context);
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/3.6, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Cancel",
-        style: TextStyle(
-          color: ajired, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    
+                  height: ScreenSize.height / 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Action when button is pressed
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ajired, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 4,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                      color: Colors.white, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: ScreenSize.height / 60,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 3.6,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                      color: ajired, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

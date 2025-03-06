@@ -1,6 +1,4 @@
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/ClientSpace.dart';
-import 'package:ajiapp/views/VerifyEmail_view.dart';
 import 'package:ajiapp/views/login_view.dart';
 import 'package:flutter/material.dart';
 

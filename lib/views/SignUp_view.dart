@@ -11,9 +11,9 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
-    TextEditingController _email = TextEditingController();
-  TextEditingController _pwd = TextEditingController();
-  TextEditingController _username = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _pwd = TextEditingController();
+  final TextEditingController _username = TextEditingController();
   bool visible = true;
   bool remeberme = false;
   @override
@@ -62,15 +62,23 @@ class _SignupViewState extends State<SignupView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Username*',style: TextStyle(color: Colors.black45,fontSize: ScreenSize.width/25),),
-                    SizedBox(height: ScreenSize.height / 120,),
+                    Text(
+                      'Username*',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: ScreenSize.width / 25),
+                    ),
+                    SizedBox(
+                      height: ScreenSize.height / 120,
+                    ),
                     SizedBox(
                       height: ScreenSize.height / 20,
                       child: TextField(
-                        controller: _email,
+                        controller: _username,
                         decoration: InputDecoration(
                           labelText: 'Username',
-                          prefixIcon: Icon(Icons.account_circle_outlined), // Email icon
+                          prefixIcon:
+                              Icon(Icons.account_circle_outlined), // Email icon
                           suffixIcon: _email.text.isNotEmpty
                               ? IconButton(
                                   icon: Icon(Icons.clear),
@@ -87,9 +95,18 @@ class _SignupViewState extends State<SignupView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: ScreenSize.height / 40,),
-                    Text('Email Address*',style: TextStyle(color: Colors.black45,fontSize: ScreenSize.width/25),),
-                    SizedBox(height: ScreenSize.height / 120,),
+                    SizedBox(
+                      height: ScreenSize.height / 40,
+                    ),
+                    Text(
+                      'Email Address*',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: ScreenSize.width / 25),
+                    ),
+                    SizedBox(
+                      height: ScreenSize.height / 120,
+                    ),
                     SizedBox(
                       height: ScreenSize.height / 20,
                       child: TextField(
@@ -113,9 +130,18 @@ class _SignupViewState extends State<SignupView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: ScreenSize.height / 40,),
-                    Text('Password*',style: TextStyle(color: Colors.black45,fontSize: ScreenSize.width/25),),
-                    SizedBox(height: ScreenSize.height / 120,),
+                    SizedBox(
+                      height: ScreenSize.height / 40,
+                    ),
+                    Text(
+                      'Password*',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: ScreenSize.width / 25),
+                    ),
+                    SizedBox(
+                      height: ScreenSize.height / 120,
+                    ),
                     SizedBox(
                       height: ScreenSize.height / 20,
                       child: TextField(
@@ -140,52 +166,63 @@ class _SignupViewState extends State<SignupView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: ScreenSize.height / 80,),
-                    Text('Password must be atleast 6 characters',style: TextStyle(color: Colors.black45,fontSize: ScreenSize.width/25),),
+                    SizedBox(
+                      height: ScreenSize.height / 80,
+                    ),
+                    Text(
+                      'Password must be atleast 6 characters',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: ScreenSize.width / 25),
+                    ),
                   ],
                 ),
-              
-          ElevatedButton(
-      onPressed: () {
-        // Action when button is pressed
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ajired, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/4, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Continue",
-        style: TextStyle(
-          color: Colors.white, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    ElevatedButton(
-      onPressed: () {
-      Navigator.pop(context);
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white, // Custom color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded edges
-        ),
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.width/3.6, vertical: ScreenSize.width/40), // Button size
-      ),
-      child: Text(
-        "Cancel",
-        style: TextStyle(
-          color: ajired, // White text
-          fontSize: ScreenSize.width/20, // Text size
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    ),
-    
+                ElevatedButton(
+                  onPressed: () {
+                    // Action when button is pressed
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ajired, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 4,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                      color: Colors.white, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, // Custom color
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Rounded edges
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 3.6,
+                        vertical: ScreenSize.width / 40), // Button size
+                  ),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                      color: ajired, // White text
+                      fontSize: ScreenSize.width / 20, // Text size
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
