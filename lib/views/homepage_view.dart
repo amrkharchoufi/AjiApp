@@ -17,6 +17,7 @@ import 'package:ajiapp/widgets/sitecard_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -176,8 +177,12 @@ class _HomePageState extends State<HomePage> {
                       FeatureCard(
                         title: "Visit Dar Naji",
                         subtitle: "Get an unmatched taset of Morroco",
-                        backgroundImage: AssetImage('assets/images/f-image.jpg'),
+                        backgroundImage:
+                            AssetImage('assets/images/f-image.jpg'),
                         description: 'Book a Tour',
+                      ),
+                      SizedBox(
+                        width: 20,
                       )
                     ],
                   ),
@@ -242,7 +247,11 @@ class _HomePageState extends State<HomePage> {
                           text: "e-sim",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Phone.svg"),color: ajired,width: ScreenSize.width/14,)),
+                          img: Image(
+                            image: Svg("assets/icons/Phone.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 14,
+                          )),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -258,24 +267,32 @@ class _HomePageState extends State<HomePage> {
                           text: "Visa",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Visa_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: Image(
+                            image: Svg("assets/icons/Visa_icon.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 12,
+                          )),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => AvailableSoon(),
-                          ),
-                        );
-                      },
-                      child: ServiceWidget(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AvailableSoon(),
+                            ),
+                          );
+                        },
+                        child: ServiceWidget(
                           width: ScreenSize.width / 3.7,
                           height: ScreenSize.width / 3.7,
                           text: "Tickets",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Ticket_icon.svg"),color: ajired,width: ScreenSize.width/12,),)
-                    ),
+                          img: Image(
+                            image: Svg("assets/icons/Ticket_icon.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 12,
+                          ),
+                        )),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
@@ -290,7 +307,11 @@ class _HomePageState extends State<HomePage> {
                           text: "Flights",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/flight_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: Image(
+                            image: Svg("assets/icons/flight_icon.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 12,
+                          )),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -305,8 +326,12 @@ class _HomePageState extends State<HomePage> {
                           height: ScreenSize.width / 3.7,
                           text: "Accommodation",
                           imgicon: false,
-                          icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Home.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          icon: FontAwesomeIcons.house,
+                          img: Image(
+                            image: Svg("assets/icons/Home.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 12,
+                          )),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -322,13 +347,17 @@ class _HomePageState extends State<HomePage> {
                           text: "Transportation",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/car.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: Image(
+                            image: Svg("assets/icons/car_icon.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 12,
+                          )),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AvailableSoon(),
+                            builder: (context) => Discover(),
                           ),
                         );
                       },
@@ -338,7 +367,11 @@ class _HomePageState extends State<HomePage> {
                           text: "Discover",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/location.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: Image(
+                            image: Svg("assets/icons/location.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 12,
+                          )),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -354,7 +387,11 @@ class _HomePageState extends State<HomePage> {
                           text: "Food",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/food.svg"),color: ajired,width: ScreenSize.width/10,)),
+                          img: Image(
+                            image: Svg("assets/icons/food.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 10,
+                          )),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -370,7 +407,11 @@ class _HomePageState extends State<HomePage> {
                           text: "Important\nContacts",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img:Image(image: Svg("assets/icons/alert.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: Image(
+                            image: Svg("assets/icons/alert.svg"),
+                            color: ajired,
+                            width: ScreenSize.width / 12,
+                          )),
                     )
                   ],
                 ),
@@ -420,8 +461,8 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       Matchwidget(
-                        width: ScreenSize.width / 1.2,
-                        height: ScreenSize.height / 4,
+                          width: ScreenSize.width / 1.2,
+                          height: ScreenSize.height / 4,
                           ImagePath: "assets/images/match.jpg",
                           MatchTitle: "Morocco vs Zambia",
                           MatchDate: "16 December at 18:00",
@@ -431,8 +472,8 @@ class _HomePageState extends State<HomePage> {
                         width: ScreenSize.width / 20,
                       ),
                       Matchwidget(
-                        width: ScreenSize.width / 1.2,
-                        height: ScreenSize.height / 4,
+                          width: ScreenSize.width / 1.2,
+                          height: ScreenSize.height / 4,
                           ImagePath: "assets/images/match2.jpg",
                           MatchTitle: "Tunisia vs South Africa",
                           MatchDate: "16 December at 18:00",
@@ -458,7 +499,7 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
-                      GestureDetector(
+                    GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

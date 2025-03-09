@@ -49,7 +49,7 @@ class Matchwidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: ScreenSize.width / 50),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +108,7 @@ class Matchwidget extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
-                      backgroundColor:  WidgetStatePropertyAll(gold),
+                      backgroundColor: WidgetStatePropertyAll(gold),
                       padding: WidgetStatePropertyAll(
                         EdgeInsets.symmetric(
                           vertical: ScreenSize.width / 70,
