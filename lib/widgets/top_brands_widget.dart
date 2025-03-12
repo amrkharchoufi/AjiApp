@@ -1,58 +1,79 @@
-import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TopBrandsWidget extends StatelessWidget {
+  final void Function(String brandName)? onBrandTap;
 
-  final List<String> brands = [
-    'assets/icons/bmw.svg',
-    'assets/icons/hyundai.svg',
-    'assets/icons/mercedes.svg',
-    'assets/icons/peugeot.svg',
-    'assets/icons/toyota.svg',
+  const TopBrandsWidget({super.key, this.onBrandTap});
+
+  static const brands = [
+    {'logo': 'assets/icons/bmw.svg', 'name': 'BMW'},
+    {'logo': 'assets/icons/hyundai.svg', 'name': 'Hyundai'},
+    {'logo': 'assets/icons/mercedes.svg', 'name': 'Mercedes'},
+    {'logo': 'assets/icons/peugeot.svg', 'name': 'Peugeot'},
+    {'logo': 'assets/icons/toyota.svg', 'name': 'Other'},
   ];
-
-  TopBrandsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize.init(context);
+    final size = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionHeader('Top Brands'),
-        SizedBox(height: ScreenSize.height * 0.01),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Top Brands',
+              style: TextStyle(
+                fontSize: size.width * 0.05,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextButton(
+              style: ButtonStyle(
+                foregroundColor: WidgetStateProperty.all<Color>(
+                  const Color.fromARGB(255, 0, 0, 0),
+                ), 
+              ),
+              onPressed: () {},
+              child: const Text("View all"),
+            ),
+          ],
+        ),
+        SizedBox(height: size.height * 0.015),
         SizedBox(
-          height: ScreenSize.height * 0.12,
+          height: size.height * 0.13,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: brands.length,
-            separatorBuilder: (_, __) => SizedBox(width: ScreenSize.width * 0.04),
+            separatorBuilder: (_, __) => SizedBox(width: size.width * 0.04),
             itemBuilder: (context, index) {
-              return Container(
-                width: ScreenSize.width * 0.28,
-                height: ScreenSize.width * 0.18,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey.shade300, width: 2),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 2,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(ScreenSize.width * 0.03),
-                  child: SvgPicture.asset(
-                    brands[index],
-                    width: ScreenSize.width * 0.12,
-                    height: ScreenSize.width * 0.12,
-                    fit: BoxFit.contain,
+              final brand = brands[index];
+              return GestureDetector(
+                onTap: () {
+                  if (onBrandTap != null) {
+                    onBrandTap!(brand['name']!);
+                  }
+                },
+                child: Container(
+                  width: size.width * 0.28,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.grey.shade300, width: 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
+                  padding: EdgeInsets.all(size.width * 0.03),
+                  child: _buildBrandLogo(brand['logo']!),
                 ),
               );
             },
@@ -62,10 +83,12 @@ class TopBrandsWidget extends StatelessWidget {
     );
   }
 
-  Widget _sectionHeader(String title) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: ScreenSize.width * 0.05, fontWeight: FontWeight.bold),
+  Widget _buildBrandLogo(String logoPath) {
+    return SvgPicture.asset(
+      logoPath,
+      fit: BoxFit.contain,
+      placeholderBuilder:
+          (_) => const Center(child: CircularProgressIndicator()),
     );
   }
 }
