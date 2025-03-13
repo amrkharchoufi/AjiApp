@@ -11,6 +11,7 @@ import 'package:ajiapp/views/notification_view.dart';
 import 'package:ajiapp/views/profile_view.dart';
 import 'package:ajiapp/views/transportation_view.dart';
 import 'package:ajiapp/views/visa_view.dart';
+import 'package:ajiapp/views/visit_morroco_view.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
 import 'package:ajiapp/widgets/service_widget.dart';
@@ -358,18 +359,18 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => Discover(),
+                            builder: (context) => VisitMorrocoView(),
                           ),
                         );
                       },
                       child: ServiceWidget(
                           width: ScreenSize.width / 3.7,
                           height: ScreenSize.width / 3.7,
-                          text: "Discover",
+                          text: "Visit Morocco",
                           imgicon: false,
                           icon: Icons.call_outlined,
                           img: Image(
-                            image: Svg("assets/icons/location.svg"),
+                            image: Svg("assets/icons/visit_icon.svg"),
                             color: ajired,
                             width: ScreenSize.width / 12,
                           )),
