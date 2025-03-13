@@ -9,6 +9,7 @@ import 'package:ajiapp/views/e-sim_view.dart';
 import 'package:ajiapp/views/food_view.dart.dart';
 import 'package:ajiapp/views/notification_view.dart';
 import 'package:ajiapp/views/profile_view.dart';
+import 'package:ajiapp/views/transportation_view.dart';
 import 'package:ajiapp/views/visa_view.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
@@ -337,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AvailableSoon(),
+                            builder: (context) => Transportationview(),
                           ),
                         );
                       },
