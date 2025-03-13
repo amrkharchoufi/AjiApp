@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/visit_morroco_red_more_view.dart';
 import 'package:flutter/material.dart';
 
 class VisitMorrocoCard1 extends StatelessWidget {
@@ -9,6 +10,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
   final String rating;
   final double width;
   final double height;
+  final bool designred;
   final String ratingsize;
   final String Description;
   const VisitMorrocoCard1({
@@ -21,6 +23,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
     required this.height,
     required this.ratingsize,
     required this.Description,
+    required this.designred,
   });
 
   @override
@@ -31,10 +34,15 @@ class VisitMorrocoCard1 extends StatelessWidget {
       height: height,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(width: 0.5, color: gold),
-      ),
+          color: !designred ? Colors.white : ajired,
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(width: 0.5, color: gold),
+          image: designred
+              ? DecorationImage(
+                  image: AssetImage("assets/images/design.png"),
+                  alignment: Alignment.bottomRight,
+                  scale: 0.7)
+              : null),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -64,10 +72,10 @@ class VisitMorrocoCard1 extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: ScreenSize.width / 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontFamily: "SFDisplay",
+                            fontSize: ScreenSize.width / 20,
+                            fontWeight: FontWeight.bold,
+                            color: designred ? Colors.white : Colors.black),
                       ),
                       SizedBox(
                         height: ScreenSize.width / 40,
@@ -76,10 +84,10 @@ class VisitMorrocoCard1 extends StatelessWidget {
                         Description,
                         softWrap: true,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: ScreenSize.width / 35,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontFamily: "SFDisplay",
+                            fontSize: ScreenSize.width / 35,
+                            fontWeight: FontWeight.bold,
+                            color: designred ? Colors.white : Colors.black),
                       ),
                     ],
                   ),
@@ -92,13 +100,13 @@ class VisitMorrocoCard1 extends StatelessWidget {
                           Icon(
                             Icons.location_on_outlined,
                             size: 20,
-                            color: ajired,
+                            color: designred ? Colors.white : ajired,
                           ),
                           Text(
                             sitePlace,
                             style: TextStyle(
                               fontFamily: "SFDisplay",
-                              color: ajired,
+                              color: designred ? Colors.white : Colors.black,
                               fontSize: ScreenSize.width / 35,
                               fontWeight: FontWeight.bold,
                             ),
@@ -113,10 +121,10 @@ class VisitMorrocoCard1 extends StatelessWidget {
                           Text(
                             rating,
                             style: TextStyle(
-                              fontFamily: "SFDisplay",
-                              fontSize: ScreenSize.width / 25,
-                              fontWeight: FontWeight.bold,
-                            ),
+                                fontFamily: "SFDisplay",
+                                fontSize: ScreenSize.width / 25,
+                                fontWeight: FontWeight.bold,
+                                color: designred ? Colors.white : Colors.black),
                           ),
                           Icon(
                             Icons.star,
@@ -125,9 +133,9 @@ class VisitMorrocoCard1 extends StatelessWidget {
                           Text(
                             "($ratingsize)",
                             style: TextStyle(
-                              fontFamily: "SFDisplay",
-                              fontSize: ScreenSize.width / 30,
-                            ),
+                                fontFamily: "SFDisplay",
+                                fontSize: ScreenSize.width / 30,
+                                color: designred ? Colors.white : Colors.black),
                           ),
                         ],
                       ),
@@ -135,7 +143,10 @@ class VisitMorrocoCard1 extends StatelessWidget {
                         height: ScreenSize.width / 50,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => VisitMorrocoRedMoreView()));
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ajired,
                           shape: RoundedRectangleBorder(

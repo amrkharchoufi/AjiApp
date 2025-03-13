@@ -7,6 +7,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
   final String siteName;
   final String sitePlace;
   final String duree;
+  final bool designred;
   final String rating;
   final double width;
   final double height;
@@ -24,7 +25,8 @@ class VisitMoroccoCard2 extends StatelessWidget {
       required this.ratingsize,
       required this.Description,
       required this.duree,
-      required this.price});
+      required this.price,
+      required this.designred});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +35,15 @@ class VisitMoroccoCard2 extends StatelessWidget {
       width: width,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(width: 0.5, color: gold),
-      ),
+          color: !designred ? Colors.white : ajired,
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(width: 0.5, color: gold),
+          image: designred
+              ? DecorationImage(
+                  image: AssetImage("assets/images/design.png"),
+                  alignment: Alignment.bottomRight,
+                  scale: 0.7)
+              : null),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,10 +72,10 @@ class VisitMoroccoCard2 extends StatelessWidget {
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: "SFDisplay",
-                    fontSize: ScreenSize.width / 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontFamily: "SFDisplay",
+                      fontSize: ScreenSize.width / 20,
+                      fontWeight: FontWeight.bold,
+                      color: designred ? Colors.white : Colors.black),
                 ),
                 SizedBox(
                   height: ScreenSize.width / 40,
@@ -79,19 +86,16 @@ class VisitMoroccoCard2 extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.hourglass_empty,
-                          size: 23,
-                          color: Colors.black,
-                        ),
+                        Icon(Icons.hourglass_empty,
+                            size: 23,
+                            color: designred ? Colors.white : Colors.black),
                         Text(
                           duree,
                           style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            color: Colors.black,
-                            fontSize: ScreenSize.width / 25,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontFamily: "SFDisplay",
+                              fontSize: ScreenSize.width / 25,
+                              fontWeight: FontWeight.bold,
+                              color: designred ? Colors.white : Colors.black),
                         ),
                       ],
                     ),
@@ -111,16 +115,14 @@ class VisitMoroccoCard2 extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.location_on_outlined,
-                          size: 23,
-                          color: Colors.black,
-                        ),
+                        Icon(Icons.location_on_outlined,
+                            size: 23,
+                            color: designred ? Colors.white : Colors.black),
                         Text(
                           sitePlace,
                           style: TextStyle(
                             fontFamily: "SFDisplay",
-                            color: Colors.black,
+                            color: designred ? Colors.white : Colors.black,
                             fontSize: ScreenSize.width / 25,
                             fontWeight: FontWeight.bold,
                           ),
@@ -145,10 +147,10 @@ class VisitMoroccoCard2 extends StatelessWidget {
                         Text(
                           rating,
                           style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            fontSize: ScreenSize.width / 25,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontFamily: "SFDisplay",
+                              fontSize: ScreenSize.width / 25,
+                              fontWeight: FontWeight.bold,
+                              color: designred ? Colors.white : Colors.black),
                         ),
                         Icon(
                           Icons.star,
@@ -157,9 +159,9 @@ class VisitMoroccoCard2 extends StatelessWidget {
                         Text(
                           "($ratingsize)",
                           style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            fontSize: ScreenSize.width / 30,
-                          ),
+                              fontFamily: "SFDisplay",
+                              fontSize: ScreenSize.width / 30,
+                              color: designred ? Colors.white : Colors.black),
                         ),
                       ],
                     ),
@@ -173,10 +175,10 @@ class VisitMoroccoCard2 extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    fontFamily: "SFDisplay",
-                    fontSize: ScreenSize.width / 35,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontFamily: "SFDisplay",
+                      fontSize: ScreenSize.width / 35,
+                      fontWeight: FontWeight.bold,
+                      color: designred ? Colors.white : Colors.black),
                 ),
                 SizedBox(
                   height: ScreenSize.width / 50,
@@ -187,14 +189,16 @@ class VisitMoroccoCard2 extends StatelessWidget {
                     Text(
                       price,
                       style: TextStyle(
-                          color: const Color.fromARGB(255, 28, 73, 29),
+                          color: !designred
+                              ? Color.fromARGB(255, 28, 73, 29)
+                              : Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: ScreenSize.width / 15),
                     ),
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: ajired,
+                        backgroundColor: !designred ? ajired : Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14),
                         ),
@@ -205,7 +209,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                       child: Text(
                         "Read More",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: designred ? ajired : Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: (ScreenSize.width / 22),
                         ),
