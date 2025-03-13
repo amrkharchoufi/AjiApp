@@ -18,6 +18,7 @@ import 'package:ajiapp/widgets/service_widget.dart';
 import 'package:ajiapp/widgets/sitecard_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -52,9 +53,7 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Image(
-                        image: Svg("assets/images/logoaji.svg"),
-                      ),
+                      SvgPicture.asset("assets/images/logoaji.svg",),
                       SizedBox(
                         width: 5,
                       ),
@@ -249,11 +248,7 @@ class _HomePageState extends State<HomePage> {
                           text: "e-sim",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/Phone.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 14,
-                          )),
+                          img: SvgPicture.asset("assets/icons/Phone.svg")),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -269,11 +264,9 @@ class _HomePageState extends State<HomePage> {
                           text: "Visa",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/Visa_icon.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 12,
-                          )),
+                          img: SvgPicture.asset("assets/icons/Visa_icon.svg",width: ScreenSize.width/15,
+                          color: ajired,),
+                          ),
                     ),
                     GestureDetector(
                         onTap: () {
@@ -289,11 +282,9 @@ class _HomePageState extends State<HomePage> {
                           text: "Tickets",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/Ticket_icon.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 12,
-                          ),
+                          img:SvgPicture.asset("assets/icons/Ticket_icon.svg",width: ScreenSize.width/13,
+                          color: ajired,),
+                          
                         )),
                     GestureDetector(
                       onTap: () {
@@ -309,11 +300,9 @@ class _HomePageState extends State<HomePage> {
                           text: "Flights",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/flight_icon.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 12,
-                          )),
+                          img:  SvgPicture.asset("assets/icons/flight_icon.svg",width: ScreenSize.width/15,
+                          color: ajired,),
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -329,11 +318,8 @@ class _HomePageState extends State<HomePage> {
                           text: "Accommodation",
                           imgicon: false,
                           icon: FontAwesomeIcons.house,
-                          img: Image(
-                            image: Svg("assets/icons/Home.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 12,
-                          )),
+                          img: SvgPicture.asset("assets/icons/Home.svg"),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -349,11 +335,8 @@ class _HomePageState extends State<HomePage> {
                           text: "Transportation",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/car_icon.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 12,
-                          )),
+                          img: SvgPicture.asset("assets/icons/car_icon.svg"),
+                            ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -369,11 +352,8 @@ class _HomePageState extends State<HomePage> {
                           text: "Visit Morocco",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/visit_icon.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 12,
-                          )),
+                          img:  SvgPicture.asset("assets/icons/visit_icon.svg"),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -389,11 +369,8 @@ class _HomePageState extends State<HomePage> {
                           text: "Food",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/food.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 10,
-                          )),
+                          img:SvgPicture.asset("assets/icons/food.svg"),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -409,11 +386,8 @@ class _HomePageState extends State<HomePage> {
                           text: "Important\nContacts",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(
-                            image: Svg("assets/icons/alert.svg"),
-                            color: ajired,
-                            width: ScreenSize.width / 12,
-                          )),
+                          img: SvgPicture.asset("assets/icons/alert.svg"),
+                          ),
                     )
                   ],
                 ),

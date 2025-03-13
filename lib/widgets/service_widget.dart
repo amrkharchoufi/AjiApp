@@ -1,6 +1,7 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ServiceWidget extends StatelessWidget {
   final double width;
@@ -8,7 +9,7 @@ class ServiceWidget extends StatelessWidget {
   final String text;
   final bool imgicon;
   final IconData icon;
-  final Image img;
+  final SvgPicture img;
   const ServiceWidget(
       {super.key,
       required this.width,

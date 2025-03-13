@@ -4,11 +4,15 @@ import 'package:ajiapp/views/accomodation_view.dart';
 import 'package:ajiapp/views/available_soon.dart';
 import 'package:ajiapp/views/e-sim_view.dart';
 import 'package:ajiapp/views/food_view.dart.dart';
+import 'package:ajiapp/views/transportation_view.dart';
 import 'package:ajiapp/views/visa_view.dart';
+import 'package:ajiapp/views/visit_morroco_view.dart';
 import 'package:ajiapp/widgets/service_widget.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ServiceView extends StatefulWidget {
   const ServiceView({super.key});
@@ -58,7 +62,7 @@ Widget build(BuildContext context) {
                     top: ScreenSize.height/20,
                     child: Row(
                       children: [
-                        Image(image: Svg("assets/images/logowhite.svg"),),
+                        SvgPicture.asset("assets/images/logowhite.svg"),
                         SizedBox(width: ScreenSize.width/25,),
                         Text("Services", style: TextStyle(
                           color: Colors.white,
@@ -71,9 +75,9 @@ Widget build(BuildContext context) {
                 ],
               ),
               SizedBox(height: ScreenSize.height/10,),
-                FadeInUp(
-                  duration: Duration(milliseconds: 1600),
-                  child: Wrap(
+              FadeInUp(
+                duration: Duration(milliseconds: 1600),
+                child: Wrap(
                   direction: Axis.horizontal,
                   spacing: ScreenSize.width / 25,
                   runSpacing: ScreenSize.width / 25,
@@ -92,7 +96,7 @@ Widget build(BuildContext context) {
                           text: "e-sim",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Phone.svg"),color: ajired,width: ScreenSize.width/14,)),
+                          img: SvgPicture.asset("assets/icons/Phone.svg")),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -108,24 +112,28 @@ Widget build(BuildContext context) {
                           text: "Visa",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Visa_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: SvgPicture.asset("assets/icons/Visa_icon.svg",width: ScreenSize.width/15,
+                          color: ajired,),
+                          ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => AvailableSoon(),
-                          ),
-                        );
-                      },
-                      child: ServiceWidget(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AvailableSoon(),
+                            ),
+                          );
+                        },
+                        child: ServiceWidget(
                           width: ScreenSize.width / 3.7,
                           height: ScreenSize.width / 3.7,
                           text: "Tickets",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Ticket_icon.svg"),color: ajired,width: ScreenSize.width/12,),)
-                    ),
+                          img:SvgPicture.asset("assets/icons/Ticket_icon.svg",width: ScreenSize.width/13,
+                          color: ajired,),
+                          
+                        )),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
@@ -140,7 +148,9 @@ Widget build(BuildContext context) {
                           text: "Flights",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/flight_icon.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img:  SvgPicture.asset("assets/icons/flight_icon.svg",width: ScreenSize.width/15,
+                          color: ajired,),
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -155,14 +165,15 @@ Widget build(BuildContext context) {
                           height: ScreenSize.width / 3.7,
                           text: "Accommodation",
                           imgicon: false,
-                          icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/Home.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          icon: FontAwesomeIcons.house,
+                          img: SvgPicture.asset("assets/icons/Home.svg"),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AvailableSoon(),
+                            builder: (context) => Transportationview(),
                           ),
                         );
                       },
@@ -172,23 +183,25 @@ Widget build(BuildContext context) {
                           text: "Transportation",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/car.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: SvgPicture.asset("assets/icons/car_icon.svg"),
+                            ),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AvailableSoon(),
+                            builder: (context) => VisitMorrocoView(),
                           ),
                         );
                       },
                       child: ServiceWidget(
                           width: ScreenSize.width / 3.7,
                           height: ScreenSize.width / 3.7,
-                          text: "Discover",
+                          text: "Visit Morocco",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/location.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img:  SvgPicture.asset("assets/icons/visit_icon.svg"),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -204,7 +217,8 @@ Widget build(BuildContext context) {
                           text: "Food",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img: Image(image: Svg("assets/icons/food.svg"),color: ajired,width: ScreenSize.width/10,)),
+                          img:SvgPicture.asset("assets/icons/food.svg"),
+                          ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -220,11 +234,12 @@ Widget build(BuildContext context) {
                           text: "Important\nContacts",
                           imgicon: false,
                           icon: Icons.call_outlined,
-                          img:Image(image: Svg("assets/icons/alert.svg"),color: ajired,width: ScreenSize.width/12,)),
+                          img: SvgPicture.asset("assets/icons/alert.svg"),
+                          ),
                     )
                   ],
                 ),
-                ),
+              ),
             
             ],
           ),

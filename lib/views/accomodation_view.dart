@@ -3,6 +3,7 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class AccomodationView extends StatefulWidget {
@@ -63,7 +64,7 @@ final List<String> cities = [
                     top: ScreenSize.height/20,
                     child: Row(
                       children: [
-                        Image(image: Svg("assets/images/logowhite.svg"),),
+                        SvgPicture.asset("assets/images/logowhite.svg"),
                         SizedBox(width: ScreenSize.width/25,),
                         Text("Accomodation", style: TextStyle(
                           color: Colors.white,
@@ -124,15 +125,21 @@ final List<String> cities = [
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: ScreenSize.width/6,
-                            height: ScreenSize.width/6,
-                            decoration: BoxDecoration(
-                              color: ajired,
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: Image(image: Svg("assets/icons/hotel_icon.svg"),
-                            ),
-                          ),
+  width: ScreenSize.width / 6,
+  height: ScreenSize.width / 6,
+  decoration: BoxDecoration(
+    color: ajired,
+    borderRadius: BorderRadius.circular(14),
+  ),
+  child: Center( // Ensures the icon stays centered
+    child: SvgPicture.asset(
+      "assets/icons/hotel_icon.svg",
+      width: ScreenSize.width / 12,  // Adjust for better visibility
+      height: ScreenSize.width / 12, 
+      fit: BoxFit.contain,  // Ensures it scales properly inside the container
+    ),
+  ),
+),
                           Text("Hotels", style: TextStyle(
                             color: Colors.black,
                             fontSize: ScreenSize.width/25,
@@ -144,15 +151,21 @@ final List<String> cities = [
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                          width: ScreenSize.width/6,
-                            height: ScreenSize.width/6,
-                            decoration: BoxDecoration(
-                              color: ajired,
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: Image(image: Svg("assets/icons/bed_icon.svg"),
-                            ),
-                          ),
+  width: ScreenSize.width / 6,
+  height: ScreenSize.width / 6,
+  decoration: BoxDecoration(
+    color: ajired,
+    borderRadius: BorderRadius.circular(14),
+  ),
+  child: Center( // Ensures the icon stays centered
+    child: SvgPicture.asset(
+      "assets/icons/bed_icon.svg",
+      width: ScreenSize.width / 12,  // Adjust for better visibility
+      height: ScreenSize.width / 12, 
+      fit: BoxFit.contain,  // Ensures it scales properly inside the container
+    ),
+  ),
+),
                           Text("Airbnb", style: TextStyle(
                             color: Colors.black,
                             fontSize: ScreenSize.width/25,
@@ -163,16 +176,22 @@ final List<String> cities = [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: ScreenSize.width/6,
-                            height: ScreenSize.width/6,
-                            decoration: BoxDecoration(
-                              color: ajired,
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: Image(image: Svg("assets/icons/Home_icon.svg"),
-                            ),
-                          ),
+                            Container(
+  width: ScreenSize.width / 6,
+  height: ScreenSize.width / 6,
+  decoration: BoxDecoration(
+    color: ajired,
+    borderRadius: BorderRadius.circular(14),
+  ),
+  child: Center( // Ensures the icon stays centered
+    child: SvgPicture.asset(
+      "assets/icons/Home_icon.svg",
+      width: ScreenSize.width / 12,  // Adjust for better visibility
+      height: ScreenSize.width / 12, 
+      fit: BoxFit.contain,  // Ensures it scales properly inside the container
+    ),
+  ),
+),
                           Text("Stay here", style: TextStyle(
                             color: Colors.black,
                             fontSize: ScreenSize.width/25,
@@ -183,16 +202,22 @@ final List<String> cities = [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                          width: ScreenSize.width/6,
-                            height: ScreenSize.width/6,
-                            decoration: BoxDecoration(
-                              color: ajired,
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: Image(image: Svg("assets/icons/more_icon.svg"),
-                            ),
-                          ),
+                            Container(
+  width: ScreenSize.width / 6,
+  height: ScreenSize.width / 6,
+  decoration: BoxDecoration(
+    color: ajired,
+    borderRadius: BorderRadius.circular(14),
+  ),
+  child: Center( // Ensures the icon stays centered
+    child: SvgPicture.asset(
+      "assets/icons/more_icon.svg",
+      width: ScreenSize.width / 12,  // Adjust for better visibility
+      height: ScreenSize.width / 12, 
+      fit: BoxFit.contain,  // Ensures it scales properly inside the container
+    ),
+  ),
+),
                           Text("More", style: TextStyle(
                             color: Colors.black,
                             fontSize: ScreenSize.width/25,
