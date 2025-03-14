@@ -2,7 +2,6 @@ import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import '../widgets/featured_section.dart';
 import '../widgets/delivery_section.dart';
 import '../widgets/restaurant_section.dart';

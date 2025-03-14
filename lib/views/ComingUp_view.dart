@@ -3,7 +3,6 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class ComingUp extends StatefulWidget {
   const ComingUp({super.key});

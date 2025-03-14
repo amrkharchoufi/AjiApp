@@ -3,8 +3,6 @@ import 'package:ajiapp/widgets/input_field_widget.dart';
 import 'package:ajiapp/widgets/section_title_widget.dart';
 import 'package:flutter/material.dart';
 
-
-
 class CityToCityScreen extends StatefulWidget {
   const CityToCityScreen({super.key});
 
@@ -47,8 +45,7 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
     );
     if (pickedDate != null && mounted) {
       setState(() {
-        controller.text =
-            "${pickedDate.day.toString().padLeft(2, '0')}/"
+        controller.text = "${pickedDate.day.toString().padLeft(2, '0')}/"
             "${pickedDate.month.toString().padLeft(2, '0')}/"
             "${pickedDate.year}";
       });
@@ -63,8 +60,7 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
     );
     if (pickedTime != null && mounted) {
       setState(() {
-        controller.text =
-            "${pickedTime.hour.toString().padLeft(2, '0')}:"
+        controller.text = "${pickedTime.hour.toString().padLeft(2, '0')}:"
             "${pickedTime.minute.toString().padLeft(2, '0')}";
       });
     }
@@ -72,13 +68,11 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Column(
       children: [
         // Titre principal (optionnel selon votre UI)
         const SizedBox(height: 16),
-    
+
         Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
@@ -106,7 +100,7 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-    
+
                 // Pick Up Location
                 InputFieldWidget(
                   label: "Pick Up Location",
@@ -114,7 +108,7 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                   controller: pickUpController,
                 ),
                 const SizedBox(height: 20),
-    
+
                 // Drop Off Location
                 InputFieldWidget(
                   label: "Drop Off Location",
@@ -122,7 +116,7 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                   controller: dropOffController,
                 ),
                 const SizedBox(height: 20),
-    
+
                 // Passenger
                 InputFieldWidget(
                   label: "Passenger",
@@ -130,11 +124,11 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                   controller: passengerController,
                 ),
                 const SizedBox(height: 20),
-    
+
                 // Section Title: Pick Up Date
                 const SectionTitleWidget(title: "Pick Up Date"),
                 const SizedBox(height: 10),
-    
+
                 // Row for Date & Time
                 Row(
                   children: [
@@ -157,9 +151,9 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                     ),
                   ],
                 ),
-    
+
                 const SizedBox(height: 10),
-    
+
                 // Checkbox Row
                 Row(
                   children: [
@@ -172,7 +166,7 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                     const Text("I'd like to return"),
                   ],
                 ),
-    
+
                 // Conditionally show "Return Date" section
                 if (isReturn) ...[
                   const SizedBox(height: 10),
@@ -200,9 +194,9 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                     ],
                   ),
                 ],
-    
+
                 const SizedBox(height: 20),
-    
+
                 // Search Button
                 SizedBox(
                   height: 50,

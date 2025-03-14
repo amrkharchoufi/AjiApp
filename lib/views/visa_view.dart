@@ -5,7 +5,6 @@ import 'package:ajiapp/views/without_visa_view.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class VisaView extends StatefulWidget {
   const VisaView({super.key});
