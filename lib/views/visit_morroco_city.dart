@@ -1,5 +1,4 @@
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/available_soon.dart';
 import 'package:ajiapp/widgets/visit_morocco_card2.dart';
 import 'package:ajiapp/widgets/visit_morroco_card1.dart';
 import 'package:flutter/material.dart';

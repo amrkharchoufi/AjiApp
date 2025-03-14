@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
@@ -48,49 +49,24 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    Image.asset(
-                      "assets/images/shape.png",
-                      width: ScreenSize.width,
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Positioned(
-                      left: ScreenSize.width / 20,
-                      top: ScreenSize.height / 20,
-                      child: Row(
-                        children: [
-                          Image(
-                            image: Svg("assets/images/logowhite.svg"),
-                          ),
-                          SizedBox(
-                            width: ScreenSize.width / 25,
-                          ),
-                          Text(
-                            "Visa",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: ScreenSize.width / 13.5,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                ServiceNameWidget(name: "Visa"),
                 SizedBox(
                   height: ScreenSize.height / 120,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal:ScreenSize.height / 60),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
                   child: Row(
                     children: [
-                    Image(image: Svg("assets/icons/${widget.country}_icon.svg"),
-                    width: ScreenSize.width / 4.5,
-                    height: ScreenSize.width / 4.5,
-                    ),
-                    SizedBox(width: ScreenSize.width / 30,),
-                    Text(
+                      Image(
+                        image: Svg("assets/icons/${widget.country}_icon.svg"),
+                        width: ScreenSize.width / 4.5,
+                        height: ScreenSize.width / 4.5,
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 30,
+                      ),
+                      Text(
                         widget.country,
                         style: TextStyle(
                             fontFamily: "SFDisplay",
@@ -122,26 +98,26 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
                         height: ScreenSize.width / 4,
                       ),
                       ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: gold,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ScreenSize.width / 15,
-                        vertical: ScreenSize.width / 40,
-                      ),
-                    ),
-                    child: Text(
-                      "Book your Flight",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: (ScreenSize.width / 18),
-                      ),
-                    ),
-                  )
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: gold,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: ScreenSize.width / 15,
+                            vertical: ScreenSize.width / 40,
+                          ),
+                        ),
+                        child: Text(
+                          "Book your Flight",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: (ScreenSize.width / 18),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),

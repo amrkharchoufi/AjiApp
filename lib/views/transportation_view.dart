@@ -5,6 +5,7 @@ import 'package:ajiapp/views/concierge_view.dart';
 import 'package:ajiapp/views/in_city_view.dart';
 import 'package:ajiapp/views/rent_car_view.dart';
 import 'package:ajiapp/views/trans_main_page_view.dart';
+import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
@@ -16,14 +17,14 @@ class Transportationview extends StatefulWidget {
 }
 
 class _TransportationviewState extends State<Transportationview> {
-  int index=0;
+  int index = 0;
 
   List<Widget> pages = [
-      TransMainPageView(),
-      RentCarView(),
-      CarServiceView(),
-      CityToCityScreen(),
-      InCityScreen()
+    TransMainPageView(),
+    RentCarView(),
+    CarServiceView(),
+    CityToCityScreen(),
+    InCityScreen()
   ];
 
   bool isCarService = false;
@@ -68,39 +69,10 @@ class _TransportationviewState extends State<Transportationview> {
           ),
         ),
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  Image.asset(
-                    "assets/images/shape.png",
-                    width: ScreenSize.width,
-                    fit: BoxFit.fitWidth,
-                  ),
-                  Positioned(
-                    left: ScreenSize.width / 20,
-                    top: ScreenSize.height / 20,
-                    child: Row(
-                      children: [
-                        Image(image: Svg("assets/images/logowhite.svg")),
-                        SizedBox(
-                          width: ScreenSize.width / 25,
-                        ),
-                        Text(
-                          "Transportation",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: ScreenSize.width / 13.5,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              // Rent a car section
+              ServiceNameWidget(name: "Transportation"),
               Padding(
                 padding: EdgeInsets.all(ScreenSize.height / 60),
                 child: Column(
@@ -109,15 +81,15 @@ class _TransportationviewState extends State<Transportationview> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                            onTap: () {
-                                setState(() {
-                                  isRentCar = true;
-                                  isCarService = false;
-                                  isCityToCity = false;
-                                  isInCity = false;
-                                  index = 1;
-                                });
-                              },
+                          onTap: () {
+                            setState(() {
+                              isRentCar = true;
+                              isCarService = false;
+                              isCityToCity = false;
+                              isInCity = false;
+                              index = 1;
+                            });
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

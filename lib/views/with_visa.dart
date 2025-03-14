@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
@@ -59,36 +60,7 @@ class _WithVisaState extends State<WithVisa> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    Image.asset(
-                      "assets/images/shape.png",
-                      width: ScreenSize.width,
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Positioned(
-                      left: ScreenSize.width / 20,
-                      top: ScreenSize.height / 20,
-                      child: Row(
-                        children: [
-                          Image(
-                            image: Svg("assets/images/logowhite.svg"),
-                          ),
-                          SizedBox(
-                            width: ScreenSize.width / 25,
-                          ),
-                          Text(
-                            "Visa",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: ScreenSize.width / 13.5,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                ServiceNameWidget(name: "Visa"),
                 SizedBox(
                   height: ScreenSize.height / 120,
                 ),
