@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "486612088522",
+    "project_id": "ajiapp-d436f",
+    "storage_bucket": "ajiapp-d436f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486612088522:android:1149ed31cae774742be633",
+        "android_client_info": {
+          "package_name": "com.example.ajiapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvMxcdhWsTPSJwPx01OZn9l7RX1jF6sWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
