@@ -108,8 +108,8 @@ class _AccomodationViewState extends State<AccomodationView> {
                                 child: Center(
                                   child: SvgPicture.asset(
                                     "assets/icons/hotel_icon.svg",
-                                    width: ScreenSize.width / 12,
-                                    height: ScreenSize.width / 12,
+                                    width: ScreenSize.width / 10,
+                                    height: ScreenSize.width / 10,
                                     fit: BoxFit.contain,
                                   ),
                                 ),
