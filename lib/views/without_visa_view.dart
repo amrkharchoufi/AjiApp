@@ -1,8 +1,9 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class WithoutVisaView extends StatefulWidget {
   final String country;
@@ -17,26 +18,7 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.notifications,
-                color: ajired,
-                size: ScreenSize.width / 13,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.account_circle_outlined,
-                color: ajired,
-                size: ScreenSize.width / 12,
-              ),
-            ),
-          ],
-        ),
+        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -58,8 +40,8 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
                       EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
                   child: Row(
                     children: [
-                      Image(
-                        image: Svg("assets/icons/${widget.country}_icon.svg"),
+                      SvgPicture.asset(
+                        "assets/icons/${widget.country}_icon.svg",
                         width: ScreenSize.width / 4.5,
                         height: ScreenSize.width / 4.5,
                       ),

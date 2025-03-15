@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -15,26 +16,7 @@ class _EsimViewState extends State<EsimView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.notifications,
-                color: ajired,
-                size: ScreenSize.width / 13,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.account_circle_outlined,
-                color: ajired,
-                size: ScreenSize.width / 12,
-              ),
-            ),
-          ],
-        ),
+        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,

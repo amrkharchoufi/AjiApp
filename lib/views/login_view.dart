@@ -4,7 +4,7 @@ import 'package:ajiapp/views/ClientSpace.dart';
 import 'package:ajiapp/views/SignUp_view.dart';
 import 'package:ajiapp/views/forgotpassword_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -27,14 +27,15 @@ class _LoginViewState extends State<LoginView> {
       height: ScreenSize.height,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/background1.png'),
+          image: AssetImage('assets/images/secondbackground.png'),
           fit: BoxFit.cover,
         ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Image(image: Svg("assets/images/logobig.svg")),
+          SvgPicture.asset("assets/images/ajiapplogo.svg",
+              width: ScreenSize.width / 2.5, height: ScreenSize.width / 2.5),
           SizedBox(height: ScreenSize.height / 15),
           Container(
             padding: EdgeInsets.symmetric(

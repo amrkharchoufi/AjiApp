@@ -3,7 +3,6 @@ import 'package:ajiapp/widgets/input_field_widget.dart';
 import 'package:ajiapp/widgets/section_title_widget.dart';
 import 'package:flutter/material.dart';
 
-
 class CarServiceView extends StatefulWidget {
   const CarServiceView({super.key});
 
@@ -61,8 +60,7 @@ class _CarServiceViewState extends State<CarServiceView>
     );
     if (pickedDate != null && mounted) {
       setState(() {
-        controller.text =
-            "${pickedDate.day.toString().padLeft(2, '0')}/"
+        controller.text = "${pickedDate.day.toString().padLeft(2, '0')}/"
             "${pickedDate.month.toString().padLeft(2, '0')}/"
             "${pickedDate.year}";
       });
@@ -77,8 +75,7 @@ class _CarServiceViewState extends State<CarServiceView>
     );
     if (pickedTime != null && mounted) {
       setState(() {
-        controller.text =
-            "${pickedTime.hour.toString().padLeft(2, '0')}:"
+        controller.text = "${pickedTime.hour.toString().padLeft(2, '0')}:"
             "${pickedTime.minute.toString().padLeft(2, '0')}";
       });
     }
@@ -91,7 +88,9 @@ class _CarServiceViewState extends State<CarServiceView>
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(height: size.width*0.1,),
+        SizedBox(
+          height: size.width * 0.1,
+        ),
         Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
@@ -109,7 +108,6 @@ class _CarServiceViewState extends State<CarServiceView>
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Onglets (TabBar)
               TabBar(
                 controller: tabController,
                 indicator: BoxDecoration(color: Colors.white),
@@ -141,7 +139,7 @@ class _CarServiceViewState extends State<CarServiceView>
                   ),
                 ],
               ),
-    
+
               // Contenu des onglets
               Container(
                 color: Colors.white,
@@ -158,7 +156,7 @@ class _CarServiceViewState extends State<CarServiceView>
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const SizedBox(height: 20),
-    
+
                           // Pick Up
                           InputFieldWidget(
                             label: "Pick Up Location",
@@ -166,7 +164,7 @@ class _CarServiceViewState extends State<CarServiceView>
                             controller: pickUpController,
                           ),
                           const SizedBox(height: 20),
-    
+
                           // Drop Off
                           InputFieldWidget(
                             label: "Drop Off Location",
@@ -174,7 +172,7 @@ class _CarServiceViewState extends State<CarServiceView>
                             controller: dropOffController,
                           ),
                           const SizedBox(height: 20),
-    
+
                           // Passengers
                           InputFieldWidget(
                             label: "Passenger",
@@ -183,7 +181,7 @@ class _CarServiceViewState extends State<CarServiceView>
                             inputType: TextInputType.number,
                           ),
                           const SizedBox(height: 20),
-    
+
                           // Pick Up Date
                           const SectionTitleWidget(title: "Pick Up Date"),
                           const SizedBox(height: 20),
@@ -209,7 +207,7 @@ class _CarServiceViewState extends State<CarServiceView>
                             ],
                           ),
                           const SizedBox(height: 20),
-    
+
                           // Bouton Search
                           SizedBox(
                             height: 50,
@@ -236,7 +234,7 @@ class _CarServiceViewState extends State<CarServiceView>
                         ],
                       ),
                     ),
-    
+
                     /// DEUXIÈME ONGLET : CAR SERVICE
                     Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -244,7 +242,7 @@ class _CarServiceViewState extends State<CarServiceView>
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const SizedBox(height: 20),
-    
+
                           // Pick Up
                           InputFieldWidget(
                             label: "Pick Up Location",
@@ -252,7 +250,7 @@ class _CarServiceViewState extends State<CarServiceView>
                             controller: pickUpController,
                           ),
                           const SizedBox(height: 20),
-    
+
                           // Pick Up Date
                           const SectionTitleWidget(title: "Pick Up Date"),
                           const SizedBox(height: 20),
@@ -278,7 +276,7 @@ class _CarServiceViewState extends State<CarServiceView>
                             ],
                           ),
                           const SizedBox(height: 20),
-    
+
                           // Return Date
                           const SectionTitleWidget(title: "Return Date"),
                           const SizedBox(height: 20),
@@ -304,7 +302,7 @@ class _CarServiceViewState extends State<CarServiceView>
                             ],
                           ),
                           const SizedBox(height: 20),
-    
+
                           // Bouton Search
                           SizedBox(
                             height: 50,

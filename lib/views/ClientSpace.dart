@@ -3,8 +3,9 @@ import 'package:ajiapp/views/Service_view.dart';
 import 'package:ajiapp/views/available_soon.dart';
 
 import 'package:ajiapp/views/homepage_view.dart';
+import 'package:ajiapp/views/profile_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Clientspace extends StatefulWidget {
   const Clientspace({super.key});
@@ -14,7 +15,6 @@ class Clientspace extends StatefulWidget {
 }
 
 class ClientspaceState extends State<Clientspace> {
-  
   int _selectedIndex = 0;
 
   static const List<Widget> _pages = <Widget>[
@@ -22,7 +22,7 @@ class ClientspaceState extends State<Clientspace> {
     AvailableSoon(),
     ServiceView(),
     AvailableSoon(),
-    AvailableSoon(),
+    ProfileView(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,43 +46,23 @@ class ClientspaceState extends State<Clientspace> {
         unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
         items: [
           BottomNavigationBarItem(
-            icon: SizedBox(
-              width: ScreenSize.width / 15,
-              height: ScreenSize.width / 15,
-              child: Image(image:Svg('assets/icons/homeicon.svg')),
-            ),
+            icon: SvgPicture.asset("assets/icons/home_icon1.svg"),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              width: ScreenSize.width / 15,
-              height: ScreenSize.width / 15,
-              child: Image(image: Svg("assets/icons/eventicon.svg")),
-            ),
+            icon: SvgPicture.asset("assets/icons/events_icon.svg"),
             label: 'Events',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              width: ScreenSize.width / 15,
-              height: ScreenSize.width / 15,
-              child: Image(image: Svg("assets/icons/services.svg")),
-            ),
+            icon: SvgPicture.asset("assets/icons/service_icon.svg"),
             label: 'Services',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              width: ScreenSize.width / 15,
-              height: ScreenSize.width / 15,
-              child: Image(image: Svg("assets/icons/search.svg")),
-            ),
+            icon: SvgPicture.asset("assets/icons/search_icon.svg"),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              width: ScreenSize.width / 15,
-              height: ScreenSize.width / 15,
-              child: Image(image: Svg("assets/icons/avatar.svg")),
-            ),
+            icon: SvgPicture.asset("assets/icons/profile_icon.svg"),
             label: 'Profile',
           ),
         ],

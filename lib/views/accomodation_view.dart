@@ -1,6 +1,7 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
+import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -25,26 +26,7 @@ class _AccomodationViewState extends State<AccomodationView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.notifications,
-                color: ajired,
-                size: ScreenSize.width / 13,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.account_circle_outlined,
-                color: ajired,
-                size: ScreenSize.width / 12,
-              ),
-            ),
-          ],
-        ),
+        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -124,14 +106,11 @@ class _AccomodationViewState extends State<AccomodationView> {
                                   borderRadius: BorderRadius.circular(14),
                                 ),
                                 child: Center(
-                                  // Ensures the icon stays centered
                                   child: SvgPicture.asset(
                                     "assets/icons/hotel_icon.svg",
-                                    width: ScreenSize.width /
-                                        12, // Adjust for better visibility
+                                    width: ScreenSize.width / 12,
                                     height: ScreenSize.width / 12,
-                                    fit: BoxFit
-                                        .contain, // Ensures it scales properly inside the container
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ),

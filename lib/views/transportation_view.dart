@@ -5,9 +5,10 @@ import 'package:ajiapp/views/concierge_view.dart';
 import 'package:ajiapp/views/in_city_view.dart';
 import 'package:ajiapp/views/rent_car_view.dart';
 import 'package:ajiapp/views/trans_main_page_view.dart';
+import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Transportationview extends StatefulWidget {
   const Transportationview({super.key});
@@ -39,26 +40,7 @@ class _TransportationviewState extends State<Transportationview> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications,
-              color: ajired,
-              size: ScreenSize.width / 13,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.account_circle_outlined,
-              color: ajired,
-              size: ScreenSize.width / 12,
-            ),
-          ),
-        ],
-      ),
+      appBar: MyappbarWidget(),
       body: Container(
         width: ScreenSize.width,
         height: ScreenSize.height,
@@ -121,8 +103,13 @@ class _TransportationviewState extends State<Transportationview> {
                                           : Color.fromARGB(255, 177, 113, 127),
                                   borderRadius: BorderRadius.circular(14),
                                 ),
-                                child: Image(
-                                  image: Svg("assets/icons/rent_car.svg"),
+                                child: Padding(
+                                  padding: EdgeInsets.all(ScreenSize.width /
+                                      30), // Add padding for spacing
+                                  child: SvgPicture.asset(
+                                    "assets/icons/rent_car.svg",
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                               Text(
@@ -176,8 +163,11 @@ class _TransportationviewState extends State<Transportationview> {
                                           : Color.fromARGB(255, 177, 113, 127),
                                   borderRadius: BorderRadius.circular(14),
                                 ),
-                                child: Image(
-                                  image: Svg("assets/icons/concierge.svg"),
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.all(ScreenSize.width / 30),
+                                  child: SvgPicture.asset(
+                                      "assets/icons/concierge_icon.svg"),
                                 ),
                               ),
                               Text(
@@ -204,37 +194,40 @@ class _TransportationviewState extends State<Transportationview> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: (isCarService == false &&
-                                        isCityToCity == false &&
-                                        isInCity == false &&
-                                        isRentCar == false)
-                                    ? ScreenSize.width / 6
-                                    : isCityToCity
-                                        ? ScreenSize.width / 5
-                                        : ScreenSize.width / 6,
-                                height: (isCarService == false &&
-                                        isCityToCity == false &&
-                                        isInCity == false &&
-                                        isRentCar == false)
-                                    ? ScreenSize.width / 6
-                                    : isCityToCity
-                                        ? ScreenSize.width / 5
-                                        : ScreenSize.width / 6,
-                                decoration: BoxDecoration(
-                                  color: (isCarService == false &&
+                                  width: (isCarService == false &&
                                           isCityToCity == false &&
                                           isInCity == false &&
                                           isRentCar == false)
-                                      ? ajired
+                                      ? ScreenSize.width / 6
                                       : isCityToCity
-                                          ? ajired
-                                          : Color.fromARGB(255, 177, 113, 127),
-                                  borderRadius: BorderRadius.circular(14),
-                                ),
-                                child: Image(
-                                  image: Svg("assets/icons/city_to_city.svg"),
-                                ),
-                              ),
+                                          ? ScreenSize.width / 5
+                                          : ScreenSize.width / 6,
+                                  height: (isCarService == false &&
+                                          isCityToCity == false &&
+                                          isInCity == false &&
+                                          isRentCar == false)
+                                      ? ScreenSize.width / 6
+                                      : isCityToCity
+                                          ? ScreenSize.width / 5
+                                          : ScreenSize.width / 6,
+                                  decoration: BoxDecoration(
+                                    color: (isCarService == false &&
+                                            isCityToCity == false &&
+                                            isInCity == false &&
+                                            isRentCar == false)
+                                        ? ajired
+                                        : isCityToCity
+                                            ? ajired
+                                            : Color.fromARGB(
+                                                255, 177, 113, 127),
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.all(ScreenSize.width / 30),
+                                    child: SvgPicture.asset(
+                                        "assets/icons/city_to_city.svg"),
+                                  )),
                               Text(
                                 "City to City",
                                 style: TextStyle(
@@ -259,37 +252,40 @@ class _TransportationviewState extends State<Transportationview> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: (isCarService == false &&
-                                        isCityToCity == false &&
-                                        isInCity == false &&
-                                        isRentCar == false)
-                                    ? ScreenSize.width / 6
-                                    : isInCity
-                                        ? ScreenSize.width / 5
-                                        : ScreenSize.width / 6,
-                                height: (isCarService == false &&
-                                        isCityToCity == false &&
-                                        isInCity == false &&
-                                        isRentCar == false)
-                                    ? ScreenSize.width / 6
-                                    : isInCity
-                                        ? ScreenSize.width / 5
-                                        : ScreenSize.width / 6,
-                                decoration: BoxDecoration(
-                                  color: (isCarService == false &&
+                                  width: (isCarService == false &&
                                           isCityToCity == false &&
                                           isInCity == false &&
                                           isRentCar == false)
-                                      ? ajired
+                                      ? ScreenSize.width / 6
                                       : isInCity
-                                          ? ajired
-                                          : Color.fromARGB(255, 177, 113, 127),
-                                  borderRadius: BorderRadius.circular(14),
-                                ),
-                                child: Image(
-                                  image: Svg("assets/icons/in_city.svg"),
-                                ),
-                              ),
+                                          ? ScreenSize.width / 5
+                                          : ScreenSize.width / 6,
+                                  height: (isCarService == false &&
+                                          isCityToCity == false &&
+                                          isInCity == false &&
+                                          isRentCar == false)
+                                      ? ScreenSize.width / 6
+                                      : isInCity
+                                          ? ScreenSize.width / 5
+                                          : ScreenSize.width / 6,
+                                  decoration: BoxDecoration(
+                                    color: (isCarService == false &&
+                                            isCityToCity == false &&
+                                            isInCity == false &&
+                                            isRentCar == false)
+                                        ? ajired
+                                        : isInCity
+                                            ? ajired
+                                            : Color.fromARGB(
+                                                255, 177, 113, 127),
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.all(ScreenSize.width / 30),
+                                    child: SvgPicture.asset(
+                                        "assets/icons/in_city.svg"),
+                                  )),
                               Text(
                                 "In City",
                                 style: TextStyle(

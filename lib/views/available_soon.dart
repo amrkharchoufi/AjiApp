@@ -1,7 +1,7 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AvailableSoon extends StatelessWidget {
   const AvailableSoon({super.key});
@@ -22,52 +22,50 @@ class AvailableSoon extends StatelessWidget {
                         image: AssetImage("assets/images/background.png"),
                         fit: BoxFit.cover)),
                 child: Column(children: [
-                    Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image(
-                        image: Svg("assets/images/logoaji.svg"),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SvgPicture.asset("assets/images/logoaji.svg"),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "Hello,",
+                            style: TextStyle(
+                              fontSize: 21,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Hello,",
-                        style: TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.notifications_outlined,
-                        color: ajired,
-                        size: ScreenSize.width / 12,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Icon(
-                        Icons.account_circle_outlined,
-                        color: ajired,
-                        size: ScreenSize.width / 12,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.notifications_outlined,
+                            color: ajired,
+                            size: ScreenSize.width / 12,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.account_circle_outlined,
+                            color: ajired,
+                            size: ScreenSize.width / 12,
+                          )
+                        ],
                       )
                     ],
-                  )
-                ],
-              ),
+                  ),
                   SizedBox(
                     height: ScreenSize.height / 3,
                   ),
                   Container(
-                width: ScreenSize.width/2,
+                    width: ScreenSize.width / 2,
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: Colors.white,

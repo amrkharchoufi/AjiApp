@@ -2,7 +2,7 @@ import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/otpinput_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class VerifyemailView extends StatefulWidget {
   const VerifyemailView({super.key});
@@ -23,15 +23,16 @@ class _VerifyemailViewState extends State<VerifyemailView> {
       height: ScreenSize.height,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/background1.png'),
+          image: AssetImage('assets/images/secondbackground.png'),
           fit: BoxFit.cover,
         ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Image(image: Svg("assets/images/logobig.svg")),
-          SizedBox(height: ScreenSize.height / 15),
+          SvgPicture.asset("assets/images/ajiapplogo.svg",
+              width: ScreenSize.width / 3, height: ScreenSize.width / 3),
+          SizedBox(height: ScreenSize.height / 18),
           Container(
             padding: EdgeInsets.symmetric(
                 horizontal: ScreenSize.width / 15,
