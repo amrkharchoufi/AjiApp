@@ -1,3 +1,4 @@
+import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/views/notification_view.dart';
@@ -35,6 +36,16 @@ class _ProfileViewState extends State<ProfileView> {
             onPressed: () {},
             icon: Icon(
               Icons.account_circle,
+              color: ajired,
+              size: ScreenSize.width / 12,
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              signout(context);
+            },
+            icon: Icon(
+              Icons.logout_outlined,
               color: ajired,
               size: ScreenSize.width / 12,
             ),

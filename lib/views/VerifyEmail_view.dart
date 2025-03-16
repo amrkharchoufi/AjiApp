@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class VerifyemailView extends StatefulWidget {
-  const VerifyemailView({super.key});
+  final String email;
+  const VerifyemailView({super.key, required this.email});
 
   @override
   State<VerifyemailView> createState() => _VerifyemailViewState();
@@ -59,7 +60,7 @@ class _VerifyemailViewState extends State<VerifyemailView> {
                   height: ScreenSize.height / 20,
                 ),
                 Text(
-                  'Please Enter The 4 Digit Code Sent To\n admin@gmail.com',
+                  'Please Enter The 4 Digit Code Sent To\n ${widget.email}',
                   style: TextStyle(
                       color: Colors.black, fontSize: ScreenSize.width / 25),
                   textAlign: TextAlign.center,
