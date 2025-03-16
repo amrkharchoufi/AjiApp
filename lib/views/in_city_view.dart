@@ -18,15 +18,12 @@ class InCityScreen extends StatelessWidget {
           SizedBox(height: size.height * 0.03),
 
           // Barre de recherche spécifique à "In City"
-            SearchBarWidget(
-              size: MediaQuery.of(context).size,
-              controller: searchController,
-              hintText: "Search cars in city...",
-              onChanged: (value) {
-                print("User is searching for: $value");
-                // Ajoute ta logique de recherche ici
-              },
-            ),          
+          SearchBarWidget(
+            size: MediaQuery.of(context).size,
+            controller: searchController,
+            hintText: "Search cars in city...",
+            onChanged: (value) {},
+          ),
           SizedBox(height: size.height * 0.03),
 
           // Titre clair avant la liste de voitures
@@ -39,10 +36,10 @@ class InCityScreen extends StatelessWidget {
               ),
               TextButton(
                 style: ButtonStyle(
-                foregroundColor: WidgetStateProperty.all<Color>(
-                  const Color.fromARGB(255, 0, 0, 0),
-                ), 
-              ),
+                  foregroundColor: WidgetStateProperty.all<Color>(
+                    const Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
                 onPressed: () {
                   // Logique pour afficher toutes les voitures disponibles
                 },
@@ -54,7 +51,6 @@ class InCityScreen extends StatelessWidget {
           SizedBox(height: size.height * 0.02),
 
           // Widget affichant la liste des voitures disponibles
-  
         ],
       ),
     );

@@ -30,24 +30,37 @@ class FoodFeaturedCard extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
-            colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+            colors: [
+              Colors.black.withAlpha((0.6 * 255).toInt()),
+              Colors.transparent
+            ],
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Spacer(),
-            Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28)),
+            Text(title,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28)),
             Row(
               children: [
                 const Icon(Icons.star, color: Colors.yellow, size: 16),
-                Expanded(child: Text("$rating ($reviews)", style: const TextStyle(color: Colors.white, fontSize: 15))),
+                Expanded(
+                    child: Text("$rating ($reviews)",
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 15))),
               ],
             ),
             Row(
               children: [
                 const Icon(Icons.location_on, color: Colors.red, size: 16),
-                Expanded(child: Text(address, style: const TextStyle(color: Colors.white, fontSize: 15))),
+                Expanded(
+                    child: Text(address,
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 15))),
               ],
             ),
           ],

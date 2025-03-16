@@ -7,10 +7,10 @@ class CityToCityScreen extends StatefulWidget {
   const CityToCityScreen({super.key});
 
   @override
-  _CityToCityScreenState createState() => _CityToCityScreenState();
+  CityToCityScreenState createState() => CityToCityScreenState();
 }
 
-class _CityToCityScreenState extends State<CityToCityScreen> {
+class CityToCityScreenState extends State<CityToCityScreen> {
   // Text controllers
   final pickUpController = TextEditingController();
   final dropOffController = TextEditingController();
@@ -80,10 +80,11 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color:
+                    Colors.black.withAlpha((0.1 * 255).toInt()), // 10% opacity
                 blurRadius: 6,
                 offset: const Offset(0, 3),
-              ),
+              )
             ],
           ),
           child: Container(
@@ -209,7 +210,7 @@ class _CityToCityScreenState extends State<CityToCityScreen> {
                       ),
                     ),
                     onPressed: () {
-                      // TODO: Implement search logic
+                      // Implement search logic
                     },
                     child: const Text(
                       "Search",

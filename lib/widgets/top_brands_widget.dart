@@ -36,7 +36,7 @@ class TopBrandsWidget extends StatelessWidget {
               style: ButtonStyle(
                 foregroundColor: WidgetStateProperty.all<Color>(
                   const Color.fromARGB(255, 0, 0, 0),
-                ), 
+                ),
               ),
               onPressed: () {},
               child: const Text("View all"),
@@ -66,10 +66,10 @@ class TopBrandsWidget extends StatelessWidget {
                     border: Border.all(color: Colors.grey.shade300, width: 2),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withAlpha((0.2 * 255).toInt()),
                         blurRadius: 4,
                         offset: const Offset(0, 2),
-                      ),
+                      )
                     ],
                   ),
                   padding: EdgeInsets.all(size.width * 0.03),
@@ -87,8 +87,8 @@ class TopBrandsWidget extends StatelessWidget {
     return SvgPicture.asset(
       logoPath,
       fit: BoxFit.contain,
-      placeholderBuilder:
-          (_) => const Center(child: CircularProgressIndicator()),
+      placeholderBuilder: (_) =>
+          const Center(child: CircularProgressIndicator()),
     );
   }
 }

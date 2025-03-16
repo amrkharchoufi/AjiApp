@@ -7,10 +7,10 @@ class CarServiceView extends StatefulWidget {
   const CarServiceView({super.key});
 
   @override
-  _CarServiceViewState createState() => _CarServiceViewState();
+  CarServiceViewState createState() => CarServiceViewState();
 }
 
-class _CarServiceViewState extends State<CarServiceView>
+class CarServiceViewState extends State<CarServiceView>
     with TickerProviderStateMixin {
   // Controllers
   final pickUpController = TextEditingController();
@@ -98,10 +98,11 @@ class _CarServiceViewState extends State<CarServiceView>
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color:
+                    Colors.black.withAlpha((0.1 * 255).toInt()), // 10% opacity
                 blurRadius: 6,
                 offset: const Offset(0, 3),
-              ),
+              )
             ],
           ),
           child: Column(

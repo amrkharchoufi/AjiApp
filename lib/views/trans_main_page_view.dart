@@ -101,10 +101,11 @@ Widget _buildCategorySection(
                   border: Border.all(color: Colors.grey.shade200, width: 1),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.15),
+                      color: Colors.grey
+                          .withAlpha((0.15 * 255).toInt()), // 15% opacity
                       blurRadius: 8,
                       offset: const Offset(0, 3),
-                    ),
+                    )
                   ],
                 ),
                 child: _buildBrandLogo(brand['logo']!),

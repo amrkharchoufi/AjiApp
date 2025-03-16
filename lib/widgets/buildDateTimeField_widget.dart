@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class _buildDateTimeField extends StatefulWidget {
+class buildDateTimeField extends StatefulWidget {
+  const buildDateTimeField({super.key});
+
   @override
-  _DateTimeFieldWidgetState createState() => _DateTimeFieldWidgetState();
+  DateTimeFieldWidgetState createState() => DateTimeFieldWidgetState();
 }
 
-class _DateTimeFieldWidgetState extends State<_buildDateTimeField> {
+class DateTimeFieldWidgetState extends State<buildDateTimeField> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
@@ -26,8 +28,7 @@ class _DateTimeFieldWidgetState extends State<_buildDateTimeField> {
           );
           if (pickedDate != null && mounted) {
             setState(() {
-              controller.text =
-                  "${pickedDate.day.toString().padLeft(2, '0')}/"
+              controller.text = "${pickedDate.day.toString().padLeft(2, '0')}/"
                   "${pickedDate.month.toString().padLeft(2, '0')}/"
                   "${pickedDate.year}";
             });
@@ -40,8 +41,7 @@ class _DateTimeFieldWidgetState extends State<_buildDateTimeField> {
           );
           if (pickedTime != null && mounted) {
             setState(() {
-              controller.text =
-                  "${pickedTime.hour.toString().padLeft(2, '0')}:"
+              controller.text = "${pickedTime.hour.toString().padLeft(2, '0')}:"
                   "${pickedTime.minute.toString().padLeft(2, '0')}";
             });
           }

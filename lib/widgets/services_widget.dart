@@ -61,7 +61,7 @@ class ServicesWidget extends StatelessWidget {
               img: SvgPicture.asset(
                 "assets/icons/Visa_icon.svg",
                 width: ScreenSize.width / 14,
-                color: ajired,
+                colorFilter: ColorFilter.mode(ajired, BlendMode.srcIn),
               ),
             ),
           ),
@@ -82,7 +82,7 @@ class ServicesWidget extends StatelessWidget {
                 img: SvgPicture.asset(
                   "assets/icons/Ticket_icon.svg",
                   width: ScreenSize.width / 17,
-                  color: ajired,
+                  colorFilter: ColorFilter.mode(ajired, BlendMode.srcIn),
                 ),
               )),
           GestureDetector(
@@ -101,7 +101,7 @@ class ServicesWidget extends StatelessWidget {
               icon: Icons.call_outlined,
               img: SvgPicture.asset(
                 "assets/icons/flight_icon.svg",
-                color: ajired,
+                colorFilter: ColorFilter.mode(ajired, BlendMode.srcIn),
               ),
             ),
           ),

@@ -23,20 +23,19 @@ class SearchBarWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withAlpha((0.3 * 255).toInt()),
               spreadRadius: 0.2,
               blurRadius: 1,
               offset: const Offset(0, 2),
-            ),
+            )
           ],
         ),
         child: TextField(
-          
           controller: controller,
           onChanged: onChanged,
           decoration: InputDecoration(
-            
-            prefixIcon: Icon(Icons.search, color: Colors.black54, size: size.width * 0.06),
+            prefixIcon: Icon(Icons.search,
+                color: Colors.black54, size: size.width * 0.06),
             hintText: hintText,
             filled: true,
             fillColor: Colors.white,

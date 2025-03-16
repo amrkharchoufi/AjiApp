@@ -1,8 +1,6 @@
 import 'package:ajiapp/views/ClientSpace.dart';
-import 'package:ajiapp/views/VerifyEmail_view.dart';
 import 'package:ajiapp/views/login_view.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,8 +36,8 @@ Future<void> login(BuildContext context, String email, String password,
     )..show();
 
     // Authenticate user
-    final UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+    // final UserCredential userCredential =
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -64,6 +62,8 @@ Future<void> login(BuildContext context, String email, String password,
       await prefs.setString('password', password);
     }
 
+    if (!context.mounted) return;
+
     // Navigate based on role
     loadingDialog.dismiss();
     Navigator.pushAndRemoveUntil(
@@ -72,14 +72,20 @@ Future<void> login(BuildContext context, String email, String password,
       (Route<dynamic> route) => false,
     );
   } on FirebaseAuthException catch (e) {
-    loadingDialog.dismiss();
-    _handleAuthError(context, e);
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _handleAuthError(context, e);
+    }
   } on FirebaseException catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Database error: ${e.message}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Database error: ${e.message}');
+    }
   } catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    }
   }
 }
 
@@ -148,6 +154,8 @@ Future<void> signout(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
 
+    if (!context.mounted) return;
+
     loadingDialog.dismiss();
     Navigator.pushAndRemoveUntil(
       context,
@@ -155,14 +163,20 @@ Future<void> signout(BuildContext context) async {
       (Route<dynamic> route) => false,
     );
   } on FirebaseAuthException catch (e) {
-    loadingDialog.dismiss();
-    _handleAuthError(context, e);
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _handleAuthError(context, e);
+    }
   } on FirebaseException catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Database error: ${e.message}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Database error: ${e.message}');
+    }
   } catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    }
   }
 }
 
@@ -211,6 +225,7 @@ Future<void> loginWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     if (googleUser == null) {
       // User canceled the sign-in
+      if (!context.mounted) return;
       loadingDialog.dismiss();
       _showErrorDialog(context, 'Google sign-in canceled.');
       return;
@@ -227,8 +242,8 @@ Future<void> loginWithGoogle(BuildContext context) async {
     );
 
     // Authenticate user with Firebase
-    final userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
+    // final userCredential =
+    await FirebaseAuth.instance.signInWithCredential(credential);
 
     // // Check if user exists in Firestore
     // final String userId = userCredential.user!.uid;
@@ -241,7 +256,7 @@ Future<void> loginWithGoogle(BuildContext context) async {
     //   await FirebaseAuth.instance.signOut();
     //   return;
     // }
-
+    if (!context.mounted) return;
     // Navigate to client space
     loadingDialog.dismiss();
     Navigator.pushAndRemoveUntil(
@@ -250,14 +265,20 @@ Future<void> loginWithGoogle(BuildContext context) async {
       (Route<dynamic> route) => false,
     );
   } on FirebaseAuthException catch (e) {
-    loadingDialog.dismiss();
-    _handleAuthError(context, e);
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _handleAuthError(context, e);
+    }
   } on FirebaseException catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Database error: ${e.message}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Database error: ${e.message}');
+    }
   } catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    }
   }
 }
 
@@ -298,6 +319,7 @@ Future<void> resetPassword(String email, BuildContext context) async {
 
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
 
+    if (!context.mounted) return;
     loadingDialog.dismiss();
     AwesomeDialog(
       context: context,
@@ -329,10 +351,14 @@ Future<void> resetPassword(String email, BuildContext context) async {
         _showErrorDialog(context, 'Error: ${e.message}');
     }
   } on FirebaseException catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Database error: ${e.message}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Database error: ${e.message}');
+    }
   } catch (e) {
-    loadingDialog.dismiss();
-    _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    }
   }
 }

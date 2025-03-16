@@ -45,13 +45,12 @@ class FeatureCard extends StatelessWidget {
                   height: ScreenSize.width / 4,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withOpacity(0.9),
-                      ],
-                    ),
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withAlpha((0.9 * 255).toInt()),
+                        ]),
                   ),
                 ),
               ),
