@@ -307,11 +307,12 @@ Future<void> resetPassword(String email, BuildContext context) async {
       desc:
           'A password reset link has been sent to your email. Please check your inbox.',
       btnOkOnPress: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => VerifyemailView(email: email)),
-        );
+        Navigator.pop(context);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => VerifyemailView(email: email)),
+        // );
       },
     ).show();
   } on FirebaseAuthException catch (e) {
