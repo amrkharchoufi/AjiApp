@@ -9,31 +9,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 Future<void> login(BuildContext context, String email, String password,
     bool rememberme) async {
-  late AwesomeDialog loadingDialog;
   try {
     // Show loading dialog
-    loadingDialog = AwesomeDialog(
-      context: context,
-      dialogType: DialogType.noHeader,
-      animType: AnimType.bottomSlide,
-      body: Container(
-        width: context.size!.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/background.png"),
-                fit: BoxFit.cover)),
-        child: Column(
-          children: [
-            SvgPicture.asset("assets/images/logoaji.svg"),
-            CircularProgressIndicator(),
-            Text('Signing in...'),
-            SizedBox(height: 16),
-          ],
-        ),
-      ),
-      dismissOnTouchOutside: false,
-      dismissOnBackKeyPress: false,
-    )..show();
+    showLoadingDialog(context, 'Signing in...');
 
     // Authenticate user
     // final UserCredential userCredential =
@@ -65,7 +43,8 @@ Future<void> login(BuildContext context, String email, String password,
     if (!context.mounted) return;
 
     // Navigate based on role
-    loadingDialog.dismiss();
+    // Dismiss loading dialog
+    Navigator.of(context, rootNavigator: true).pop();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => Clientspace()),
@@ -73,17 +52,20 @@ Future<void> login(BuildContext context, String email, String password,
     );
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _handleAuthError(context, e);
     }
   } on FirebaseException catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
@@ -124,31 +106,9 @@ void _showErrorDialog(BuildContext context, String message) {
 }
 
 Future<void> signout(BuildContext context) async {
-  late AwesomeDialog loadingDialog;
   try {
     // Show loading dialog
-    loadingDialog = AwesomeDialog(
-      context: context,
-      dialogType: DialogType.noHeader,
-      animType: AnimType.bottomSlide,
-      body: Container(
-        width: context.size!.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/background.png"),
-                fit: BoxFit.cover)),
-        child: Column(
-          children: [
-            SvgPicture.asset("assets/images/logoaji.svg"),
-            CircularProgressIndicator(),
-            Text('Signing Out...'),
-            SizedBox(height: 16),
-          ],
-        ),
-      ),
-      dismissOnTouchOutside: false,
-      dismissOnBackKeyPress: false,
-    )..show();
+    showLoadingDialog(context, 'Signing out...');
 
     FirebaseAuth.instance.signOut();
     final prefs = await SharedPreferences.getInstance();
@@ -156,7 +116,8 @@ Future<void> signout(BuildContext context) async {
 
     if (!context.mounted) return;
 
-    loadingDialog.dismiss();
+    // Dismiss loading dialog
+    Navigator.of(context, rootNavigator: true).pop();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => LoginView()),
@@ -164,17 +125,20 @@ Future<void> signout(BuildContext context) async {
     );
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _handleAuthError(context, e);
     }
   } on FirebaseException catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
@@ -193,40 +157,17 @@ void loadSavedCredentials(
 }
 
 Future<void> loginWithGoogle(BuildContext context) async {
-  late AwesomeDialog loadingDialog;
   try {
     // Show loading dialog
-    loadingDialog = AwesomeDialog(
-      context: context,
-      dialogType: DialogType.noHeader,
-      animType: AnimType.bottomSlide,
-      body: Container(
-        width: context.size!.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          children: [
-            SvgPicture.asset("assets/images/logoaji.svg"),
-            CircularProgressIndicator(),
-            Text('Signing in...'),
-            SizedBox(height: 16),
-          ],
-        ),
-      ),
-      dismissOnTouchOutside: false,
-      dismissOnBackKeyPress: false,
-    )..show();
+    showLoadingDialog(context, 'Signing in...');
 
     // Google Sign-In
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     if (googleUser == null) {
       // User canceled the sign-in
       if (!context.mounted) return;
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Google sign-in canceled.');
       return;
     }
@@ -258,7 +199,8 @@ Future<void> loginWithGoogle(BuildContext context) async {
     // }
     if (!context.mounted) return;
     // Navigate to client space
-    loadingDialog.dismiss();
+    // Dismiss loading dialog
+    Navigator.of(context, rootNavigator: true).pop();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => Clientspace()),
@@ -266,17 +208,20 @@ Future<void> loginWithGoogle(BuildContext context) async {
     );
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _handleAuthError(context, e);
     }
   } on FirebaseException catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      // Dismiss loading dialog
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
@@ -361,4 +306,44 @@ Future<void> resetPassword(String email, BuildContext context) async {
       _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
+}
+
+void showLoadingDialog(BuildContext context, String text) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) => Dialog(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              "assets/images/logoaji.svg",
+              width: 80,
+            ),
+            const SizedBox(height: 20),
+            const CircularProgressIndicator(),
+            const SizedBox(height: 10),
+            Text(
+              text,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
