@@ -1,0 +1,2 @@
+C:/projects/AjiApp/android/app/.cxx/Debug/5g1za4f5/x86/CMakeFiles/edit_cache.dir
+C:/projects/AjiApp/android/app/.cxx/Debug/5g1za4f5/x86/CMakeFiles/rebuild_cache.dir

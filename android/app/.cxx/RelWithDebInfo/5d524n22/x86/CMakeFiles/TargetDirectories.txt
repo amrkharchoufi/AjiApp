@@ -1,0 +1,2 @@
+C:/projects/AjiApp/android/app/.cxx/RelWithDebInfo/5d524n22/x86/CMakeFiles/edit_cache.dir
+C:/projects/AjiApp/android/app/.cxx/RelWithDebInfo/5d524n22/x86/CMakeFiles/rebuild_cache.dir
