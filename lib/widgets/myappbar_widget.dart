@@ -11,9 +11,9 @@ class MyappbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        ServiceNameWidget(name: name),
+      
         AppBar(
           backgroundColor: ajired,
           elevation: 0,
@@ -35,6 +35,7 @@ class MyappbarWidget extends StatelessWidget {
             ),
           ],
         ),
+          ServiceNameWidget(name: name),
       ],
     );
   }

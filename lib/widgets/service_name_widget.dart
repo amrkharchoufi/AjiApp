@@ -9,6 +9,7 @@ class ServiceNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
+    SizeConfig.init(context);
     return Stack(
       children: [
         // Image.asset(
@@ -21,18 +22,16 @@ class ServiceNameWidget extends StatelessWidget {
           width: ScreenSize.width,
           fit: BoxFit.fitWidth,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              name,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: ScreenSize.width / 13.5,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
+        Positioned(
+          bottom: SizeConfig.getblockSizeVertical(5.5),
+          left: SizeConfig.getblockSizeHorizontal(43),
+          child: Text(
+            name,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: SizeConfig.getblockSizeVertical(3.5),
+                fontWeight: FontWeight.bold),
+          ),
         )
       ],
     );

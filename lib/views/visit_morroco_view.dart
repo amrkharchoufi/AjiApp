@@ -3,7 +3,6 @@ import 'package:ajiapp/views/visit_morocco_all.dart';
 import 'package:ajiapp/views/visit_morocco_home.dart';
 import 'package:ajiapp/views/visit_morroco_city.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 

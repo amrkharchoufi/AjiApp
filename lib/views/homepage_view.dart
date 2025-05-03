@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                       FeatureCard(
                         title: "Get your E-sim",
                         subtitle: "Stay connected with inwi e-sim",
-                        backgroundImage: 'https://i.ibb.co/nNb72Jpc/guide.jpg',
+                        backgroundImage: AssetImage('assets/images/sim.jpg'),
                         description: 'Learn More',
                       ),
                       SizedBox(
@@ -146,37 +146,38 @@ class _HomePageState extends State<HomePage> {
                       FeatureCard(
                         title: "Morroco vs Comoros",
                         subtitle: "Dec,21,2025 at 18:00",
-                        backgroundImage: 'https://i.ibb.co/nNb72Jpc/guide.jpg',
+                        backgroundImage:
+                            AssetImage('assets/images/matchday.jpg'),
                         description: 'Learn More',
                       ),
-                      // SizedBox(
-                      //   width: ScreenSize.width / 20,
-                      // ),
-                      // FeatureCard(
-                      //   title: "Your Guide to Morroco",
-                      //   subtitle: "Aji app is your Companion in Morocco",
-                      //   backgroundImage: AssetImage('assets/images/guide.jpg'),
-                      //   description: 'Learn More',
-                      // ),
-                      // SizedBox(
-                      //   width: ScreenSize.width / 20,
-                      // ),
-                      // FeatureCard(
-                      //   title: "Hassan II Mosque",
-                      //   subtitle: "Visit the Largest mosque in Morroco",
-                      //   backgroundImage: AssetImage('assets/images/mosque.jpg'),
-                      //   description: 'Book a Tour',
-                      // ),
-                      // SizedBox(
-                      //   width: ScreenSize.width / 20,
-                      // ),
-                      // FeatureCard(
-                      //   title: "Visit Dar Naji",
-                      //   subtitle: "Get an unmatched taset of Morroco",
-                      //   backgroundImage:
-                      //       AssetImage('assets/images/f-image.jpg'),
-                      //   description: 'Book a Tour',
-                      // ),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      FeatureCard(
+                        title: "Your Guide to Morroco",
+                        subtitle: "Aji app is your Companion in Morocco",
+                        backgroundImage: AssetImage('assets/images/guide.jpg'),
+                        description: 'Learn More',
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      FeatureCard(
+                        title: "Hassan II Mosque",
+                        subtitle: "Visit the Largest mosque in Morroco",
+                        backgroundImage: AssetImage('assets/images/mosque.jpg'),
+                        description: 'Book a Tour',
+                      ),
+                      SizedBox(
+                        width: ScreenSize.width / 20,
+                      ),
+                      FeatureCard(
+                        title: "Visit Dar Naji",
+                        subtitle: "Get an unmatched taset of Morroco",
+                        backgroundImage:
+                            AssetImage('assets/images/f-image.jpg'),
+                        description: 'Book a Tour',
+                      ),
                       SizedBox(
                         width: 20,
                       )
