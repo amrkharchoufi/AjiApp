@@ -18,9 +18,10 @@ class FeatureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
+    SizeConfig().init(context);
     return SizedBox(
-      width: ScreenSize.width / 2.1,
-      height: ScreenSize.width / 1.35,
+      width: SizeConfig.getBlockSizeHorizontal(35),
+      height: SizeConfig.getBlockSizeVertical(27),
       child: CustomPaint(
         painter: DoorFramePainter(),
         child: ClipPath(

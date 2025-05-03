@@ -178,9 +178,7 @@ class _HomePageState extends State<HomePage> {
                             AssetImage('assets/images/f-image.jpg'),
                         description: 'Book a Tour',
                       ),
-                      SizedBox(
-                        width: 20,
-                      )
+                      
                     ],
                   ),
                 ),
