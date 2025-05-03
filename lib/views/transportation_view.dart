@@ -40,7 +40,6 @@ class _TransportationviewState extends State<Transportationview> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-      appBar: MyappbarWidget(),
       body: Container(
         width: ScreenSize.width,
         height: ScreenSize.height,
@@ -54,7 +53,7 @@ class _TransportationviewState extends State<Transportationview> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ServiceNameWidget(name: "Transportation"),
+              MyappbarWidget(name: "Transportation"),
               Padding(
                 padding: EdgeInsets.all(ScreenSize.height / 60),
                 child: Column(

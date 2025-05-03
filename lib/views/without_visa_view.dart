@@ -18,94 +18,93 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
-          width: ScreenSize.width,
-          height: ScreenSize.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.cover,
+      width: ScreenSize.width,
+      height: ScreenSize.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            MyappbarWidget(name: "Visa"),
+    
+            SizedBox(
+              height: ScreenSize.height / 120,
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ServiceNameWidget(name: "Visa"),
-                SizedBox(
-                  height: ScreenSize.height / 120,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/${widget.country}_icon.svg",
-                        width: ScreenSize.width / 4.5,
-                        height: ScreenSize.width / 4.5,
-                      ),
-                      SizedBox(
-                        width: ScreenSize.width / 30,
-                      ),
-                      Text(
-                        widget.country,
-                        style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            fontSize: ScreenSize.width / 11,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/${widget.country}_icon.svg",
+                    width: ScreenSize.width / 4.5,
+                    height: ScreenSize.width / 4.5,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(ScreenSize.height / 60),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Get visa information before your next trip to Morroco",
-                        style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            fontSize: ScreenSize.width / 21,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Search your nationality to find out the documents you need for your visa application",
-                        style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: ScreenSize.width / 25,
-                        ),
-                      ),
-                      SizedBox(
-                        height: ScreenSize.width / 4,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: gold,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: ScreenSize.width / 15,
-                            vertical: ScreenSize.width / 40,
-                          ),
-                        ),
-                        child: Text(
-                          "Book your Flight",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: (ScreenSize.width / 18),
-                          ),
-                        ),
-                      )
-                    ],
+                  SizedBox(
+                    width: ScreenSize.width / 30,
                   ),
-                ),
-              ],
+                  Text(
+                    widget.country,
+                    style: TextStyle(
+                        fontFamily: "SFDisplay",
+                        fontSize: ScreenSize.width / 11,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ));
+            Padding(
+              padding: EdgeInsets.all(ScreenSize.height / 60),
+              child: Column(
+                children: [
+                  Text(
+                    "Get visa information before your next trip to Morroco",
+                    style: TextStyle(
+                        fontFamily: "SFDisplay",
+                        fontSize: ScreenSize.width / 21,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Search your nationality to find out the documents you need for your visa application",
+                    style: TextStyle(
+                      fontFamily: "SFDisplay",
+                      fontSize: ScreenSize.width / 25,
+                    ),
+                  ),
+                  SizedBox(
+                    height: ScreenSize.width / 4,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: gold,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ScreenSize.width / 15,
+                        vertical: ScreenSize.width / 40,
+                      ),
+                    ),
+                    child: Text(
+                      "Book your Flight",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: (ScreenSize.width / 18),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }

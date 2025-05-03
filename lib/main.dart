@@ -1,4 +1,5 @@
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/ClientSpace.dart';
 import 'package:ajiapp/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     ScreenSize.init(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home: Clientspace(),
     );
   }
 }

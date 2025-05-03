@@ -16,7 +16,7 @@ class _ServiceViewState extends State<ServiceView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
+       
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -29,6 +29,7 @@ class _ServiceViewState extends State<ServiceView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                MyappbarWidget(name: "Services"),
                 ServiceNameWidget(name: "Services"),
                 SizedBox(
                   height: ScreenSize.height / 10,

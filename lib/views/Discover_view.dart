@@ -16,7 +16,7 @@ class _DiscoverState extends State<Discover> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
+   
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -29,6 +29,7 @@ class _DiscoverState extends State<Discover> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                MyappbarWidget(name: "Discover"),
                 ServiceNameWidget(name: "Discover"),
                 SizedBox(
                   height: ScreenSize.height / 60,

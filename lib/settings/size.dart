@@ -10,4 +10,7 @@ class ScreenSize {
     width = mediaQuery.size.width;
     height = mediaQuery.size.height;
   }
+  
+ 
+
 }

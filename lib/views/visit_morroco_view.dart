@@ -30,92 +30,90 @@ class _VisitMorrocoViewState extends State<VisitMorrocoView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
-          width: ScreenSize.width,
-          height: ScreenSize.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.cover,
+      width: ScreenSize.width,
+      height: ScreenSize.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            MyappbarWidget(name: "Visit Morocco"),
+            SizedBox(
+              height: ScreenSize.height / 120,
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ServiceNameWidget(name: "Visit Morocco"),
-                SizedBox(
-                  height: ScreenSize.height / 120,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(ScreenSize.height / 60),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: ScreenSize.width / 1.2,
-                        child: DropdownSearch<String>(
-                          popupProps: PopupProps.menu(
-                            showSearchBox:
-                                true, // Enables search in the dropdown
-                            searchFieldProps: TextFieldProps(
-                              decoration: InputDecoration(
-                                prefixIcon:
-                                    Icon(Icons.search, color: Colors.black54),
-                                hintText: "Search for a city",
-                                border: InputBorder
-                                    .none, // Removes the default border
-                              ),
-                            ),
-                            fit: FlexFit.loose,
+            Padding(
+              padding: EdgeInsets.all(ScreenSize.height / 60),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: ScreenSize.width / 1.2,
+                    child: DropdownSearch<String>(
+                      popupProps: PopupProps.menu(
+                        showSearchBox: true, // Enables search in the dropdown
+                        searchFieldProps: TextFieldProps(
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                Icon(Icons.search, color: Colors.black54),
+                            hintText: "Search for a city",
+                            border:
+                                InputBorder.none, // Removes the default border
                           ),
-                          items: cities,
-                          dropdownDecoratorProps: DropDownDecoratorProps(
-                            dropdownSearchDecoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              prefixIcon: Icon(Icons.search,
-                                  color: Colors.black54), // Search icon
-                              hintText: "Search for a city",
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: ScreenSize.width / 10,
-                                  vertical: ScreenSize.width / 30),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                    ScreenSize.width / 10),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
+                        ),
+                        fit: FlexFit.loose,
+                      ),
+                      items: cities,
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          prefixIcon: Icon(Icons.search,
+                              color: Colors.black54), // Search icon
+                          hintText: "Search for a city",
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: ScreenSize.width / 10,
+                              vertical: ScreenSize.width / 30),
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.circular(ScreenSize.width / 10),
+                            borderSide: BorderSide.none,
                           ),
-                          dropdownButtonProps: DropdownButtonProps(
-                            icon: Icon(Icons.arrow_drop_down,
-                                color: Colors.black54),
-                          ),
-                          onChanged: (value) => {
-                            if (value == "All the Country")
-                              {
-                                setState(() {
-                                  Custom = VisitMoroccoAll();
-                                })
-                              }
-                            else
-                              {
-                                setState(() {
-                                  Custom = VisitMoroccoCity(city: value!);
-                                })
-                              }
-                          },
                         ),
                       ),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
+                      dropdownButtonProps: DropdownButtonProps(
+                        icon:
+                            Icon(Icons.arrow_drop_down, color: Colors.black54),
                       ),
-                      Custom
-                    ],
+                      onChanged: (value) => {
+                        if (value == "All the Country")
+                          {
+                            setState(() {
+                              Custom = VisitMoroccoAll();
+                            })
+                          }
+                        else
+                          {
+                            setState(() {
+                              Custom = VisitMoroccoCity(city: value!);
+                            })
+                          }
+                      },
+                    ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: ScreenSize.width / 20,
+                  ),
+                  Custom
+                ],
+              ),
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    ));
   }
 }

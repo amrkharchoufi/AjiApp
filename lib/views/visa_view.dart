@@ -39,113 +39,111 @@ class _VisaViewState extends State<VisaView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
-          width: ScreenSize.width,
-          height: ScreenSize.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.cover,
+      width: ScreenSize.width,
+      height: ScreenSize.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            MyappbarWidget(name: "Visa"),
+            SizedBox(
+              height: ScreenSize.height / 120,
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ServiceNameWidget(name: "Visa"),
-                SizedBox(
-                  height: ScreenSize.height / 120,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(ScreenSize.height / 60),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Get visa information before your next trip to Morroco",
-                        style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            fontSize: ScreenSize.width / 21,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Search your nationality to find out the documents you need for your visa application",
-                        style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: ScreenSize.width / 25,
-                        ),
-                      ),
-                      SizedBox(
-                        height: ScreenSize.width / 10,
-                      ),
-                      SizedBox(
-                        width: ScreenSize.width / 1.2,
-                        child: DropdownSearch<String>(
-                          popupProps: PopupProps.menu(
-                            showSearchBox:
-                                true, // Enables search in the dropdown
-                            searchFieldProps: TextFieldProps(
-                              decoration: InputDecoration(
-                                prefixIcon:
-                                    Icon(Icons.search, color: Colors.black54),
-                                hintText: "Nationality",
-                                border: InputBorder
-                                    .none, // Removes the default border
-                              ),
-                            ),
-                            fit: FlexFit.loose,
-                          ),
-                          items: nationalities,
-                          dropdownDecoratorProps: DropDownDecoratorProps(
-                            dropdownSearchDecoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              prefixIcon: Icon(Icons.search,
-                                  color: Colors.black54), // Search icon
-                              hintText: "Nationality",
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: ScreenSize.width / 10,
-                                  vertical: ScreenSize.width / 30),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                    ScreenSize.width / 10),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                          dropdownButtonProps: DropdownButtonProps(
-                            icon: Icon(Icons.arrow_drop_down,
-                                color: Colors.black54),
-                          ),
-                          onChanged: (value) => {
-                            if (nationalityvisa[value] == true)
-                              {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => WithoutVisaView(
-                                      country: value!,
-                                    ),
-                                  ),
-                                )
-                              }
-                            else
-                              {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => WithVisa(
-                                      country: value!,
-                                    ),
-                                  ),
-                                )
-                              }
-                          },
-                        ),
-                      )
-                    ],
+            Padding(
+              padding: EdgeInsets.all(ScreenSize.height / 60),
+              child: Column(
+                children: [
+                  Text(
+                    "Get visa information before your next trip to Morroco",
+                    style: TextStyle(
+                        fontFamily: "SFDisplay",
+                        fontSize: ScreenSize.width / 21,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-              ],
+                  Text(
+                    "Search your nationality to find out the documents you need for your visa application",
+                    style: TextStyle(
+                      fontFamily: "SFDisplay",
+                      fontSize: ScreenSize.width / 25,
+                    ),
+                  ),
+                  SizedBox(
+                    height: ScreenSize.width / 10,
+                  ),
+                  SizedBox(
+                    width: ScreenSize.width / 1.2,
+                    child: DropdownSearch<String>(
+                      popupProps: PopupProps.menu(
+                        showSearchBox: true, // Enables search in the dropdown
+                        searchFieldProps: TextFieldProps(
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                Icon(Icons.search, color: Colors.black54),
+                            hintText: "Nationality",
+                            border:
+                                InputBorder.none, // Removes the default border
+                          ),
+                        ),
+                        fit: FlexFit.loose,
+                      ),
+                      items: nationalities,
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          prefixIcon: Icon(Icons.search,
+                              color: Colors.black54), // Search icon
+                          hintText: "Nationality",
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: ScreenSize.width / 10,
+                              vertical: ScreenSize.width / 30),
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.circular(ScreenSize.width / 10),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                      ),
+                      dropdownButtonProps: DropdownButtonProps(
+                        icon:
+                            Icon(Icons.arrow_drop_down, color: Colors.black54),
+                      ),
+                      onChanged: (value) => {
+                        if (nationalityvisa[value] == true)
+                          {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => WithoutVisaView(
+                                  country: value!,
+                                ),
+                              ),
+                            )
+                          }
+                        else
+                          {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => WithVisa(
+                                  country: value!,
+                                ),
+                              ),
+                            )
+                          }
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    ));
   }
 }

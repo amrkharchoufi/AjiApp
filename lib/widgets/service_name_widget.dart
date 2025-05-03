@@ -11,29 +11,28 @@ class ServiceNameWidget extends StatelessWidget {
     ScreenSize.init(context);
     return Stack(
       children: [
-        Image.asset(
-          "assets/images/shape.png",
+        // Image.asset(
+        //   "assets/images/shape.png",
+        //   width: ScreenSize.width,
+        //   fit: BoxFit.fitWidth,
+        // ),
+        SvgPicture.asset(
+          "assets/images/custom_header.svg",
           width: ScreenSize.width,
           fit: BoxFit.fitWidth,
         ),
-        Positioned(
-          left: ScreenSize.width / 20,
-          top: ScreenSize.height / 20,
-          child: Row(
-            children: [
-              SvgPicture.asset("assets/images/logowhite.svg"),
-              SizedBox(
-                width: ScreenSize.width / 25,
-              ),
-              Text(
-                name,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: ScreenSize.width / 13.5,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              name,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: ScreenSize.width / 13.5,
+                  fontWeight: FontWeight.bold),
+            )
+          ],
         )
       ],
     );

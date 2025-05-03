@@ -13,45 +13,44 @@ class FoodHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
-          width: ScreenSize.width,
-          height: ScreenSize.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.cover,
+      width: ScreenSize.width,
+      height: ScreenSize.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            MyappbarWidget(name: "Food"),
+            SizedBox(
+              height: ScreenSize.height / 150,
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ServiceNameWidget(name: "Food"),
-                SizedBox(
-                  height: ScreenSize.height / 150,
-                ),
-                SafeArea(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FeaturedSection(),
-                        DeliverySection(),
-                        RestaurantSection(),
-                        const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Center(
-                            child: Text("Version 1.1.2",
-                                style: TextStyle(color: Colors.grey)),
-                          ),
-                        ),
-                      ],
+            SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FeaturedSection(),
+                    DeliverySection(),
+                    RestaurantSection(),
+                    const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Text("Version 1.1.2",
+                            style: TextStyle(color: Colors.grey)),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    ));
   }
 }

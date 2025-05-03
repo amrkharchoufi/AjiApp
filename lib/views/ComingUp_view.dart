@@ -16,7 +16,7 @@ class _ComingUpState extends State<ComingUp> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
+
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -29,6 +29,7 @@ class _ComingUpState extends State<ComingUp> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                MyappbarWidget(name: "Coming Up"),
                 ServiceNameWidget(name: "Coming Up"),
                 SizedBox(
                   height: ScreenSize.height / 60,

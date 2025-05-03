@@ -17,7 +17,6 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -30,7 +29,8 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Visit Morocco"),
+                MyappbarWidget(name: "Visit Morocco"),
+            
                 SizedBox(
                   height: ScreenSize.height / 120,
                 ),
