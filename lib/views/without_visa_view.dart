@@ -52,7 +52,7 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
                       Text(
                         widget.country,
                         style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 11,
                             fontWeight: FontWeight.bold),
                       ),
@@ -62,48 +62,56 @@ class _WithoutVisaViewState extends State<WithoutVisaView> {
                 Padding(
                   padding: EdgeInsets.all(ScreenSize.height / 60),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: ScreenSize.width / 20,
+                      ),
                       Text(
-                        "Get visa information before your next trip to Morroco",
+                        "You do not need a visa to travel to Morocco. ",
                         style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 21,
                             fontWeight: FontWeight.bold),
                       ),
+                      SizedBox(
+                        height: ScreenSize.width / 20,
+                      ),
                       Text(
-                        "Search your nationality to find out the documents you need for your visa application",
+                        "You can book your flight directly. ",
+                        textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                          
                           fontSize: ScreenSize.width / 25,
                         ),
                       ),
-                      SizedBox(
+                      
+                    ],
+                  ),
+                ),
+                SizedBox(
                         height: ScreenSize.width / 4,
                       ),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: gold,
+                          backgroundColor: ajired,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: ScreenSize.width / 15,
-                            vertical: ScreenSize.width / 40,
+                          fixedSize: Size(
+                            ScreenSize.width / 1.5,
+                            ScreenSize.height / 18,
                           ),
                         ),
                         child: Text(
-                          "Book your Flight",
+                          "Visit Morocco",
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: (ScreenSize.width / 18),
+                            fontSize: (ScreenSize.width / 20),
                           ),
                         ),
                       )
-                    ],
-                  ),
-                ),
               ],
             ),
           ),

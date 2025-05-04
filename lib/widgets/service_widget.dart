@@ -7,17 +7,16 @@ class ServiceWidget extends StatelessWidget {
   final double width;
   final double height;
   final String text;
-  final bool imgicon;
-  final IconData icon;
-  final SvgPicture img;
+  final bool golden;
+  final double? customzie;
+  final String img;
   const ServiceWidget(
       {super.key,
       required this.width,
       required this.height,
       required this.text,
-      required this.imgicon,
-      required this.icon,
-      required this.img});
+      required this.img,
+      required this.golden, this.customzie});
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +25,25 @@ class ServiceWidget extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: gold, width: 0.7),
+          color: golden ? gold : Colors.white,
+          border: Border.all(color: golden ? white : gold, width: 0.7),
           borderRadius: BorderRadius.circular(20)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          imgicon
-              ? Icon(
-                  icon,
-                  color: ajired,
-                  size: ScreenSize.width / 12,
-                )
-              : img,
+          SvgPicture.asset(
+            img,
+            width: customzie,
+            color: golden ? Colors.white : null,
+          ),
+          SizedBox(
+            height: 5,
+          ),
           Text(
             text,
+            textAlign: TextAlign.center,
             style: TextStyle(
-                color: ajired,
+                color: golden ? white : ajired,
                 fontWeight: FontWeight.bold,
                 fontSize: ScreenSize.width / 33),
           )

@@ -63,14 +63,14 @@ class _VisaViewState extends State<VisaView> {
                       Text(
                         "Get visa information before your next trip to Morroco",
                         style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 21,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "Search your nationality to find out the documents you need for your visa application",
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                          
                           fontSize: ScreenSize.width / 25,
                         ),
                       ),
@@ -81,6 +81,11 @@ class _VisaViewState extends State<VisaView> {
                         width: ScreenSize.width / 1.2,
                         child: DropdownSearch<String>(
                           popupProps: PopupProps.menu(
+                            menuProps: MenuProps(
+                             backgroundColor: Colors.white,
+                             borderRadius: BorderRadius.circular(
+                                  25), 
+                             ),
                             showSearchBox:
                                 true, // Enables search in the dropdown
                             searchFieldProps: TextFieldProps(
@@ -97,14 +102,14 @@ class _VisaViewState extends State<VisaView> {
                           items: nationalities,
                           dropdownDecoratorProps: DropDownDecoratorProps(
                             dropdownSearchDecoration: InputDecoration(
-                              fillColor: Colors.white,
+                              fillColor: const Color.fromARGB(255, 255, 255, 255),
                               filled: true,
                               prefixIcon: Icon(Icons.search,
                                   color: Colors.black54), // Search icon
                               hintText: "Nationality",
                               contentPadding: EdgeInsets.symmetric(
-                                  horizontal: ScreenSize.width / 10,
-                                  vertical: ScreenSize.width / 30),
+                                  horizontal: ScreenSize.width / 15,
+                                  vertical: ScreenSize.width / 25),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(
                                     ScreenSize.width / 10),

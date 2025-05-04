@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 15,
               ),
-              ServicesWidget(),
+              ServicesWidget(rownb: 2,),
               SizedBox(
                 height: 20,
               ),

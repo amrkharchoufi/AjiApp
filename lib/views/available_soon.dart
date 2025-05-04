@@ -77,7 +77,7 @@ class AvailableSoon extends StatelessWidget {
                         "This Service will \nbe available soon",
                         style: TextStyle(
                             color: ajired,
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 19),
                       ),
                     ),

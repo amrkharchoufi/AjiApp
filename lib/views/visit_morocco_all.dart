@@ -22,7 +22,7 @@ class _VisitMoroccoAllState extends State<VisitMoroccoAll> {
             Text(
               "Most Popular",
               style: TextStyle(
-                  fontFamily: "SFDisplay",
+                  
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             ),
@@ -37,7 +37,7 @@ class _VisitMoroccoAllState extends State<VisitMoroccoAll> {
               child: Text(
                 "View all",
                 style: TextStyle(
-                  fontFamily: "SFDisplay",
+                  
                   fontSize: 19,
                 ),
               ),

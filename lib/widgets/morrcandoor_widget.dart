@@ -73,7 +73,7 @@ class FeatureCard extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                          
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: ScreenSize.width / 25,
@@ -85,7 +85,7 @@ class FeatureCard extends StatelessWidget {
                       Text(
                         subtitle,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                          
                           color: Colors.white,
                           fontSize: ScreenSize.width / 30,
                         ),
@@ -99,7 +99,7 @@ class FeatureCard extends StatelessWidget {
                           Text(
                             description,
                             style: TextStyle(
-                              fontFamily: "SFDisplay",
+                        
                               color: Colors.white,
                               fontSize: ScreenSize.width / 30,
                             ),

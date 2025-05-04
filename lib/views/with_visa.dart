@@ -63,7 +63,7 @@ class _WithVisaState extends State<WithVisa> {
                       Text(
                         widget.country,
                         style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 11,
                             fontWeight: FontWeight.bold),
                       ),
@@ -77,14 +77,14 @@ class _WithVisaState extends State<WithVisa> {
                       Text(
                         "if you hold a ${nationalitiesMap[widget.country]} passport,you are required to obtain an eVisa or eTA to enter Morocco",
                         style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 21,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "Moroccan embassies and consulates handle visa applications for foreign nationals who wish to visit Morocco for various purposes, including tourism, work, study, business, or family visits.",
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                          
                           fontSize: ScreenSize.width / 25,
                         ),
                       ),
@@ -95,26 +95,25 @@ class _WithVisaState extends State<WithVisa> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: gold,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: ScreenSize.width / 15,
-                      vertical: ScreenSize.width / 40,
-                    ),
-                  ),
-                  child: Text(
-                    "Apply for eVisa",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: (ScreenSize.width / 18),
-                    ),
-                  ),
-                )
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ajired,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          fixedSize: Size(
+                            ScreenSize.width / 1.5,
+                            ScreenSize.height / 18,
+                          ),
+                        ),
+                        child: Text(
+                          "Apply for e-visa",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: (ScreenSize.width / 20),
+                          ),
+                        ),
+                      )
               ],
             ),
           ),

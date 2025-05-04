@@ -46,7 +46,7 @@ class _EsimViewState extends State<EsimView> {
                       "This Service will \nbe available soon",
                       style: TextStyle(
                           color: ajired,
-                          fontFamily: "SFDisplay",
+                          
                           fontSize: ScreenSize.width / 19),
                     ),
                   ),

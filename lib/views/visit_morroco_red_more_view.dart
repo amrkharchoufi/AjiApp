@@ -91,7 +91,7 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                 Text(
                                   "4.6",
                                   style: TextStyle(
-                                      fontFamily: "SFDisplay",
+                                      
                                       fontSize: ScreenSize.width / 25,
                                       color: Colors.black),
                                 ),
@@ -102,7 +102,7 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                 Text(
                                   "(9.3k)",
                                   style: TextStyle(
-                                      fontFamily: "SFDisplay",
+                                      
                                       fontSize: ScreenSize.width / 30,
                                       color: Colors.black),
                                 ),

@@ -58,7 +58,7 @@ class DiscoverCard extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                          
                           fontSize: ScreenSize.width / 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -75,7 +75,7 @@ class DiscoverCard extends StatelessWidget {
                           Text(
                             sitePlace,
                             style: TextStyle(
-                              fontFamily: "SFDisplay",
+                              
                               color: ajired,
                               fontSize: ScreenSize.width / 35,
                               fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class DiscoverCard extends StatelessWidget {
                       Text(
                         Entry,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                          
                           fontSize: ScreenSize.width / 35,
                           fontWeight: FontWeight.bold,
                         ),

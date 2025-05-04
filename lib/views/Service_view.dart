@@ -24,7 +24,7 @@ class _ServiceViewState extends State<ServiceView> {
               fit: BoxFit.cover,
             ),
           ),
-          child: SingleChildScrollView(
+          child: SingleChildScrollView( 
             child: Column(
               children: [
                 MyappbarWidget(
@@ -33,7 +33,7 @@ class _ServiceViewState extends State<ServiceView> {
                 SizedBox(
                   height: ScreenSize.height / 10,
                 ),
-                ServicesWidget()
+                ServicesWidget(rownb: 3,)
               ],
             ),
           ),

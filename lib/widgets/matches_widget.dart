@@ -60,7 +60,7 @@ class Matchwidget extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                        
                           fontSize: ScreenSize.width / 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -70,7 +70,7 @@ class Matchwidget extends StatelessWidget {
                         MatchDate,
                         style: TextStyle(
                           color: ajired,
-                          fontFamily: "SFDisplay",
+                        
                           fontSize: ScreenSize.width / 35,
                           fontWeight: FontWeight.bold,
                         ),
@@ -86,7 +86,7 @@ class Matchwidget extends StatelessWidget {
                           Text(
                             Matchplace,
                             style: TextStyle(
-                              fontFamily: "SFDisplay",
+                              
                               fontSize: ScreenSize.width / 35,
                               fontWeight: FontWeight.bold,
                             ),
@@ -97,7 +97,7 @@ class Matchwidget extends StatelessWidget {
                       Text(
                         "FROM $Price MAD",
                         style: TextStyle(
-                          fontFamily: "SFDisplay",
+                        
                           fontSize: ScreenSize.width / 23,
                           fontWeight: FontWeight.bold,
                         ),

@@ -23,7 +23,7 @@ class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
             Text(
               "Most Visits",
               style: TextStyle(
-                  fontFamily: "SFDisplay",
+                  
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             ),
@@ -38,7 +38,7 @@ class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
               child: Text(
                 "View all",
                 style: TextStyle(
-                  fontFamily: "SFDisplay",
+                  
                   fontSize: 19,
                 ),
               ),
@@ -118,7 +118,7 @@ class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
             Text(
               "Multi City Tour",
               style: TextStyle(
-                  fontFamily: "SFDisplay",
+                  
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             ),
@@ -133,7 +133,7 @@ class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
               child: Text(
                 "View all",
                 style: TextStyle(
-                  fontFamily: "SFDisplay",
+                  
                   fontSize: 19,
                 ),
               ),
