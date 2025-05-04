@@ -1,6 +1,5 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 import '../widgets/featured_section.dart';
 import '../widgets/delivery_section.dart';
@@ -13,7 +12,6 @@ class FoodHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -26,7 +24,9 @@ class FoodHomePage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Food"),
+                MyappbarWidget(
+                  title: "Food",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 150,
                 ),

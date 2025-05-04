@@ -1,7 +1,6 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 
 class ComingUp extends StatefulWidget {
@@ -16,7 +15,7 @@ class _ComingUpState extends State<ComingUp> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
+
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -29,7 +28,9 @@ class _ComingUpState extends State<ComingUp> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Coming Up"),
+                MyappbarWidget(
+                  title: "Coming Up",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 60,
                 ),

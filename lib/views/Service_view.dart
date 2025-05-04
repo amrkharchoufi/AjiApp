@@ -1,6 +1,5 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:ajiapp/widgets/services_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,6 @@ class _ServiceViewState extends State<ServiceView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -29,7 +27,9 @@ class _ServiceViewState extends State<ServiceView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Services"),
+                MyappbarWidget(
+                  title: "Services",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 10,
                 ),

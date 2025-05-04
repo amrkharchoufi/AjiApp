@@ -1,3 +1,4 @@
+import 'package:ajiapp/settings/fonts.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/views/ClientSpace.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: myFonts.fontFamily,
+      ),
       debugShowCheckedModeBanner: false,
       home:Clientspace(),
     );

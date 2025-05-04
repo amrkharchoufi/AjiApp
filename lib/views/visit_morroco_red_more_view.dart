@@ -1,7 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 
 class VisitMorrocoRedMoreView extends StatefulWidget {
@@ -17,7 +16,7 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
+        
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -30,7 +29,9 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Visit Morocco"),
+                MyappbarWidget(
+                  title: "Visit Morocco",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 120,
                 ),

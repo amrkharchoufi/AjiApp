@@ -1,14 +1,12 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/ComingUp_view.dart';
-import 'package:ajiapp/views/Discover_view.dart';
-import 'package:ajiapp/views/Service_view.dart';
 
 import 'package:ajiapp/views/notification_view.dart';
 import 'package:ajiapp/views/profile_view.dart';
 
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
+import 'package:ajiapp/widgets/section_header.dart';
 
 import 'package:ajiapp/widgets/services_widget.dart';
 import 'package:ajiapp/widgets/sitecard_widget.dart';
@@ -104,26 +102,7 @@ class _HomePageState extends State<HomePage> {
               ),
               FadeInRight(
                 duration: Duration(milliseconds: 1000),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Featured",
-                      style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "View all",
-                      style: TextStyle(
-                        fontFamily: "SFDisplay",
-                        fontSize: 19,
-                      ),
-                    ),
-                  ],
-                ),
+                child: SectionHeader(title: "Featured"),
               ),
               SizedBox(
                 height: 15,
@@ -188,34 +167,8 @@ class _HomePageState extends State<HomePage> {
               ),
               FadeInRight(
                 duration: Duration(milliseconds: 1400),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Services",
-                      style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ServiceView(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "View all",
-                        style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: 19,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: SectionHeader(
+                  title: "Services",
                 ),
               ),
               SizedBox(
@@ -227,34 +180,8 @@ class _HomePageState extends State<HomePage> {
               ),
               FadeInRight(
                 duration: Duration(milliseconds: 1800),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Coming up",
-                      style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ComingUp(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "View all",
-                        style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: 19,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: SectionHeader(
+                  title: "Coming Up",
                 ),
               ),
               SizedBox(
@@ -294,34 +221,8 @@ class _HomePageState extends State<HomePage> {
               ),
               FadeInRight(
                 duration: Duration(milliseconds: 2200),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Discover",
-                      style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => Discover(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "View all",
-                        style: TextStyle(
-                          fontFamily: "SFDisplay",
-                          fontSize: 19,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: SectionHeader(
+                  title: "Discover",
                 ),
               ),
               SizedBox(

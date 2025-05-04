@@ -2,7 +2,6 @@ import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +25,6 @@ class _AccomodationViewState extends State<AccomodationView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -39,7 +37,9 @@ class _AccomodationViewState extends State<AccomodationView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Accomodation"),
+                MyappbarWidget(
+                  title: "Accomodation",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 120,
                 ),

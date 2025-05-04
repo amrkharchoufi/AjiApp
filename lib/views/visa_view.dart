@@ -2,7 +2,6 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/views/with_visa.dart';
 import 'package:ajiapp/views/without_visa_view.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +38,6 @@ class _VisaViewState extends State<VisaView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -52,7 +50,9 @@ class _VisaViewState extends State<VisaView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Visa"),
+                MyappbarWidget(
+                  title: "Visa",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 120,
                 ),

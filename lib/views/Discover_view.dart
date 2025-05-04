@@ -1,7 +1,6 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/discover_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 
 class Discover extends StatefulWidget {
@@ -16,7 +15,6 @@ class _DiscoverState extends State<Discover> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -29,7 +27,9 @@ class _DiscoverState extends State<Discover> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Discover"),
+                MyappbarWidget(
+                  title: "Discover",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 60,
                 ),

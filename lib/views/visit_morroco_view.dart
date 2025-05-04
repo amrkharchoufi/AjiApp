@@ -3,7 +3,6 @@ import 'package:ajiapp/views/visit_morocco_all.dart';
 import 'package:ajiapp/views/visit_morocco_home.dart';
 import 'package:ajiapp/views/visit_morroco_city.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,6 @@ class _VisitMorrocoViewState extends State<VisitMorrocoView> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        appBar: MyappbarWidget(),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -43,7 +41,9 @@ class _VisitMorrocoViewState extends State<VisitMorrocoView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ServiceNameWidget(name: "Visit Morocco"),
+                MyappbarWidget(
+                  title: "Visit Morocco",
+                ),
                 SizedBox(
                   height: ScreenSize.height / 120,
                 ),

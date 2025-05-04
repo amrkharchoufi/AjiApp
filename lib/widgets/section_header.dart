@@ -1,3 +1,6 @@
+import 'package:ajiapp/settings/colors.dart';
+import 'package:ajiapp/settings/fonts.dart';
+import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -6,13 +9,15 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        TextButton(
-          onPressed: () {},
-          child: const Text("View all", style: TextStyle(color: Colors.brown)),
+        Text(title, style:  TextStyle(fontSize:SizeConfig.getBlockSizeHorizontal(6.8), fontFamily: myFonts.fontFamily,fontWeight: FontWeight.bold)),
+        GestureDetector(
+          onTap: () {},
+          child:  Text("View all", style: TextStyle(color: gold,fontSize: SizeConfig.getBlockSizeHorizontal(4), fontFamily: myFonts.fontFamily)),
         ),
       ],
     );
