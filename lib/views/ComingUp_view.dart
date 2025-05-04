@@ -25,69 +25,75 @@ class _ComingUpState extends State<ComingUp> {
               fit: BoxFit.cover,
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                MyappbarWidget(
-                  title: "Coming Up",
-                ),
-                SizedBox(
-                  height: ScreenSize.height / 60,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: ScreenSize.width / 25),
+          child: Column(
+            children: [
+              MyappbarWidget(
+                title: "Coming Up",
+              ),
+              SizedBox(
+                height: ScreenSize.height / 60,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Matchwidget(
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4,
-                          ImagePath: "assets/images/match.jpg",
-                          MatchTitle: "Morocco vs\nZambia",
-                          MatchDate: "16 December at 18:00",
-                          Matchplace: "Sport Complexe Prince",
-                          Price: "600"),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
-                      ),
-                      Matchwidget(
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4,
-                          ImagePath: "assets/images/match2.jpg",
-                          MatchTitle: "Tunisia vs\nSouth Africa",
-                          MatchDate: "16 December at 18:00",
-                          Matchplace: "Sport Complexe Prince",
-                          Price: "600"),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
-                      ),
-                      Matchwidget(
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4,
-                          ImagePath: "assets/images/match2.jpg",
-                          MatchTitle: "Tunisia vs\nSouth Africa",
-                          MatchDate: "16 December at 18:00",
-                          Matchplace: "Sport Complexe Prince",
-                          Price: "600"),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
-                      ),
-                      Matchwidget(
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4,
-                          ImagePath: "assets/images/match2.jpg",
-                          MatchTitle: "Tunisia vs\nSouth Africa",
-                          MatchDate: "16 December at 18:00",
-                          Matchplace: "Sport Complexe Prince",
-                          Price: "600"),
-                      SizedBox(
-                        height: ScreenSize.height / 20,
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: ScreenSize.width / 25),
+                        child: Column(
+                          children: [
+                            Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/match.jpg",
+                                MatchTitle: "Morocco vs\nZambia",
+                                MatchDate: "16 December at 18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
+                            SizedBox(
+                              height: ScreenSize.width / 20,
+                            ),
+                            Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/match2.jpg",
+                                MatchTitle: "Tunisia vs\nSouth Africa",
+                                MatchDate: "16 December at 18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
+                            SizedBox(
+                              height: ScreenSize.width / 20,
+                            ),
+                            Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/match2.jpg",
+                                MatchTitle: "Tunisia vs\nSouth Africa",
+                                MatchDate: "16 December at 18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
+                            SizedBox(
+                              height: ScreenSize.width / 20,
+                            ),
+                            Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/match2.jpg",
+                                MatchTitle: "Tunisia vs\nSouth Africa",
+                                MatchDate: "16 December at 18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
+                            SizedBox(
+                              height: ScreenSize.height / 20,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ));
   }

@@ -1,5 +1,8 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/views/ComingUp_view.dart';
+import 'package:ajiapp/views/Discover_view.dart';
+import 'package:ajiapp/views/Service_view.dart';
 
 import 'package:ajiapp/views/notification_view.dart';
 import 'package:ajiapp/views/profile_view.dart';
@@ -169,6 +172,7 @@ class _HomePageState extends State<HomePage> {
                 duration: Duration(milliseconds: 1400),
                 child: SectionHeader(
                   title: "Services",
+                  actionWidget:  ServiceView(),
                 ),
               ),
               SizedBox(
@@ -182,6 +186,7 @@ class _HomePageState extends State<HomePage> {
                 duration: Duration(milliseconds: 1800),
                 child: SectionHeader(
                   title: "Coming Up",
+                  actionWidget:  ComingUp(),
                 ),
               ),
               SizedBox(
@@ -223,6 +228,7 @@ class _HomePageState extends State<HomePage> {
                 duration: Duration(milliseconds: 2200),
                 child: SectionHeader(
                   title: "Discover",
+                  actionWidget: Discover(),
                 ),
               ),
               SizedBox(

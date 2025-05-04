@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
-  const SectionHeader({super.key, required this.title});
+  final Widget? actionWidget;
+  const SectionHeader({super.key, required this.title,this.actionWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,15 @@ class SectionHeader extends StatelessWidget {
       children: [
         Text(title, style:  TextStyle(fontSize:SizeConfig.getBlockSizeHorizontal(6.8), fontWeight: FontWeight.bold)),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            if(actionWidget == null) return;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => actionWidget!,
+              ),
+            );
+          },
           child:  Text("View all", style: TextStyle(color: gold,fontSize: SizeConfig.getBlockSizeHorizontal(4))),
         ),
       ],

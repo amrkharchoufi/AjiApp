@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/widgets/available%20_soon_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -33,24 +34,7 @@ class _EsimViewState extends State<EsimView> {
                 SizedBox(
                   height: ScreenSize.height / 6,
                 ),
-                Container(
-                  width: ScreenSize.width / 2,
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(19),
-                    border: Border.all(width: 1, color: gold),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "This Service will \nbe available soon",
-                      style: TextStyle(
-                          color: ajired,
-                          
-                          fontSize: ScreenSize.width / 19),
-                    ),
-                  ),
-                )
+                Available_SoonWidget()
               ],
             ),
           ),

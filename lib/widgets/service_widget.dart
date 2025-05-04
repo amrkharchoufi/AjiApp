@@ -34,6 +34,7 @@ class ServiceWidget extends StatelessWidget {
           SvgPicture.asset(
             img,
             width: customzie,
+            // ignore: deprecated_member_use
             color: golden ? Colors.white : null,
           ),
           SizedBox(
