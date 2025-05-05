@@ -1,4 +1,3 @@
-import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/available%20_soon_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';

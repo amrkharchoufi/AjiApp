@@ -42,7 +42,7 @@ class ServiceNameWidget extends StatelessWidget {
             name,
             style: TextStyle(
               color: Colors.white,
-              fontSize: SizeConfig.getBlockSizeHorizontal(9.5),
+              fontSize: SizeConfig.getBlockSizeHorizontal(9),
               fontWeight: FontWeight.bold,
             ),
           ),

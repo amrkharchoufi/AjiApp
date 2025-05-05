@@ -26,7 +26,7 @@ class ServiceWidget extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
           color: golden ? gold : Colors.white,
-          border: Border.all(color: golden ? white : gold, width: 0.7),
+          border: Border.all(color: golden ? white : gold, width: 1),
           borderRadius: BorderRadius.circular(20)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -3,6 +3,7 @@ import 'package:ajiapp/views/accomodation_view.dart';
 import 'package:ajiapp/views/available_soon.dart';
 import 'package:ajiapp/views/e-sim_view.dart';
 import 'package:ajiapp/views/food_view.dart.dart';
+import 'package:ajiapp/views/importantct_view.dart';
 import 'package:ajiapp/views/transportation_view.dart';
 import 'package:ajiapp/views/visa_view.dart';
 import 'package:ajiapp/views/visit_morroco_view.dart';
@@ -116,7 +117,7 @@ class ServicesWidget extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => AvailableSoon(),
+                  builder: (context) => ImportantctView(),
                 ),
               );
             },
