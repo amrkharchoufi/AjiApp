@@ -15,7 +15,7 @@ class ServiceNameWidget extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Positioned(
-          top: 5,
+          top: 3,
           child: Opacity(
             opacity: 0.4,
             child: ImageFiltered(

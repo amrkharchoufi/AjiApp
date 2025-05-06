@@ -16,6 +16,7 @@ class MyappbarWidget extends StatelessWidget{
         AppBar(
           backgroundColor: ajired,
           elevation: 0,
+          scrolledUnderElevation: 0,
           iconTheme: IconThemeData(color: Colors.white),
           actions: [
             IconButton(

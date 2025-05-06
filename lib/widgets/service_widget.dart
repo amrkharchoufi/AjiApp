@@ -26,8 +26,18 @@ class ServiceWidget extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
           color: golden ? gold : Colors.white,
-          border: Border.all(color: golden ? white : gold, width: 1),
-          borderRadius: BorderRadius.circular(20)),
+          // border: Border.all(color: golden ? white : gold, width: 1),
+          borderRadius: BorderRadius.circular(20),
+           boxShadow: [
+    BoxShadow(
+      //ignore: deprecated_member_use
+      color: Colors.black.withOpacity(0.2), // Light shadow
+      spreadRadius: 2,
+      blurRadius: 3,
+      offset: Offset(0, 2),
+    ),
+  ],
+          ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -35,6 +35,7 @@ class CallWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
+              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(0.15),
               blurRadius: 2,
               offset: const Offset(0, 5),
