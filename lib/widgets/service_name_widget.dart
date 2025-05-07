@@ -1,6 +1,7 @@
-import 'package:ajiapp/settings/size.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ajiapp/settings/size.dart';
 
 class ServiceNameWidget extends StatelessWidget {
   final String name;
@@ -8,33 +9,44 @@ class ServiceNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize.init(context);
+    SizeConfig().init(context);
+
     return Stack(
+      clipBehavior: Clip.none,
       children: [
-        Image.asset(
-          "assets/images/shape.png",
+        Positioned(
+          top: 3,
+          child: Opacity(
+            opacity: 0.4,
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 10,sigmaY: 1),
+              child: ColorFiltered(
+                colorFilter: const ColorFilter.mode(
+                    Colors.black, BlendMode.srcIn),
+                child: SvgPicture.asset(
+                  "assets/images/custom_header.svg",
+                  width: ScreenSize.width,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            ),
+          ),
+        ),
+        SvgPicture.asset(
+          "assets/images/custom_header.svg",
           width: ScreenSize.width,
           fit: BoxFit.fitWidth,
         ),
-        Positioned(
-          left: ScreenSize.width / 20,
-          top: ScreenSize.height / 20,
-          child: Row(
-            children: [
-              SvgPicture.asset("assets/images/logowhite.svg"),
-              SizedBox(
-                width: ScreenSize.width / 25,
-              ),
-              Text(
-                name,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: ScreenSize.width / 13.5,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
+        Center(
+          child: Text(
+            name,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: SizeConfig.getBlockSizeHorizontal(9),
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        )
+        ),
       ],
     );
   }

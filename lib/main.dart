@@ -1,5 +1,6 @@
+import 'package:ajiapp/settings/fonts.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/login_view.dart';
+import 'package:ajiapp/views/common/ClientSpace.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -19,8 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: myFonts.fontFamily,
+      ),
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home:Clientspace(),
     );
   }
 }

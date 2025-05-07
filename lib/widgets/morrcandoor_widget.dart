@@ -18,9 +18,10 @@ class FeatureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
+    SizeConfig().init(context);
     return SizedBox(
-      width: ScreenSize.width / 2.1,
-      height: ScreenSize.width / 1.35,
+      width: SizeConfig.getBlockSizeHorizontal(35),
+      height: SizeConfig.getBlockSizeVertical(27),
       child: CustomPaint(
         painter: DoorFramePainter(),
         child: ClipPath(
@@ -28,14 +29,13 @@ class FeatureCard extends StatelessWidget {
           child: Stack(
             children: [
               // Background image
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    image: DecorationImage(
-                      image: backgroundImage,
-                      fit: BoxFit.cover,
-                    )),
-              ),
+                Positioned.fill(
+  child: Image(
+    image: backgroundImage,
+    fit: BoxFit.cover,
+  ),
+),
+
               // Gradient overlay
               Positioned(
                 bottom: 0,
@@ -70,47 +70,41 @@ class FeatureCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Flexible(
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ScreenSize.width / 25,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      Text(
+                        title,
+                        style: TextStyle(
+                          
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: ScreenSize.width / 25,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: ScreenSize.width / 100),
-                      Flexible(
-                        child: Text(
-                          subtitle,
-                          style: TextStyle(
-                            fontFamily: "SFDisplay",
-                            color: Colors.white,
-                            fontSize: ScreenSize.width / 30,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      Text(
+                        subtitle,
+                        style: TextStyle(
+                          
+                          color: Colors.white,
+                          fontSize: ScreenSize.width / 30,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: ScreenSize.width / 100),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Flexible(
-                            child: Text(
-                              description,
-                              style: TextStyle(
-                                fontFamily: "SFDisplay",
-                                color: Colors.white,
-                                fontSize: ScreenSize.width / 30,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                          Text(
+                            description,
+                            style: TextStyle(
+                        
+                              color: Colors.white,
+                              fontSize: ScreenSize.width / 30,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           Icon(
                             Icons.arrow_forward_rounded,

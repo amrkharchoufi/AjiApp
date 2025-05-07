@@ -1,5 +1,5 @@
-import 'package:ajiapp/views/ClientSpace.dart';
-import 'package:ajiapp/views/login_view.dart';
+import 'package:ajiapp/views/common/ClientSpace.dart';
+import 'package:ajiapp/views/auth/login_view.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

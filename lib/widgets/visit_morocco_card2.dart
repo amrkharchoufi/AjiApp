@@ -72,7 +72,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontFamily: "SFDisplay",
+                      
                       fontSize: ScreenSize.width / 20,
                       fontWeight: FontWeight.bold,
                       color: designred ? Colors.white : Colors.black),
@@ -92,7 +92,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                         Text(
                           duree,
                           style: TextStyle(
-                              fontFamily: "SFDisplay",
+                              
                               fontSize: ScreenSize.width / 25,
                               fontWeight: FontWeight.bold,
                               color: designred ? Colors.white : Colors.black),
@@ -121,7 +121,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                         Text(
                           sitePlace,
                           style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             color: designred ? Colors.white : Colors.black,
                             fontSize: ScreenSize.width / 25,
                             fontWeight: FontWeight.bold,
@@ -147,7 +147,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                         Text(
                           rating,
                           style: TextStyle(
-                              fontFamily: "SFDisplay",
+                              
                               fontSize: ScreenSize.width / 25,
                               fontWeight: FontWeight.bold,
                               color: designred ? Colors.white : Colors.black),
@@ -159,7 +159,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                         Text(
                           "($ratingsize)",
                           style: TextStyle(
-                              fontFamily: "SFDisplay",
+                              
                               fontSize: ScreenSize.width / 30,
                               color: designred ? Colors.white : Colors.black),
                         ),
@@ -175,7 +175,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                   softWrap: true,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontFamily: "SFDisplay",
+                      
                       fontSize: ScreenSize.width / 35,
                       fontWeight: FontWeight.bold,
                       color: designred ? Colors.white : Colors.black),

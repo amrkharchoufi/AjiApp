@@ -1,6 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/visit_morroco_red_more_view.dart';
+import 'package:ajiapp/views/tourisme_service/visit_morroco_red_more_view.dart';
 import 'package:flutter/material.dart';
 
 class VisitMorrocoCard1 extends StatelessWidget {
@@ -72,7 +72,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 20,
                             fontWeight: FontWeight.bold,
                             color: designred ? Colors.white : Colors.black),
@@ -84,7 +84,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
                         Description,
                         softWrap: true,
                         style: TextStyle(
-                            fontFamily: "SFDisplay",
+                            
                             fontSize: ScreenSize.width / 35,
                             fontWeight: FontWeight.bold,
                             color: designred ? Colors.white : Colors.black),
@@ -105,7 +105,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
                           Text(
                             sitePlace,
                             style: TextStyle(
-                              fontFamily: "SFDisplay",
+                              
                               color: designred ? Colors.white : Colors.black,
                               fontSize: ScreenSize.width / 35,
                               fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
                           Text(
                             rating,
                             style: TextStyle(
-                                fontFamily: "SFDisplay",
+                                
                                 fontSize: ScreenSize.width / 25,
                                 fontWeight: FontWeight.bold,
                                 color: designred ? Colors.white : Colors.black),
@@ -133,7 +133,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
                           Text(
                             "($ratingsize)",
                             style: TextStyle(
-                                fontFamily: "SFDisplay",
+                                
                                 fontSize: ScreenSize.width / 30,
                                 color: designred ? Colors.white : Colors.black),
                           ),
