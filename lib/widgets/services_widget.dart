@@ -1,12 +1,13 @@
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/accomodation_view.dart';
-import 'package:ajiapp/views/available_soon.dart';
-import 'package:ajiapp/views/e-sim_view.dart';
-import 'package:ajiapp/views/food_view.dart.dart';
-import 'package:ajiapp/views/importantct_view.dart';
-import 'package:ajiapp/views/transportation_view.dart';
-import 'package:ajiapp/views/visa_view.dart';
-import 'package:ajiapp/views/visit_morroco_view.dart';
+import 'package:ajiapp/views/accomodation_service/accomodation_view.dart';
+import 'package:ajiapp/views/common/available_soon.dart';
+import 'package:ajiapp/views/e-sim_service/e-sim_view.dart';
+import 'package:ajiapp/views/followyourteam_service/view/follow_your_team_view.dart';
+import 'package:ajiapp/views/food_service/food_view.dart.dart';
+import 'package:ajiapp/views/contacts_service/importantct_view.dart';
+import 'package:ajiapp/views/transport_service/transportation_view.dart';
+import 'package:ajiapp/views/visa_service/visa_view.dart';
+import 'package:ajiapp/views/tourisme_service/visit_morroco_view.dart';
 import 'package:ajiapp/widgets/service_widget.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class ServicesWidget extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => AvailableSoon(),
+                  builder: (context) => FollowYourTeamView(),
                 ),
               );
             },

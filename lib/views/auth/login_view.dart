@@ -1,8 +1,8 @@
 import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/SignUp_view.dart';
-import 'package:ajiapp/views/forgotpassword_view.dart';
+import 'package:ajiapp/views/auth/SignUp_view.dart';
+import 'package:ajiapp/views/auth/forgotpassword_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

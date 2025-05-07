@@ -1,6 +1,6 @@
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/with_visa.dart';
-import 'package:ajiapp/views/without_visa_view.dart';
+import 'package:ajiapp/views/visa_service/with_visa.dart';
+import 'package:ajiapp/views/visa_service/without_visa_view.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';

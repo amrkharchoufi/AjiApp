@@ -1,9 +1,9 @@
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/Service_view.dart';
-import 'package:ajiapp/views/available_soon.dart';
+import 'package:ajiapp/views/common/Service_view.dart';
+import 'package:ajiapp/views/common/available_soon.dart';
 
-import 'package:ajiapp/views/homepage_view.dart';
-import 'package:ajiapp/views/profile_view.dart';
+import 'package:ajiapp/views/common/homepage_view.dart';
+import 'package:ajiapp/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

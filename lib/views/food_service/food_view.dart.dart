@@ -1,9 +1,9 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
-import '../widgets/featured_section.dart';
-import '../widgets/delivery_section.dart';
-import '../widgets/restaurant_section.dart';
+import '../../widgets/featured_section.dart';
+import '../../widgets/delivery_section.dart';
+import '../../widgets/restaurant_section.dart';
 
 class FoodHomePage extends StatelessWidget {
   const FoodHomePage({super.key});

@@ -1,11 +1,11 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/ComingUp_view.dart';
-import 'package:ajiapp/views/Discover_view.dart';
-import 'package:ajiapp/views/Service_view.dart';
+import 'package:ajiapp/views/common/ComingUp_view.dart';
+import 'package:ajiapp/views/common/Discover_view.dart';
+import 'package:ajiapp/views/common/Service_view.dart';
 
-import 'package:ajiapp/views/notification_view.dart';
-import 'package:ajiapp/views/profile_view.dart';
+import 'package:ajiapp/views/common/notification_view.dart';
+import 'package:ajiapp/views/profile/profile_view.dart';
 
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';

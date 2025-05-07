@@ -1,6 +1,6 @@
 import 'package:ajiapp/settings/fonts.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/ClientSpace.dart';
+import 'package:ajiapp/views/common/ClientSpace.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
