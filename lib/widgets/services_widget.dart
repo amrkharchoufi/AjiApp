@@ -1,16 +1,9 @@
+import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/accomodation_service/accomodation_view.dart';
-import 'package:ajiapp/views/common/available_soon.dart';
-import 'package:ajiapp/views/e-sim_service/e-sim_view.dart';
-import 'package:ajiapp/views/followyourteam_service/view/follow_your_team_view.dart';
-import 'package:ajiapp/views/food_service/food_view.dart.dart';
-import 'package:ajiapp/views/contacts_service/importantct_view.dart';
-import 'package:ajiapp/views/transport_service/transportation_view.dart';
-import 'package:ajiapp/views/visa_service/visa_view.dart';
-import 'package:ajiapp/views/tourisme_service/visit_morroco_view.dart';
 import 'package:ajiapp/widgets/service_widget.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ServicesWidget extends StatelessWidget {
@@ -23,11 +16,7 @@ class ServicesWidget extends StatelessWidget {
     List<Widget> Services=[
     GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => VisitMorrocoView(),
-                ),
-              );
+            Get.toNamed(Routes.VISIT_MOROCCO);
             },
             child: ServiceWidget( 
               golden: false,
@@ -40,13 +29,9 @@ class ServicesWidget extends StatelessWidget {
             
             ),
           ),
-          GestureDetector(
+    GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => VisaView(),
-                ),
-              );
+              Get.toNamed(Routes.VISA);
             },
             child: ServiceWidget(
               golden: false,
@@ -59,13 +44,9 @@ class ServicesWidget extends StatelessWidget {
               
             ),
           ),
-            GestureDetector(
+    GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => FollowYourTeamView(),
-                ),
-              );
+              Get.toNamed(Routes.FOLLOWYOURTEAM);
             },
             child: ServiceWidget(
               golden: false,
@@ -78,14 +59,10 @@ class ServicesWidget extends StatelessWidget {
               
             ),
           ),
-      
-          GestureDetector(
+    
+    GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => EsimView(),
-                ),
-              );
+            Get.toNamed(Routes.ESIM);
             },
             child: ServiceWidget(
               golden: false,
@@ -97,13 +74,9 @@ class ServicesWidget extends StatelessWidget {
                   "assets/icons/Phone.svg",
               ),
           ),
-          GestureDetector(
+    GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => AccomodationView(),
-                ),
-              );
+              Get.toNamed(Routes.ACCOMMODATION);
             },
             child: ServiceWidget(
               golden: false,
@@ -114,13 +87,9 @@ class ServicesWidget extends StatelessWidget {
               img: "assets/icons/hotelicon.svg",
             ),
           ),
-          GestureDetector(
+    GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ImportantctView(),
-                ),
-              );
+            Get.toNamed(Routes.CONTACTS);
             },
             child: ServiceWidget(
               golden: false,
@@ -130,16 +99,11 @@ class ServicesWidget extends StatelessWidget {
             
               img: "assets/icons/contact_icon.svg",
             ),
-          ),
-        
-        
-          GestureDetector(
+          ),      
+    
+    GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => FoodHomePage(),
-                ),
-              );
+              Get.toNamed(Routes.FOOD);
             },
             child: ServiceWidget(
               golden: false,
@@ -150,13 +114,9 @@ class ServicesWidget extends StatelessWidget {
               img: "assets/icons/food.svg",
             ),
           ),
-          GestureDetector(
+    GestureDetector(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AvailableSoon(),
-                  ),
-                );
+              Get.toNamed(Routes.SOON);
               },
               child: ServiceWidget(
                 golden: false,
@@ -168,13 +128,9 @@ class ServicesWidget extends StatelessWidget {
                   "assets/icons/ticket_icon.svg",
                 
               )),
-          GestureDetector(
+    GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => Transportationview(),
-                ),
-              );
+            Get.toNamed(Routes.TRANSPORTATION);
             },
             child: ServiceWidget(
               golden: false,

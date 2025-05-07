@@ -1,6 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/followyourteam_service/model/fixture_model.dart';
+import 'package:ajiapp/services/followyourteam_service/model/fixture_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

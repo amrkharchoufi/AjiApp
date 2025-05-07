@@ -1,6 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/profile/profile_view.dart';
+import 'package:ajiapp/services/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class NotificationView extends StatefulWidget {
@@ -16,6 +16,8 @@ class _NotificationViewState extends State<NotificationView> {
     ScreenSize.init(context);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {},

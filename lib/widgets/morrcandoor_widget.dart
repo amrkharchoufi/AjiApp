@@ -76,7 +76,7 @@ class FeatureCard extends StatelessWidget {
                           
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: ScreenSize.width / 25,
+                          fontSize: ScreenSize.width / 30,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -87,7 +87,7 @@ class FeatureCard extends StatelessWidget {
                         style: TextStyle(
                           
                           color: Colors.white,
-                          fontSize: ScreenSize.width / 30,
+                          fontSize: ScreenSize.width / 35,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

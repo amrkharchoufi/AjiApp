@@ -1,7 +1,7 @@
 import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/common/notification_view.dart';
+import 'package:ajiapp/services/common/notification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -291,7 +291,7 @@ class _ProfileViewState extends State<ProfileView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset("assets/icons/Ticket_icon.svg"),
+                            SvgPicture.asset("assets/icons/ticket_icon.svg"),
                             SizedBox(
                               width: ScreenSize.width / 20,
                             ),
@@ -317,7 +317,7 @@ class _ProfileViewState extends State<ProfileView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset("assets/icons/car.svg"),
+                            SvgPicture.asset("assets/icons/car_icon.svg"),
                             SizedBox(
                               width: ScreenSize.width / 20,
                             ),

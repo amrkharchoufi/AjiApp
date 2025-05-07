@@ -1,11 +1,11 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/views/common/ComingUp_view.dart';
-import 'package:ajiapp/views/common/Discover_view.dart';
-import 'package:ajiapp/views/common/Service_view.dart';
+import 'package:ajiapp/services/common/ComingUp_view.dart';
+import 'package:ajiapp/services/common/Discover_view.dart';
+import 'package:ajiapp/services/common/Service_view.dart';
 
-import 'package:ajiapp/views/common/notification_view.dart';
-import 'package:ajiapp/views/profile/profile_view.dart';
+import 'package:ajiapp/services/common/notification_view.dart';
+import 'package:ajiapp/services/profile/profile_view.dart';
 
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
@@ -119,6 +119,15 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         FeatureCard(
+                          title: "Follow your team!",
+                          subtitle: "Find where your team plays next",
+                          backgroundImage: AssetImage('assets/images/follow_featured.jpg'),
+                          description: 'Learn More',
+                        ),
+                        SizedBox(
+                          width: ScreenSize.width / 20,
+                        ),
+                        FeatureCard(
                           title: "Get your E-sim",
                           subtitle: "Stay connected with inwi e-sim",
                           backgroundImage: AssetImage('assets/images/sim.jpg'),
@@ -201,24 +210,26 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         Matchwidget(
-                            width: ScreenSize.width / 1.2,
-                            height: ScreenSize.height / 4,
-                            ImagePath: "assets/images/match.jpg",
-                            MatchTitle: "Morocco vs Zambia",
-                            MatchDate: "16 December at 18:00",
-                            Matchplace: "Sport Complexe Prince",
-                            Price: "600"),
+                                width: ScreenSize.width/1.3,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/upcomingpic1.jpg",
+                                MatchTitleaway: "Comoros",
+                                MatchTitlehome: "Morocco",
+                                MatchDate: "Sunday, Dec 21 \n18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
                         SizedBox(
                           width: ScreenSize.width / 20,
                         ),
-                        Matchwidget(
-                            width: ScreenSize.width / 1.2,
-                            height: ScreenSize.height / 4,
-                            ImagePath: "assets/images/match2.jpg",
-                            MatchTitle: "Tunisia vs South Africa",
-                            MatchDate: "16 December at 18:00",
-                            Matchplace: "Sport Complexe Prince",
-                            Price: "600")
+                          Matchwidget(
+                                width: ScreenSize.width/1.3,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/upcomingpic2.jpg",
+                                MatchTitleaway: "Zambia",
+                                MatchTitlehome: "Mali",
+                                MatchDate: "Sunday, Dec 21 \n18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
                       ],
                     ),
                   ),
