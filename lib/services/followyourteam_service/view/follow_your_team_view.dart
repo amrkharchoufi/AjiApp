@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/followyourteam_service/controller/fixture_controller.dart';
@@ -122,7 +124,7 @@ class FollowYourTeamView extends StatelessWidget {
                       height: 52,
                       child: controller.selectedIndex.value
                           ? SearchbarWidget(
-                              options: controller.names,
+                              options: controller.teamsnames.toList(),
                               onchanged: (value) {
                                 controller.searchTeam(value!);
                               },

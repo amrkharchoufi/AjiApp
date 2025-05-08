@@ -32,7 +32,13 @@ class StadiumWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
-        border: Border.all(width: 0.5, color: gold),
+        boxShadow: [
+      BoxShadow(
+        color: Colors.black12, // Light shadow
+        blurRadius: 5,
+        offset: Offset(0, 3), 
+      ),
+    ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -86,26 +92,22 @@ class StadiumWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ajired,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              fixedSize: Size(
-                              SizeConfig.getBlockSizeHorizontal(35),
-                                SizeConfig.getBlockSizeVertical(2.5)
-                              ),
-                            ),
-                            child: Text(
-                              "Learn More",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: (SizeConfig.getBlockSizeHorizontal(4)),
-                              ),
-                            ),
-                          ),
+                      MaterialButton(
+                  onPressed: () {},
+                  color: ajired,
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  ),
+                  minWidth: SizeConfig.getBlockSizeHorizontal(35),
+                  height: SizeConfig.getBlockSizeVertical(3),
+                  child: Text(
+                    "Learn More",
+                     style: TextStyle(
+                     color: Colors.white,
+                     fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
+                      ),
+                    ),
+                  ),
                     ],
                   )
                 ],

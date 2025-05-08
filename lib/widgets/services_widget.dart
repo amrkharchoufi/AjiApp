@@ -52,7 +52,7 @@ class ServicesWidget extends StatelessWidget {
               golden: false,
               width: ScreenSize.width / 3.7,
               height: ScreenSize.width / 3.7,
-              text: "Follow your\n team",
+              text: "Your team",
             
               img: 
                 "assets/icons/ball_icon.svg",
@@ -95,7 +95,7 @@ class ServicesWidget extends StatelessWidget {
               golden: false,
               width: ScreenSize.width / 3.7,
               height: ScreenSize.width / 3.7,
-              text: "Important\nContacts",
+              text: "Contacts",
             
               img: "assets/icons/contact_icon.svg",
             ),
@@ -116,7 +116,7 @@ class ServicesWidget extends StatelessWidget {
           ),
     GestureDetector(
               onTap: () {
-              Get.toNamed(Routes.SOON);
+              Get.toNamed(Routes.TICKETS);
               },
               child: ServiceWidget(
                 golden: false,

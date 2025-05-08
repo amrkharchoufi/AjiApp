@@ -30,7 +30,7 @@ class AvailableSoon extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          SvgPicture.asset("assets/images/logoaji.svg"),
+                          SvgPicture.asset("assets/icons/aji_icon.svg"),
                           SizedBox(
                             width: 5,
                           ),

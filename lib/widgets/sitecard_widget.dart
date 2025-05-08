@@ -15,8 +15,8 @@ class SiteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Container(
-      width: ScreenSize.width / 1.3,
-      height: ScreenSize.height / 4,
+      width: ScreenSize.width / 1.5,
+      height: ScreenSize.height / 3.8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         boxShadow: [

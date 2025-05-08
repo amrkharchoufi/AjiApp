@@ -17,9 +17,9 @@ class ServiceNameWidget extends StatelessWidget {
         Positioned(
           top: 3,
           child: Opacity(
-            opacity: 0.4,
+            opacity: 0.2,
             child: ImageFiltered(
-              imageFilter: ImageFilter.blur(sigmaX: 10,sigmaY: 1),
+              imageFilter: ImageFilter.blur(sigmaX: 10,),
               child: ColorFiltered(
                 colorFilter: const ColorFilter.mode(
                     Colors.black, BlendMode.srcIn),

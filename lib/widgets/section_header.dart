@@ -1,4 +1,3 @@
-import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class SectionHeader extends StatelessWidget {
               ),
             );
           },
-          child:  Text("View all", style: TextStyle(color: gold,fontSize: SizeConfig.getBlockSizeHorizontal(4))),
+          child:  Text("View all", style: TextStyle(fontSize: SizeConfig.getBlockSizeHorizontal(4))),
         ),
       ],
     );

@@ -1,6 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/services/profile/profile_view.dart';
+import 'package:ajiapp/services/profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class NotificationView extends StatefulWidget {

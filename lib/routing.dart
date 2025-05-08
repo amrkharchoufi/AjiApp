@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:ajiapp/services/accomodation_service/accomodation_view.dart';
 import 'package:ajiapp/services/auth/CreatePassword_view.dart';
 import 'package:ajiapp/services/auth/SignUp_view.dart';
@@ -9,13 +11,16 @@ import 'package:ajiapp/services/common/available_soon.dart';
 import 'package:ajiapp/services/common/homepage_view.dart';
 import 'package:ajiapp/services/common/notification_view.dart';
 import 'package:ajiapp/services/contacts_service/importantct_view.dart';
-import 'package:ajiapp/services/e-sim_service/e-sim_view.dart';
+import 'package:ajiapp/services/e-sim_service/view/e-sim_view.dart';
 import 'package:ajiapp/services/followyourteam_service/view/follow_your_team_view.dart';
 import 'package:ajiapp/services/food_service/food_view.dart.dart';
-import 'package:ajiapp/services/profile/profile_view.dart';
-import 'package:ajiapp/services/tourisme_service/visit_morroco_view.dart';
+import 'package:ajiapp/services/profile/view/profile_view.dart';
+import 'package:ajiapp/services/ticket_service/view/ticket_view.dart';
+import 'package:ajiapp/services/tourisme_service/view/visit_morroco_view.dart';
 import 'package:ajiapp/services/transport_service/transportation_view.dart';
-import 'package:ajiapp/services/visa_service/visa_view.dart';
+import 'package:ajiapp/services/visa_service/view/visa_view.dart';
+import 'package:ajiapp/services/visa_service/view/with_visa.dart';
+import 'package:ajiapp/services/visa_service/view/without_visa_view.dart';
 import 'package:get/get.dart';
 
 List<GetPage> routes = [
@@ -91,7 +96,15 @@ List<GetPage> routes = [
       page: () => const VisaView(),
       
     ),
-
+    GetPage(
+      name: Routes.WITH_VISA,
+      page: () => const WithVisa(),
+      
+    ),
+    GetPage(
+      name: Routes.WITHOUT_VISA,
+      page: () => const WithoutVisaView(),
+      ),
 
     // Visit Morocco routes
     GetPage(
@@ -128,6 +141,10 @@ List<GetPage> routes = [
     GetPage(
       name: Routes.SOON,
       page: () => const AvailableSoon(),
+    ),
+    GetPage(
+      name: Routes.TICKETS,
+      page: () => const TicketView(),
     ),
   ];
 
@@ -166,4 +183,5 @@ abstract class Routes {
   static const FOLLOWYOURTEAM = '/follow-your-team';
   static const CONTACTS = '/contacts';
   static const SOON = '/soon';
+  static const TICKETS = '/tickets';
 }

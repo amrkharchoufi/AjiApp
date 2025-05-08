@@ -12,7 +12,6 @@ class CallWidget extends StatelessWidget {
 
  Future<void> _launchDialer(String number) async {
     final Uri dialUri = Uri(scheme: 'tel', path: number);
-    print("Dialing: $dialUri");
     if (await canLaunchUrl(dialUri)) {
       await launchUrl(dialUri);
     } else {

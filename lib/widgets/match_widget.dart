@@ -28,6 +28,13 @@ class MatchWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
+         boxShadow: [
+      BoxShadow(
+        color: Colors.black12, // Light shadow
+        blurRadius: 5,
+        offset: Offset(0, 3), 
+      ),
+    ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

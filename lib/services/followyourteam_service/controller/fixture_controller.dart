@@ -6,7 +6,8 @@ import 'dart:convert';
 
 class FixtureController extends GetxController {
   var fixtures = <FixtureSimple>[].obs;
-  final names = <String>[];
+  var newfixtures = <FixtureSimple>[].obs;
+  var searchfixtures = <FixtureSimple>[].obs;
   var stadiums = <String>["Prince Moulay Abdellah Stadium"].obs;
   var stadiumsinfo = <StadiumModel>[
     StadiumModel(
@@ -26,7 +27,6 @@ class FixtureController extends GetxController {
   @override
   void onInit() {
     fetchFixtures();
-    getteamsnames();
     super.onInit();
   }
 
@@ -47,6 +47,7 @@ class FixtureController extends GetxController {
 
         fixtures.value =
             fixtureJson.map((json) => FixtureSimple.fromJson(json)).toList();
+            searchfixtures.value=fixtureJson.map((json) => FixtureSimple.fromJson(json)).toList();
       } else {
         error.value = 'Failed: ${response.statusCode}';
       }
@@ -59,7 +60,7 @@ class FixtureController extends GetxController {
 
   void searchTeam(String teamname) {
     if (teamname.isNotEmpty) {
-      fixtures.value = fixtures
+      fixtures.value = searchfixtures
           .where((fixture) =>
               fixture.homeTeam.name
                   .toLowerCase()
@@ -73,12 +74,14 @@ class FixtureController extends GetxController {
     }
   }
 
-  List<String> getteamsnames() {
-    for (var fixture in fixtures) {
+  Set<String> get teamsnames {
+      final names = <String>[];
+    for (var fixture in searchfixtures) {
       names.add(fixture.homeTeam.name);
       names.add(fixture.awayTeam.name);
     }
-    return names.toList();
+    names.sort((a, b) => a.compareTo(b));
+    return names.toSet();
   }
 
   void onchanged() {

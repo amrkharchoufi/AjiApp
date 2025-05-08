@@ -1,6 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/services/tourisme_service/visit_morroco_read_more_view.dart';
+import 'package:ajiapp/services/tourisme_service/view/visit_morroco_read_more_view.dart';
 import 'package:flutter/material.dart';
 
 class VisitMorrocoCard1 extends StatelessWidget {

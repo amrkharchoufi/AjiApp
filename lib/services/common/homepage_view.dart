@@ -5,7 +5,7 @@ import 'package:ajiapp/services/common/Discover_view.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
 
 import 'package:ajiapp/services/common/notification_view.dart';
-import 'package:ajiapp/services/profile/profile_view.dart';
+import 'package:ajiapp/services/profile/view/profile_view.dart';
 
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
