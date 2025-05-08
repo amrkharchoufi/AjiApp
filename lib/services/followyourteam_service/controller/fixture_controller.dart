@@ -6,9 +6,8 @@ import 'dart:convert';
 
 class FixtureController extends GetxController {
   var fixtures = <FixtureSimple>[].obs;
-  var stadiums = <String>[
-    "Prince Moulay Abdellah Stadium"
-  ].obs;
+  final names = <String>[];
+  var stadiums = <String>["Prince Moulay Abdellah Stadium"].obs;
   var stadiumsinfo = <StadiumModel>[
     StadiumModel(
       name: "Prince Moulay Abdellah Stadium",
@@ -27,6 +26,7 @@ class FixtureController extends GetxController {
   @override
   void onInit() {
     fetchFixtures();
+    getteamsnames();
     super.onInit();
   }
 
@@ -72,17 +72,16 @@ class FixtureController extends GetxController {
       fetchFixtures();
     }
   }
-  List<String> get teamsnames {
-  final names = <String>{};
-  for (var fixture in fixtures) {
-    names.add(fixture.homeTeam.name);
-    names.add(fixture.awayTeam.name);
+
+  List<String> getteamsnames() {
+    for (var fixture in fixtures) {
+      names.add(fixture.homeTeam.name);
+      names.add(fixture.awayTeam.name);
+    }
+    return names.toList();
   }
-  return names.toList();
-}
 
-void onchanged(){
-  selectedIndex.value=!selectedIndex.value;
-}
-
+  void onchanged() {
+    selectedIndex.value = !selectedIndex.value;
+  }
 }

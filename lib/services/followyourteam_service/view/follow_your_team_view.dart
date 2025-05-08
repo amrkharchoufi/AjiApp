@@ -122,7 +122,7 @@ class FollowYourTeamView extends StatelessWidget {
                       height: 52,
                       child: controller.selectedIndex.value
                           ? SearchbarWidget(
-                              options: controller.teamsnames,
+                              options: controller.names,
                               onchanged: (value) {
                                 controller.searchTeam(value!);
                               },
