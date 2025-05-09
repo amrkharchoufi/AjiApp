@@ -1,8 +1,7 @@
 import 'package:ajiapp/routing.dart';
-import 'package:ajiapp/services/common/Map_view.dart';
+import 'package:ajiapp/services/common/ClientSpace.dart';
 import 'package:ajiapp/settings/fonts.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/services/common/ClientSpace.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -30,10 +29,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: myFonts.fontFamily,
       ),
-      
-      getPages:routes,
+      getPages: routes,
       debugShowCheckedModeBanner: false,
-      home:MapView(),
+      home: Clientspace(),
     );
   }
 }

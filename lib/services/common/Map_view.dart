@@ -12,10 +12,8 @@ class _MapViewState extends State<MapView> {
   static const LatLng _myhouse = LatLng(33.909292413511956, -6.919676971167564);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(initialCameraPosition: CameraPosition(target: _myhouse,zoom: 13),
-      cloudMapId: 'cd31d568b85381c8e142ab30'
-      ),
-    );
+    return GoogleMap(
+        initialCameraPosition: CameraPosition(target: _myhouse, zoom: 13),
+        cloudMapId: 'cd31d568b85381c8e142ab30');
   }
 }
