@@ -1,4 +1,5 @@
 import 'package:ajiapp/services/common/Map_view.dart';
+import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
@@ -94,9 +95,14 @@ class FoodHomePage extends StatelessWidget {
     ScreenSize.init(context);
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: ajired,
           onPressed: () => _showMapBottomSheet(context),
-          label: const Text("View on Map"),
-          icon: const Icon(Icons.map),
+          label:
+              const Text("View on Map", style: TextStyle(color: Colors.white)),
+          icon: const Icon(
+            Icons.map,
+            color: Colors.white,
+          ),
         ),
         body: Container(
           width: ScreenSize.width,
