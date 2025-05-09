@@ -21,36 +21,38 @@ class FoodHomePage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                MyappbarWidget(
-                  title: "Food",
-                ),
-                SizedBox(
-                  height: ScreenSize.height / 150,
-                ),
-                SafeArea(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FeaturedSection(),
-                        DeliverySection(),
-                        RestaurantSection(),
-                        const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Center(
-                            child: Text("Version 1.1.2",
-                                style: TextStyle(color: Colors.grey)),
-                          ),
-                        ),
-                      ],
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    MyappbarWidget(
+                      title: "Food",
                     ),
-                  ),
+                    SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FeaturedSection(),
+                          DeliverySection(),
+                          RestaurantSection(),
+                          const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Center(
+                              child: Text("Version 1.1.2",
+                                  style: TextStyle(color: Colors.grey)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              MyappbarWidget(
+                      title: "Food",
+                    ),
+            ],
           ),
         ));
   }

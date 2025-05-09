@@ -9,24 +9,29 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(title, style:  TextStyle(fontSize:SizeConfig.getBlockSizeHorizontal(6.8), fontWeight: FontWeight.bold)),
-        GestureDetector(
-          onTap: () {
-            if(actionWidget == null) return;
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => actionWidget!,
-              ),
-            );
-          },
-          child:  Text("View all", style: TextStyle(fontSize: SizeConfig.getBlockSizeHorizontal(4))),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.getBlockSizeHorizontal(5),
+                ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(title, style:  TextStyle(fontSize:SizeConfig.getBlockSizeHorizontal(6.8), fontWeight: FontWeight.bold)),
+          GestureDetector(
+            onTap: () {
+              if(actionWidget == null) return;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => actionWidget!,
+                ),
+              );
+            },
+            child:  Text("View all", style: TextStyle(fontSize: SizeConfig.getBlockSizeHorizontal(4))),
+          ),
+        ],
+      ),
     );
   }
 }

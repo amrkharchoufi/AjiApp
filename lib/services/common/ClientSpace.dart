@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:ajiapp/services/common/ComingUp_view.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
@@ -20,18 +21,44 @@ class Clientspace extends StatefulWidget {
 class ClientspaceState extends State<Clientspace> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    HomePage(),
-    AvailableSoon(),
-    ServiceView(),
-    AvailableSoon(),
-    ProfileView(),
-  ];
-
+  Widget _getPage(int index) {
+  switch (index) {
+    case 0: return const HomePage();
+    case 1: return const ComingUp();
+    case 2: return const ServiceView();
+    case 3: return const AvailableSoon();
+    case 4: return const ProfileView();
+    default: return const HomePage();
+  }
+}
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+  final Map<String, Widget> _svgCache = {};
+
+  Widget _getSvg(String path, Color color) {
+  final key = '$path-$color';
+  if (!_svgCache.containsKey(key)) {
+    _svgCache[key] = SvgPicture.asset(
+      path,
+      color: color,
+      width: SizeConfig.getBlockSizeHorizontal(7),
+      height: SizeConfig.getBlockSizeHorizontal(7),
+    );
+  }
+  return _svgCache[key]!;
+  }
+    Widget _getSvgactive(String path, Color color) {
+  final key = '$path-$color';
+  if (!_svgCache.containsKey(key)) {
+    _svgCache[key] = SvgPicture.asset(
+      path,
+      color: color,
+    );
+  }
+  return _svgCache[key]!;
   }
 
   @override
@@ -40,7 +67,12 @@ class ClientspaceState extends State<Clientspace> {
     SizeConfig().init(context);
 
     return Scaffold(
-      body: _pages[_selectedIndex],
+      body:IndexedStack(
+            index: _selectedIndex,
+            children: List.generate(5, (index) => 
+            _selectedIndex == index ? _getPage(index) : Container(),
+           ),
+         ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -50,28 +82,28 @@ class ClientspaceState extends State<Clientspace> {
         unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal,fontSize: SizeConfig.getBlockSizeHorizontal(3)),
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/hotelicon.svg",color: Colors.brown,width: SizeConfig.getBlockSizeHorizontal(7),height: SizeConfig.getBlockSizeHorizontal(7),),
-            activeIcon: SvgPicture.asset("assets/icons/hotelicon.svg",color: ajired,),
+            icon:_getSvg("assets/icons/hotelicon.svg",Colors.brown,),
+            activeIcon: _getSvgactive("assets/icons/hotelicon.svg", ajired,),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/events_icon.svg",color: Colors.brown,width: SizeConfig.getBlockSizeHorizontal(7),height: SizeConfig.getBlockSizeHorizontal(7),),
-            activeIcon: SvgPicture.asset("assets/icons/events_icon.svg",color: ajired,),
+            icon: _getSvg("assets/icons/events_icon.svg", Colors.brown),
+            activeIcon: _getSvgactive("assets/icons/events_icon.svg", ajired,),
             label: 'Events',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/service_icon.svg",color: Colors.brown,width: SizeConfig.getBlockSizeHorizontal(7),height: SizeConfig.getBlockSizeHorizontal(7),),
-            activeIcon: SvgPicture.asset("assets/icons/service_icon.svg",color: ajired,),
+            icon: _getSvg("assets/icons/service_icon.svg",Colors.brown,),
+            activeIcon: _getSvgactive("assets/icons/service_icon.svg",ajired,),
             label: 'Services',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/search_icon.svg",color: Colors.brown,width: SizeConfig.getBlockSizeHorizontal(7),height: SizeConfig.getBlockSizeHorizontal(7),),
-            activeIcon: SvgPicture.asset("assets/icons/search_icon.svg",color: ajired,),
+            icon: _getSvg("assets/icons/search_icon.svg", Colors.brown,),
+            activeIcon: _getSvgactive("assets/icons/search_icon.svg", ajired,),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/profile_icon.svg",color: Colors.brown,width: SizeConfig.getBlockSizeHorizontal(7),height: SizeConfig.getBlockSizeHorizontal(7),),
-            activeIcon: SvgPicture.asset("assets/icons/profile_icon.svg",color: ajired,),
+            icon: _getSvg("assets/icons/profile_icon.svg", Colors.brown),
+            activeIcon: _getSvgactive("assets/icons/profile_icon.svg", ajired,),
             label: 'Profile',
           ),
         ],

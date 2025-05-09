@@ -27,82 +27,78 @@ class _ComingUpState extends State<ComingUp> {
           ),
           child: Stack(
             children: [
-              
-              
-              Expanded(
-                child: ScrollConfiguration(
-                    behavior:
-                ScrollConfiguration.of(context).copyWith(overscroll: false),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        MyappbarWidget(
-                title: "Coming Up",
-              ),
-              SizedBox(
-                height: ScreenSize.height / 60,
-              ),
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: ScreenSize.width / 25),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 
-                            ScreenSize.width / 20,
-                            children: [
-                              Text(
-                               "Football",
-                              style: TextStyle(
-                              fontSize: ScreenSize.width / 13,
-                             fontWeight: FontWeight.bold,
-                             ),
-                         ),
-                              Matchwidget(
-                                  width: ScreenSize.width,
-                                  height: ScreenSize.height / 4,
-                                  ImagePath: "assets/images/upcomingpic2.jpg",
-                                  MatchTitleaway: "Zambia",
-                                  MatchTitlehome: "Mali",
-                                  MatchDate: "Sunday, Dec 21 \n18:00",
-                                  Matchplace: "Sport Complexe Prince",
-                                  Price: "600"),
-                                    Matchwidget(
-                                  width: ScreenSize.width,
-                                  height: ScreenSize.height / 4,
-                                  ImagePath: "assets/images/upcomingpic1.jpg",
-                                  MatchTitleaway: "Comoros",
-                                  MatchTitlehome: "Morocco",
-                                  MatchDate: "Sunday, Dec 21 \n18:00",
-                                  Matchplace: "Sport Complexe Prince",
-                                  Price: "600"),
+              ScrollConfiguration(
+                  behavior:
+              ScrollConfiguration.of(context).copyWith(overscroll: false),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      MyappbarWidget(
+              title: "Coming Up",
+                            ),
+                            SizedBox(
+              height: ScreenSize.height / 60,
+                            ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: ScreenSize.width / 25),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 
+                          ScreenSize.width / 20,
+                          children: [
+                            Text(
+                             "Football",
+                            style: TextStyle(
+                            fontSize: ScreenSize.width / 13,
+                           fontWeight: FontWeight.bold,
+                           ),
+                       ),
+                            Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/upcomingpic2.jpg",
+                                MatchTitleaway: "Zambia",
+                                MatchTitlehome: "Mali",
+                                MatchDate: "Sunday, Dec 21 \n18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
                                   Matchwidget(
-                                  width: ScreenSize.width,
-                                  height: ScreenSize.height / 4,
-                                  ImagePath: "assets/images/upcomingpic2.jpg",
-                                  MatchTitleaway: "Zambia",
-                                  MatchTitlehome: "Mali",
-                                  MatchDate: "Sunday, Dec 21 \n18:00",
-                                  Matchplace: "Sport Complexe Prince",
-                                  Price: "600"),
-                                    Matchwidget(
-                                  width: ScreenSize.width,
-                                  height: ScreenSize.height / 4,
-                                  ImagePath: "assets/images/upcomingpic1.jpg",
-                                  MatchTitleaway: "Comoros",
-                                  MatchTitlehome: "Morocco",
-                                  MatchDate: "Sunday, Dec 21 \n18:00",
-                                  Matchplace: "Sport Complexe Prince",
-                                  Price: "600"),
-                              SizedBox(
-                                height: ScreenSize.height / 20,
-                              ),
-                            ],
-                          ),
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/upcomingpic1.jpg",
+                                MatchTitleaway: "Comoros",
+                                MatchTitlehome: "Morocco",
+                                MatchDate: "Sunday, Dec 21 \n18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
+                                Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/upcomingpic2.jpg",
+                                MatchTitleaway: "Zambia",
+                                MatchTitlehome: "Mali",
+                                MatchDate: "Sunday, Dec 21 \n18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
+                                  Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: "assets/images/upcomingpic1.jpg",
+                                MatchTitleaway: "Comoros",
+                                MatchTitlehome: "Morocco",
+                                MatchDate: "Sunday, Dec 21 \n18:00",
+                                Matchplace: "Sport Complexe Prince",
+                                Price: "600"),
+                            SizedBox(
+                              height: ScreenSize.height / 20,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ), 
+                ),
               ),
               MyappbarWidget(
                 title: "Coming Up",

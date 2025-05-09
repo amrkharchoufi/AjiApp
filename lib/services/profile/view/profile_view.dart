@@ -234,131 +234,65 @@ class _ProfileViewState extends State<ProfileView> {
               SizedBox(
                 height: ScreenSize.width / 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.lock,
-                            color: ajired,
-                            size: ScreenSize.width / 18,
-                          ),
-                          Text(
-                            "Change password",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.credit_card,
-                            color: ajired,
-                            size: ScreenSize.width / 18,
-                          ),
-                          Text(
-                            "Payment methods",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.language,
-                            color: ajired,
-                            size: ScreenSize.width / 18,
-                          ),
-                          Text(
-                            "Language",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: ScreenSize.width / 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.phone_outlined,
-                            color: ajired,
-                            size: ScreenSize.width / 18,
-                          ),
-                          Text(
-                            "Change phone number ",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.email,
-                            color: ajired,
-                            size: ScreenSize.width / 18,
-                          ),
-                          Text(
-                            "Change email",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: ScreenSize.width / 20,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.fmd_good_sharp,
-                            color: ajired,
-                            size: ScreenSize.width / 18,
-                          ),
-                          Text(
-                            "Country ",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(SizeConfig.getBlockSizeHorizontal(3)),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14)
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Change password",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ScreenSize.width / 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Divider(),
+                    Text(
+                      "Payment methods",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ScreenSize.width / 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                      Divider(),
+                    Text(
+                      "Language",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ScreenSize.width / 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                      Divider(),
+                    Text(
+                      "Change phone number ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ScreenSize.width / 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                      Divider(),
+                    Text(
+                      "Change email",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ScreenSize.width / 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                      Divider(),
+                    Text(
+                      "Country ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ScreenSize.width / 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
