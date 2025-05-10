@@ -32,9 +32,9 @@ class FixtureController extends GetxController {
 
   void fetchFixtures() async {
     const url =
-        'https://v3.football.api-sports.io/fixtures?league=6&season=2023';
+        'https://v3.football.api-sports.io/fixtures?league=6&season=2025';
     const headers = {
-      'x-apisports-key': '25c13a59fbbd8e59fc2f389324acac97',
+      'x-apisports-key': 'eb019172e018ad81e65c44fa21d24227',
     };
 
     try {

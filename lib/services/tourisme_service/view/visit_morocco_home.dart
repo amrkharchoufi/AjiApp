@@ -16,40 +16,40 @@ class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
     ScreenSize.init(context);
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              "Most Visits",
-              style: TextStyle(
-                  
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-            GestureDetector(
-              onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => ServiceView(),
-                //   ),
-                // );
-              },
-              child: Text(
-                "View all",
-                style: TextStyle(
-                  
-                  fontSize: 19,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Most Visits",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              GestureDetector(
+                onTap: () {
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => ServiceView(),
+                  //   ),
+                  // );
+                },
+                child: Text(
+                  "View all",
+                  style: TextStyle(
+                    fontSize: 19,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         SizedBox(
           height: ScreenSize.width / 40,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
           child: Row(
             children: [
               VisitMorrocoCard1(
@@ -111,40 +111,40 @@ class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
         SizedBox(
           height: ScreenSize.width / 20,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              "Multi City Tour",
-              style: TextStyle(
-                  
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-            GestureDetector(
-              onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => ServiceView(),
-                //   ),
-                // );
-              },
-              child: Text(
-                "View all",
-                style: TextStyle(
-                  
-                  fontSize: 19,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Multi City Tour",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              GestureDetector(
+                onTap: () {
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => ServiceView(),
+                  //   ),
+                  // );
+                },
+                child: Text(
+                  "View all",
+                  style: TextStyle(
+                    fontSize: 19,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         SizedBox(
           height: ScreenSize.width / 40,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
           child: Row(
             children: [
               VisitMoroccoCard2(
@@ -211,7 +211,10 @@ class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
                   height: ScreenSize.height / 2.3),
             ],
           ),
-        )
+        ),
+        SizedBox(
+          height: ScreenSize.width / 20,
+        ),
       ],
     );
   }

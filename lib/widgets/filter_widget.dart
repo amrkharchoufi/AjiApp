@@ -34,6 +34,7 @@ class _ExpandableFilterWidgetState extends State<ExpandableFilterWidget> {
 
   // City options
   final List<String> cities = [
+    'All the Country',
     'Rabat',
     'Casablanca',
     'Fes',
@@ -110,15 +111,12 @@ class _ExpandableFilterWidgetState extends State<ExpandableFilterWidget> {
     return GestureDetector(
       key: _filterButtonKey,
       onTap: _toggleFilterPanel,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Filters',
-          style: TextStyle(
-            fontSize: SizeConfig.getBlockSizeHorizontal(6),
-            fontWeight: FontWeight.bold,
-            color: _isFilterVisible == false ? Colors.grey : ajired,
-          ),
+      child: Text(
+        'Filters',
+        style: TextStyle(
+          fontSize: SizeConfig.getBlockSizeHorizontal(6),
+          fontWeight: FontWeight.bold,
+          color: _isFilterVisible == false ? Colors.grey : ajired,
         ),
       ),
     );

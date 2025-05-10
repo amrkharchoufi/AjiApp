@@ -24,47 +24,41 @@ class VisitMorrocoView extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          ScrollConfiguration(
-            behavior:
-                ScrollConfiguration.of(context).copyWith(overscroll: false),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  MyappbarWidget(
-                    title: "Visit Morocco",
-                  ),
-                  SizedBox(
-                    height: ScreenSize.height / 120,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(ScreenSize.height / 60),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ExpandableFilterWidget(
-                              CitySelected: (String? city) { 
-                                controller.searchCity(city!);
-                               },
-                              InterestSelected: (String? city) { 
-
-                               },
-                            ),
-                          ],
-                        ),
-                        
-                        GetBuilder(
-                          init: TourismeController(),
-                          builder: (controller) {
-                            return controller.Custom;
-                          },
-                        ),
-                      ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                MyappbarWidget(
+                  title: "Visit Morocco",
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenSize.height / 60),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ExpandableFilterWidget(
+                            CitySelected: (String? city) {
+                              controller.searchCity(city!);
+                            },
+                            InterestSelected: (String? city) {},
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                    GetBuilder(
+                      init: TourismeController(),
+                      builder: (controller) {
+                        return controller.Custom;
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: ScreenSize.height / 60,
+                ),
+              ],
             ),
           ),
           MyappbarWidget(

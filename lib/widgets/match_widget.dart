@@ -12,7 +12,7 @@ class MatchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime matchDate = DateTime.parse(fixture.date);
-    String dayAndDate = DateFormat('EEEE MMM d').format(matchDate); // Sunday Dec 21
+    String dayAndDate = DateFormat('EEEE MMM d').format(matchDate); 
     String time = DateFormat('hh:mm a').format(matchDate);
     
     SizeConfig().init(context);
@@ -45,12 +45,10 @@ class MatchWidget extends StatelessWidget {
             width: SizeConfig.getBlockSizeHorizontal(15),
               height: SizeConfig.getBlockSizeHorizontal(15),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+              // borderRadius: BorderRadius.circular(12),
             ),
             child: CachedNetworkImage(
               imageUrl: fixture.homeTeam.logo,
-              
-              fit: BoxFit.cover,
             ),
           ),
 
@@ -125,11 +123,11 @@ class MatchWidget extends StatelessWidget {
             width: SizeConfig.getBlockSizeHorizontal(15),
             height: SizeConfig.getBlockSizeHorizontal(15),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(13),
+            
             ),
             child: CachedNetworkImage(
               imageUrl: fixture.awayTeam.logo,
-              fit: BoxFit.cover,
+              
             ),
           ),
         ],

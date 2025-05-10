@@ -73,40 +73,45 @@ class ClientspaceState extends State<Clientspace> {
             _selectedIndex == index ? _getPage(index) : Container(),
            ),
          ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: ajired,
-        unselectedItemColor: Colors.black,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: SizeConfig.getBlockSizeHorizontal(3)),
-        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal,fontSize: SizeConfig.getBlockSizeHorizontal(3)),
-        items: [
-          BottomNavigationBarItem(
-            icon:_getSvg("assets/icons/hotelicon.svg",Colors.brown,),
-            activeIcon: _getSvgactive("assets/icons/hotelicon.svg", ajired,),
-            label: 'Home',
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+         canvasColor: beige,
           ),
-          BottomNavigationBarItem(
-            icon: _getSvg("assets/icons/events_icon.svg", Colors.brown),
-            activeIcon: _getSvgactive("assets/icons/events_icon.svg", ajired,),
-            label: 'Events',
-          ),
-          BottomNavigationBarItem(
-            icon: _getSvg("assets/icons/service_icon.svg",Colors.brown,),
-            activeIcon: _getSvgactive("assets/icons/service_icon.svg",ajired,),
-            label: 'Services',
-          ),
-          BottomNavigationBarItem(
-            icon: _getSvg("assets/icons/search_icon.svg", Colors.brown,),
-            activeIcon: _getSvgactive("assets/icons/search_icon.svg", ajired,),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: _getSvg("assets/icons/profile_icon.svg", Colors.brown),
-            activeIcon: _getSvgactive("assets/icons/profile_icon.svg", ajired,),
-            label: 'Profile',
-          ),
-        ],
+        child: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          selectedItemColor: ajired,
+          unselectedItemColor: Colors.black,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: SizeConfig.getBlockSizeHorizontal(3)),
+          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal,fontSize: SizeConfig.getBlockSizeHorizontal(3)),
+          items: [
+            BottomNavigationBarItem(
+              icon:_getSvg("assets/icons/hotelicon.svg",Colors.brown,),
+              activeIcon: _getSvgactive("assets/icons/hotelicon.svg", ajired,),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: _getSvg("assets/icons/events_icon.svg", Colors.brown),
+              activeIcon: _getSvgactive("assets/icons/events_icon.svg", ajired,),
+              label: 'Events',
+            ),
+            BottomNavigationBarItem(
+              icon: _getSvg("assets/icons/service_icon.svg",Colors.brown,),
+              activeIcon: _getSvgactive("assets/icons/service_icon.svg",ajired,),
+              label: 'Services',
+            ),
+            BottomNavigationBarItem(
+              icon: _getSvg("assets/icons/search_icon.svg", Colors.brown,),
+              activeIcon: _getSvgactive("assets/icons/search_icon.svg", ajired,),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: _getSvg("assets/icons/profile_icon.svg", Colors.brown),
+              activeIcon: _getSvgactive("assets/icons/profile_icon.svg", ajired,),
+              label: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }
