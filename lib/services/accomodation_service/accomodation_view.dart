@@ -39,7 +39,7 @@ class _AccomodationViewState extends State<AccomodationView> {
             child: Column(
               children: [
                 MyappbarWidget(
-                  title: "Accomodation",
+                  title: "Hotels",
                 ),
                 SizedBox(
                   height: ScreenSize.height / 120,

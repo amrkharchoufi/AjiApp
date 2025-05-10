@@ -56,9 +56,9 @@ class FeatureCard extends StatelessWidget {
               ),
               // Text content
               Positioned(
-                bottom: ScreenSize.width / 30,
-                left: ScreenSize.width / 30,
-                right: ScreenSize.width / 30,
+                bottom:  ScreenSize.width/30,
+                left:  ScreenSize.width/46,
+                right:  ScreenSize.width/80,
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: ScreenSize.width / 50),
@@ -73,7 +73,6 @@ class FeatureCard extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                          
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: ScreenSize.width / 30,
@@ -85,7 +84,6 @@ class FeatureCard extends StatelessWidget {
                       Text(
                         subtitle,
                         style: TextStyle(
-                          
                           color: Colors.white,
                           fontSize: ScreenSize.width / 35,
                         ),
