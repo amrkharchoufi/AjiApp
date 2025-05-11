@@ -25,7 +25,7 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
   late GoogleMapController _mapController;
   bool _isMapReady = false;
 
-  Set<Marker> _markers = {};
+  final Set<Marker> _markers = {};
 
   @override
   void initState() {

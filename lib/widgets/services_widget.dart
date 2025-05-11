@@ -35,7 +35,7 @@ class ServicesWidget extends StatelessWidget {
           width: ScreenSize.width / 3.7,
           height: ScreenSize.width / 3.7,
           text: "Visa",
-          img: "assets/icons/visa_icon.svg",
+          img: "assets/icons/Visa_icon.svg",
         ),
       ),
       GestureDetector(
@@ -109,7 +109,7 @@ class ServicesWidget extends StatelessWidget {
             height: ScreenSize.width / 3.7,
             text: "Tickets",
             customzie: SizeConfig.getBlockSizeHorizontal(9),
-            img: "assets/icons/ticket_icon.svg",
+            img: "assets/icons/Ticket_icon.svg",
           )),
       GestureDetector(
         onTap: () {

@@ -1,10 +1,9 @@
 import 'package:ajiapp/routing.dart';
 import 'package:get/get.dart';
 
-
 class VisaConrtoller extends GetxController {
- var selectedNationality = '';
- final Map<String, String> nationalitiesMap = {
+  var selectedNationality = '';
+  final Map<String, String> nationalitiesMap = {
     "Algeria": "Algerian",
     "Benin": "Beninese",
     "Cameroon": "Cameroonian",
@@ -15,7 +14,7 @@ class VisaConrtoller extends GetxController {
     "Senegal": "Senegalese",
   };
 
-final List<String> nationalities = [
+  final List<String> nationalities = [
     "Algeria",
     "Benin",
     "Cameroon",
@@ -39,10 +38,10 @@ final List<String> nationalities = [
 
   void searchNationality(String value) {
     selectedNationality = value;
-  if (nationalityvisa[value] == true) {
+    if (nationalityvisa[value] == true) {
       Get.toNamed(Routes.WITHOUT_VISA);
-          } else {
+    } else {
       Get.toNamed(Routes.WITH_VISA);
-              }
+    }
   }
 }
