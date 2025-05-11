@@ -50,7 +50,7 @@ class VisitMorrocoView extends StatelessWidget {
                     GetBuilder(
                       init: TourismeController(),
                       builder: (controller) {
-                        return controller.Custom;
+                        return controller.custom;
                       },
                     ),
                   ],

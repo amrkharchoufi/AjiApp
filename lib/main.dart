@@ -1,5 +1,7 @@
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/common/ClientSpace.dart';
+// import 'package:ajiapp/services/tourisme_service/service/tourism_data_service.dart';
+
 import 'package:ajiapp/settings/fonts.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // final tourismDataService = TourismDataService();
+  // await tourismDataService.seedInitialDataIfNeeded();
   runApp(const MyApp());
 }
 

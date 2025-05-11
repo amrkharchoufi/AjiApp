@@ -1,37 +1,43 @@
+// lib/widgets/visit_morroco_card1.dart
+import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
+import 'package:ajiapp/services/tourisme_service/view/visit_morroco_read_more_view.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/services/tourisme_service/view/visit_morroco_read_more_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class VisitMorrocoCard1 extends StatelessWidget {
-  final String ImagePath;
-  final String siteName;
-  final String sitePlace;
-  final String rating;
-  final double width;
-  final double height;
+  // TouristSpot object is required
+  final TouristSpot spot;
+
+  // Optional parameters for visual customization
+  final double? width;
+  final double? height;
   final bool designred;
-  final String ratingsize;
-  final String Description;
+
   const VisitMorrocoCard1({
     super.key,
-    required this.ImagePath,
-    required this.siteName,
-    required this.sitePlace,
-    required this.rating,
-    required this.width,
-    required this.height,
-    required this.ratingsize,
-    required this.Description,
-    required this.designred,
+    required this.spot,
+    this.width,
+    this.height,
+    this.designred = false,
   });
+
+  // Helper method to check if the image is a network image
+  bool _isNetworkImage(String url) {
+    return url.startsWith('http://') || url.startsWith('https://');
+  }
 
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
+
+    final cardWidth = width ?? ScreenSize.width / 1.06;
+    final cardHeight = height ?? ScreenSize.height / 2.3;
+
     return Container(
-      width: width,
-      height: height,
+      width: cardWidth,
+      height: cardHeight,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
           color: !designred ? Colors.white : ajired,
@@ -47,13 +53,29 @@ class VisitMorrocoCard1 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            width: width / 2,
-            height: height,
-            child: Image.asset(
-              alignment: Alignment.centerLeft,
-              ImagePath,
-              fit: BoxFit.cover,
-            ),
+            width: cardWidth / 2,
+            height: cardHeight,
+            child: _isNetworkImage(spot.imageUrl)
+                ? CachedNetworkImage(
+                    imageUrl: spot.imageUrl,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.centerLeft,
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      color: Colors.grey[300],
+                      child: Icon(
+                        Icons.error,
+                        color: Colors.red,
+                      ),
+                    ),
+                  )
+                : Image.asset(
+                    spot.imageUrl,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.centerLeft,
+                  ),
           ),
           Expanded(
             child: Padding(
@@ -67,12 +89,11 @@ class VisitMorrocoCard1 extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        siteName,
+                        spot.name,
                         softWrap: true,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            
                             fontSize: ScreenSize.width / 20,
                             fontWeight: FontWeight.bold,
                             color: designred ? Colors.white : Colors.black),
@@ -81,10 +102,11 @@ class VisitMorrocoCard1 extends StatelessWidget {
                         height: ScreenSize.width / 40,
                       ),
                       Text(
-                        Description,
+                        spot.description,
                         softWrap: true,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            
                             fontSize: ScreenSize.width / 35,
                             fontWeight: FontWeight.bold,
                             color: designred ? Colors.white : Colors.black),
@@ -103,9 +125,8 @@ class VisitMorrocoCard1 extends StatelessWidget {
                             color: designred ? Colors.white : ajired,
                           ),
                           Text(
-                            sitePlace,
+                            spot.city,
                             style: TextStyle(
-                              
                               color: designred ? Colors.white : Colors.black,
                               fontSize: ScreenSize.width / 35,
                               fontWeight: FontWeight.bold,
@@ -119,9 +140,8 @@ class VisitMorrocoCard1 extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            rating,
+                            spot.rating,
                             style: TextStyle(
-                                
                                 fontSize: ScreenSize.width / 25,
                                 fontWeight: FontWeight.bold,
                                 color: designred ? Colors.white : Colors.black),
@@ -131,9 +151,8 @@ class VisitMorrocoCard1 extends StatelessWidget {
                             color: Colors.yellow,
                           ),
                           Text(
-                            "($ratingsize)",
+                            "(${spot.ratingCount})",
                             style: TextStyle(
-                                
                                 fontSize: ScreenSize.width / 30,
                                 color: designred ? Colors.white : Colors.black),
                           ),
@@ -144,11 +163,16 @@ class VisitMorrocoCard1 extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => VisitMorrocoRedMoreView()));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => VisitMorrocoRedMoreView(
+                                spot: spot,
+                              ),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: ajired,
+                          backgroundColor: designred ? Colors.white : ajired,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
                           ),
@@ -159,7 +183,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
                         child: Text(
                           "Read More",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: designred ? ajired : Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: (ScreenSize.width / 22),
                           ),

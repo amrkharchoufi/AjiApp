@@ -1,118 +1,107 @@
+// lib/services/tourisme_service/view/visit_morocco_all.dart
+import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/visit_morocco_card2.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class VisitMoroccoAll extends StatefulWidget {
+class VisitMoroccoAll extends StatelessWidget {
   const VisitMoroccoAll({super.key});
 
   @override
-  State<VisitMoroccoAll> createState() => _VisitMoroccoAllState();
-}
-
-class _VisitMoroccoAllState extends State<VisitMoroccoAll> {
-  @override
   Widget build(BuildContext context) {
+    final TourismeController controller = Get.find<TourismeController>();
     ScreenSize.init(context);
-    return Padding(
-      padding:EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+
+    return Obx(() {
+      // Show loading spinner when data is loading
+      if (controller.isLoadingTours.value) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
+      // Show empty state message when no data is available
+      if (controller.tours.isEmpty && !controller.isLoadingTours.value) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Most Popular",
-                style: TextStyle(
-                    
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+              Icon(
+                Icons.directions_bus,
+                size: 64,
+                color: Colors.grey,
               ),
-              GestureDetector(
-                onTap: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ServiceView(),
-                  //   ),
-                  // );
-                },
-                child: Text(
-                  "View all",
-                  style: TextStyle(
-                    
-                    fontSize: 19,
-                  ),
+              SizedBox(height: 20),
+              Text(
+                "No tours available",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Please add tours in Firebase",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
                 ),
               ),
             ],
           ),
-          SizedBox(
-            height: ScreenSize.width / 40,
-          ),
-          VisitMoroccoCard2(
-              designred: false,
-              ImagePath: "assets/images/merzoga.png",
-              siteName: "Tour from Marrakech to Fes and Merzouga Desert",
-              sitePlace: "Marrakech",
-              rating: "4,6",
-              ratingsize: "3.4k",
-              duree: "4 days",
-              price: "2000 MAD",
-              Description:
-                  "A 4-day tour from Marrakech to Fes offers stunning mountain views, ancient kasbahs, camel trekking in golden dunes, breathtaking gorges, lush valleys, starry desert nights, and scenic forest landscapes.",
-              width: ScreenSize.width / 1.06,
-              height: ScreenSize.height / 2.3),
-          SizedBox(
-            height: ScreenSize.width / 30,
-          ),
-          VisitMoroccoCard2(
-              designred: false,
-              ImagePath: "assets/images/ouarzazat.png",
-              siteName: "Tour from Ouarzazate to Zagora desert",
-              sitePlace: "Ouarzazate",
-              rating: "4,6",
-              ratingsize: "3.4k",
-              duree: "3 days",
-              price: "2500 MAD",
-              Description:
-                  "Embark on a thrilling tour from Ouarzazate to Merzouga Desert and Zagora, crossing the Draa Valley, exploring ancient kasbahs, and enjoying camel treks, desert camps, and breathtaking Sahara sunsets.",
-              width: ScreenSize.width / 1.06,
-              height: ScreenSize.height / 2.3),
-          SizedBox(
-            height: ScreenSize.width / 30,
-          ),
-          VisitMoroccoCard2(
-            designred: false,
-            ImagePath: "assets/images/chefchaouen.png",
-            siteName: "Tour from Casablanca to Chefchaouen",
-            sitePlace: "Casablanca",
-            rating: "4,6",
-            ratingsize: "3.4k",
-            duree: "3 days",
-            Description:
-                "Tour from Casablanca to Chefchaouen, exploring Rabat’s landmarks, wandering through the blue-washed streets of Chefchaouen, and enjoying breathtaking Rif Mountain views in a peaceful setting.",
-            width: ScreenSize.width / 1.06,
-            height: ScreenSize.height / 2.3,
-            price: '1500 MAD',
-          ),
-          SizedBox(
-            height: ScreenSize.width / 30,
-          ),
-          VisitMoroccoCard2(
-              designred: false,
-              ImagePath: "assets/images/Tangier.png",
-              siteName: "Tour from Ouarzazate to Zagora desert",
-              sitePlace: "Tangier",
-              rating: "4,5",
-              ratingsize: "3.4k",
-              duree: "6 days",
-              price: "3900 MAD",
-              Description:
-                  "Journey from Tangier to Marrakech, exploring Chefchaouen’s blue streets, Fes’ rich history, the Sahara’s golden dunes, and Berber villages before crossing the Atlas Mountains to reach vibrant Marrakech.",
-              width: ScreenSize.width / 1.06,
-              height: ScreenSize.height / 2.3),
-        ],
-      ),
-    );
+        );
+      }
+
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "Most Popular",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Handle view all tap
+                  },
+                  child: Text(
+                    "View all",
+                    style: TextStyle(
+                      fontSize: 19,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: ScreenSize.width / 40,
+            ),
+            // Display all tours
+            for (var tour in controller.tours)
+              Column(
+                children: [
+                  VisitMoroccoCard2(
+                    tour: tour,
+                    designred: false,
+                    width: ScreenSize.width / 1.06,
+                    height: ScreenSize.height / 2.3,
+                  ),
+                  SizedBox(
+                    height: ScreenSize.width / 30,
+                  ),
+                ],
+              ),
+          ],
+        ),
+      );
+    });
   }
 }
