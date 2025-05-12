@@ -30,6 +30,7 @@ class VisaConrtoller extends GetxController {
     } catch (e) {
       print(e.toString());
     } finally {
+      nationalities.sort((a, b) => a.compareTo(b));
       isLoading.value = false;
     }
   }
