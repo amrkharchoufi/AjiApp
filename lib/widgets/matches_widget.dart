@@ -49,10 +49,13 @@ class Matchwidget extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: ScreenSize.width / 50),
+              padding: EdgeInsets.symmetric(
+                horizontal: ScreenSize.width / 50,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: ScreenSize.width / 65,
                 children: [
                   Column(
                     children: [
@@ -67,27 +70,25 @@ class Matchwidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                          'Vs',
-                          style: TextStyle(
-                            fontSize: SizeConfig.getBlockSizeHorizontal(5),
-                            fontWeight: FontWeight.bold,
-                            color: ajired,
-                          ),
+                        'Vs',
+                        style: TextStyle(
+                          fontSize: SizeConfig.getBlockSizeHorizontal(5),
+                          fontWeight: FontWeight.bold,
+                          color: ajired,
                         ),
+                      ),
                       Text(
                         MatchTitleaway,
                         softWrap: true,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                        
                           fontSize: ScreenSize.width / 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: ScreenSize.width / 50),
                   Text(
                     MatchDate,
                     textAlign: TextAlign.center,
@@ -96,7 +97,6 @@ class Matchwidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: ScreenSize.width / 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -106,28 +106,27 @@ class Matchwidget extends StatelessWidget {
                       ),
                       Text(
                         Matchplace,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          
                           fontSize: ScreenSize.width / 35,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: ScreenSize.width / 50),
                   MaterialButton(
-                  onPressed: () {},
-                  color: ajired,
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  ),
-                  minWidth: SizeConfig.getBlockSizeHorizontal(35),
-                  height: SizeConfig.getBlockSizeVertical(3),
-                  child: Text(
-                    "Learn More",
-                     style: TextStyle(
-                     color: Colors.white,
-                     fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
+                    onPressed: () {},
+                    color: ajired,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    minWidth: SizeConfig.getBlockSizeHorizontal(35),
+                    height: SizeConfig.getBlockSizeVertical(3),
+                    child: Text(
+                      "Learn More",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
                       ),
                     ),
                   ),
@@ -140,4 +139,3 @@ class Matchwidget extends StatelessWidget {
     );
   }
 }
-
