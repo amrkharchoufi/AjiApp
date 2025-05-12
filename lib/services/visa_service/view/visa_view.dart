@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VisaView extends StatelessWidget {
-   const VisaView({super.key});
-
-  
+  const VisaView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,36 +31,42 @@ class VisaView extends StatelessWidget {
             SizedBox(
               height: ScreenSize.height / 120,
             ),
-            Padding(
-              padding: EdgeInsets.all(ScreenSize.height / 60),
-              child: Column(
-                children: [
-                  Text(
-                    "Get visa information before your next trip to Morroco",
-                    style: TextStyle(
-                        fontSize: ScreenSize.width / 21,
-                        fontWeight: FontWeight.bold),
+            Obx(() {
+              if (controller.isLoading.value) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return Padding(
+                  padding: EdgeInsets.all(ScreenSize.height / 60),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Get visa information before your next trip to Morroco",
+                        style: TextStyle(
+                            fontSize: ScreenSize.width / 21,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "Search your nationality to find out the documents you need for your visa application",
+                        style: TextStyle(
+                          fontSize: ScreenSize.width / 25,
+                        ),
+                      ),
+                      SizedBox(
+                        height: ScreenSize.width / 10,
+                      ),
+                      SizedBox(
+                          width: ScreenSize.width / 1.2,
+                          child: SearchbarWidget(
+                              placeholder: "Search your nationality",
+                              options: controller.nationalities,
+                              onchanged: (value) {
+                                controller.searchNationality(value!);
+                              }))
+                    ],
                   ),
-                  Text(
-                    "Search your nationality to find out the documents you need for your visa application",
-                    style: TextStyle(
-                      fontSize: ScreenSize.width / 25,
-                    ),
-                  ),
-                  SizedBox(
-                    height: ScreenSize.width / 10,
-                  ),
-                  SizedBox(
-                      width: ScreenSize.width / 1.2,
-                      child: SearchbarWidget(
-                          placeholder: "Search your nationality",
-                          options: controller.nationalities,
-                          onchanged: (value) {
-                            controller.searchNationality(value!);
-                          }))
-                ],
-              ),
-            ),
+                );
+              }
+            })
           ],
         ),
       ),

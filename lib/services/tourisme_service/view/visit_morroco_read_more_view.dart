@@ -1,4 +1,6 @@
 // lib/services/tourisme_service/view/visit_morroco_read_more_view.dart
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+
 import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';

@@ -37,8 +37,8 @@ class WithoutVisaView extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
               child: Row(
                 children: [
-                  SvgPicture.asset(
-                    "assets/icons/${controller.selectedNationality}_icon.svg",
+                  SvgPicture.network(
+                    controller.selectedvisa.Imageurl,
                     width: ScreenSize.width / 4.5,
                     height: ScreenSize.width / 4.5,
                   ),
@@ -46,7 +46,7 @@ class WithoutVisaView extends StatelessWidget {
                     width: ScreenSize.width / 30,
                   ),
                   Text(
-                    controller.selectedNationality,
+                    controller.selectedvisa.country,
                     style: TextStyle(
                         fontSize: ScreenSize.width / 11,
                         fontWeight: FontWeight.bold),

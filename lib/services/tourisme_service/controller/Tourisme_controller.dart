@@ -1,4 +1,6 @@
 // lib/services/tourisme_service/controller/Tourisme_controller.dart
+// ignore_for_file: avoid_print
+
 import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morocco_all.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morocco_home.dart';
