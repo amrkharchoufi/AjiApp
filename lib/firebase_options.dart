@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDvMxcdhWsTPSJwPx01OZn9l7RX1jF6sWA',
-    appId: '1:486612088522:android:1149ed31cae774742be633',
+    appId: '1:486612088522:android:149c3381dd36c5c42be633',
     messagingSenderId: '486612088522',
     projectId: 'ajiapp-d436f',
     storageBucket: 'ajiapp-d436f.firebasestorage.app',
@@ -65,10 +65,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAPTYo_4hwCpl4zHwGAQ-yp1hZrpxC3_i8',
-    appId: '1:486612088522:ios:54d3b711ee6909932be633',
+    appId: '1:486612088522:ios:34d6be96416f49812be633',
     messagingSenderId: '486612088522',
     projectId: 'ajiapp-d436f',
     storageBucket: 'ajiapp-d436f.firebasestorage.app',
-    iosBundleId: 'com.example.ajiapp',
+    androidClientId: '486612088522-msbpch02e5sosi1ij7n0dk325rnh2796.apps.googleusercontent.com',
+    iosClientId: '486612088522-f19slnqd5i7sh92b1j9oa9svmjbjijpa.apps.googleusercontent.com',
+    iosBundleId: 'com.ajiapp.app',
   );
+
 }
