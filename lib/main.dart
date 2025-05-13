@@ -1,5 +1,4 @@
 import 'package:ajiapp/routing.dart';
-import 'package:ajiapp/services/common/ClientSpace.dart';
 
 import 'package:ajiapp/settings/fonts.dart';
 import 'package:ajiapp/settings/size.dart';
@@ -31,8 +30,8 @@ class MyApp extends StatelessWidget {
         fontFamily: myFonts.fontFamily,
       ),
       getPages: routes,
+      initialRoute: Routes.SPLASH,
       debugShowCheckedModeBanner: false,
-      home: Clientspace(),
     );
   }
 }

@@ -14,7 +14,9 @@ import 'package:ajiapp/services/contacts_service/importantct_view.dart';
 import 'package:ajiapp/services/e-sim_service/view/e-sim_view.dart';
 import 'package:ajiapp/services/followyourteam_service/view/follow_your_team_view.dart';
 import 'package:ajiapp/services/food_service/food_view.dart.dart';
+import 'package:ajiapp/services/onboarding/view/onboarding_view.dart';
 import 'package:ajiapp/services/profile/view/profile_view.dart';
+import 'package:ajiapp/services/splash/view/splash_view.dart';
 import 'package:ajiapp/services/ticket_service/view/ticket_view.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morroco_view.dart';
 import 'package:ajiapp/services/transport_service/transportation_view.dart';
@@ -24,6 +26,15 @@ import 'package:ajiapp/services/visa_service/view/without_visa_view.dart';
 import 'package:get/get.dart';
 
 List<GetPage> routes = [
+
+   GetPage(
+    name: Routes.SPLASH,
+    page: () => const SplashView(),
+  ),
+  GetPage(
+    name: Routes.ONBOARDING,
+    page: () => OnboardingView(),
+  ),
     // Auth routes
     GetPage(
       name: Routes.LOGIN,
@@ -150,6 +161,10 @@ List<GetPage> routes = [
 
 
 abstract class Routes {
+  // Onboarding and splash routes
+  static const SPLASH = '/splash';
+  static const ONBOARDING = '/onboarding';
+
   // Auth routes
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
