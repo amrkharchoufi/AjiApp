@@ -59,7 +59,7 @@ class OnboardingController extends GetxController {
   Future<void> completeOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('onboarding_completed', true);
-    Get.offAllNamed(Routes.LOGIN);
+    Get.offAllNamed(Routes.CLIENT_SPACE);
   }
 
   // Dispose of page controller
