@@ -23,6 +23,11 @@ class TourismeController extends GetxController {
   final RxBool isLoadingSpots = true.obs;
   final RxBool isLoadingTours = true.obs;
 
+  // Shimmer display states
+  final RxBool showCitiesShimmer = true.obs;
+  final RxBool showSpotsShimmer = true.obs;
+  final RxBool showToursShimmer = true.obs;
+
   // Error states
   final RxString errorCities = ''.obs;
   final RxString errorSpots = ''.obs;
@@ -35,11 +40,23 @@ class TourismeController extends GetxController {
   RxString selectedCity = 'All the Country'.obs;
   RxString selectedInterest = ''.obs;
 
+  // Pagination variables
+  final int pageSize = 5;
+  DocumentSnapshot? lastTouristSpotDoc;
+  DocumentSnapshot? lastTourDoc;
+  final RxBool hasMoreSpots = true.obs;
+  final RxBool hasMoreTours = true.obs;
+  final RxBool loadingMoreSpots = false.obs;
+  final RxBool loadingMoreTours = false.obs;
+
   @override
   void onInit() {
-    fetchCities();
-    fetchTouristSpots();
-    fetchTours();
+    // Prioritize loading cities first since they're needed for the filter
+    fetchCities().then((_) {
+      // Then load initial tourist spots and tours
+      fetchInitialTouristSpots();
+      fetchInitialTours();
+    });
     super.onInit();
   }
 
@@ -47,6 +64,7 @@ class TourismeController extends GetxController {
   Future<void> fetchCities() async {
     try {
       isLoadingCities.value = true;
+      showCitiesShimmer.value = true;
 
       // Add default "All the Country" option
       cities.add(City(
@@ -69,45 +87,157 @@ class TourismeController extends GetxController {
       print(errorCities.value);
     } finally {
       isLoadingCities.value = false;
+
+      // Delay hiding shimmer for smooth transition
+      Future.delayed(Duration(milliseconds: 500), () {
+        showCitiesShimmer.value = false;
+      });
     }
   }
 
-  // Fetch tourist spots from Firestore
-  Future<void> fetchTouristSpots() async {
+  // Fetch initial tourist spots with pagination
+  Future<void> fetchInitialTouristSpots() async {
     try {
       isLoadingSpots.value = true;
+      showSpotsShimmer.value = true;
 
-      final QuerySnapshot snapshot =
-          await _firestore.collection('tourist_spots').get();
+      // Clear existing data
+      touristSpots.clear();
+      lastTouristSpotDoc = null;
+      hasMoreSpots.value = true;
 
-      for (var doc in snapshot.docs) {
-        touristSpots.add(TouristSpot.fromFirestore(
-            doc.data() as Map<String, dynamic>, doc.id));
+      // Fetch first batch
+      QuerySnapshot snapshot = await _firestore
+          .collection('tourist_spots')
+          .orderBy('rating', descending: true)
+          .limit(pageSize)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        hasMoreSpots.value = false;
+      } else {
+        for (var doc in snapshot.docs) {
+          touristSpots.add(TouristSpot.fromFirestore(
+              doc.data() as Map<String, dynamic>, doc.id));
+        }
+
+        // Store last document for pagination
+        lastTouristSpotDoc = snapshot.docs.last;
       }
     } catch (e) {
       errorSpots.value = 'Error fetching tourist spots: $e';
       print(errorSpots.value);
     } finally {
       isLoadingSpots.value = false;
+
+      // Delay hiding shimmer for smooth transition
+      Future.delayed(Duration(milliseconds: 800), () {
+        showSpotsShimmer.value = false;
+      });
     }
   }
 
-  // Fetch tours from Firestore
-  Future<void> fetchTours() async {
+  // Load more tourist spots
+  Future<void> loadMoreTouristSpots() async {
+    if (!hasMoreSpots.value || loadingMoreSpots.value) return;
+
+    try {
+      loadingMoreSpots.value = true;
+
+      QuerySnapshot snapshot = await _firestore
+          .collection('tourist_spots')
+          .orderBy('rating', descending: true)
+          .startAfterDocument(lastTouristSpotDoc!)
+          .limit(pageSize)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        hasMoreSpots.value = false;
+      } else {
+        for (var doc in snapshot.docs) {
+          touristSpots.add(TouristSpot.fromFirestore(
+              doc.data() as Map<String, dynamic>, doc.id));
+        }
+
+        lastTouristSpotDoc = snapshot.docs.last;
+      }
+    } catch (e) {
+      print('Error loading more spots: $e');
+    } finally {
+      loadingMoreSpots.value = false;
+    }
+  }
+
+  // Fetch initial tours with pagination
+  Future<void> fetchInitialTours() async {
     try {
       isLoadingTours.value = true;
+      showToursShimmer.value = true;
 
-      final QuerySnapshot snapshot = await _firestore.collection('tours').get();
+      // Clear existing data
+      tours.clear();
+      lastTourDoc = null;
+      hasMoreTours.value = true;
 
-      for (var doc in snapshot.docs) {
-        tours.add(
-            Tour.fromFirestore(doc.data() as Map<String, dynamic>, doc.id));
+      // Fetch first batch
+      QuerySnapshot snapshot = await _firestore
+          .collection('tours')
+          .orderBy('rating', descending: true)
+          .limit(pageSize)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        hasMoreTours.value = false;
+      } else {
+        for (var doc in snapshot.docs) {
+          tours.add(
+              Tour.fromFirestore(doc.data() as Map<String, dynamic>, doc.id));
+        }
+
+        // Store last document for pagination
+        lastTourDoc = snapshot.docs.last;
       }
     } catch (e) {
       errorTours.value = 'Error fetching tours: $e';
       print(errorTours.value);
     } finally {
       isLoadingTours.value = false;
+
+      // Delay hiding shimmer for smooth transition
+      Future.delayed(Duration(milliseconds: 1000), () {
+        showToursShimmer.value = false;
+      });
+    }
+  }
+
+  // Load more tours
+  Future<void> loadMoreTours() async {
+    if (!hasMoreTours.value || loadingMoreTours.value) return;
+
+    try {
+      loadingMoreTours.value = true;
+
+      QuerySnapshot snapshot = await _firestore
+          .collection('tours')
+          .orderBy('rating', descending: true)
+          .startAfterDocument(lastTourDoc!)
+          .limit(pageSize)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        hasMoreTours.value = false;
+      } else {
+        for (var doc in snapshot.docs) {
+          tours.add(
+              Tour.fromFirestore(doc.data() as Map<String, dynamic>, doc.id));
+        }
+
+        lastTourDoc = snapshot.docs.last;
+      }
+    } catch (e) {
+      print('Error loading more tours: $e');
+    } finally {
+      loadingMoreTours.value = false;
     }
   }
 
@@ -158,5 +288,19 @@ class TourismeController extends GetxController {
   void setInterest(String value) {
     selectedInterest.value = value;
     update();
+  }
+
+  // Check if we need to load more spots (for infinite scrolling)
+  void checkAndLoadMoreSpots() {
+    if (!loadingMoreSpots.value && hasMoreSpots.value) {
+      loadMoreTouristSpots();
+    }
+  }
+
+  // Check if we need to load more tours (for infinite scrolling)
+  void checkAndLoadMoreTours() {
+    if (!loadingMoreTours.value && hasMoreTours.value) {
+      loadMoreTours();
+    }
   }
 }
