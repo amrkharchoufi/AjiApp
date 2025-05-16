@@ -1,0 +1,2 @@
+C:/Users/ayman/Desktop/Dev/flutter/AjiApp/android/app/.cxx/RelWithDebInfo/3e3e3y5f/x86/CMakeFiles/edit_cache.dir
+C:/Users/ayman/Desktop/Dev/flutter/AjiApp/android/app/.cxx/RelWithDebInfo/3e3e3y5f/x86/CMakeFiles/rebuild_cache.dir
