@@ -96,10 +96,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: SFDisplay
-  #     fonts:
-  #       - asset: assets/fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF
+  fonts:
+    - family: Nunita
+      fonts:
+        - asset: assets/fonts/nunita/NunitoSans-Regular.ttf
   #       - asset: assets/fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF
   #         style: italic
   #   - family: Trajan Pro
@@ -107,11 +107,6 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-
-  fonts:
-    - family: Nunita
-      fonts:
-        - asset: assets\fonts\nunita\NunitoSans-VariableFont.ttf
-        
+  #      
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

@@ -1,9 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/common/ClientSpace.dart';
-import 'package:ajiapp/services/auth/login_view.dart';
+import 'package:ajiapp/settings/colors.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -14,24 +19,24 @@ Future<void> login(BuildContext context, String email, String password,
     showLoadingDialog(context, 'Signing in...');
 
     // Authenticate user
-    // final UserCredential userCredential =
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+    final UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
 
-    // // Get user data
-    // final String userId = userCredential.user!.uid;
-    // final DocumentSnapshot<Map<String, dynamic>> userSnapshot =
-    //     await FirebaseFirestore.instance.collection('Users').doc(userId).get();
+    //Get user data
+    final String userId = userCredential.user!.uid;
+    final DocumentSnapshot<Map<String, dynamic>> userSnapshot =
+        await FirebaseFirestore.instance.collection('user').doc(userId).get();
 
     // // Handle user data
-    // if (!userSnapshot.exists) {
-    //   loadingDialog.dismiss();
-    //   _showErrorDialog(context, 'User account not found');
-    //   await FirebaseAuth.instance.signOut();
-    //   return;
-    // }
+    if (!userSnapshot.exists || userSnapshot.get("isAdmin") == true) {
+      Navigator.of(context, rootNavigator: true).pop();
+      _showErrorDialog(context, 'User account not found');
+      await FirebaseAuth.instance.signOut();
+      return;
+    }
 
     // Save credentials if 'Remember Me' is checked
     if (rememberme) {
@@ -45,11 +50,7 @@ Future<void> login(BuildContext context, String email, String password,
     // Navigate based on role
     // Dismiss loading dialog
     Navigator.of(context, rootNavigator: true).pop();
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => Clientspace()),
-      (Route<dynamic> route) => false,
-    );
+    Get.toNamed(Routes.PROFILE);
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
       // Dismiss loading dialog
@@ -118,11 +119,7 @@ Future<void> signout(BuildContext context) async {
 
     // Dismiss loading dialog
     Navigator.of(context, rootNavigator: true).pop();
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => LoginView()),
-      (Route<dynamic> route) => false,
-    );
+    Get.back();
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
       // Dismiss loading dialog
@@ -346,4 +343,76 @@ void showLoadingDialog(BuildContext context, String text) {
       ),
     ),
   );
+}
+
+Future<bool> checkIfUserIsLoggedIn() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  return user != null;
+}
+
+Future<void> signup(
+  BuildContext context,
+  String email,
+  String password,
+  String username,
+  String phone,
+) async {
+  try {
+    // Show loading dialog
+    showLoadingDialog(context, 'Signing up...');
+    final auth = FirebaseAuth.instance;
+
+    // Create user with email and password
+    UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    User? user = userCredential.user;
+
+    if (user != null) {
+      // Update display name
+      await user.updateDisplayName(username);
+
+      // Save extra user data in Firestore
+      await FirebaseFirestore.instance.collection('user').doc(user.uid).set({
+        'username': username,
+        'email': email,
+        'phone': phone,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+      Navigator.of(context, rootNavigator: true).pop();
+      Get.back();
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Account created successfully!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+                Get.toNamed(Routes.PROFILE);
+              },
+              child: Text('OK', style: TextStyle(color: ajired)),
+            ),
+          ],
+        ),
+      );
+    }
+  } on FirebaseAuthException catch (e) {
+    String errorMessage = 'An error occurred. Please try again.';
+    if (e.code == 'email-already-in-use') {
+      errorMessage = 'This email is already in use.';
+    } else if (e.code == 'weak-password') {
+      errorMessage = 'The password is too weak.';
+    } else if (e.code == 'invalid-email') {
+      errorMessage = 'Invalid email format.';
+    }
+    Navigator.of(context, rootNavigator: true).pop();
+    _showErrorDialog(context, errorMessage);
+  } catch (e) {
+    debugPrint('Signup error: $e');
+    _showErrorDialog(context, e.toString());
+  }
 }
