@@ -56,6 +56,10 @@ dependencies:
   intl: ^0.19.0 
   google_maps_flutter: ^2.12.1
   location: ^8.0.0
+  webview_flutter: ^4.12.0
+  webview_flutter_android: ^4.6.0
+  webview_flutter_wkwebview: ^3.21.0
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -96,10 +100,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Nunita
-      fonts:
-        - asset: assets/fonts/nunita/NunitoSans-Regular.ttf
+  # fonts:
+  #   - family: Nunita
+  #     fonts:
+  #       - asset: assets/fonts/nunita/NunitoSans-Regular.ttf
   #       - asset: assets/fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF
   #         style: italic
   #   - family: Trajan Pro

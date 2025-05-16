@@ -8,6 +8,7 @@ import 'package:ajiapp/services/auth/common/login_view.dart';
 import 'package:ajiapp/services/common/ClientSpace.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
 import 'package:ajiapp/services/common/available_soon.dart';
+import 'package:ajiapp/services/followyourteam_service/view/team_details_view.dart';
 import 'package:ajiapp/services/home/view/homepage_view.dart';
 import 'package:ajiapp/services/common/notification_view.dart';
 import 'package:ajiapp/services/contacts_service/importantct_view.dart';
@@ -135,6 +136,10 @@ List<GetPage> routes = [
     page: () => FollowYourTeamView(),
   ),
   GetPage(
+    name: Routes.TEAM_DETAILS,
+    page: () => const TeamDetailsView(),
+  ),
+  GetPage(
     name: Routes.CONTACTS,
     page: () => const ImportantctView(),
   ),
@@ -184,6 +189,7 @@ abstract class Routes {
   static const COMING_UP = '/coming-up';
 
   static const FOLLOWYOURTEAM = '/follow-your-team';
+  static const TEAM_DETAILS = '/team-details';
   static const CONTACTS = '/contacts';
   static const SOON = '/soon';
   static const TICKETS = '/tickets';

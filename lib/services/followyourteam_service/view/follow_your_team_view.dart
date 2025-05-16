@@ -141,7 +141,7 @@ class FollowYourTeamView extends StatelessWidget {
                   }),
                   Row(
                     children: [
-                      Obx((){
+                      Obx(() {
                         return Padding(
                           padding: EdgeInsets.only(left: ScreenSize.width / 20),
                           child: Text(
@@ -172,14 +172,13 @@ class FollowYourTeamView extends StatelessWidget {
                               }).toList(),
                             )
                           : Column(
-                              children:  controller.stadiumsinfo.map((stadium) {
+                              children: controller.stadiumsinfo.map((stadium) {
                                 return StadiumWidget(
                                   ImagePath: stadium.imageUrl!,
-                                  MatchTitleaway: stadium.name!, 
+                                  MatchTitleaway: stadium.name!,
                                   Matchplace: stadium.city!,
-                                  width:  ScreenSize.width,
-                                  height:   ScreenSize.height / 6,
-                                  
+                                  width: ScreenSize.width,
+                                  height: ScreenSize.height / 6,
                                 );
                               }).toList(),
                             );

@@ -27,6 +27,7 @@ class OnboardingView extends StatelessWidget {
           child: Container(
             clipBehavior: Clip.hardEdge,
             margin: EdgeInsets.symmetric(
+              vertical: ScreenSize.width * 0.01,
               horizontal: ScreenSize.width * 0.01,
             ),
             decoration: BoxDecoration(
