@@ -19,6 +19,7 @@ class TourismShimmerCards extends StatelessWidget {
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       child: Container(
+        clipBehavior: Clip.hardEdge,
         width: cardWidth,
         height: cardHeight,
         margin: EdgeInsets.symmetric(vertical: 8),

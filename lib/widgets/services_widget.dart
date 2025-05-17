@@ -1,7 +1,7 @@
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/utils/svg_cache.dart';
 import 'package:ajiapp/widgets/service_widget.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,129 +12,89 @@ class ServicesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    List<Widget> Services = [
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.VISIT_MOROCCO);
-        },
-        child: ServiceWidget(
-          golden: false,
-          width: ScreenSize.width / 3.7,
-          height: ScreenSize.width / 3.7,
-          text: "Visit Morocco",
-          customzie: SizeConfig.getBlockSizeHorizontal(6),
-          img: "assets/icons/visit_icon.svg",
-        ),
+
+    // Define services only once to avoid recreating ServiceWidget instances
+    List<Widget> services = [
+      _buildServiceTile(
+        "Visit Morocco",
+        "assets/icons/visit_icon.svg",
+        () => Get.toNamed(Routes.VISIT_MOROCCO),
+        customSize: SizeConfig.getBlockSizeHorizontal(6),
       ),
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.VISA);
-        },
-        child: ServiceWidget(
-          golden: false,
-          width: ScreenSize.width / 3.7,
-          height: ScreenSize.width / 3.7,
-          text: "Visa",
-          img: "assets/icons/Visa_icon.svg",
-        ),
+      _buildServiceTile(
+        "Visa",
+        "assets/icons/Visa_icon.svg",
+        () => Get.toNamed(Routes.VISA),
       ),
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.FOLLOWYOURTEAM);
-        },
-        child: ServiceWidget(
-          golden: false,
-          width: ScreenSize.width / 3.7,
-          height: ScreenSize.width / 3.7,
-          text: "Your team",
-          img: "assets/icons/ball_icon.svg",
-        ),
+      _buildServiceTile(
+        "Your team",
+        "assets/icons/ball_icon.svg",
+        () => Get.toNamed(Routes.FOLLOWYOURTEAM),
       ),
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.ESIM);
-        },
-        child: ServiceWidget(
-          golden: false,
-          width: ScreenSize.width / 3.7,
-          height: ScreenSize.width / 3.7,
-          text: "E-sim",
-          img: "assets/icons/Phone.svg",
-        ),
+      _buildServiceTile(
+        "E-sim",
+        "assets/icons/Phone.svg",
+        () => Get.toNamed(Routes.ESIM),
       ),
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.ACCOMMODATION);
-        },
-        child: ServiceWidget(
-          golden: false,
-          width: ScreenSize.width / 3.7,
-          height: ScreenSize.width / 3.7,
-          text: "Hotels",
-          img: "assets/icons/hotelicon.svg",
-        ),
+      _buildServiceTile(
+        "Hotels",
+        "assets/icons/hotelicon.svg",
+        () => Get.toNamed(Routes.ACCOMMODATION),
       ),
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.CONTACTS);
-        },
-        child: ServiceWidget(
-          golden: false,
-          width: ScreenSize.width / 3.7,
-          height: ScreenSize.width / 3.7,
-          text: "Contacts",
-          img: "assets/icons/contact_icon.svg",
-        ),
+      _buildServiceTile(
+        "Contacts",
+        "assets/icons/contact_icon.svg",
+        () => Get.toNamed(Routes.CONTACTS),
       ),
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.FOOD);
-        },
-        child: ServiceWidget(
-          golden: false,
-          width: ScreenSize.width / 3.7,
-          height: ScreenSize.width / 3.7,
-          text: "Food",
-          customzie: SizeConfig.getBlockSizeHorizontal(9.5),
-          img: "assets/icons/food.svg",
-        ),
+      _buildServiceTile(
+        "Food",
+        "assets/icons/food.svg",
+        () => Get.toNamed(Routes.FOOD),
+        customSize: SizeConfig.getBlockSizeHorizontal(9.5),
       ),
-      GestureDetector(
-          onTap: () {
-            Get.toNamed(Routes.TICKETS);
-          },
-          child: ServiceWidget(
-            golden: false,
-            width: ScreenSize.width / 3.7,
-            height: ScreenSize.width / 3.7,
-            text: "Tickets",
-            customzie: SizeConfig.getBlockSizeHorizontal(9),
-            img: "assets/icons/Ticket_icon.svg",
-          )),
-      GestureDetector(
-        onTap: () {
-          Get.toNamed(Routes.TRANSPORTATION);
-        },
-        child: ServiceWidget(
-            golden: false,
-            width: ScreenSize.width / 3.7,
-            height: ScreenSize.width / 3.7,
-            text: "Transportation",
-            customzie: SizeConfig.getBlockSizeHorizontal(9),
-            img: "assets/icons/car_icon.svg"),
+      _buildServiceTile(
+        "Tickets",
+        "assets/icons/Ticket_icon.svg",
+        () => Get.toNamed(Routes.TICKETS),
+        customSize: SizeConfig.getBlockSizeHorizontal(9),
+      ),
+      _buildServiceTile(
+        "Transportation",
+        "assets/icons/car_icon.svg",
+        () => Get.toNamed(Routes.TRANSPORTATION),
+        customSize: SizeConfig.getBlockSizeHorizontal(9),
       ),
     ];
-    return FadeInUp(
-      duration: Duration(milliseconds: 1600),
+
+    // Calculate how many services to show based on rownb parameter
+    final int servicesToShow =
+        rownb != null ? (rownb! * 3).toInt() : services.length;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: ScreenSize.width / 25),
       child: Wrap(
-          direction: Axis.horizontal,
-          spacing: ScreenSize.width / 25,
-          runSpacing: ScreenSize.width / 25,
-          children: [
-            for (int i = 0; i < rownb! * 3; i++) ...[
-              Services[i],
-            ]
-          ]),
+        direction: Axis.horizontal,
+        spacing: ScreenSize.width / 25,
+        runSpacing: ScreenSize.width / 25,
+        children: services.take(servicesToShow).toList(),
+      ),
+    );
+  }
+
+  // Build an individual service tile with proper performance optimizations
+  Widget _buildServiceTile(String text, String iconPath, VoidCallback onTap,
+      {double? customSize}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: ServiceWidget(
+        key: ValueKey('service-$text'),
+        golden: false,
+        width: ScreenSize.width / 3.7,
+        height: ScreenSize.width / 3.7,
+        text: text,
+        customzie: customSize,
+        img: iconPath,
+      ),
     );
   }
 }
