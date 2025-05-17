@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'firebase_options.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -72,7 +71,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // Use faster transition
-      defaultTransition: Transition.fade,
+      // defaultTransition: Transition.fade,
+      customTransition: ScaleTransitions(),
       transitionDuration: const Duration(milliseconds: 200),
 
       // Optimize GetX for performance

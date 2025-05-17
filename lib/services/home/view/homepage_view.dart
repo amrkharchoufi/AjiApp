@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/home/controller/home_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
@@ -199,33 +196,34 @@ class _HomePageState extends State<HomePage>
         const SizedBox(height: 15),
         SizedBox(
           height: ScreenSize.height / 4,
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            children: const [
-              SizedBox(width: 10),
-              FeatureCard(
-                title: "Follow your team!",
-                subtitle: "Find where your team plays next",
-                backgroundImage:
-                    AssetImage('assets/images/follow_featured.jpg'),
-                description: 'Learn More',
-              ),
-              FeatureCard(
-                title: "Get your E-sim",
-                subtitle: "Stay connected with inwi e-sim",
-                backgroundImage: AssetImage('assets/images/sim.jpg'),
-                description: 'Learn More',
-              ),
-              FeatureCard(
-                title: "Morroco vs Comoros",
-                subtitle: "Dec,21,2025 at 18:00",
-                backgroundImage: AssetImage('assets/images/matchday.jpg'),
-                description: 'Learn More',
-              ),
-              SizedBox(width: 10),
-            ],
+            child: Row(
+              spacing: ScreenSize.width/20,
+              children: const [
+                SizedBox(width: 10),
+                FeatureCard(
+                  title: "Follow your team!",
+                  subtitle: "Find where your team plays next",
+                  backgroundImage:
+                      AssetImage('assets/images/follow_featured.jpg'),
+                  description: 'Learn More',
+                ),
+                FeatureCard(
+                  title: "Get your E-sim",
+                  subtitle: "Stay connected with inwi e-sim",
+                  backgroundImage: AssetImage('assets/images/sim.jpg'),
+                  description: 'Learn More',
+                ),
+                FeatureCard(
+                  title: "Morroco vs Comoros",
+                  subtitle: "Dec,21,2025 at 18:00",
+                  backgroundImage: AssetImage('assets/images/matchday.jpg'),
+                  description: 'Learn More',
+                ),
+                SizedBox(width: 10),
+              ],
+            ),
           ),
         ),
       ],
@@ -257,36 +255,37 @@ class _HomePageState extends State<HomePage>
         const SizedBox(height: 15),
         SizedBox(
           height: ScreenSize.height / 4,
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
+          child:SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            children: [
-              const SizedBox(width: 10),
-              Matchwidget(
-                key: const ValueKey('match1'),
-                width: ScreenSize.width / 1.3,
-                height: ScreenSize.height / 4,
-                ImagePath: "assets/images/upcomingpic1.jpg",
-                MatchTitleaway: "Comoros",
-                MatchTitlehome: "Morocco",
-                MatchDate: "Sunday, Dec 21 \n18:00",
-                Matchplace: "Sport Complexe Prince",
-                Price: "600",
-              ),
-              Matchwidget(
-                key: const ValueKey('match2'),
-                width: ScreenSize.width / 1.3,
-                height: ScreenSize.height / 4,
-                ImagePath: "assets/images/upcomingpic2.jpg",
-                MatchTitleaway: "Zambia",
-                MatchTitlehome: "Mali",
-                MatchDate: "Sunday, Dec 21 \n18:00",
-                Matchplace: "Sport Complexe Prince",
-                Price: "600",
-              ),
-              const SizedBox(width: 10),
-            ],
+            child: Row(
+             spacing: ScreenSize.width/20,
+              children: [
+                const SizedBox(width: 10),
+                Matchwidget(
+                  key: const ValueKey('match1'),
+                  width: ScreenSize.width / 1.3,
+                  height: ScreenSize.height / 4,
+                  ImagePath: "assets/images/upcomingpic1.jpg",
+                  MatchTitleaway: "Comoros",
+                  MatchTitlehome: "Morocco",
+                  MatchDate: "Sunday, Dec 21 \n18:00",
+                  Matchplace: "Sport Complexe Prince",
+                  Price: "600",
+                ),
+                Matchwidget(
+                  key: const ValueKey('match2'),
+                  width: ScreenSize.width / 1.3,
+                  height: ScreenSize.height / 4,
+                  ImagePath: "assets/images/upcomingpic2.jpg",
+                  MatchTitleaway: "Zambia",
+                  MatchTitlehome: "Mali",
+                  MatchDate: "Sunday, Dec 21 \n18:00",
+                  Matchplace: "Sport Complexe Prince",
+                  Price: "600",
+                ),
+                const SizedBox(width: 10),
+              ],
+            ),
           ),
         ),
       ],
@@ -304,11 +303,11 @@ class _HomePageState extends State<HomePage>
         const SizedBox(height: 15),
         SizedBox(
           height: ScreenSize.height / 3.8,
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
+            child:SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            children: const [
+            child: Row(
+             spacing: ScreenSize.width/20,
+              children: [
               SizedBox(width: 10),
               SiteCard(
                 title: "Mausoleum of Mohammed V",
@@ -325,6 +324,7 @@ class _HomePageState extends State<HomePage>
               SizedBox(width: 10),
             ],
           ),
+        )
         ),
       ],
     );

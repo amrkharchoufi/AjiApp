@@ -9,7 +9,6 @@ import 'package:ajiapp/services/common/ClientSpace.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
 import 'package:ajiapp/services/common/available_soon.dart';
 import 'package:ajiapp/services/followyourteam_service/view/team_details_view.dart';
-import 'package:ajiapp/services/home/view/homepage_view.dart';
 import 'package:ajiapp/services/common/notification_view.dart';
 import 'package:ajiapp/services/contacts_service/importantct_view.dart';
 import 'package:ajiapp/services/e-sim_service/view/e-sim_view.dart';
@@ -67,7 +66,7 @@ List<GetPage> routes = [
   // Home routes
   GetPage(
     name: Routes.HOME,
-    page: () => const HomePage(),
+    page: () => const Clientspace(),
   ),
 
   // Services routes
@@ -156,6 +155,7 @@ List<GetPage> routes = [
 abstract class Routes {
   // Onboarding and splash routes
   static const SPLASH = '/splash';
+  static const SPLASH1 = '/splash1';
   static const ONBOARDING = '/onboarding';
 
   // Auth routes

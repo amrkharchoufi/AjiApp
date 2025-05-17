@@ -50,6 +50,7 @@ Future<void> login(BuildContext context, String email, String password,
     // Navigate based on role
     // Dismiss loading dialog
     Navigator.of(context, rootNavigator: true).pop();
+    Get.back();
     Get.toNamed(Routes.PROFILE);
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
@@ -380,6 +381,7 @@ Future<void> signup(
         'email': email,
         'phone': phone,
         'createdAt': FieldValue.serverTimestamp(),
+        'isAdmin': false
       });
       Navigator.of(context, rootNavigator: true).pop();
       Get.back();

@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 /// A utility class for optimizing image loading and caching
 class ImageCacheManager {
@@ -55,8 +54,8 @@ class ImageCacheManager {
       width: width,
       height: height,
       fit: fit,
-      cacheWidth: width != null ? width.toInt() : null,
-      cacheHeight: height != null ? height.toInt() : null,
+      cacheWidth: width?.toInt(),
+      cacheHeight: height?.toInt(),
       filterQuality: FilterQuality.medium,
     );
   }

@@ -59,7 +59,7 @@ class VisitMorrocoCard1 extends StatelessWidget {
                 ? CachedNetworkImage(
                     imageUrl: spot.imageUrl,
                     fit: BoxFit.cover,
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     placeholder: (context, url) => Center(
                       child: CircularProgressIndicator(),
                     ),

@@ -40,6 +40,17 @@ class WithVisa extends StatelessWidget {
                     controller.selectedvisa.Imageurl,
                     width: ScreenSize.width / 4.5,
                     height: ScreenSize.width / 4.5,
+                    // placeholderBuilder: (context) => Shimmer.fromColors(
+                    //   baseColor: Colors.grey.shade300,
+                    //   highlightColor: Colors.grey.shade100,
+                    //   child: Container(
+                    //     width: ScreenSize.width / 4.5,
+                    //     height: ScreenSize.width / 4.5,
+                    //     decoration: BoxDecoration(
+                    //       shape: BoxShape.circle,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                   SizedBox(
                     width: ScreenSize.width / 30,

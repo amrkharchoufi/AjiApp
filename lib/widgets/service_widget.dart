@@ -31,6 +31,7 @@ class ServiceWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 2,

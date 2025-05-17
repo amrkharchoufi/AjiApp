@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:ajiapp/services/followyourteam_service/controller/fixture_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
@@ -45,14 +47,16 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
         ),
         child: Stack(
           children: [
-            Column(
-              children: [
-                MyappbarWidget(title: "Follow Your Team"),
-                _buildTabSelector(),
-                _buildSearchBar(),
-                _buildContentHeader(),
-                _buildContentBody(),
-              ],
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  MyappbarWidget(title: "Follow Your Team"),
+                  _buildTabSelector(),
+                  _buildSearchBar(),
+                  _buildContentHeader(),
+                  _buildContentBody(),
+                ],
+              ),
             ),
             MyappbarWidget(title: "Follow Your Team"),
           ],
@@ -169,26 +173,24 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
 
   // Build the main content body
   Widget _buildContentBody() {
-    return Expanded(
-      child: Obx(() {
-        // Show loading indicator if loading initial data
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        // Show error message if there's an error
-        else if (controller.error.isNotEmpty) {
-          return Center(child: Text(controller.error.value));
-        }
-
-        // Show content based on selected tab
-        else {
-          return controller.selectedIndex.value
-              ? _buildMatchesList()
-              : _buildStadiumsList();
-        }
-      }),
-    );
+    return Obx(() {
+      // Show loading indicator if loading initial data
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+    
+      // Show error message if there's an error
+      else if (controller.error.isNotEmpty) {
+        return Center(child: Text(controller.error.value));
+      }
+    
+      // Show content based on selected tab
+      else {
+        return controller.selectedIndex.value
+            ? _buildMatchesList()
+            : _buildStadiumsList();
+      }
+    });
   }
 
   // Build the list of matches with optimization
@@ -200,17 +202,18 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
         return const Center(child: Text("No matches found"));
       }
 
-      return ListView.builder(
-        controller: _scrollController,
-        physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: fixtures.length,
-        itemBuilder: (context, index) {
-          // Return match widget with unique key for better performance
-          return MatchWidget(
-            key: ValueKey(fixtures[index].id),
-            fixture: fixtures[index],
-          );
-        },
+      return Column(
+        children: [
+          ...List.generate(
+            fixtures.length,
+            (index) {
+              return MatchWidget(
+                key: ValueKey(fixtures[index].id),
+                fixture: fixtures[index],
+              );
+            },
+          ),
+        ],
       );
     });
   }

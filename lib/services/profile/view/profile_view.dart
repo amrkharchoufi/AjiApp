@@ -1,8 +1,8 @@
 import 'package:ajiapp/backend/authentification_functions.dart';
+import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/profile/controller/profile_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/services/common/notification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,15 +14,11 @@ class ProfileView extends StatelessWidget {
     final ProfileController controller = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: beige,
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => NotificationView(),
-                ),
-              );
+              Get.offNamed(Routes.NOTIFICATION);
             },
             icon: Icon(
               Icons.notifications_outlined,
@@ -134,14 +130,14 @@ class ProfileView extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  "City: ",
+                                  "Country: ",
                                   style: TextStyle(
                                       color: ajired,
                                       fontSize: ScreenSize.width / 30,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  controller.currentuser.city,
+                                  controller.currentuser.country,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: ScreenSize.width / 30,

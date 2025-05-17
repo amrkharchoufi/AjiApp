@@ -83,7 +83,7 @@ class VisitMoroccoHome extends StatelessWidget {
           SizedBox(
             height: ScreenSize.width / 40,
           ),
-          Container(
+          SizedBox(
             height: ScreenSize.height / 2.3,
             child: NotificationListener<ScrollNotification>(
               onNotification: (ScrollNotification scrollInfo) {
@@ -165,7 +165,7 @@ class VisitMoroccoHome extends StatelessWidget {
           SizedBox(
             height: ScreenSize.width / 40,
           ),
-          Container(
+          SizedBox(
             height: ScreenSize.height / 2.3,
             child: NotificationListener<ScrollNotification>(
               onNotification: (ScrollNotification scrollInfo) {

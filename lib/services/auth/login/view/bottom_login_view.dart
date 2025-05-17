@@ -4,7 +4,6 @@ import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/auth/common/forgotpassword_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class LoginBottomSheetView extends StatefulWidget {
@@ -43,8 +42,6 @@ class _LoginBottomSheetViewState extends State<LoginBottomSheetView> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset("assets/images/ajiapplogo.svg",
-                  width: ScreenSize.width / 3, height: ScreenSize.width / 3),
               const SizedBox(height: 10),
               Text(
                 'Login with email address',

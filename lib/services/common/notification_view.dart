@@ -1,7 +1,8 @@
+import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/services/profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NotificationView extends StatefulWidget {
   const NotificationView({super.key});
@@ -29,11 +30,7 @@ class _NotificationViewState extends State<NotificationView> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => ProfileView(),
-                ),
-              );
+              Get.offNamed(Routes.PROFILE);
             },
             icon: Icon(
               Icons.account_circle_outlined,

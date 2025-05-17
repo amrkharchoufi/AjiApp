@@ -2,7 +2,6 @@ import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SignupBottomSheetView extends StatefulWidget {
   const SignupBottomSheetView({super.key});
@@ -35,8 +34,6 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset("assets/images/ajiapplogo.svg",
-                  width: ScreenSize.width / 3, height: ScreenSize.width / 3),
               const SizedBox(height: 10),
               Text(
                 'Create an account',
@@ -63,6 +60,7 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
                       controller: _phone,
                       icon: Icons.phone_outlined,
                       validatorText: '*Phone number required',
+                      Keyboardtype: TextInputType.phone
                     ),
                     const SizedBox(height: 15),
                     _buildTextField(
@@ -166,6 +164,7 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
   Widget _buildTextField({
     required String label,
     required TextEditingController controller,
+    Keyboardtype=TextInputType.text,
     required IconData icon,
     required String validatorText,
   }) {
@@ -173,6 +172,7 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
       controller: controller,
       validator: (value) =>
           value == null || value.isEmpty ? validatorText : null,
+      keyboardType: Keyboardtype,
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon),

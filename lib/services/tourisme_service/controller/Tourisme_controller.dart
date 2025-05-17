@@ -139,7 +139,7 @@ class TourismeController extends GetxController {
 
   // Load more tourist spots
   Future<void> loadMoreTouristSpots() async {
-    if (!hasMoreSpots.value || loadingMoreSpots.value) return;
+    if (!hasMoreSpots.value || loadingMoreSpots.value || touristSpots.length>=10) return;
 
     try {
       loadingMoreSpots.value = true;
@@ -212,7 +212,7 @@ class TourismeController extends GetxController {
 
   // Load more tours
   Future<void> loadMoreTours() async {
-    if (!hasMoreTours.value || loadingMoreTours.value) return;
+    if (!hasMoreTours.value || loadingMoreTours.value || tours.length>6) return;
 
     try {
       loadingMoreTours.value = true;

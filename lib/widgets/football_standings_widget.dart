@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ajiapp/settings/colors.dart';
@@ -34,12 +36,6 @@ class FootballStandingsWidget extends GetWidget<TeamDetailsController> {
             SizedBox(height: 16),
             Text(controller.standingsError.value,
                 style: TextStyle(color: ajired)),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: controller.fetchStandings,
-              style: ElevatedButton.styleFrom(backgroundColor: ajired),
-              child: Text('Try Again', style: TextStyle(color: Colors.white)),
-            )
           ],
         ));
       }
@@ -183,73 +179,73 @@ class FootballStandingsWidget extends GetWidget<TeamDetailsController> {
     return relevantGroups;
   }
 
-  Widget _buildLeagueHeader() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          if (controller.leagueInfo.value!['logo'] != null)
-            CachedNetworkImage(
-              imageUrl: controller.leagueInfo.value!['logo'],
-              width: 40,
-              height: 40,
-              placeholder: (context, url) => Container(
-                width: 40,
-                height: 40,
-                color: Colors.grey[200],
-              ),
-              errorWidget: (context, url, error) => Icon(Icons.sports_soccer),
-            ),
-          SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  controller.leagueInfo.value!['name'] ?? 'Unknown League',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  '${controller.leagueInfo.value!['country'] ?? 'Unknown'} - Season ${controller.leagueInfo.value!['season'] ?? ''}',
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (controller.leagueInfo.value!['flag'] != null)
-            CachedNetworkImage(
-              imageUrl: controller.leagueInfo.value!['flag'],
-              width: 30,
-              height: 20,
-              placeholder: (context, url) => Container(
-                width: 30,
-                height: 20,
-                color: Colors.grey[200],
-              ),
-              errorWidget: (context, url, error) => Icon(Icons.flag),
-            ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildLeagueHeader() {
+  //   return Container(
+  //     margin: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+  //     padding: EdgeInsets.all(12),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(12),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.black.withOpacity(0.1),
+  //           blurRadius: 4,
+  //           offset: Offset(0, 2),
+  //         ),
+  //       ],
+  //     ),
+  //     child: Row(
+  //       children: [
+  //         if (controller.leagueInfo.value!['logo'] != null)
+  //           CachedNetworkImage(
+  //             imageUrl: controller.leagueInfo.value!['logo'],
+  //             width: 40,
+  //             height: 40,
+  //             placeholder: (context, url) => Container(
+  //               width: 40,
+  //               height: 40,
+  //               color: Colors.grey[200],
+  //             ),
+  //             errorWidget: (context, url, error) => Icon(Icons.sports_soccer),
+  //           ),
+  //         SizedBox(width: 12),
+  //         Expanded(
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text(
+  //                 controller.leagueInfo.value!['name'] ?? 'Unknown League',
+  //                 style: TextStyle(
+  //                   fontWeight: FontWeight.bold,
+  //                   fontSize: 16,
+  //                 ),
+  //               ),
+  //               Text(
+  //                 '${controller.leagueInfo.value!['country'] ?? 'Unknown'} - Season ${controller.leagueInfo.value!['season'] ?? ''}',
+  //                 style: TextStyle(
+  //                   color: Colors.grey[600],
+  //                   fontSize: 14,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         if (controller.leagueInfo.value!['flag'] != null)
+  //           CachedNetworkImage(
+  //             imageUrl: controller.leagueInfo.value!['flag'],
+  //             width: 30,
+  //             height: 20,
+  //             placeholder: (context, url) => Container(
+  //               width: 30,
+  //               height: 20,
+  //               color: Colors.grey[200],
+  //             ),
+  //             errorWidget: (context, url, error) => Icon(Icons.flag),
+  //           ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildStandingsTable(List<StandingItem> standings) {
     return Container(
@@ -382,7 +378,7 @@ class FootballStandingsWidget extends GetWidget<TeamDetailsController> {
       int? flex,
       Color? textColor,
       FontWeight? fontWeight,
-      Alignment alignment = Alignment.center}) {
+      }) {
     final textWidget = Text(
       text,
       style: TextStyle(

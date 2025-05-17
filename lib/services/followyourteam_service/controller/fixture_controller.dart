@@ -7,7 +7,7 @@ import 'dart:convert';
 
 class FixtureController extends GetxController {
   final int leagueid = 6;
-  final int season = 2021;
+  final int season = 2025;
   final String api_token = "eb019172e018ad81e65c44fa21d24227";
 
   // Data containers
