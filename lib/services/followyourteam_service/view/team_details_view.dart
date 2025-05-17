@@ -2,7 +2,7 @@ import 'package:ajiapp/services/followyourteam_service/controller/team_details_c
 import 'package:ajiapp/services/followyourteam_service/model/fixture_model.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/widgets/footballstandingswebview.dart';
+import 'package:ajiapp/widgets/football_standings_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -100,17 +100,19 @@ class TeamDetailsView extends StatelessWidget {
                               margin: EdgeInsets.only(top: 10),
                               child: Obx(
                                 () => controller.tabIndex.value == 0
-                                    ? SingleChildScrollView(
-                                        child: FootballStandingsWidget(
-                                          token: controller.api_token,
-                                          season: controller.season,
-                                          leagueid: controller.leagueid,
-                                          fixture: controller.fixture,
-                                        ),
-                                      )
+                                    ? FootballStandingsWidget()
                                     : SizedBox(
-                                        child: Text(
-                                            "The line up will be displayed once it is available."),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Text(
+                                            "The line up will be displayed once it is available.",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.grey[700],
+                                            ),
+                                          ),
+                                        ),
                                       ),
                               ),
                             ),
