@@ -1,56 +1,61 @@
+import 'package:ajiapp/services/accomodation_service/controller/hotel_controller.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/widgets/hotel_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:ajiapp/widgets/section_header.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AccomodationView extends StatefulWidget {
+class AccomodationView extends StatelessWidget {
   const AccomodationView({super.key});
 
   @override
-  State<AccomodationView> createState() => _AccomodationViewState();
-}
-
-class _AccomodationViewState extends State<AccomodationView> {
-  final List<String> cities = [
-    "Rabat",
-    "Sale",
-    "Casablanca",
-    "Marrakech",
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    final HotelController controller = Get.put(HotelController());
     ScreenSize.init(context);
+
     return Scaffold(
-        body: Container(
-      width: ScreenSize.width,
-      height: ScreenSize.height,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/background.png"),
-          fit: BoxFit.cover,
+      body: Container(
+        width: ScreenSize.width,
+        height: ScreenSize.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
+        child:
+            Stack(
               children: [
-                MyappbarWidget(
-                  title: "Hotels",
-                ),
-                SizedBox(
-                  height: ScreenSize.height / 120,
-                ),
-                Column(children: [SectionHeader(title: "Recommanded")]),
+                Obx(() {
+                  if (controller.isloading.value) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return SingleChildScrollView(
+                    
+                      child: Column(
+                        spacing: ScreenSize.width/20,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          MyappbarWidget(title: "Hotels"),
+                          SectionHeader(title: "Recommanded"),
+                          ...controller.hotels.map(
+                            (hotel) => HotelWidget(hotel: hotel),
+                          ),
+                          SizedBox(height: 20), // For padding at bottom
+                        ],
+                      ),
+                    );
+                  }
+                }),
+                MyappbarWidget(title: "Hotels"),
               ],
             ),
-          ),
-          MyappbarWidget(
-            title: "Hotels",
-          ),
-        ],
+            
+      
       ),
-    ));
+    );
   }
 }

@@ -1,13 +1,10 @@
-import 'package:ajiapp/services/common/Map_view.dart';
-import 'package:ajiapp/settings/colors.dart';
+// import 'package:ajiapp/services/common/Map_view.dart';
+// import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:ajiapp/widgets/available%20_soon_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../widgets/featured_section.dart';
-import '../../widgets/delivery_section.dart';
-import '../../widgets/restaurant_section.dart';
-
+// import 'package:get/get.dart';
 class FoodHomePage extends StatelessWidget {
   const FoodHomePage({super.key});
 
@@ -15,18 +12,18 @@ class FoodHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: ajired,
-          onPressed: () {
-            Get.to(MapView());
-          },
-          label:
-              const Text("View on Map", style: TextStyle(color: Colors.white)),
-          icon: const Icon(
-            Icons.map,
-            color: Colors.white,
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton.extended(
+        //   backgroundColor: ajired,
+        //   onPressed: () {
+        //     Get.to(MapView());
+        //   },
+        //   label:
+        //       const Text("View on Map", style: TextStyle(color: Colors.white)),
+        //   icon: const Icon(
+        //     Icons.map,
+        //     color: Colors.white,
+        //   ),
+        // ),
         body: Container(
           width: ScreenSize.width,
           height: ScreenSize.height,
@@ -36,39 +33,19 @@ class FoodHomePage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Stack(
-            children: [
+          child: 
               SingleChildScrollView(
                 child: Column(
                   children: [
                     MyappbarWidget(
                       title: "Food",
                     ),
-                    SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FeaturedSection(),
-                          DeliverySection(),
-                          RestaurantSection(),
-                          const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(
-                              child: Text("Version 1.1.2",
-                                  style: TextStyle(color: Colors.grey)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    SizedBox(height: ScreenSize.height/5,),
+                    Available_SoonWidget(),
+                    ],
                 ),
               ),
-              MyappbarWidget(
-                title: "Food",
-              ),
-            ],
-          ),
+          
         ));
   }
 }
