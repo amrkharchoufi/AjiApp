@@ -1,43 +1,21 @@
-import 'package:ajiapp/settings/size.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:ajiapp/services/splash/controller/splash_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
-class SplashView extends StatelessWidget {
-  const SplashView({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the splash controller
-    Get.put(SplashController());
-
-    ScreenSize.init(context);
+    Future.delayed(const Duration(seconds: 6), () {
+      Get.put(SplashController());
+    });
 
     return Scaffold(
-      body: Container(
-        width: ScreenSize.width,
-        height: ScreenSize.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/secondbackground.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                "assets/images/ajiapplogo.svg",
-                width: ScreenSize.width / 2,
-                height: ScreenSize.width / 2,
-              ),
-              SizedBox(height: 30),
-              CircularProgressIndicator(),
-            ],
-          ),
-        ),
+      body: SizedBox.expand(
+        child: Lottie.asset('assets/animations/splash_AJIApp.json',
+            fit: BoxFit.fill, frameRate: FrameRate.max),
       ),
     );
   }

@@ -11,6 +11,7 @@ import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
 import 'package:ajiapp/widgets/section_header.dart';
 import 'package:ajiapp/widgets/services_widget.dart';
+import 'package:ajiapp/widgets/shimmer_door_widget.dart';
 import 'package:ajiapp/widgets/sitecard_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage>
                 const SizedBox(height: 30),
 
                 // Featured section - always loaded immediately
-                _buildFeaturedSection(),
+                _buildFeaturedSection(controller),
 
                 // Secondary content - conditionally loaded
                 if (_loadSecondaryContent) ...[
@@ -189,7 +190,7 @@ class _HomePageState extends State<HomePage>
   }
 
   // Build the featured section with optimized content
-  Widget _buildFeaturedSection() {
+  Widget _buildFeaturedSection(HomeController controller) {
     return Column(
       children: [
         const SectionHeader(title: "Featured"),
@@ -198,32 +199,37 @@ class _HomePageState extends State<HomePage>
           height: ScreenSize.height / 4,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Row(
-              spacing: ScreenSize.width/20,
-              children: const [
-                SizedBox(width: 10),
-                FeatureCard(
-                  title: "Follow your team!",
-                  subtitle: "Find where your team plays next",
-                  backgroundImage:
-                      AssetImage('assets/images/follow_featured.jpg'),
-                  description: 'Learn More',
-                ),
-                FeatureCard(
-                  title: "Get your E-sim",
-                  subtitle: "Stay connected with inwi e-sim",
-                  backgroundImage: AssetImage('assets/images/sim.jpg'),
-                  description: 'Learn More',
-                ),
-                FeatureCard(
-                  title: "Morroco vs Comoros",
-                  subtitle: "Dec,21,2025 at 18:00",
-                  backgroundImage: AssetImage('assets/images/matchday.jpg'),
-                  description: 'Learn More',
-                ),
-                SizedBox(width: 10),
-              ],
-            ),
+            child: Obx(() {
+              if (controller.isloading.value) {
+                return Row(
+                  children: List.generate(5, (index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        left: index == 0 ? 10 : ScreenSize.width / 20,
+                        right: index == 4 ? 10 : 0,
+                      ),
+                      child: const ShimmerDoorCard(),
+                    );
+                  }),
+                );
+              } else {
+                return Row(
+                  spacing: ScreenSize.width / 20,
+                  children: [
+                    const SizedBox(width: 10),
+                    ...controller.fts.map((ft) {
+                      return FeatureCard(
+                        title: ft.title,
+                        subtitle: ft.description,
+                        backgroundImage: ft.Imageurl,
+                        description: "Learn More",
+                      );
+                    }),
+                    const SizedBox(width: 10),
+                  ],
+                );
+              }
+            }),
           ),
         ),
       ],
@@ -255,10 +261,10 @@ class _HomePageState extends State<HomePage>
         const SizedBox(height: 15),
         SizedBox(
           height: ScreenSize.height / 4,
-          child:SingleChildScrollView(
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-             spacing: ScreenSize.width/20,
+              spacing: ScreenSize.width / 20,
               children: [
                 const SizedBox(width: 10),
                 Matchwidget(
@@ -302,30 +308,29 @@ class _HomePageState extends State<HomePage>
         ),
         const SizedBox(height: 15),
         SizedBox(
-          height: ScreenSize.height / 3.8,
-            child:SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-             spacing: ScreenSize.width/20,
-              children: [
-              SizedBox(width: 10),
-              SiteCard(
-                title: "Mausoleum of Mohammed V",
-                backgroundImage: AssetImage("assets/images/city1.png"),
+            height: ScreenSize.height / 3.8,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                spacing: ScreenSize.width / 20,
+                children: [
+                  SizedBox(width: 10),
+                  SiteCard(
+                    title: "Mausoleum of Mohammed V",
+                    backgroundImage: AssetImage("assets/images/city1.png"),
+                  ),
+                  SiteCard(
+                    title: "Hassan Tower",
+                    backgroundImage: AssetImage("assets/images/city2.png"),
+                  ),
+                  SiteCard(
+                    title: "Hassan II Mosque",
+                    backgroundImage: AssetImage("assets/images/mosque.png"),
+                  ),
+                  SizedBox(width: 10),
+                ],
               ),
-              SiteCard(
-                title: "Hassan Tower",
-                backgroundImage: AssetImage("assets/images/city2.png"),
-              ),
-              SiteCard(
-                title: "Hassan II Mosque",
-                backgroundImage: AssetImage("assets/images/mosque.png"),
-              ),
-              SizedBox(width: 10),
-            ],
-          ),
-        )
-        ),
+            )),
       ],
     );
   }

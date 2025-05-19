@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:ajiapp/services/accomodation_service/accomodation_view.dart';
+import 'package:ajiapp/services/accomodation_service/view/accomodation_view.dart';
 import 'package:ajiapp/services/auth/common/CreatePassword_view.dart';
 import 'package:ajiapp/services/auth/common/SignUp_view.dart';
 import 'package:ajiapp/services/auth/common/forgotpassword_view.dart';
@@ -28,7 +28,7 @@ import 'package:get/get.dart';
 List<GetPage> routes = [
   GetPage(
     name: Routes.SPLASH,
-    page: () => const SplashView(),
+    page: () => const SplashScreen(),
   ),
   GetPage(
     name: Routes.ONBOARDING,

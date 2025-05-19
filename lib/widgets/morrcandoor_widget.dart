@@ -1,10 +1,11 @@
 import 'package:ajiapp/settings/size.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class FeatureCard extends StatelessWidget {
   final String title;
   final String subtitle;
-  final ImageProvider backgroundImage;
+  final String backgroundImage;
   final String description;
 
   const FeatureCard({
@@ -29,12 +30,12 @@ class FeatureCard extends StatelessWidget {
           child: Stack(
             children: [
               // Background image
-                Positioned.fill(
-  child: Image(
-    image: backgroundImage,
-    fit: BoxFit.cover,
-  ),
-),
+              Positioned.fill(
+                child: CachedNetworkImage(
+                  imageUrl: backgroundImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
 
               // Gradient overlay
               Positioned(
@@ -56,9 +57,9 @@ class FeatureCard extends StatelessWidget {
               ),
               // Text content
               Positioned(
-                bottom:  ScreenSize.width/30,
-                left:  ScreenSize.width/46,
-                right:  ScreenSize.width/80,
+                bottom: ScreenSize.width / 30,
+                left: ScreenSize.width / 46,
+                right: ScreenSize.width / 80,
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: ScreenSize.width / 50),
@@ -97,7 +98,6 @@ class FeatureCard extends StatelessWidget {
                           Text(
                             description,
                             style: TextStyle(
-                        
                               color: Colors.white,
                               fontSize: ScreenSize.width / 30,
                             ),
