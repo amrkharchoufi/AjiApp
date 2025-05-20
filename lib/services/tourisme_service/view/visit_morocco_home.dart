@@ -1,7 +1,8 @@
 // lib/services/tourisme_service/view/visit_morocco_home.dart
+
 import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
+import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/widgets/tourism_shimmer_cards.dart';
 import 'package:ajiapp/widgets/visit_morocco_card2.dart';
 import 'package:ajiapp/widgets/visit_morroco_card1.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,7 @@ class VisitMoroccoHome extends StatelessWidget {
       if (controller.touristSpots.isEmpty &&
           controller.tours.isEmpty &&
           !controller.isLoadingSpots.value &&
-          !controller.isLoadingTours.value &&
-          !controller.showSpotsShimmer.value &&
-          !controller.showToursShimmer.value) {
+          !controller.isLoadingTours.value) {
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -83,56 +82,15 @@ class VisitMoroccoHome extends StatelessWidget {
           SizedBox(
             height: ScreenSize.width / 40,
           ),
+
+          // Tourist spots section with loading indicator
           SizedBox(
             height: ScreenSize.height / 2.3,
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (ScrollNotification scrollInfo) {
-                if (scrollInfo.metrics.pixels ==
-                    scrollInfo.metrics.maxScrollExtent) {
-                  // When user scrolls to the end, check if we need to load more
-                  controller.checkAndLoadMoreSpots();
-                }
-                return true;
-              },
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding:
-                    EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-                child: Row(
-                  children: [
-                    // Show shimmer placeholders while loading
-                    if (controller.showSpotsShimmer.value)
-                      for (int i = 0; i < 3; i++)
-                        Padding(
-                          padding:
-                              EdgeInsets.only(right: ScreenSize.width / 30),
-                          child: TourismShimmerCards(isSpotCard: true),
-                        )
-                    // Show actual data once loaded
-                    else if (controller.touristSpots.isNotEmpty)
-                      for (var spot in controller.touristSpots)
-                        Padding(
-                          padding:
-                              EdgeInsets.only(right: ScreenSize.width / 30),
-                          child: VisitMorrocoCard1(
-                            spot: spot,
-                            designred: false,
-                            width: ScreenSize.width / 1.06,
-                            height: ScreenSize.height / 2.3,
-                          ),
-                        ),
-
-                    // Loading indicator at the end when loading more items
-                    if (controller.loadingMoreSpots.value)
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-                  ],
-                ),
-              ),
-            ),
+            child: controller.isLoadingSpots.value
+                ? _buildLoadingIndicator()
+                : _buildTouristSpotsList(controller),
           ),
+
           SizedBox(
             height: ScreenSize.width / 20,
           ),
@@ -165,61 +123,126 @@ class VisitMoroccoHome extends StatelessWidget {
           SizedBox(
             height: ScreenSize.width / 40,
           ),
+
+          // Tours section with loading indicator
           SizedBox(
             height: ScreenSize.height / 2.3,
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (ScrollNotification scrollInfo) {
-                if (scrollInfo.metrics.pixels ==
-                    scrollInfo.metrics.maxScrollExtent) {
-                  // When user scrolls to the end, check if we need to load more
-                  controller.checkAndLoadMoreTours();
-                }
-                return true;
-              },
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding:
-                    EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-                child: Row(
-                  children: [
-                    // Show shimmer placeholders while loading
-                    if (controller.showToursShimmer.value)
-                      for (int i = 0; i < 3; i++)
-                        Padding(
-                          padding:
-                              EdgeInsets.only(right: ScreenSize.width / 30),
-                          child: TourismShimmerCards(isSpotCard: false),
-                        )
-                    // Show actual data once loaded
-                    else if (controller.tours.isNotEmpty)
-                      for (var tour in controller.tours)
-                        Padding(
-                          padding:
-                              EdgeInsets.only(right: ScreenSize.width / 30),
-                          child: VisitMoroccoCard2(
-                            tour: tour,
-                            designred: false,
-                            width: ScreenSize.width / 1.06,
-                            height: ScreenSize.height / 2.3,
-                          ),
-                        ),
-
-                    // Loading indicator at the end when loading more items
-                    if (controller.loadingMoreTours.value)
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-                  ],
-                ),
-              ),
-            ),
+            child: controller.isLoadingTours.value
+                ? _buildLoadingIndicator()
+                : _buildToursList(controller),
           ),
+
           SizedBox(
             height: ScreenSize.width / 20,
           ),
         ],
       );
     });
+  }
+
+  // Clean loading indicator with brand color
+  Widget _buildLoadingIndicator() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(ajired),
+          ),
+          SizedBox(height: 16),
+          Text(
+            "Loading...",
+            style: TextStyle(
+              color: ajired,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Tourist spots horizontal list
+  Widget _buildTouristSpotsList(TourismeController controller) {
+    return NotificationListener<ScrollNotification>(
+      onNotification: (ScrollNotification scrollInfo) {
+        if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
+          controller.checkAndLoadMoreSpots();
+        }
+        return true;
+      },
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
+        child: Row(
+          children: [
+            if (controller.touristSpots.isNotEmpty)
+              for (var spot in controller.touristSpots)
+                Padding(
+                  padding: EdgeInsets.only(right: ScreenSize.width / 30),
+                  child: VisitMorrocoCard1(
+                    spot: spot,
+                    designred: false,
+                    width: ScreenSize.width / 1.06,
+                    height: ScreenSize.height / 2.3,
+                  ),
+                ),
+
+            // Loading indicator at the end when loading more items
+            if (controller.loadingMoreSpots.value)
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(ajired),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Tours horizontal list
+  Widget _buildToursList(TourismeController controller) {
+    return NotificationListener<ScrollNotification>(
+      onNotification: (ScrollNotification scrollInfo) {
+        if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
+          controller.checkAndLoadMoreTours();
+        }
+        return true;
+      },
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
+        child: Row(
+          children: [
+            if (controller.tours.isNotEmpty)
+              for (var tour in controller.tours)
+                Padding(
+                  padding: EdgeInsets.only(right: ScreenSize.width / 30),
+                  child: VisitMoroccoCard2(
+                    tour: tour,
+                    designred: false,
+                    width: ScreenSize.width / 1.06,
+                    height: ScreenSize.height / 2.3,
+                  ),
+                ),
+
+            // Loading indicator at the end when loading more items
+            if (controller.loadingMoreTours.value)
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(ajired),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
   }
 }

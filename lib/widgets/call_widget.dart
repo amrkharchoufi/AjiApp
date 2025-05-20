@@ -10,13 +10,10 @@ class CallWidget extends StatelessWidget {
   const CallWidget(
       {super.key, required this.name, this.img, required this.number});
 
- Future<void> _launchDialer(String number) async {
+  Future<void> _launchDialer(String number) async {
     final Uri dialUri = Uri(scheme: 'tel', path: number);
-    if (await canLaunchUrl(dialUri)) {
-      await launchUrl(dialUri);
-    } else {
-      throw 'Could not launch $dialUri';
-    }
+
+    await launchUrl(dialUri);
   }
 
   @override

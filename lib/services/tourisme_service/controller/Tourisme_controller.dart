@@ -1,5 +1,4 @@
 // lib/services/tourisme_service/controller/Tourisme_controller.dart
-// ignore_for_file: avoid_print
 
 import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morocco_all.dart';
@@ -18,15 +17,10 @@ class TourismeController extends GetxController {
   final RxList<TouristSpot> touristSpots = <TouristSpot>[].obs;
   final RxList<Tour> tours = <Tour>[].obs;
 
-  // Loading states
+  // Loading states - remove shimmer states and just use loading states
   final RxBool isLoadingCities = true.obs;
   final RxBool isLoadingSpots = true.obs;
   final RxBool isLoadingTours = true.obs;
-
-  // Shimmer display states
-  final RxBool showCitiesShimmer = true.obs;
-  final RxBool showSpotsShimmer = true.obs;
-  final RxBool showToursShimmer = true.obs;
 
   // Error states
   final RxString errorCities = ''.obs;
@@ -64,7 +58,6 @@ class TourismeController extends GetxController {
   Future<void> fetchCities() async {
     try {
       isLoadingCities.value = true;
-      showCitiesShimmer.value = true;
 
       // Add default "All the Country" option
       cities.add(City(
@@ -87,11 +80,6 @@ class TourismeController extends GetxController {
       print(errorCities.value);
     } finally {
       isLoadingCities.value = false;
-
-      // Delay hiding shimmer for smooth transition
-      Future.delayed(Duration(milliseconds: 500), () {
-        showCitiesShimmer.value = false;
-      });
     }
   }
 
@@ -99,7 +87,6 @@ class TourismeController extends GetxController {
   Future<void> fetchInitialTouristSpots() async {
     try {
       isLoadingSpots.value = true;
-      showSpotsShimmer.value = true;
 
       // Clear existing data
       touristSpots.clear();
@@ -129,17 +116,15 @@ class TourismeController extends GetxController {
       print(errorSpots.value);
     } finally {
       isLoadingSpots.value = false;
-
-      // Delay hiding shimmer for smooth transition
-      Future.delayed(Duration(milliseconds: 800), () {
-        showSpotsShimmer.value = false;
-      });
     }
   }
 
-  // Load more tourist spots
+  // The rest of your methods remain unchanged...
+  // loadMoreTouristSpots, fetchInitialTours, loadMoreTours, etc.
   Future<void> loadMoreTouristSpots() async {
-    if (!hasMoreSpots.value || loadingMoreSpots.value || touristSpots.length>=10) return;
+    if (!hasMoreSpots.value ||
+        loadingMoreSpots.value ||
+        touristSpots.length >= 10) return;
 
     try {
       loadingMoreSpots.value = true;
@@ -172,7 +157,6 @@ class TourismeController extends GetxController {
   Future<void> fetchInitialTours() async {
     try {
       isLoadingTours.value = true;
-      showToursShimmer.value = true;
 
       // Clear existing data
       tours.clear();
@@ -202,17 +186,13 @@ class TourismeController extends GetxController {
       print(errorTours.value);
     } finally {
       isLoadingTours.value = false;
-
-      // Delay hiding shimmer for smooth transition
-      Future.delayed(Duration(milliseconds: 1000), () {
-        showToursShimmer.value = false;
-      });
     }
   }
 
   // Load more tours
   Future<void> loadMoreTours() async {
-    if (!hasMoreTours.value || loadingMoreTours.value || tours.length>6) return;
+    if (!hasMoreTours.value || loadingMoreTours.value || tours.length > 6)
+      return;
 
     try {
       loadingMoreTours.value = true;
@@ -240,6 +220,9 @@ class TourismeController extends GetxController {
       loadingMoreTours.value = false;
     }
   }
+
+  // Other filter and search methods remain the same
+  // ...
 
   // Filter spots by city
   List<TouristSpot> getSpotsByCity(String city) {

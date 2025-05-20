@@ -1,7 +1,8 @@
 // lib/services/tourisme_service/view/visit_morocco_all.dart
+
 import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
+import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/widgets/tourism_shimmer_cards.dart';
 import 'package:ajiapp/widgets/visit_morocco_card2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,10 +16,30 @@ class VisitMoroccoAll extends StatelessWidget {
     ScreenSize.init(context);
 
     return Obx(() {
-      // Show empty state message when no data is available and not loading
-      if (controller.tours.isEmpty &&
-          !controller.isLoadingTours.value &&
-          !controller.showToursShimmer.value) {
+      // Show loading indicator
+      if (controller.isLoadingTours.value) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(ajired),
+              ),
+              SizedBox(height: 16),
+              Text(
+                "Loading tours...",
+                style: TextStyle(
+                  color: ajired,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+
+      // Show empty state message when no data is available
+      if (controller.tours.isEmpty) {
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -80,69 +101,62 @@ class VisitMoroccoAll extends StatelessWidget {
             SizedBox(
               height: ScreenSize.width / 40,
             ),
-            // Display shimmer placeholders while loading
-            if (controller.showToursShimmer.value)
-              for (int i = 0; i < 3; i++)
-                Column(
-                  children: [
-                    TourismShimmerCards(isSpotCard: false),
-                    SizedBox(
-                      height: ScreenSize.width / 30,
+
+            // Display tours list
+            NotificationListener<ScrollNotification>(
+              onNotification: (ScrollNotification scrollInfo) {
+                if (scrollInfo.metrics.pixels ==
+                    scrollInfo.metrics.maxScrollExtent) {
+                  // When user scrolls to the end, check if we need to load more
+                  controller.checkAndLoadMoreTours();
+                }
+                return true;
+              },
+              child: Column(
+                children: [
+                  // Display all tours
+                  for (var tour in controller.tours)
+                    Column(
+                      children: [
+                        VisitMoroccoCard2(
+                          tour: tour,
+                          designred: false,
+                          width: ScreenSize.width / 1.06,
+                          height: ScreenSize.height / 2.3,
+                        ),
+                        SizedBox(
+                          height: ScreenSize.width / 30,
+                        ),
+                      ],
                     ),
-                  ],
-                )
-            // Display actual data once loaded
-            else
-              NotificationListener<ScrollNotification>(
-                onNotification: (ScrollNotification scrollInfo) {
-                  if (scrollInfo.metrics.pixels ==
-                      scrollInfo.metrics.maxScrollExtent) {
-                    // When user scrolls to the end, check if we need to load more
-                    controller.checkAndLoadMoreTours();
-                  }
-                  return true;
-                },
-                child: Column(
-                  children: [
-                    // Display all tours
-                    for (var tour in controller.tours)
-                      Column(
-                        children: [
-                          VisitMoroccoCard2(
-                            tour: tour,
-                            designred: false,
-                            width: ScreenSize.width / 1.06,
-                            height: ScreenSize.height / 2.3,
-                          ),
-                          SizedBox(
-                            height: ScreenSize.width / 30,
-                          ),
-                        ],
-                      ),
 
-                    // Loading indicator at the bottom when loading more items
-                    if (controller.loadingMoreTours.value)
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-
-                    // "End of list" indicator when no more items to load
-                    if (!controller.hasMoreTours.value &&
-                        controller.tours.isNotEmpty)
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Text(
-                          "You've reached the end",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                          ),
+                  // Loading indicator at the bottom when loading more items
+                  if (controller.loadingMoreTours.value)
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(ajired),
                         ),
                       ),
-                  ],
-                ),
+                    ),
+
+                  // "End of list" indicator when no more items to load
+                  if (!controller.hasMoreTours.value &&
+                      controller.tours.isNotEmpty)
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text(
+                        "You've reached the end",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                ],
               ),
+            ),
           ],
         ),
       );

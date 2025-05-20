@@ -17,10 +17,10 @@ class ServiceNameWidget extends StatelessWidget {
         Positioned(
           top: 3,
           child: Opacity(
-            opacity: 0.2,
+            opacity: 0.1,
             child: ColorFiltered(
               colorFilter:
-                  const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                  const ColorFilter.mode(Colors.black38, BlendMode.srcIn),
               child: SvgCache.getAsset(
                 "assets/images/custom_header.svg",
                 width: ScreenSize.width,

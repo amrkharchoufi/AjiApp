@@ -1,19 +1,20 @@
 import 'dart:io';
 
+import 'package:ajiapp/init_binding.dart';
 import 'package:ajiapp/routing.dart';
+import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/fonts.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
-
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // This preserves the splash screen until initialization is complete
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Lock orientation for better performance
   await SystemChrome.setPreferredOrientations([
@@ -25,23 +26,14 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Initialize WebView platform
-  _initializeWebView();
 
-  // Run the app - removed precaching as it needs context
+  // Remove the splash screen when initialization is complete
+  FlutterNativeSplash.remove();
+
+  // Run the app
   runApp(const MyApp());
 }
 
-// Initialize WebView platform
-void _initializeWebView() {
-  if (WebViewPlatform.instance == null) {
-    if (Platform.isIOS || Platform.isMacOS) {
-      WebViewPlatform.instance = WebKitWebViewPlatform();
-    } else if (Platform.isAndroid) {
-      WebViewPlatform.instance = AndroidWebViewPlatform();
-    }
-  }
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -51,6 +43,7 @@ class MyApp extends StatelessWidget {
     ScreenSize.init(context);
     return GetMaterialApp(
       title: 'Aji App',
+      initialBinding: InitBindings(),
       theme: ThemeData(
         fontFamily: myFonts.fontFamily,
         // Optimize material animations
@@ -62,8 +55,7 @@ class MyApp extends StatelessWidget {
         ),
         // Use the system's color scheme for better performance
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF98161b),
-        ),
+            seedColor: const Color(0xFF98161b), primary: ajired),
         useMaterial3: true,
       ),
       getPages: routes,

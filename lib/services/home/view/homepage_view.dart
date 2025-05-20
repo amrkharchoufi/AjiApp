@@ -5,7 +5,6 @@ import 'package:ajiapp/services/common/ComingUp_view.dart';
 import 'package:ajiapp/services/common/Discover_view.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
 import 'package:ajiapp/services/common/notification_view.dart';
-import 'package:ajiapp/utils/image_cache_manager.dart';
 import 'package:ajiapp/utils/svg_cache.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
@@ -16,120 +15,64 @@ import 'package:ajiapp/widgets/sitecard_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  // Animation controller for smooth page transitions
-  late AnimationController _animationController;
-  late Animation<double> _opacityAnimation;
-
-  // Lazily load content to improve initial render performance
-  bool _loadSecondaryContent = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Initialize screen dimensions
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScreenSize.init(context);
-      SizeConfig().init(context);
-
-      // Precache images with valid context after widget is built
-      _precacheImages();
-    });
-
-    // Setup animation controller with a shorter duration
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-
-    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeIn,
-      ),
-    );
-
-    // Start the animation
-    _animationController.forward();
-
-    // Load secondary content after initial render is complete
-    Future.delayed(const Duration(milliseconds: 100), () {
-      if (mounted) {
-        setState(() {
-          _loadSecondaryContent = true;
-        });
-      }
-    });
-  }
-
-  // Precache important images to improve performance
-  Future<void> _precacheImages() async {
-    try {
-      await ImageCacheManager.precacheCommonImages(context);
-    } catch (e) {
-      debugPrint('Error precaching images: $e');
-    }
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final HomeController controller = Get.put(HomeController());
+    // Initialize and find the controller
+    
+
+    ScreenSize.init(context);
+    SizeConfig().init(context);
 
     return Scaffold(
-      body: FadeTransition(
-        opacity: _opacityAnimation,
-        child: SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20),
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/background.png"),
-                fit: BoxFit.cover,
+      body: GetBuilder<HomeController>(
+        builder: (controller) => FadeTransition(
+          opacity: controller.opacityAnimation,
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/background.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                // Header section - always loaded immediately
-                _buildHeader(controller, context),
+              child: Column(
+                children: [
+                  // Header section - always loaded immediately
+                  _buildHeader(controller, context),
 
-                const SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
-                // Featured section - always loaded immediately
-                _buildFeaturedSection(controller),
+                  // Featured section - always loaded immediately
+                  _buildFeaturedSection(controller),
 
-                // Secondary content - conditionally loaded
-                if (_loadSecondaryContent) ...[
-                  const SizedBox(height: 20),
-                  _buildServicesSection(),
-                  const SizedBox(height: 20),
-                  _buildComingUpSection(),
-                  const SizedBox(height: 20),
-                  _buildDiscoverSection(),
-                ]
-              ],
+                  // Secondary content - conditionally loaded
+                  Obx(() => controller.loadSecondaryContent.value
+                      ? Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            _buildServicesSection(),
+                            const SizedBox(height: 20),
+                            _buildComingUpSection(),
+                            const SizedBox(height: 20),
+                            _buildDiscoverSection(),
+                          ],
+                        )
+                      : SizedBox())
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
 
   // Build the header section with optimized SVG loading
   Widget _buildHeader(HomeController controller, BuildContext context) {

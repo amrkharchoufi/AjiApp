@@ -1,13 +1,12 @@
 // lib/services/tourisme_service/view/visit_morroco_city.dart
+
 import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/widgets/tourism_shimmer_cards.dart';
 import 'package:ajiapp/widgets/visit_morroco_card1.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
 
 class VisitMoroccoCity extends StatelessWidget {
   final String city;
@@ -26,6 +25,11 @@ class VisitMoroccoCity extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
       child: Obx(() {
+        // Show loading indicator
+        if (controller.isLoadingCities.value) {
+          return _buildLoadingContainer("Loading city information...");
+        }
+
         // Get city data
         final cityData = controller.cities.firstWhere((c) => c.name == city,
             orElse: () => controller.cities.first);
@@ -46,54 +50,44 @@ class VisitMoroccoCity extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    // Show shimmer for image while loading
-                    if (controller.showCitiesShimmer.value)
-                      Shimmer.fromColors(
-                        baseColor: Colors.grey.shade300,
-                        highlightColor: Colors.grey.shade100,
-                        child: Container(
-                          height: ScreenSize.height / 4,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(17)),
-                          ),
-                        ),
-                      )
-                    else
-                      ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(17)),
-                        child: _isNetworkImage(cityData.imageUrl)
-                            ? CachedNetworkImage(
-                                imageUrl: cityData.imageUrl,
-                                width: double.infinity,
+                    // City image
+                    ClipRRect(
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(17)),
+                      child: _isNetworkImage(cityData.imageUrl)
+                          ? CachedNetworkImage(
+                              imageUrl: cityData.imageUrl,
+                              width: double.infinity,
+                              height: ScreenSize.height / 4,
+                              fit: BoxFit.cover,
+                              placeholder: (context, url) => Container(
                                 height: ScreenSize.height / 4,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => Container(
-                                  height: ScreenSize.height / 4,
-                                  color: Colors.grey[300],
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
+                                color: Colors.grey[300],
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation<Color>(ajired),
                                   ),
                                 ),
-                                errorWidget: (context, url, error) => Container(
-                                  height: ScreenSize.height / 4,
-                                  color: Colors.grey[300],
-                                  child: Icon(
-                                    Icons.error,
-                                    color: Colors.red,
-                                    size: 50,
-                                  ),
-                                ),
-                              )
-                            : Image.asset(
-                                cityData.imageUrl,
-                                width: double.infinity,
-                                height: ScreenSize.height / 4,
-                                fit: BoxFit.cover,
                               ),
-                      ),
+                              errorWidget: (context, url, error) => Container(
+                                height: ScreenSize.height / 4,
+                                color: Colors.grey[300],
+                                child: Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                  size: 50,
+                                ),
+                              ),
+                            )
+                          : Image.asset(
+                              cityData.imageUrl,
+                              width: double.infinity,
+                              height: ScreenSize.height / 4,
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+
                     NotificationListener<ScrollNotification>(
                       onNotification: (ScrollNotification scrollInfo) {
                         if (scrollInfo.metrics.pixels ==
@@ -168,13 +162,30 @@ class VisitMoroccoCity extends StatelessWidget {
                               ),
                             ),
 
-                            // Display tourist spots for this city
-                            if (controller.showSpotsShimmer.value)
-                              for (int i = 0; i < 3; i++)
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                                  child: TourismShimmerCards(isSpotCard: true),
-                                )
+                            // Display tourist spots for this city with loading
+                            if (controller.isLoadingSpots.value)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 32.0),
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                ajired),
+                                      ),
+                                      SizedBox(height: 16),
+                                      Text(
+                                        "Loading tourist spots...",
+                                        style: TextStyle(
+                                          color: Colors.grey[700],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
                             else if (citySpots.isEmpty)
                               Padding(
                                 padding: EdgeInsets.all(20.0),
@@ -205,8 +216,10 @@ class VisitMoroccoCity extends StatelessWidget {
                             if (controller.loadingMoreSpots.value)
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 16.0),
-                                child:
-                                    Center(child: CircularProgressIndicator()),
+                                child: CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation<Color>(ajired),
+                                ),
                               ),
 
                             // "End of list" indicator when no more items to load
@@ -233,6 +246,36 @@ class VisitMoroccoCity extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+
+  // Helper method for a clean loading container
+  Widget _buildLoadingContainer(String message) {
+    return Container(
+      width: ScreenSize.width,
+      height: ScreenSize.height / 2,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(17),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(ajired),
+            ),
+            SizedBox(height: 16),
+            Text(
+              message,
+              style: TextStyle(
+                color: ajired,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

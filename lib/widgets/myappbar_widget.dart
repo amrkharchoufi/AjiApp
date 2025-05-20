@@ -5,7 +5,7 @@ import 'package:ajiapp/services/profile/view/profile_view.dart';
 import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:flutter/material.dart';
 
-class MyappbarWidget extends StatelessWidget{
+class MyappbarWidget extends StatelessWidget {
   final String title;
   const MyappbarWidget({super.key, required this.title});
 
@@ -23,14 +23,15 @@ class MyappbarWidget extends StatelessWidget{
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => NotificationView()),
               ),
-              icon: Icon(Icons.notifications_outlined, size: ScreenSize.width / 12),
+              icon: Icon(Icons.notifications_outlined,
+                  size: ScreenSize.width / 12),
             ),
             IconButton(
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => ProfileView()),
               ),
-              icon:
-                  Icon(Icons.account_circle_outlined, size: ScreenSize.width / 12),
+              icon: Icon(Icons.account_circle_outlined,
+                  size: ScreenSize.width / 12),
             ),
           ],
         ),

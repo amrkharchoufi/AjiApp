@@ -7,32 +7,106 @@ import 'package:get/get.dart';
 class HotelController extends GetxController {
   // Firebase instance
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  var isloading = true.obs;
+  var isLoading = true.obs;
+  var isLoadingMore = false.obs;
+  var hasMoreData = true.obs;
+
+  // Pagination variables
+  final int pageSize = 10; // Increased page size for better performance
+  DocumentSnapshot? lastDocument;
 
   // Observable lists for data
-  final RxList<String> cities = <String>[].obs;
   final RxList<Hotel_model> hotels = <Hotel_model>[].obs;
+
+  // Throttle for scroll loading
+  DateTime? lastLoadTime;
 
   @override
   void onInit() {
-    fetchhotels();
+    fetchHotels();
     super.onInit();
   }
 
-  
-  Future<void> fetchhotels() async {
+  Future<void> fetchHotels() async {
     try {
-      final QuerySnapshot snapshot =
-          await _firestore.collection('accommodations').get();
-      for (var doc in snapshot.docs) {
-        final hotel =
-             Hotel_model.fromFirestore(doc.data() as Map<String, dynamic>);
-        hotels.add(hotel);
+      isLoading.value = true;
+
+      // Initial query with limit
+      final Query query = _firestore
+          .collection('accommodations')
+          .orderBy('title') // Adding ordering for consistent pagination
+          .limit(pageSize);
+
+      final QuerySnapshot snapshot = await query.get();
+
+      if (snapshot.docs.isEmpty) {
+        hasMoreData.value = false;
+      } else {
+        hotels.clear(); // Clear existing data when fetching fresh
+
+        for (var doc in snapshot.docs) {
+          final hotel =
+              Hotel_model.fromFirestore(doc.data() as Map<String, dynamic>);
+          hotels.add(hotel);
+        }
+
+        // Store the last document for pagination
+        if (snapshot.docs.length < pageSize) {
+          hasMoreData.value = false;
+        } else {
+          lastDocument = snapshot.docs.last;
+        }
       }
     } catch (e) {
-      print(e.toString());
+      print("Error fetching hotels: ${e.toString()}");
     } finally {
-      isloading.value = false;
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> loadMoreHotels() async {
+    // Throttle requests - don't allow more than one request per second
+    final now = DateTime.now();
+    if (lastLoadTime != null &&
+        now.difference(lastLoadTime!).inMilliseconds < 1000) {
+      return;
+    }
+    lastLoadTime = now;
+
+    if (!hasMoreData.value || isLoadingMore.value) return;
+
+    try {
+      isLoadingMore.value = true;
+
+      // Query for the next page
+      final Query query = _firestore
+          .collection('accommodations')
+          .orderBy('title') // Same ordering as initial query
+          .startAfterDocument(lastDocument!)
+          .limit(pageSize);
+
+      final QuerySnapshot snapshot = await query.get();
+
+      if (snapshot.docs.isEmpty) {
+        hasMoreData.value = false;
+      } else {
+        for (var doc in snapshot.docs) {
+          final hotel =
+              Hotel_model.fromFirestore(doc.data() as Map<String, dynamic>);
+          hotels.add(hotel);
+        }
+
+        // Update the last document and check if we have more data
+        if (snapshot.docs.length < pageSize) {
+          hasMoreData.value = false;
+        } else {
+          lastDocument = snapshot.docs.last;
+        }
+      }
+    } catch (e) {
+      print("Error loading more hotels: ${e.toString()}");
+    } finally {
+      isLoadingMore.value = false;
     }
   }
 }
