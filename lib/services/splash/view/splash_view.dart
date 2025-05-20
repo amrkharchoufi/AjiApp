@@ -8,7 +8,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 6), () {
+    Future.delayed(const Duration(milliseconds: 3500), () {
       Get.put(SplashController());
     });
 
