@@ -85,7 +85,7 @@ class VisitMoroccoCard2 extends StatelessWidget {
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: ScreenSize.width / 20,
+                      fontSize: ScreenSize.width / 23,
                       fontWeight: FontWeight.bold,
                       color: designred ? Colors.white : Colors.black),
                 ),

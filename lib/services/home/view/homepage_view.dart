@@ -45,12 +45,12 @@ class HomePage extends StatelessWidget {
                 children: [
                   // Header section - always loaded immediately
                   _buildHeader(controller, context),
-
+          
                   const SizedBox(height: 30),
-
+          
                   // Featured section - always loaded immediately
                   _buildFeaturedSection(controller),
-
+          
                   // Secondary content - conditionally loaded
                   Obx(() => controller.loadSecondaryContent.value
                       ? Column(

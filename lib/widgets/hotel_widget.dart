@@ -103,10 +103,10 @@ class HotelWidget extends StatelessWidget {
                       Text(
                         hotel.description,
                         softWrap: true,
-                        maxLines: 6,
+                        maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: ScreenSize.width / 29,
+                            fontSize: ScreenSize.width / 30,
                             color: designred ? Colors.white : Colors.black),
                       ),
                     ],

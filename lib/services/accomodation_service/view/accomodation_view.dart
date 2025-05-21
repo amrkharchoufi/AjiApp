@@ -73,6 +73,7 @@ class AccomodationView extends StatelessWidget {
                           return true;
                         },
                         child: ListView(
+                          physics:ClampingScrollPhysics(),
                           // itemCount: controller.hotels.length +
                           //     (controller.hasMoreData.value ? 1 : 0),
                           // itemBuilder: (context, index) {
