@@ -1,21 +1,45 @@
-import 'package:ajiapp/services/splash/controller/splash_controller.dart';
+import 'package:ajiapp/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 3500), () {
-      Get.put(SplashController());
-    });
+  State<SplashScreen> createState() => _SplashScreenState();
+}
 
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Shorter delay since we already showed the native splash
+    Future.delayed(const Duration(milliseconds: 3500), () {
+      _checkFirstSeen();
+    });
+  }
+
+  Future<void> _checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? seen = prefs.getBool('onboarding_completed');
+
+    if (seen == null || seen == false) {
+      // User has not completed onboarding
+      Get.offAllNamed(Routes.ONBOARDING);
+    } else {
+      // User has completed onboarding
+      Get.offAllNamed(Routes.CLIENT_SPACE);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
         child: Lottie.asset('assets/animations/splash_AJIApp.json',
-            fit: BoxFit.fill, frameRate: FrameRate.max),
+            fit: BoxFit.fill, frameRate: FrameRate.max, repeat: false),
       ),
     );
   }

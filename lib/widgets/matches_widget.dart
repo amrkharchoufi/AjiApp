@@ -104,12 +104,14 @@ class Matchwidget extends StatelessWidget {
                         Icons.location_on_outlined,
                         size: 20,
                       ),
-                      Text(
-                        Matchplace,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: ScreenSize.width / 35,
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Text(
+                          Matchplace,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: ScreenSize.width / 35,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

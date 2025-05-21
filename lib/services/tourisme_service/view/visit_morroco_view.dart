@@ -25,6 +25,7 @@ class VisitMorrocoView extends StatelessWidget {
       child: Stack(
         children: [
           SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
             child: Column(
               children: [
                 MyappbarWidget(

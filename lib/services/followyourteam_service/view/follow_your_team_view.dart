@@ -219,21 +219,22 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
   }
 
   // Build the list of stadiums
-  Widget _buildStadiumsList() {
-    return ListView.builder(
-      physics: const AlwaysScrollableScrollPhysics(),
-      itemCount: controller.stadiumsinfo.length,
-      itemBuilder: (context, index) {
-        final stadium = controller.stadiumsinfo[index];
-        return StadiumWidget(
-          key: ValueKey("stadium-${stadium.name}"),
-          ImagePath: stadium.imageUrl!,
-          MatchTitleaway: stadium.name!,
-          Matchplace: stadium.city!,
-          width: ScreenSize.width,
-          height: ScreenSize.height / 6,
-        );
-      },
-    );
-  }
+Widget _buildStadiumsList() {
+  return ListView.builder(
+    shrinkWrap: true, // ← Ajout important
+    physics: NeverScrollableScrollPhysics(), // ← pour éviter le conflit de scroll
+    itemCount: controller.stadiumsinfo.length,
+    itemBuilder: (context, index) {
+      final stadium = controller.stadiumsinfo[index];
+      return StadiumWidget(
+        key: ValueKey("stadium-${stadium.name}"),
+        ImagePath: stadium.imageUrl ?? '',
+        MatchTitleaway: stadium.name ?? '',
+        Matchplace: stadium.city ?? '',
+        width: ScreenSize.width,
+        height: ScreenSize.height / 6,
+      );
+    },
+  );
+}
 }
