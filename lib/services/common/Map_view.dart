@@ -1,4 +1,5 @@
 import 'package:ajiapp/routing.dart';
+import 'package:ajiapp/services/accomodation_service/controller/hotel_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,27 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  static const LatLng _myhouse = LatLng(33.909292413511956, -6.919676971167564);
+  final HotelController controller = Get.put(HotelController());
+
+  late LatLng _myhouse;
+  Set<Marker> markers = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _myhouse = Get.arguments ?? const LatLng(0, 0);
+
+    markers = controller.positions.asMap().entries.map((entry) {
+      int index = entry.key;
+      LatLng pos = entry.value;
+      return Marker(
+        markerId: MarkerId('marker_$index'),
+        position: pos,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      );
+    }).toSet();
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
@@ -42,8 +63,10 @@ class _MapViewState extends State<MapView> {
         ],
       ),
       body: GoogleMap(
-          initialCameraPosition: CameraPosition(target: _myhouse, zoom: 15),
-          cloudMapId: 'cd31d568b85381c8e142ab30'),
+        initialCameraPosition: CameraPosition(target: _myhouse, zoom: 15),
+        markers: markers,
+        cloudMapId: 'cd31d568b85381c8e142ab30',
+      ),
     );
   }
 }

@@ -25,6 +25,8 @@ import 'package:ajiapp/services/visa_service/view/with_visa.dart';
 import 'package:ajiapp/services/visa_service/view/without_visa_view.dart';
 import 'package:get/get.dart';
 
+import 'services/common/Map_view.dart';
+
 List<GetPage> routes = [
   GetPage(
     name: Routes.SPLASH,
@@ -150,6 +152,10 @@ List<GetPage> routes = [
     name: Routes.TICKETS,
     page: () => const TicketView(),
   ),
+  GetPage(
+    name: Routes.MAP, 
+    page:()=> MapView(),
+    )
 ];
 
 abstract class Routes {
@@ -193,4 +199,5 @@ abstract class Routes {
   static const CONTACTS = '/contacts';
   static const SOON = '/soon';
   static const TICKETS = '/tickets';
+  static const MAP = '/map';
 }

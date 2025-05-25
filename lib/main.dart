@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:ajiapp/init_binding.dart';
 import 'package:ajiapp/routing.dart';

@@ -1,9 +1,11 @@
 // lib/widgets/visit_morroco_card1.dart
+import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HotelWidget extends StatelessWidget {
   // Touristhotel object is required
@@ -103,7 +105,7 @@ class HotelWidget extends StatelessWidget {
                       Text(
                         hotel.description,
                         softWrap: true,
-                        maxLines: 5,
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: ScreenSize.width / 30,
@@ -114,24 +116,24 @@ class HotelWidget extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Icon(
-                      //       Icons.location_on_outlined,
-                      //       size: 20,
-                      //       color: designred ? Colors.white : ajired,
-                      //     ),
-                      //     Text(
-                      //       hotel.city,
-                      //       style: TextStyle(
-                      //         color: designred ? Colors.white : Colors.black,
-                      //         fontSize: ScreenSize.width / 35,
-                      //         fontWeight: FontWeight.bold,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 20,
+                            color: designred ? Colors.white : ajired,
+                          ),
+                          Text(
+                            hotel.city,
+                            style: TextStyle(
+                              color: designred ? Colors.white : Colors.black,
+                              fontSize: ScreenSize.width / 35,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: ScreenSize.width / 50,
                       ),
@@ -161,22 +163,24 @@ class HotelWidget extends StatelessWidget {
                       SizedBox(
                         height: ScreenSize.width / 50,
                       ),
-                        MaterialButton(
-                    onPressed: () {},
-                    color: ajired,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    minWidth: SizeConfig.getBlockSizeHorizontal(35),
-                    height: SizeConfig.getBlockSizeVertical(3),
-                    child: Text(
-                      "View On Map",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
+                      MaterialButton(
+                        onPressed: () {
+                          Get.toNamed(Routes.MAP, arguments: hotel.location);
+                        },
+                        color: ajired,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minWidth: SizeConfig.getBlockSizeHorizontal(35),
+                        height: SizeConfig.getBlockSizeVertical(3),
+                        child: Text(
+                          "View On Map",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
                     ],
                   ),
                 ],

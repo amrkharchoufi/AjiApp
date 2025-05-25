@@ -1,5 +1,7 @@
 // lib/services/tourisme_service/controller/Tourisme_controller.dart
 
+// ignore_for_file: avoid_print
+
 import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morocco_all.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morocco_home.dart';
@@ -124,7 +126,9 @@ class TourismeController extends GetxController {
   Future<void> loadMoreTouristSpots() async {
     if (!hasMoreSpots.value ||
         loadingMoreSpots.value ||
-        touristSpots.length >= 10) return;
+        touristSpots.length >= 10) {
+      return;
+    }
 
     try {
       loadingMoreSpots.value = true;
@@ -191,8 +195,9 @@ class TourismeController extends GetxController {
 
   // Load more tours
   Future<void> loadMoreTours() async {
-    if (!hasMoreTours.value || loadingMoreTours.value || tours.length > 6)
+    if (!hasMoreTours.value || loadingMoreTours.value || tours.length > 6) {
       return;
+    }
 
     try {
       loadingMoreTours.value = true;

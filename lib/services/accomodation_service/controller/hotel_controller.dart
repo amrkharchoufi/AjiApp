@@ -10,7 +10,7 @@ class HotelController extends GetxController {
   var isLoading = true.obs;
   var isLoadingMore = false.obs;
   var hasMoreData = true.obs;
-
+  final List positions = [];
   // Pagination variables
   final int pageSize = 10; // Increased page size for better performance
   DocumentSnapshot? lastDocument;
@@ -47,6 +47,7 @@ class HotelController extends GetxController {
         for (var doc in snapshot.docs) {
           final hotel =
               Hotel_model.fromFirestore(doc.data() as Map<String, dynamic>);
+          positions.add(hotel.location);
           hotels.add(hotel);
         }
 
