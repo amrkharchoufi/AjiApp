@@ -1,4 +1,3 @@
-
 import 'package:ajiapp/init_binding.dart';
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/settings/colors.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
+
 Future<void> main() async {
   // This preserves the splash screen until initialization is complete
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -25,14 +25,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-
   // Remove the splash screen when initialization is complete
   FlutterNativeSplash.remove();
 
   // Run the app
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

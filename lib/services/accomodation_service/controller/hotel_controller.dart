@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -24,6 +22,7 @@ class HotelController extends GetxController {
   @override
   void onInit() {
     fetchHotels();
+    print(positions);
     super.onInit();
   }
 

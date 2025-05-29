@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:ajiapp/routing.dart';
-import 'package:ajiapp/services/common/ClientSpace.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -162,63 +161,63 @@ Future<void> loginWithGoogle(BuildContext context) async {
     // Google Sign-In
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     if (googleUser == null) {
-      // User canceled the sign-in
       if (!context.mounted) return;
-      // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Google sign-in canceled.');
       return;
     }
 
-    // Obtain the GoogleSignIn authentication details
+    // Obtain authentication details
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
-    // Create credential for Firebase
+    // Create Firebase credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
-    // Authenticate user with Firebase
-    // final userCredential =
-    await FirebaseAuth.instance.signInWithCredential(credential);
+    // Sign in to Firebase
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    final user = userCredential.user;
 
-    // // Check if user exists in Firestore
-    // final String userId = userCredential.user!.uid;
-    // final userSnapshot =
-    //     await FirebaseFirestore.instance.collection('Users').doc(userId).get();
+    if (user == null) {
+      Navigator.of(context, rootNavigator: true).pop();
+      _showErrorDialog(context, 'Authentication failed.');
+      return;
+    }
 
-    // if (!userSnapshot.exists) {
-    //   loadingDialog.dismiss();
-    //   _showErrorDialog(context, 'User account not found.');
-    //   await FirebaseAuth.instance.signOut();
-    //   return;
-    // }
+    final userDoc = FirebaseFirestore.instance.collection('user').doc(user.uid);
+    final docSnapshot = await userDoc.get();
+
+    if (!docSnapshot.exists) {
+      // First time login, save user info
+      await userDoc.set({
+        'username': googleUser.displayName ?? '',
+        'email': googleUser.email,
+        'phone': user.phoneNumber ?? '', // usually null from Google
+        'createdAt': FieldValue.serverTimestamp(),
+        'isAdmin': false,
+      });
+    }
+
     if (!context.mounted) return;
-    // Navigate to client space
-    // Dismiss loading dialog
     Navigator.of(context, rootNavigator: true).pop();
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => Clientspace()),
-      (Route<dynamic> route) => false,
-    );
+
+    Get.offNamed(Routes.PROFILE);
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
-      // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
       _handleAuthError(context, e);
     }
   } on FirebaseException catch (e) {
     if (context.mounted) {
-      // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
-      // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }

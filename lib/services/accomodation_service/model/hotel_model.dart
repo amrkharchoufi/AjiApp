@@ -14,8 +14,7 @@ class Hotel_model {
       required this.price,
       required this.description,
       required this.city,
-      required this.location
-      });
+      required this.location});
 
   factory Hotel_model.fromFirestore(Map<String, dynamic> data) {
     return Hotel_model(
@@ -24,9 +23,6 @@ class Hotel_model {
         imageUrl: data['imageUrl'] ?? '',
         price: data["price"] ?? '',
         city: data["location"] ?? '',
-        location: LatLng(
-          /*data["latitude"] ?? 0*/33.9716, 
-          /*data["longitude"] ?? 0*/-6.867)
-        );
+        location: LatLng(-36, 6));
   }
 }
