@@ -2,6 +2,8 @@
 
 // ignore_for_file: avoid_print
 
+import 'dart:developer';
+
 import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morocco_all.dart';
 import 'package:ajiapp/services/tourisme_service/view/visit_morocco_home.dart';
@@ -19,7 +21,7 @@ class TourismeController extends GetxController {
   final RxList<TouristSpot> touristSpots = <TouristSpot>[].obs;
   final RxList<Tour> tours = <Tour>[].obs;
 
-  // Loading states - remove shimmer states and just use loading states
+  // Loading states
   final RxBool isLoadingCities = true.obs;
   final RxBool isLoadingSpots = true.obs;
   final RxBool isLoadingTours = true.obs;
@@ -30,28 +32,19 @@ class TourismeController extends GetxController {
   final RxString errorTours = ''.obs;
 
   // Current view
-  Widget custom = VisitMoroccoHome();
+  final Rx<Widget> custom = Rx<Widget>(VisitMoroccoHome());
 
   // Selected filters
   RxString selectedCity = 'All the Country'.obs;
-  RxString selectedInterest = ''.obs;
-
-  // Pagination variables
-  final int pageSize = 5;
-  DocumentSnapshot? lastTouristSpotDoc;
-  DocumentSnapshot? lastTourDoc;
-  final RxBool hasMoreSpots = true.obs;
-  final RxBool hasMoreTours = true.obs;
-  final RxBool loadingMoreSpots = false.obs;
-  final RxBool loadingMoreTours = false.obs;
+  RxList<String> selectedInterests = <String>[].obs;
 
   @override
   void onInit() {
     // Prioritize loading cities first since they're needed for the filter
     fetchCities().then((_) {
-      // Then load initial tourist spots and tours
-      fetchInitialTouristSpots();
-      fetchInitialTours();
+      // Then load tourist spots and tours
+      fetchTouristSpots();
+      fetchTours();
     });
     super.onInit();
   }
@@ -85,34 +78,22 @@ class TourismeController extends GetxController {
     }
   }
 
-  // Fetch initial tourist spots with pagination
-  Future<void> fetchInitialTouristSpots() async {
+  // Fetch all tourist spots
+  Future<void> fetchTouristSpots() async {
     try {
       isLoadingSpots.value = true;
-
-      // Clear existing data
       touristSpots.clear();
-      lastTouristSpotDoc = null;
-      hasMoreSpots.value = true;
 
-      // Fetch first batch
-      QuerySnapshot snapshot = await _firestore
+      final QuerySnapshot snapshot = await _firestore
           .collection('tourist_spots')
           .orderBy('rating', descending: true)
-          .limit(pageSize)
           .get();
 
-      if (snapshot.docs.isEmpty) {
-        hasMoreSpots.value = false;
-      } else {
-        for (var doc in snapshot.docs) {
-          touristSpots.add(TouristSpot.fromFirestore(
-              doc.data() as Map<String, dynamic>, doc.id));
-        }
-
-        // Store last document for pagination
-        lastTouristSpotDoc = snapshot.docs.last;
+      for (var doc in snapshot.docs) {
+        touristSpots.add(TouristSpot.fromFirestore(
+            doc.data() as Map<String, dynamic>, doc.id));
       }
+      log(touristSpots.length.toString());
     } catch (e) {
       errorSpots.value = 'Error fetching tourist spots: $e';
       print(errorSpots.value);
@@ -121,69 +102,20 @@ class TourismeController extends GetxController {
     }
   }
 
-  // The rest of your methods remain unchanged...
-  // loadMoreTouristSpots, fetchInitialTours, loadMoreTours, etc.
-  Future<void> loadMoreTouristSpots() async {
-    if (!hasMoreSpots.value ||
-        loadingMoreSpots.value ||
-        touristSpots.length >= 10) {
-      return;
-    }
-
-    try {
-      loadingMoreSpots.value = true;
-
-      QuerySnapshot snapshot = await _firestore
-          .collection('tourist_spots')
-          .orderBy('rating', descending: true)
-          .startAfterDocument(lastTouristSpotDoc!)
-          .limit(pageSize)
-          .get();
-
-      if (snapshot.docs.isEmpty) {
-        hasMoreSpots.value = false;
-      } else {
-        for (var doc in snapshot.docs) {
-          touristSpots.add(TouristSpot.fromFirestore(
-              doc.data() as Map<String, dynamic>, doc.id));
-        }
-
-        lastTouristSpotDoc = snapshot.docs.last;
-      }
-    } catch (e) {
-      print('Error loading more spots: $e');
-    } finally {
-      loadingMoreSpots.value = false;
-    }
-  }
-
-  // Fetch initial tours with pagination
-  Future<void> fetchInitialTours() async {
+  // Fetch all tours
+  Future<void> fetchTours() async {
     try {
       isLoadingTours.value = true;
-
-      // Clear existing data
       tours.clear();
-      lastTourDoc = null;
-      hasMoreTours.value = true;
 
-      // Fetch first batch
-      QuerySnapshot snapshot = await _firestore
+      final QuerySnapshot snapshot = await _firestore
           .collection('tours')
           .orderBy('rating', descending: true)
-          .limit(pageSize)
           .get();
 
-      if (snapshot.docs.isEmpty) {
-        hasMoreTours.value = false;
-      } else {
-        for (var doc in snapshot.docs) {
-          tours.add(
-              Tour.fromFirestore(doc.data() as Map<String, dynamic>, doc.id));
-        }
-
-        // Store last document for pagination
-        lastTourDoc = snapshot.docs.last;
+      for (var doc in snapshot.docs) {
+        tours.add(
+            Tour.fromFirestore(doc.data() as Map<String, dynamic>, doc.id));
       }
     } catch (e) {
       errorTours.value = 'Error fetching tours: $e';
@@ -193,48 +125,26 @@ class TourismeController extends GetxController {
     }
   }
 
-  // Load more tours
-  Future<void> loadMoreTours() async {
-    if (!hasMoreTours.value || loadingMoreTours.value || tours.length > 6) {
-      return;
+  // Filter spots by city and interests
+  List<TouristSpot> getSpotsByCityAndInterest(String city) {
+    var filteredSpots = touristSpots.toList();
+
+    // Apply city filter if not "All the Country"
+    if (city != "All the Country") {
+      filteredSpots = filteredSpots.where((spot) => spot.city == city).toList();
     }
 
-    try {
-      loadingMoreTours.value = true;
-
-      QuerySnapshot snapshot = await _firestore
-          .collection('tours')
-          .orderBy('rating', descending: true)
-          .startAfterDocument(lastTourDoc!)
-          .limit(pageSize)
-          .get();
-
-      if (snapshot.docs.isEmpty) {
-        hasMoreTours.value = false;
-      } else {
-        for (var doc in snapshot.docs) {
-          tours.add(
-              Tour.fromFirestore(doc.data() as Map<String, dynamic>, doc.id));
-        }
-
-        lastTourDoc = snapshot.docs.last;
-      }
-    } catch (e) {
-      print('Error loading more tours: $e');
-    } finally {
-      loadingMoreTours.value = false;
+    // Apply interest filter if any interest is selected and it's not "All"
+    if (selectedInterests.isNotEmpty && selectedInterests.first != "All") {
+      filteredSpots = filteredSpots.where((spot) {
+        final spotInterests =
+            spot.interestType.split(",").map((e) => e.trim()).toList();
+        return spotInterests
+            .contains(selectedInterests.first); // Since it's single-select now
+      }).toList();
     }
-  }
 
-  // Other filter and search methods remain the same
-  // ...
-
-  // Filter spots by city
-  List<TouristSpot> getSpotsByCity(String city) {
-    if (city == 'All the Country') {
-      return touristSpots;
-    }
-    return touristSpots.where((spot) => spot.city == city).toList();
+    return filteredSpots;
   }
 
   // Filter tours by starting city
@@ -249,46 +159,69 @@ class TourismeController extends GetxController {
   }
 
   // Get all city names as a list for dropdown
-  List<String> get cityNames => cities.map((city) => city.name).toList();
+  List<String> get cityNames {
+    var names = cities.map((city) => city.name).toList();
+    names.sort((a, b) {
+      if (a == "All the Country") return -1;
+      if (b == "All the Country") return 1;
+      return a.compareTo(b);
+    });
+    return names;
+  }
 
   // Get all interest types
   List<String> get interestTypes {
-    Set<String> interests = {};
-    for (var city in cities) {
-      interests.addAll(city.interests);
+    Set<String> interests = {"All"};
+    for (var spot in touristSpots) {
+      interests.addAll(spot.interestType.split(",").map((e) => e.trim()));
     }
-    return interests.toList();
+    var interestList = interests.toList();
+    interestList.sort((a, b) {
+      if (a == "All") return -1;
+      if (b == "All") return 1;
+      return a.compareTo(b);
+    });
+    return interestList;
+  }
+
+  // Toggle interest selection
+  void toggleInterest(String interest) {
+    if (selectedInterests.contains(interest)) {
+      selectedInterests.remove(interest);
+    } else {
+      selectedInterests
+          .clear(); // Clear previous selection since it's single-select
+      selectedInterests.add(interest);
+    }
+
+    // Update the view with filtered results
+    if (selectedCity.value == "All the Country") {
+      custom.value = VisitMoroccoAll();
+    } else {
+      custom.value = VisitMoroccoCity(city: selectedCity.value);
+    }
+  }
+
+  // Clear all selected interests
+  void clearInterests() {
+    selectedInterests.clear();
+    // Update the view with filtered results
+    if (selectedCity.value == "All the Country") {
+      custom.value = VisitMoroccoAll();
+    } else {
+      custom.value = VisitMoroccoCity(city: selectedCity.value);
+    }
   }
 
   // Change view based on selected city
-  void searchCity(String value) {
+  void filterByCity(String value) {
     selectedCity.value = value;
 
     if (value == "All the Country") {
-      custom = VisitMoroccoAll();
+      custom.value = VisitMoroccoAll();
     } else {
-      custom = VisitMoroccoCity(city: value);
+      custom.value = VisitMoroccoCity(city: value);
     }
     update();
-  }
-
-  // Set selected interest
-  void setInterest(String value) {
-    selectedInterest.value = value;
-    update();
-  }
-
-  // Check if we need to load more spots (for infinite scrolling)
-  void checkAndLoadMoreSpots() {
-    if (!loadingMoreSpots.value && hasMoreSpots.value) {
-      loadMoreTouristSpots();
-    }
-  }
-
-  // Check if we need to load more tours (for infinite scrolling)
-  void checkAndLoadMoreTours() {
-    if (!loadingMoreTours.value && hasMoreTours.value) {
-      loadMoreTours();
-    }
   }
 }

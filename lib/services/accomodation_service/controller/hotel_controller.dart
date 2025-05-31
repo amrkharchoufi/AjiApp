@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -22,7 +24,7 @@ class HotelController extends GetxController {
   @override
   void onInit() {
     fetchHotels();
-    print(positions);
+    log(positions.toString());
     super.onInit();
   }
 
@@ -58,7 +60,7 @@ class HotelController extends GetxController {
         }
       }
     } catch (e) {
-      print("Error fetching hotels: ${e.toString()}");
+      log("Error fetching hotels: ${e.toString()}");
     } finally {
       isLoading.value = false;
     }
@@ -104,7 +106,7 @@ class HotelController extends GetxController {
         }
       }
     } catch (e) {
-      print("Error loading more hotels: ${e.toString()}");
+      log("Error loading more hotels: ${e.toString()}");
     } finally {
       isLoadingMore.value = false;
     }

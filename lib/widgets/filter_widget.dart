@@ -76,9 +76,8 @@ class _ExpandableFilterWidgetState extends State<ExpandableFilterWidget> {
       builder: (context) {
         return Positioned(
           top: position.dy + size.height,
-          right: 10, // Align with the right side like in your design
-          width: MediaQuery.of(context).size.width *
-              0.55, // Adjust width as needed
+          right: 10,
+          width: MediaQuery.of(context).size.width * 0.9,
           child: Material(
             elevation: 4.0,
             borderRadius: BorderRadius.circular(12),
@@ -94,16 +93,39 @@ class _ExpandableFilterWidgetState extends State<ExpandableFilterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+    ScreenSize.init(context);
     return GestureDetector(
       key: _filterButtonKey,
       onTap: _toggleFilterPanel,
-      child: Text(
-        'Filters',
-        style: TextStyle(
-          fontSize: SizeConfig.getBlockSizeHorizontal(6),
-          fontWeight: FontWeight.bold,
-          color: _isFilterVisible == false ? Colors.grey : ajired,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color:
+              _isFilterVisible ? ajired.withOpacity(0.1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: _isFilterVisible ? ajired : Colors.grey,
+            width: 1,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.filter_list,
+              color: _isFilterVisible ? ajired : Colors.grey,
+              size: ScreenSize.width / 22,
+            ),
+            SizedBox(width: 4),
+            Text(
+              'Filters',
+              style: TextStyle(
+                fontSize: ScreenSize.width / 25,
+                fontWeight: FontWeight.w500,
+                color: _isFilterVisible ? ajired : Colors.grey,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -113,129 +135,130 @@ class _ExpandableFilterWidgetState extends State<ExpandableFilterWidget> {
   Widget _buildFilterPanel() {
     return Container(
       padding: const EdgeInsets.all(16),
-      height: SizeConfig.getBlockSizeVertical(50),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Obx(() {
-        final cities = _controller.cityNames;
+        final cities = _controller.cityNames.toList()..sort();
         final interests = _controller.interestTypes;
         final selectedCity = _controller.selectedCity.value;
-        final selectedInterest = _controller.selectedInterest.value;
+        final selectedInterests = _controller.selectedInterests;
 
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // City filter section
-              Text(
-                'City:',
-                style: TextStyle(
-                  fontSize: SizeConfig.getBlockSizeHorizontal(5),
-                  fontWeight: FontWeight.bold,
-                  color: ajired,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // City filter section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'City',
+                  style: TextStyle(
+                    fontSize: ScreenSize.width / 24,
+                    fontWeight: FontWeight.bold,
+                    color: ajired,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              ...cities.map((city) => _buildRadioOption(
-                    title: city,
-                    groupValue: selectedCity,
-                    value: city,
-                    onChanged: (value) {
-                      if (value != null) {
-                        _controller.searchCity(value);
-                        widget.CitySelected(value);
-                        _removeOverlay();
-                        setState(() {
-                          _isFilterVisible = false;
-                        });
-                      }
+                if (selectedCity != "All the Country")
+                  TextButton(
+                    onPressed: () {
+                      widget.CitySelected("All the Country");
+                      _removeOverlay();
+                      setState(() {
+                        _isFilterVisible = false;
+                      });
                     },
-                  )),
-              const Divider(),
+                    child: Text(
+                      'Show All',
+                      style: TextStyle(
+                        fontSize: ScreenSize.width / 30,
+                        color: ajired,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: cities
+                  .map((city) => ChoiceChip(
+                        label: Text(city),
+                        selected: selectedCity == city,
+                        onSelected: (selected) {
+                          if (selected) {
+                            widget.CitySelected(city);
+                            _removeOverlay();
+                            setState(() {
+                              _isFilterVisible = false;
+                            });
+                          }
+                        },
+                        selectedColor: ajired.withOpacity(0.2),
+                        labelStyle: TextStyle(
+                          color: selectedCity == city ? ajired : Colors.black87,
+                          fontSize: ScreenSize.width / 30,
+                        ),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(height: 16),
 
-              // Interest filter section
-              Text(
-                'Interest:',
-                style: TextStyle(
-                  fontSize: SizeConfig.getBlockSizeHorizontal(5),
-                  fontWeight: FontWeight.bold,
-                  color: ajired,
+            // Interest filter section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Interests',
+                  style: TextStyle(
+                    fontSize: ScreenSize.width / 24,
+                    fontWeight: FontWeight.bold,
+                    color: ajired,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              _buildRadioOption(
-                title: "All",
-                groupValue: selectedInterest.isEmpty ? "All" : selectedInterest,
-                value: "All",
-                onChanged: (value) {
-                  _controller.setInterest("");
-                  widget.InterestSelected("");
-                  _removeOverlay();
-                  setState(() {
-                    _isFilterVisible = false;
-                  });
-                },
-              ),
-              ...interests.map((interest) => _buildRadioOption(
-                    title: interest,
-                    groupValue: selectedInterest,
-                    value: interest,
-                    onChanged: (value) {
-                      if (value != null) {
-                        _controller.setInterest(value);
-                        widget.InterestSelected(value);
-                        _removeOverlay();
-                        setState(() {
-                          _isFilterVisible = false;
-                        });
-                      }
+                if (selectedInterests.isNotEmpty)
+                  TextButton(
+                    onPressed: () {
+                      _controller.clearInterests();
                     },
-                  )),
-            ],
-          ),
+                    child: Text(
+                      'Clear All',
+                      style: TextStyle(
+                        fontSize: ScreenSize.width / 30,
+                        color: ajired,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: interests
+                  .map((interest) => FilterChip(
+                        label: Text(interest),
+                        selected: selectedInterests.contains(interest),
+                        onSelected: (selected) {
+                          _controller.toggleInterest(interest);
+                        },
+                        selectedColor: ajired.withOpacity(0.2),
+                        labelStyle: TextStyle(
+                          color: selectedInterests.contains(interest)
+                              ? ajired
+                              : Colors.black87,
+                          fontSize: ScreenSize.width / 30,
+                        ),
+                        checkmarkColor: ajired,
+                      ))
+                  .toList(),
+            ),
+          ],
         );
       }),
-    );
-  }
-
-  // Helper method to build radio option
-  Widget _buildRadioOption({
-    required String title,
-    required String? groupValue,
-    required String value,
-    required Function(String?)? onChanged,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Radio<String>(
-                value: value,
-                groupValue: groupValue,
-                onChanged: onChanged,
-                activeColor: ajired,
-                visualDensity: VisualDensity.compact,
-              ),
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-          // Add a divider after each option
-          const Divider(height: 1),
-        ],
-      ),
     );
   }
 }

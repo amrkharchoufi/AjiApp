@@ -41,7 +41,7 @@ class VisitMoroccoHome extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Please add tourist spots in Firebase",
+                "Please add tourist spots",
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
@@ -164,85 +164,57 @@ class VisitMoroccoHome extends StatelessWidget {
 
   // Tourist spots horizontal list
   Widget _buildTouristSpotsList(TourismeController controller) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: (ScrollNotification scrollInfo) {
-        if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-          controller.checkAndLoadMoreSpots();
-        }
-        return true;
-      },
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-        child: Row(
-          children: [
-            if (controller.touristSpots.isNotEmpty)
-              for (var spot in controller.touristSpots)
-                Padding(
-                  padding: EdgeInsets.only(right: ScreenSize.width / 30),
-                  child: VisitMorrocoCard1(
-                    spot: spot,
-                    designred: false,
-                    width: ScreenSize.width / 1.06,
-                    height: ScreenSize.height / 2.3,
-                  ),
-                ),
-
-            // Loading indicator at the end when loading more items
-            if (controller.loadingMoreSpots.value)
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(ajired),
-                  ),
-                ),
-              ),
-          ],
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) => Row(children: [
+        SizedBox(width: ScreenSize.width / 30),
+        VisitMorrocoCard1(
+          spot: controller.touristSpots[index],
+          designred: false,
+          width: ScreenSize.width / 1.06,
+          height: ScreenSize.height / 2.3,
         ),
-      ),
+        if (index == controller.touristSpots.length - 1)
+          SizedBox(width: ScreenSize.width / 30),
+      ]),
+      itemCount: controller.touristSpots.length,
     );
   }
 
   // Tours horizontal list
   Widget _buildToursList(TourismeController controller) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: (ScrollNotification scrollInfo) {
-        if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-          controller.checkAndLoadMoreTours();
-        }
-        return true;
-      },
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-        child: Row(
-          children: [
-            if (controller.tours.isNotEmpty)
-              for (var tour in controller.tours)
-                Padding(
-                  padding: EdgeInsets.only(right: ScreenSize.width / 30),
-                  child: VisitMoroccoCard2(
-                    tour: tour,
-                    designred: false,
-                    width: ScreenSize.width / 1.06,
-                    height: ScreenSize.height / 2.3,
-                  ),
-                ),
+    // return SingleChildScrollView(
+    //   scrollDirection: Axis.horizontal,
+    //   padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
+    //   child: Row(
+    //     children: [
+    //       if (controller.tours.isNotEmpty)
+    //         for (var tour in controller.tours)
+    //           Padding(
+    //             padding: EdgeInsets.only(right: ScreenSize.width / 30),
+    //             child: VisitMoroccoCard2(
+    //               tour: tour,
+    //               designred: false,
+    //               width: ScreenSize.width / 1.06,
+    //               height: ScreenSize.height / 2.3,
+    //             ),
+    //           ),
+    //     ],
+    //   ),
+    // );
 
-            // Loading indicator at the end when loading more items
-            if (controller.loadingMoreTours.value)
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(ajired),
-                  ),
-                ),
-              ),
-          ],
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: controller.tours.length,
+      itemBuilder: (context, index) => Row(children: [
+        SizedBox(width: ScreenSize.width / 30),
+        VisitMoroccoCard2(
+          tour: controller.tours[index],
+          designred: false,
         ),
-      ),
+        if (index == controller.tours.length - 1)
+          SizedBox(width: ScreenSize.width / 30),
+      ]),
     );
   }
 }

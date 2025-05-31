@@ -57,14 +57,6 @@ class VisitMoroccoAll extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
-                "Please add tours in Firebase",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
-              ),
             ],
           ),
         );
@@ -103,15 +95,7 @@ class VisitMoroccoAll extends StatelessWidget {
             ),
 
             // Display tours list
-            NotificationListener<ScrollNotification>(
-              onNotification: (ScrollNotification scrollInfo) {
-                if (scrollInfo.metrics.pixels ==
-                    scrollInfo.metrics.maxScrollExtent) {
-                  // When user scrolls to the end, check if we need to load more
-                  controller.checkAndLoadMoreTours();
-                }
-                return true;
-              },
+            SingleChildScrollView(
               child: Column(
                 children: [
                   // Display all tours
@@ -128,31 +112,6 @@ class VisitMoroccoAll extends StatelessWidget {
                           height: ScreenSize.width / 30,
                         ),
                       ],
-                    ),
-
-                  // Loading indicator at the bottom when loading more items
-                  if (controller.loadingMoreTours.value)
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(ajired),
-                        ),
-                      ),
-                    ),
-
-                  // "End of list" indicator when no more items to load
-                  if (!controller.hasMoreTours.value &&
-                      controller.tours.isNotEmpty)
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text(
-                        "You've reached the end",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                        ),
-                      ),
                     ),
                 ],
               ),

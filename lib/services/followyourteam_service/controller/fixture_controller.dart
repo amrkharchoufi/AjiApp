@@ -12,7 +12,6 @@ class FixtureController extends GetxController {
 
   // Data containers
   var fixtures = <FixtureSimple>[].obs;
-  var newfixtures = <FixtureSimple>[].obs;
   var searchfixtures = <FixtureSimple>[].obs;
   var stadiums = <String>["Prince Moulay Abdellah Stadium"].obs;
   var stadiumsinfo = <StadiumModel>[
@@ -39,7 +38,7 @@ class FixtureController extends GetxController {
     super.onInit();
   }
 
-  // Optimized fixture fetching without pagination since the API doesn't support it
+  // Direct fixture fetching without batching
   Future<void> fetchFixtures() async {
     try {
       isLoading.value = true;
@@ -58,8 +57,11 @@ class FixtureController extends GetxController {
         final jsonData = jsonDecode(response.body);
         final List<dynamic> fixtureJson = jsonData['response'];
 
-        // Process in batches to avoid UI freezes with large datasets
-        _processFixturesInBatches(fixtureJson);
+        // Process all fixtures at once
+        final allFixtures =
+            fixtureJson.map((json) => FixtureSimple.fromJson(json)).toList();
+        fixtures.addAll(allFixtures);
+        searchfixtures.addAll(allFixtures);
       } else {
         error.value = 'Failed: ${response.statusCode}';
       }
@@ -68,47 +70,6 @@ class FixtureController extends GetxController {
     } finally {
       isLoading.value = false;
     }
-  }
-
-  // Process fixtures in small batches to keep the UI responsive
-  void _processFixturesInBatches(List<dynamic> fixtureJson) {
-    const int batchSize = 10;
-    int processedCount = 0;
-
-    // Process first batch immediately
-    _processFixtureBatch(fixtureJson, 0, batchSize);
-    processedCount += batchSize;
-
-    // Process remaining batches with small delays to avoid blocking UI
-    while (processedCount < fixtureJson.length) {
-      final int nextBatchSize =
-          (processedCount + batchSize <= fixtureJson.length)
-              ? batchSize
-              : fixtureJson.length - processedCount;
-
-      Future.delayed(Duration(milliseconds: 50), () {
-        if (Get.isRegistered<FixtureController>()) {
-          // Check if controller is still active
-          _processFixtureBatch(fixtureJson, processedCount, nextBatchSize);
-        }
-      });
-
-      processedCount += nextBatchSize;
-    }
-  }
-
-  // Process a batch of fixtures
-  void _processFixtureBatch(
-      List<dynamic> fixtureJson, int startIndex, int count) {
-    final endIndex = startIndex + count;
-    if (endIndex > fixtureJson.length) return;
-
-    final batchData = fixtureJson.sublist(startIndex, endIndex);
-    final newFixtures =
-        batchData.map((json) => FixtureSimple.fromJson(json)).toList();
-
-    fixtures.addAll(newFixtures);
-    searchfixtures.addAll(newFixtures);
   }
 
   // Optimized search function
