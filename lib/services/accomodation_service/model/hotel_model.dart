@@ -25,7 +25,7 @@ class Hotel_model {
     description: data['description'] ?? '',
     imageUrl: data['imageUrl'] ?? '',
     price: data["price"]       ?? '',
-    city: data["city"]         ?? '',
+    city: data["location"]         ?? '',
     location: LatLng(
       rawLat.toDouble(),
       rawLng.toDouble(),
