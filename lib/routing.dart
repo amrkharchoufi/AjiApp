@@ -25,7 +25,7 @@ import 'package:ajiapp/services/visa_service/view/with_visa.dart';
 import 'package:ajiapp/services/visa_service/view/without_visa_view.dart';
 import 'package:get/get.dart';
 
-import 'services/common/Map_view.dart';
+import 'services/map_service/view/Map_view.dart';
 
 List<GetPage> routes = [
   GetPage(

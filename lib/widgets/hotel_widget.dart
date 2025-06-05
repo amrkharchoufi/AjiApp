@@ -174,7 +174,7 @@ class HotelWidget extends StatelessWidget {
                         minWidth: SizeConfig.getBlockSizeHorizontal(35),
                         height: SizeConfig.getBlockSizeVertical(3),
                         child: Text(
-                          "View On Map",
+                          "Book Now",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: SizeConfig.getBlockSizeHorizontal(3.5),

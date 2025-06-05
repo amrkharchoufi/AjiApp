@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HotelController extends GetxController {
   // Firebase instance
@@ -10,7 +11,7 @@ class HotelController extends GetxController {
   var isLoading = true.obs;
   var isLoadingMore = false.obs;
   var hasMoreData = true.obs;
-  final List positions = [];
+  final List<LatLng> positions = [];
   // Pagination variables
   final int pageSize = 10; // Increased page size for better performance
   DocumentSnapshot? lastDocument;
@@ -24,9 +25,9 @@ class HotelController extends GetxController {
   @override
   void onInit() {
     fetchHotels();
-    log(positions.toString());
     super.onInit();
   }
+
 
   Future<void> fetchHotels() async {
     try {
@@ -48,7 +49,6 @@ class HotelController extends GetxController {
         for (var doc in snapshot.docs) {
           final hotel =
               Hotel_model.fromFirestore(doc.data() as Map<String, dynamic>);
-          positions.add(hotel.location);
           hotels.add(hotel);
         }
 

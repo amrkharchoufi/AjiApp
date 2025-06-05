@@ -1,3 +1,4 @@
+import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/accomodation_service/controller/hotel_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
@@ -19,6 +20,18 @@ class AccomodationView extends StatelessWidget {
     final horizontalPadding = ScreenSize.width / 30;
 
     return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: ajired,
+          onPressed: () {
+            Get.toNamed(Routes.MAP);
+          },
+          label:
+              const Text("View on Map", style: TextStyle(color: Colors.white)),
+          icon: const Icon(
+            Icons.map,
+            color: Colors.white,
+          ),
+        ),
       body: Container(
         width: ScreenSize.width,
         height: ScreenSize.height,
@@ -101,6 +114,7 @@ class AccomodationView extends StatelessWidget {
                           children: [
                             MyappbarWidget(title: "Hotels"),
                             // Section header outside ListView to prevent it from scrolling
+                            
                             Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: horizontalPadding, vertical: 8),

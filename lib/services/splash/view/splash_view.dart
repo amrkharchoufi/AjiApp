@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? seen = prefs.getBool('onboarding_completed');
 
-    if (seen == null || seen == false) {
+    if (seen == false) {
       // User has not completed onboarding
       Get.offAllNamed(Routes.ONBOARDING);
     } else {
