@@ -1,11 +1,10 @@
-// lib/widgets/visit_morroco_card1.dart
-import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HotelWidget extends StatelessWidget {
   // Touristhotel object is required
@@ -164,8 +163,14 @@ class HotelWidget extends StatelessWidget {
                         height: ScreenSize.width / 50,
                       ),
                       MaterialButton(
-                        onPressed: () {
-                          Get.toNamed(Routes.MAP, arguments: hotel.location);
+                        onPressed: () async {
+                          final url = Uri.parse(hotel.Link);
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url,
+                                mode: LaunchMode.externalApplication);
+                          } else {
+                            Get.snackbar("Error", "Cannot open the link");
+                          }
                         },
                         color: ajired,
                         shape: RoundedRectangleBorder(

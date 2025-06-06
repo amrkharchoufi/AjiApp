@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,7 +14,7 @@ class MapController extends GetxController {
   /// This RxList just duplicates the LatLng positions for convenience.
   final RxList<LatLng> positions = <LatLng>[].obs;
 
-@override
+  @override
   void onInit() {
     fetchallhotels();
     super.onInit();
@@ -35,7 +37,7 @@ class MapController extends GetxController {
         positions.add(hotel.location);
       }
     } catch (e) {
-      print("Error fetching hotels: ${e.toString()}");
+      log("Error fetching hotels: ${e.toString()}");
     } finally {
       isLoading.value = false;
     }

@@ -100,7 +100,8 @@ class _MapViewState extends State<MapView> {
                   position: loc,
                   onTap: () {
                     // Find the corresponding hotel index by matching Lat/Lng
-                    final int hotelIndex = controller.hotels.indexWhere((hotel) {
+                    final int hotelIndex =
+                        controller.hotels.indexWhere((hotel) {
                       return hotel.location.latitude == loc.latitude &&
                           hotel.location.longitude == loc.longitude;
                     });
@@ -166,6 +167,7 @@ class _MapViewState extends State<MapView> {
                             child: HotelMapWidget(
                               hotel_name: hotel.title,
                               Image_link: hotel.imageUrl,
+                              Link: hotel.Link,
                             ),
                           ),
                         ),

@@ -3,11 +3,18 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HotelMapWidget extends StatelessWidget {
   final String hotel_name;
   final String Image_link;
-  const HotelMapWidget({super.key, required this.hotel_name, required this.Image_link});
+  final String Link;
+  const HotelMapWidget(
+      {super.key,
+      required this.hotel_name,
+      required this.Image_link,
+      required this.Link});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +74,14 @@ class HotelMapWidget extends StatelessWidget {
                 ],
               ),
               MaterialButton(
-                onPressed: () {},
+                onPressed: () async {
+                  final url = Uri.parse(Link);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  } else {
+                    Get.snackbar("Error", "Cannot open the link");
+                  }
+                },
                 color: ajired,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(7),
