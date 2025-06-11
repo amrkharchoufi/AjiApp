@@ -165,12 +165,9 @@ class HotelWidget extends StatelessWidget {
                       MaterialButton(
                         onPressed: () async {
                           final url = Uri.parse(hotel.Link);
-                          if (await canLaunchUrl(url)) {
-                            await launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          } else {
-                            Get.snackbar("Error", "Cannot open the link");
-                          }
+
+                          await launchUrl(url,
+                              mode: LaunchMode.externalApplication);
                         },
                         color: ajired,
                         shape: RoundedRectangleBorder(

@@ -58,13 +58,8 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
 
     final url =
         'https://www.google.com/maps/search/?api=1&query=${widget.spot.latitude},${widget.spot.longitude}';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not open maps')),
-      );
-    }
+
+    await launch(url);
   }
 
   @override

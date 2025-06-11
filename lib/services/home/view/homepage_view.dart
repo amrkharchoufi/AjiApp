@@ -21,7 +21,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Initialize and find the controller
-    
 
     ScreenSize.init(context);
     SizeConfig().init(context);
@@ -45,12 +44,12 @@ class HomePage extends StatelessWidget {
                 children: [
                   // Header section - always loaded immediately
                   _buildHeader(controller, context),
-          
+
                   const SizedBox(height: 30),
-          
+
                   // Featured section - always loaded immediately
                   _buildFeaturedSection(controller),
-          
+
                   // Secondary content - conditionally loaded
                   Obx(() => controller.loadSecondaryContent.value
                       ? Column(
@@ -72,7 +71,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
 
   // Build the header section with optimized SVG loading
   Widget _buildHeader(HomeController controller, BuildContext context) {

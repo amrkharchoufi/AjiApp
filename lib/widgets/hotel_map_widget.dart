@@ -76,11 +76,9 @@ class HotelMapWidget extends StatelessWidget {
               MaterialButton(
                 onPressed: () async {
                   final url = Uri.parse(Link);
-                  if (await canLaunchUrl(url)) {
+                
                     await launchUrl(url, mode: LaunchMode.externalApplication);
-                  } else {
-                    Get.snackbar("Error", "Cannot open the link");
-                  }
+                  
                 },
                 color: ajired,
                 shape: RoundedRectangleBorder(
