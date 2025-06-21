@@ -48,8 +48,8 @@ class ClientspaceState extends State<Clientspace> {
       _svgCache[key] = SvgPicture.asset(
         path,
         color: color,
-        width: SizeConfig.getBlockSizeHorizontal(3),
-        height: SizeConfig.getBlockSizeHorizontal(3),
+        width: SizeConfig.getBlockSizeHorizontal(5),
+        height: SizeConfig.getBlockSizeHorizontal(5),
       );
     }
     return _svgCache[key]!;
