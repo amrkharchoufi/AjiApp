@@ -23,13 +23,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? seen = prefs.getBool('onboarding_completed');
+    bool seen = prefs.getBool('onboarding_completed') ?? false;
 
-    if (seen == false) {
-      // User has not completed onboarding
+    if (!seen) {
       Get.offAllNamed(Routes.ONBOARDING);
     } else {
-      // User has completed onboarding
       Get.offAllNamed(Routes.CLIENT_SPACE);
     }
   }
