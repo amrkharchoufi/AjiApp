@@ -51,6 +51,22 @@
 		<string>This app uses your location to show nearby services on the map.</string>
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>This app needs access to your location even when the app is in the background for accurate tracking.</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>google</string>
+			<string>com.googleusercontent.apps.486612088522-8di1chbqda60jd5u5036kmb2k5ir0iuu</string>
+		</array>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.googleusercontent.apps.486612088522-8di1chbqda60jd5u5036kmb2k5ir0iuu</string>
+				</array>
+			</dict>
+		</array>
 
 	</dict>
 </plist>
