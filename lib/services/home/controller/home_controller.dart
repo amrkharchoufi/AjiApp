@@ -64,11 +64,18 @@ class HomeController extends GetxController
     }
   }
 
-  void checklogin(BuildContext context) async {
+  void checklogin(BuildContext context, int page) async {
     islogged.value = await checkIfUserIsLoggedIn();
     isloading.value = false;
     if (islogged.value) {
-      Get.toNamed(Routes.PROFILE);
+      switch (page) {
+        case 0:
+          Get.toNamed(Routes.PROFILE);
+          break;
+        case 1:
+          Get.toNamed(Routes.NOTIFICATION);
+          break;
+      }
     } else {
       showLoginBottomSheet(context);
     }
@@ -90,7 +97,7 @@ class HomeController extends GetxController
     }
   }
 
-void showLoginBottomSheet(BuildContext context) {
+  void showLoginBottomSheet(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,

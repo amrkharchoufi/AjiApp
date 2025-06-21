@@ -1,9 +1,7 @@
-
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/available%20_soon_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
-
 
 class Transportationview extends StatefulWidget {
   const Transportationview({super.key});
@@ -27,6 +25,7 @@ class _TransportationviewState extends State<Transportationview> {
           ),
         ),
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -34,8 +33,8 @@ class _TransportationviewState extends State<Transportationview> {
                 title: "Transportation",
               ),
               SizedBox(
-                  height: ScreenSize.height / 6,
-                ),
+                height: ScreenSize.height / 6,
+              ),
               Center(child: Available_SoonWidget())
             ],
           ),

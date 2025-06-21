@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/map_service/controller/map_controller.dart';
 import 'package:ajiapp/widgets/hotel_map_widget.dart';

@@ -1,29 +1,29 @@
 class StadiumModel {
-  String? name;
-  String? city;
-  String? imageUrl;
+  final String name;
+  final String city;
+  final String imageUrl;
+  final String capacity;
+  final String description;
+  final String inauguration;
+  final String homeGroundFor;
 
-  StadiumModel({
-    this.name,
-    this.city,
-    this.imageUrl,
-  });
+  StadiumModel(
+      {required this.name,
+      required this.city,
+      required this.imageUrl,
+      required this.capacity,
+      required this.description,
+      required this.inauguration,
+      required this.homeGroundFor});
 
-  StadiumModel.fromJson(Map<String, dynamic> json) {
-    
-    name = json['name'];
-    city = json['city'];
-  
-    imageUrl = json['image_url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-  
-    data['name'] = name;
-    data['city'] = city;
-  
-    data['image_url'] = imageUrl;
-    return data;
+  factory StadiumModel.fromFirestore(Map<String, dynamic> data) {
+    return StadiumModel(
+        name: data['title'] ?? "",
+        city: data['location'] ?? "",
+        imageUrl: data['imageUrl'],
+        capacity: data["capacity"] ?? "",
+        description: data["description"] ?? "",
+        inauguration: data["inauguration"] ?? "",
+        homeGroundFor: data["homeGroundFor"] ?? "");
   }
 }

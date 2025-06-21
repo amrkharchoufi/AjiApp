@@ -23,6 +23,7 @@ class EsimView extends StatelessWidget {
         ),
       ),
       child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             MyappbarWidget(

@@ -3,7 +3,6 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HotelMapWidget extends StatelessWidget {
@@ -76,9 +75,8 @@ class HotelMapWidget extends StatelessWidget {
               MaterialButton(
                 onPressed: () async {
                   final url = Uri.parse(Link);
-                
-                    await launchUrl(url, mode: LaunchMode.externalApplication);
-                  
+
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
                 },
                 color: ajired,
                 shape: RoundedRectangleBorder(

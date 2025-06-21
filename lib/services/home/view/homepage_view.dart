@@ -4,7 +4,6 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/common/ComingUp_view.dart';
 import 'package:ajiapp/services/common/Discover_view.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
-import 'package:ajiapp/services/common/notification_view.dart';
 import 'package:ajiapp/utils/svg_cache.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
 import 'package:ajiapp/widgets/morrcandoor_widget.dart';
@@ -100,11 +99,7 @@ class HomePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const NotificationView(),
-                    ),
-                  );
+                  controller.checklogin(context, 1);
                 },
                 child: Icon(
                   Icons.notifications_outlined,
@@ -115,7 +110,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(width: 10),
               GestureDetector(
                 onTap: () {
-                  controller.checklogin(context);
+                  controller.checklogin(context, 0);
                 },
                 child: Icon(
                   Icons.account_circle_outlined,

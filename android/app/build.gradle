@@ -41,7 +41,7 @@ android {
         applicationId = "com.ajiapp.app"
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
-        versionCode = generateVersionCode()
+        versionCode = 1 //generateVersionCode()
         versionName = flutter.versionName
         multiDexEnabled true
     }

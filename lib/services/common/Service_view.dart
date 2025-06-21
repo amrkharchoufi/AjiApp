@@ -16,27 +16,30 @@ class _ServiceViewState extends State<ServiceView> {
     ScreenSize.init(context);
     return Scaffold(
         body: Container(
-          width: ScreenSize.width,
-          height: ScreenSize.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.cover,
+      width: ScreenSize.width,
+      height: ScreenSize.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          children: [
+            MyappbarWidget(
+              title: "Services",
             ),
-          ),
-          child: SingleChildScrollView( 
-            child: Column(
-              children: [
-                MyappbarWidget(
-                  title: "Services",
-                ),
-                SizedBox(
-                  height: ScreenSize.height / 10,
-                ),
-                ServicesWidget(rownb: 3,)
-              ],
+            SizedBox(
+              height: ScreenSize.height / 10,
             ),
-          ),
-        ));
+            ServicesWidget(
+              rownb: 3,
+            )
+          ],
+        ),
+      ),
+    ));
   }
 }

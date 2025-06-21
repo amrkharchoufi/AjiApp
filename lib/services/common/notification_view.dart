@@ -71,7 +71,7 @@ class _NotificationViewState extends State<NotificationView> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: Text(
-                  "Your flight is in 2 days, don’t forget to get your e-sim",
+                  "Welcome to AJI your guide to Morroco",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: ScreenSize.width / 25,
@@ -94,34 +94,6 @@ class _NotificationViewState extends State<NotificationView> {
             SizedBox(
               height: ScreenSize.width / 20,
             ),
-            Stack(children: [
-              Container(
-                padding: EdgeInsets.all(ScreenSize.width / 20),
-                width: ScreenSize.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "Tomorrow’s match: Morocco vs Algeria. Don’t forget to grab your ticket",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: ScreenSize.width / 25,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: ScreenSize.width / 40,
-                bottom: ScreenSize.width / 60,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(width: 1, color: gold), // Background color
-                    shape: BoxShape.circle, // Makes it circular
-                  ),
-                  child: Icon(Icons.east, color: gold),
-                ),
-              )
-            ])
           ],
         ),
       ),

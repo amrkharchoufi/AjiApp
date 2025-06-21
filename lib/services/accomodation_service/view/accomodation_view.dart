@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/accomodation_service/controller/hotel_controller.dart';
 import 'package:ajiapp/settings/colors.dart';

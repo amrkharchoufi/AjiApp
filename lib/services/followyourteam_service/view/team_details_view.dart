@@ -39,6 +39,7 @@ class TeamDetailsView extends StatelessWidget {
             child: Stack(
               children: [
                 SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
                   child: Column(
                     children: [
                       MyappbarWidget(title: "Follow Your Team"),

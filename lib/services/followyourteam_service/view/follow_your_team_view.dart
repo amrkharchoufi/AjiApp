@@ -48,6 +48,7 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
         child: Stack(
           children: [
             SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
                   MyappbarWidget(title: "Follow Your Team"),
@@ -144,7 +145,7 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
             : SearchbarWidget(
                 options: controller.stadiums,
                 onchanged: (value) {
-                  controller.searchTeam(value!);
+                  controller.searchstadium(value!);
                 },
                 placeholder: "Search Stadium",
               ),
@@ -178,17 +179,17 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
       if (controller.isLoading.value) {
         return const Center(child: CircularProgressIndicator());
       }
-    
+
       // Show error message if there's an error
       else if (controller.error.isNotEmpty) {
         return Center(child: Text(controller.error.value));
       }
-    
+
       // Show content based on selected tab
       else {
         return controller.selectedIndex.value
             ? _buildMatchesList()
-            : _buildStadiumsList();
+            : _buildstdList();
       }
     });
   }
@@ -218,23 +219,28 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
     });
   }
 
-  // Build the list of stadiums
-Widget _buildStadiumsList() {
-  return ListView.builder(
-    shrinkWrap: true, // ← Ajout important
-    physics: NeverScrollableScrollPhysics(), // ← pour éviter le conflit de scroll
-    itemCount: controller.stadiumsinfo.length,
-    itemBuilder: (context, index) {
-      final stadium = controller.stadiumsinfo[index];
-      return StadiumWidget(
-        key: ValueKey("stadium-${stadium.name}"),
-        ImagePath: stadium.imageUrl ?? '',
-        MatchTitleaway: stadium.name ?? '',
-        Matchplace: stadium.city ?? '',
-        width: ScreenSize.width,
-        height: ScreenSize.height / 6,
+  Widget _buildstdList() {
+    return Obx(() {
+      final stadiums = controller.stadiumsinfo;
+
+      if (stadiums.isEmpty) {
+        return const Center(child: Text("No matches found"));
+      }
+
+      return Column(
+        children: [
+          ...List.generate(
+            stadiums.length,
+            (index) {
+              return StadiumWidget(
+                stadium: stadiums[index],
+                width: ScreenSize.width,
+                height: ScreenSize.height / 6,
+              );
+            },
+          ),
+        ],
       );
-    },
-  );
-}
+    });
+  }
 }

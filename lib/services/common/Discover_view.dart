@@ -16,74 +16,74 @@ class _DiscoverState extends State<Discover> {
     ScreenSize.init(context);
     return Scaffold(
         body: Container(
-          width: ScreenSize.width,
-          height: ScreenSize.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.cover,
+      width: ScreenSize.width,
+      height: ScreenSize.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          children: [
+            MyappbarWidget(
+              title: "Discover",
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                MyappbarWidget(
-                  title: "Discover",
-                ),
-                SizedBox(
-                  height: ScreenSize.height / 60,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: ScreenSize.width / 25),
-                  child: Column(
-                    children: [
-                      DiscoverCard(
-                          ImagePath: "assets/images/city1.png",
-                          siteName: "Mausoluem of Hassan",
-                          sitePlace: "Rabat",
-                          Entry: "Paid Entry",
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4.5),
-                      SizedBox(
-                        height: ScreenSize.height / 60,
-                      ),
-                      DiscoverCard(
-                          ImagePath: "assets/images/city2.png",
-                          siteName: "Hassan Tower",
-                          sitePlace: "Rabat",
-                          Entry: "Free Entry",
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4.5),
-                      SizedBox(
-                        height: ScreenSize.height / 60,
-                      ),
-                      DiscoverCard(
-                          ImagePath: "assets/images/hercules.png",
-                          siteName: "Hercules Caves",
-                          sitePlace: "Tangier",
-                          Entry: "Free Entry",
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4.5),
-                      SizedBox(
-                        height: ScreenSize.height / 60,
-                      ),
-                      DiscoverCard(
-                          ImagePath: "assets/images/mosque.jpg",
-                          siteName: "Medina of Fez",
-                          sitePlace: "Fez",
-                          Entry: "Paid Entry",
-                          width: ScreenSize.width,
-                          height: ScreenSize.height / 4.5),
-                      SizedBox(
-                        height: ScreenSize.height / 20,
-                      ),
-                    ],
+            SizedBox(
+              height: ScreenSize.height / 60,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: ScreenSize.width / 25),
+              child: Column(
+                children: [
+                  DiscoverCard(
+                      ImagePath: "assets/images/city1.png",
+                      siteName: "Mausoluem of Hassan",
+                      sitePlace: "Rabat",
+                      Entry: "Paid Entry",
+                      width: ScreenSize.width,
+                      height: ScreenSize.height / 4.5),
+                  SizedBox(
+                    height: ScreenSize.height / 60,
                   ),
-                )
-              ],
-            ),
-          ),
-        ));
+                  DiscoverCard(
+                      ImagePath: "assets/images/city2.png",
+                      siteName: "Hassan Tower",
+                      sitePlace: "Rabat",
+                      Entry: "Free Entry",
+                      width: ScreenSize.width,
+                      height: ScreenSize.height / 4.5),
+                  SizedBox(
+                    height: ScreenSize.height / 60,
+                  ),
+                  DiscoverCard(
+                      ImagePath: "assets/images/hercules.png",
+                      siteName: "Hercules Caves",
+                      sitePlace: "Tangier",
+                      Entry: "Free Entry",
+                      width: ScreenSize.width,
+                      height: ScreenSize.height / 4.5),
+                  SizedBox(
+                    height: ScreenSize.height / 60,
+                  ),
+                  DiscoverCard(
+                      ImagePath: "assets/images/mosque.jpg",
+                      siteName: "Medina of Fez",
+                      sitePlace: "Fez",
+                      Entry: "Paid Entry",
+                      width: ScreenSize.width,
+                      height: ScreenSize.height / 4.5),
+                  SizedBox(
+                    height: ScreenSize.height / 20,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    ));
   }
 }

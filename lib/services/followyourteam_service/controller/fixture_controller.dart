@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/followyourteam_service/model/fixture_model.dart';
 import 'package:ajiapp/services/followyourteam_service/model/stadium_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -9,32 +12,25 @@ class FixtureController extends GetxController {
   final int leagueid = 6;
   final int season = 2025;
   final String api_token = "eb019172e018ad81e65c44fa21d24227";
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Data containers
   var fixtures = <FixtureSimple>[].obs;
   var searchfixtures = <FixtureSimple>[].obs;
   var stadiums = <String>["Prince Moulay Abdellah Stadium"].obs;
-  var stadiumsinfo = <StadiumModel>[
-    StadiumModel(
-      name: "Prince Moulay Abdellah Stadium",
-      imageUrl: "assets/images/stadium.jpg",
-      city: "Rabat",
-    ),
-    StadiumModel(
-      name: "Prince Moulay Abdellah Stadium",
-      imageUrl: "assets/images/stadium.jpg",
-      city: "Rabat",
-    ),
-  ].obs;
+  var stadiumsinfo = <StadiumModel>[].obs;
+  var allStadiums = <StadiumModel>[].obs;
 
   // UI state variables
   var isLoading = true.obs;
+  var isloadingstd = true.obs;
   var error = ''.obs;
   RxBool selectedIndex = true.obs;
 
   @override
   void onInit() {
     fetchFixtures();
+    fetchstadiums();
     super.onInit();
   }
 
@@ -127,5 +123,56 @@ class FixtureController extends GetxController {
   void onClose() {
     _cachedTeamNames.clear();
     super.onClose();
+  }
+
+  Future<void> fetchstadiums() async {
+    try {
+      isloadingstd.value = true;
+
+      // Fetch all hotels at once
+      final QuerySnapshot snapshot =
+          await _firestore.collection('stadiums').get();
+      allStadiums.clear();
+      stadiumsinfo.clear(); // Clear existing data
+      stadiums.clear(); // Clear existing cities
+      stadiums.add('All Stadiums'); // Add default option
+
+      for (var doc in snapshot.docs) {
+        final std =
+            StadiumModel.fromFirestore(doc.data() as Map<String, dynamic>);
+        stadiumsinfo.add(std);
+        allStadiums.add(std);
+
+        // Add city to cities list if not already present
+        if (!stadiums.contains(std.name)) {
+          stadiums.add(std.name);
+        }
+      }
+
+      // Sort cities alphabetically
+      stadiums.sort((a, b) {
+        if (a == 'All Stadiums') return -1;
+        if (b == 'All Stadiums') return 1;
+        return a.compareTo(b);
+      });
+    } catch (e) {
+      log("Error fetching stadiums: ${e.toString()}");
+    } finally {
+      isloadingstd.value = false;
+    }
+  }
+
+  void searchstadium(String stadiumName) {
+    if (stadiumName == 'All Stadiums' || stadiumName.isEmpty) {
+      stadiumsinfo.value = allStadiums;
+      return;
+    }
+
+    final results = allStadiums
+        .where(
+            (std) => std.name.toLowerCase().contains(stadiumName.toLowerCase()))
+        .toList();
+
+    stadiumsinfo.value = results;
   }
 }

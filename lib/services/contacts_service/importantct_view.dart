@@ -11,50 +11,60 @@ class ImportantctView extends StatelessWidget {
     ScreenSize.init(context);
     return Scaffold(
         body: Container(
-          width: ScreenSize.width,
-          height: ScreenSize.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/background.png"),
-              fit: BoxFit.cover,
+      width: ScreenSize.width,
+      height: ScreenSize.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          children: [
+            MyappbarWidget(
+              title: "Important Contacts",
             ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
+            SizedBox(
+              height: ScreenSize.height / 15,
+            ),
+            Column(
               children: [
-                MyappbarWidget(
-                  title: "Important Contacts",
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                  child: CallWidget(
+                    name: 'Contact',
+                    img: "assets/icons/aji_icon.svg",
+                    number: "0661777073",
+                  ),
                 ),
-                SizedBox(
-                  height: ScreenSize.height / 15,
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                  child: CallWidget(name: 'Police', number: "19"),
                 ),
-                Column(
-                  children: [
-                    Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
-                    child: CallWidget(name: 'Contact',img: "assets/icons/aji_icon.svg",number: "0661777073",),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
-                    child: CallWidget(name: 'Police',number: "19"),
-                  ),
-                  Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
-                    child: CallWidget(name: 'Ambulance',number: "150"),
-                  ),
-                  Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
-                    child: CallWidget(name: 'Fire Fighters',number: "15"),
-                  ),
-                  Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
-                    child: CallWidget(name: 'Embassies',number: "177"),
-                  ),
-                  ],
-                )
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                  child: CallWidget(name: 'Ambulance', number: "150"),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                  child: CallWidget(name: 'Fire Fighters', number: "15"),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+                  child: CallWidget(name: 'Embassies', number: "177"),
+                ),
               ],
-            ),
-          ),
-        ));
+            )
+          ],
+        ),
+      ),
+    ));
   }
 }
