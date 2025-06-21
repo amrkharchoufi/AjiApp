@@ -51,11 +51,8 @@
 		<string>This app uses your location to show nearby services on the map.</string>
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>This app needs access to your location even when the app is in the background for accurate tracking.</string>
-		<key>LSApplicationQueriesSchemes</key>
-		<array>
-			<string>google</string>
-			<string>com.googleusercontent.apps.486612088522-8di1chbqda60jd5u5036kmb2k5ir0iuu</string>
-		</array>
+		<key>GIDClientID</key>
+		<string>486612088522-f19slnqd5i7sh92b1j9oa9svmjbjijpa.apps.googleusercontent.com</string>
 		<key>CFBundleURLTypes</key>
 		<array>
 			<dict>
@@ -63,10 +60,10 @@
 				<string>Editor</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>com.googleusercontent.apps.486612088522-8di1chbqda60jd5u5036kmb2k5ir0iuu</string>
+					<string>com.googleusercontent.apps.486612088522-f19slnqd5i7sh92b1j9oa9svmjbjijpa</string>
 				</array>
 			</dict>
 		</array>
-
+		<!-- End of the Google Sign-in Section -->
 	</dict>
 </plist>
