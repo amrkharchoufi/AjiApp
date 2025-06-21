@@ -37,7 +37,7 @@ dependencies:
   path_drawing: ^1.0.1
   animations: ^2.0.11
   animate_do: ^4.2.0
-  dropdown_search: ^6.0.2
+  dropdown_search: ^5.0.2
   font_awesome_flutter: ^10.8.0
   flutter_svg: ^2.0.10+1
   firebase_core: ^3.12.1
