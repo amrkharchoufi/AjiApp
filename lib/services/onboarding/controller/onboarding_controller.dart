@@ -32,7 +32,7 @@ class OnboardingController extends GetxController {
       'title': 'No hassle information',
       'subtitle':
           "Don't know where to go in Morocco? We got you covered! Whatever kind of tourist you are, Morocco has it all, and AJIAPP is here to guide you!",
-      'image': 'assets/images/onboarding4.jpg',
+      'image': 'assets/images/onboardingfinal.jpg',
     },
   ];
 
@@ -51,8 +51,8 @@ class OnboardingController extends GetxController {
   }
 
   // For skip button functionality
-  void skipOnboarding() {
-    completeOnboarding();
+  void skipOnboarding() async {
+    await completeOnboarding();
   }
 
   // Save completion status and navigate to appropriate screen

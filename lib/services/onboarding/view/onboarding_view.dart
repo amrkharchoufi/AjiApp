@@ -111,7 +111,9 @@ class OnboardingView extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () => controller.skipOnboarding(),
+                          onPressed: () async {
+                            controller.completeOnboarding();
+                          },
                           child: Text(
                             "Skip >",
                             style: TextStyle(
@@ -137,7 +139,7 @@ class OnboardingView extends StatelessWidget {
                               child: Text(
                                 controller.currentPage.value ==
                                         controller.onboardingData.length - 1
-                                    ? "SignUp"
+                                    ? "Getstarted"
                                     : "Continue",
                                 style: TextStyle(
                                   color: Colors.white,
