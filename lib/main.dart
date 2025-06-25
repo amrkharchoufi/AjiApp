@@ -24,7 +24,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  await NotificationService.instance.initialize();
   // Remove the splash screen when initialization is complete
   FlutterNativeSplash.remove();
 
