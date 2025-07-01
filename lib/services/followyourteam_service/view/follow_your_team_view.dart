@@ -236,6 +236,9 @@ class _FollowYourTeamViewState extends State<FollowYourTeamView> {
                 stadium: stadiums[index],
                 width: ScreenSize.width,
                 height: ScreenSize.height / 6,
+                onpressed: () {
+                  controller.selectstadium(stadiums[index]);
+                },
               );
             },
           ),

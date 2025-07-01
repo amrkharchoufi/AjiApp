@@ -18,12 +18,12 @@ class StadiumModel {
 
   factory StadiumModel.fromFirestore(Map<String, dynamic> data) {
     return StadiumModel(
-        name: data['title'] ?? "",
-        city: data['location'] ?? "",
+        name: data['title'] ?? "empty",
+        city: data['location'] ?? "empty",
         imageUrl: data['imageUrl'],
-        capacity: data["capacity"] ?? "",
-        description: data["description"] ?? "",
-        inauguration: data["inauguration"] ?? "",
-        homeGroundFor: data["homeGroundFor"] ?? "");
+        capacity: data["capacity"] ?? "empty",
+        description: data["description"] ?? "empty",
+        inauguration: data["inauguration"] ?? "empty",
+        homeGroundFor: data["homeGroundFor"] ?? "empty");
   }
 }

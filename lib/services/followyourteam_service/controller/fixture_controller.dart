@@ -20,6 +20,7 @@ class FixtureController extends GetxController {
   var stadiums = <String>["Prince Moulay Abdellah Stadium"].obs;
   var stadiumsinfo = <StadiumModel>[].obs;
   var allStadiums = <StadiumModel>[].obs;
+  late StadiumModel selectedstd;
 
   // UI state variables
   var isLoading = true.obs;
@@ -174,5 +175,10 @@ class FixtureController extends GetxController {
         .toList();
 
     stadiumsinfo.value = results;
+  }
+
+  void selectstadium(StadiumModel std) {
+    selectedstd = std;
+    Get.toNamed(Routes.STADIUM_DETAILS);
   }
 }

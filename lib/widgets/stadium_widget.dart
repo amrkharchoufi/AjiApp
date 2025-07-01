@@ -8,11 +8,13 @@ class StadiumWidget extends StatelessWidget {
   final StadiumModel stadium;
   final double width;
   final double height;
+  final VoidCallback? onpressed;
   const StadiumWidget({
     super.key,
     required this.stadium,
     required this.width,
     required this.height,
+    required this.onpressed,
   });
 
   @override
@@ -92,7 +94,7 @@ class StadiumWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: onpressed,
                         color: ajired,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
