@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Matchwidget extends StatelessWidget {
@@ -8,7 +9,6 @@ class Matchwidget extends StatelessWidget {
   final String MatchTitlehome;
   final String MatchDate;
   final String Matchplace;
-  final String Price;
   final double width;
   final double height;
   const Matchwidget({
@@ -18,7 +18,6 @@ class Matchwidget extends StatelessWidget {
     required this.MatchTitlehome,
     required this.MatchDate,
     required this.Matchplace,
-    required this.Price,
     required this.width,
     required this.height,
   });
@@ -42,8 +41,8 @@ class Matchwidget extends StatelessWidget {
           SizedBox(
             width: width / 2.1,
             height: height,
-            child: Image.asset(
-              ImagePath,
+            child: CachedNetworkImage(
+              imageUrl: ImagePath,
               fit: BoxFit.cover,
             ),
           ),

@@ -3,7 +3,6 @@
 import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
-import 'package:ajiapp/widgets/visit_morocco_card2.dart';
 import 'package:ajiapp/widgets/visit_morroco_card1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,17 +64,6 @@ class VisitMoroccoHome extends StatelessWidget {
                   "Most Visits",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    // Handle view all tap
-                  },
-                  child: Text(
-                    "View all",
-                    style: TextStyle(
-                      fontSize: 19,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -89,47 +77,6 @@ class VisitMoroccoHome extends StatelessWidget {
             child: controller.isLoadingSpots.value
                 ? _buildLoadingIndicator()
                 : _buildTouristSpotsList(controller),
-          ),
-
-          SizedBox(
-            height: ScreenSize.width / 20,
-          ),
-
-          // Multi City Tour Section
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Multi City Tour",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Handle view all tap
-                  },
-                  child: Text(
-                    "View all",
-                    style: TextStyle(
-                      fontSize: 19,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: ScreenSize.width / 40,
-          ),
-
-          // Tours section with loading indicator
-          SizedBox(
-            height: ScreenSize.height / 2.3,
-            child: controller.isLoadingTours.value
-                ? _buildLoadingIndicator()
-                : _buildToursList(controller),
           ),
 
           SizedBox(
@@ -178,43 +125,6 @@ class VisitMoroccoHome extends StatelessWidget {
           SizedBox(width: ScreenSize.width / 30),
       ]),
       itemCount: controller.touristSpots.length,
-    );
-  }
-
-  // Tours horizontal list
-  Widget _buildToursList(TourismeController controller) {
-    // return SingleChildScrollView(
-    //   scrollDirection: Axis.horizontal,
-    //   padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
-    //   child: Row(
-    //     children: [
-    //       if (controller.tours.isNotEmpty)
-    //         for (var tour in controller.tours)
-    //           Padding(
-    //             padding: EdgeInsets.only(right: ScreenSize.width / 30),
-    //             child: VisitMoroccoCard2(
-    //               tour: tour,
-    //               designred: false,
-    //               width: ScreenSize.width / 1.06,
-    //               height: ScreenSize.height / 2.3,
-    //             ),
-    //           ),
-    //     ],
-    //   ),
-    // );
-
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: controller.tours.length,
-      itemBuilder: (context, index) => Row(children: [
-        SizedBox(width: ScreenSize.width / 30),
-        VisitMoroccoCard2(
-          tour: controller.tours[index],
-          designred: false,
-        ),
-        if (index == controller.tours.length - 1)
-          SizedBox(width: ScreenSize.width / 30),
-      ]),
     );
   }
 }

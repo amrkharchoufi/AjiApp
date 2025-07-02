@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:ajiapp/services/common/ComingUp_view.dart';
+import 'package:ajiapp/services/coming-up_service/view/ComingUp_view.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
@@ -24,7 +24,7 @@ class ClientspaceState extends State<Clientspace> {
       case 0:
         return const HomePage();
       case 1:
-        return const ComingUp();
+        return ComingUp();
       case 2:
         return const ServiceView();
       case 3:
