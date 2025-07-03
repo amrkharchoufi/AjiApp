@@ -75,21 +75,20 @@ class ComingUp extends StatelessWidget {
                             ),
                           );
                         } else {
-                          return ListView.builder(
-                              itemCount: controller.events.length,
-                              itemBuilder: (context, index) {
-                                final event = controller.events[index];
-                                return Matchwidget(
-                                  width: ScreenSize.width,
-                                  height: ScreenSize.height / 4,
-                                  ImagePath: event.imageUrl,
-                                  MatchTitleaway: event.awayteam,
-                                  MatchTitlehome: event.hometeam,
-                                  MatchDate:
-                                      "${event.matchDate} \n${event.matchTime}",
-                                  Matchplace: event.venue,
-                                );
-                              });
+                          return Column(
+                            children: controller.events.map((event) {
+                              return Matchwidget(
+                                width: ScreenSize.width,
+                                height: ScreenSize.height / 4,
+                                ImagePath: event.imageUrl,
+                                MatchTitleaway: event.awayteam,
+                                MatchTitlehome: event.hometeam,
+                                MatchDate:
+                                    "${event.matchDate} \n${event.matchTime}",
+                                Matchplace: event.venue,
+                              );
+                            }).toList(),
+                          );
                         }
                       }),
                       SizedBox(

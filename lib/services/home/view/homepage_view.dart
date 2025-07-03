@@ -14,6 +14,7 @@ import 'package:ajiapp/widgets/shimmer_door_widget.dart';
 import 'package:ajiapp/widgets/sitecard_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -25,47 +26,48 @@ class HomePage extends StatelessWidget {
     ScreenSize.init(context);
     SizeConfig().init(context);
 
-    return SafeArea(
-      child: Scaffold(
-        body: GetBuilder<HomeController>(
-          builder: (controller) => FadeTransition(
-            opacity: controller.opacityAnimation,
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/background.png"),
-                    fit: BoxFit.cover,
+    return Scaffold(
+      body: GetBuilder<HomeController>(
+        builder: (controller) => FadeTransition(
+          opacity: controller.opacityAnimation,
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/background.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(
+                children: [
+                  // Header section - always loaded immediately
+                  SizedBox(
+                    height: ScreenSize.height / 45,
                   ),
-                ),
-                child: Column(
-                  children: [
-                    // Header section - always loaded immediately
-                    _buildHeader(controller, context),
+                  _buildHeader(controller, context),
 
-                    const SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
-                    // Featured section - always loaded immediately
-                    _buildFeaturedSection(controller),
+                  // Featured section - always loaded immediately
+                  _buildFeaturedSection(controller),
 
-                    // Secondary content - conditionally loaded
-                    Obx(() => controller.loadSecondaryContent.value
-                        ? Column(
-                            children: [
-                              const SizedBox(height: 20),
-                              _buildServicesSection(),
-                              const SizedBox(height: 20),
-                              _buildComingUpSection(),
-                              const SizedBox(height: 20),
-                              _buildDiscoverSection(),
-                            ],
-                          )
-                        : SizedBox())
-                  ],
-                ),
+                  // Secondary content - conditionally loaded
+                  Obx(() => controller.loadSecondaryContent.value
+                      ? Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            _buildServicesSection(),
+                            const SizedBox(height: 20),
+                            _buildComingUpSection(),
+                            const SizedBox(height: 20),
+                            _buildDiscoverSection(),
+                          ],
+                        )
+                      : SizedBox())
+                ],
               ),
             ),
           ),
@@ -132,18 +134,22 @@ class HomePage extends StatelessWidget {
   Widget _buildFeaturedSection(HomeController controller) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              "Featured",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "Featured",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 15),
         SizedBox(
@@ -203,6 +209,7 @@ class HomePage extends StatelessWidget {
 
   // Build the coming up section with optimized list
   Widget _buildComingUpSection() {
+    final ComingupController controller = Get.find<ComingupController>();
     return Column(
       children: [
         SectionHeader(
@@ -214,25 +221,47 @@ class HomePage extends StatelessWidget {
           height: ScreenSize.height / 4,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: GetBuilder<ComingupController>(builder: (controller) {
-              return Row(
-                spacing: ScreenSize.width / 20,
-                children: [
-                  const SizedBox(width: 10),
-                  ...controller.events.map((evt) {
-                    return Matchwidget(
-                      width: ScreenSize.width,
-                      height: ScreenSize.height / 4,
-                      ImagePath: evt.imageUrl,
-                      MatchTitleaway: evt.awayteam,
-                      MatchTitlehome: evt.hometeam,
-                      MatchDate: "${evt.matchDate} \n${evt.matchTime}",
-                      Matchplace: evt.venue,
+            child: Obx(() {
+              if (controller.isLoading.value) {
+                return Row(
+                  children: List.generate(5, (index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        left: index == 0 ? 10 : ScreenSize.width / 20,
+                        right: index == 4 ? 10 : 0,
+                      ),
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: Colors.grey.shade100,
+                        child: Container(
+                          width: ScreenSize.width,
+                          height: ScreenSize.height / 4,
+                          color: Colors.grey.shade300,
+                        ),
+                      ),
                     );
                   }),
-                  const SizedBox(width: 10),
-                ],
-              );
+                );
+              } else {
+                return Row(
+                  spacing: ScreenSize.width / 20,
+                  children: [
+                    const SizedBox(width: 10),
+                    ...controller.events.map((evt) {
+                      return Matchwidget(
+                        width: ScreenSize.width,
+                        height: ScreenSize.height / 4,
+                        ImagePath: evt.imageUrl,
+                        MatchTitleaway: evt.awayteam,
+                        MatchTitlehome: evt.hometeam,
+                        MatchDate: "${evt.matchDate} \n${evt.matchTime}",
+                        Matchplace: evt.venue,
+                      );
+                    }),
+                    const SizedBox(width: 10),
+                  ],
+                );
+              }
             }),
           ),
         ),
