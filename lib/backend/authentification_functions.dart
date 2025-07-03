@@ -188,18 +188,41 @@ Future<void> loginWithGoogle(BuildContext context) async {
       return;
     }
 
-    final userDoc = FirebaseFirestore.instance.collection('user').doc(user.uid);
-    final docSnapshot = await userDoc.get();
+    final userDocRef =
+        FirebaseFirestore.instance.collection('user').doc(user.uid);
+    final docSnapshot = await userDocRef.get();
 
     if (!docSnapshot.exists) {
-      // First time login, save user info
-      await userDoc.set({
+      // First time login with Google, set user data
+      await userDocRef.set({
         'username': googleUser.displayName ?? '',
         'email': googleUser.email,
-        'phone': user.phoneNumber ?? '', // usually null from Google
+        'phone': user.phoneNumber ?? '',
         'createdAt': FieldValue.serverTimestamp(),
         'isAdmin': false,
       });
+    } else {
+      // User already exists: don't overwrite existing values
+      // But optionally update missing fields only (safe merge)
+      Map<String, dynamic> existingData = docSnapshot.data() ?? {};
+      Map<String, dynamic> updateData = {};
+
+      if ((existingData['username'] ?? '').isEmpty &&
+          googleUser.displayName != null) {
+        updateData['username'] = googleUser.displayName;
+      }
+
+      if ((existingData['email'] ?? '').isEmpty) {
+        updateData['email'] = googleUser.email;
+      }
+
+      if ((existingData['phone'] ?? '').isEmpty && user.phoneNumber != null) {
+        updateData['phone'] = user.phoneNumber;
+      }
+
+      if (updateData.isNotEmpty) {
+        await userDocRef.update(updateData);
+      }
     }
 
     if (!context.mounted) return;

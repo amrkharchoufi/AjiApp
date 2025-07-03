@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   // Header section - always loaded immediately
                   SizedBox(
-                    height: ScreenSize.height / 45,
+                    height: ScreenSize.height / 40,
                   ),
                   _buildHeader(controller, context),
 
