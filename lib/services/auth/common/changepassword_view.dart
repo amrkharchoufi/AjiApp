@@ -4,17 +4,18 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CreatepasswordView extends StatefulWidget {
-  const CreatepasswordView({super.key});
+class Changepassword extends StatefulWidget {
+  const Changepassword({super.key});
 
   @override
-  State<CreatepasswordView> createState() => _CreatepasswordViewState();
+  State<Changepassword> createState() => _ChangepasswordState();
 }
 
-class _CreatepasswordViewState extends State<CreatepasswordView> {
-  final TextEditingController _newpwd = TextEditingController();
+class _ChangepasswordState extends State<Changepassword> {
+  final TextEditingController _email = TextEditingController();
   final TextEditingController _pwd = TextEditingController();
   final GlobalKey<FormState> mykey = GlobalKey();
+
   bool visible = true;
   bool remeberme = false;
   @override
@@ -55,29 +56,68 @@ class _CreatepasswordViewState extends State<CreatepasswordView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Create New Password',
+                      'Change email',
                       style: TextStyle(
                           fontSize: ScreenSize.width / 17,
                           fontWeight: FontWeight.bold,
                           fontFamily: "SFDisplay"),
                     ),
                     SizedBox(
-                      height: ScreenSize.height / 30,
+                      height: ScreenSize.height / 20,
                     ),
                     Text(
-                      'Enter Your New Password ',
+                      'Please Enter Your new Email Address To \nRecieve a Verification Code',
                       style: TextStyle(
                           color: Colors.black, fontSize: ScreenSize.width / 25),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
-                      height: ScreenSize.height / 40,
+                      height: ScreenSize.height / 15,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Password*',
+                          'New Email Address*',
+                          style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: ScreenSize.width / 25),
+                        ),
+                        SizedBox(
+                          height: ScreenSize.height / 120,
+                        ),
+                        TextFormField(
+                          controller: _email,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return '*E-mail Required';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'New Email Address',
+                            prefixIcon:
+                                Icon(Icons.email_outlined), // Email icon
+                            suffixIcon: _email.text.isNotEmpty
+                                ? IconButton(
+                                    icon: Icon(Icons.clear),
+                                    onPressed: () {
+                                      _email.clear();
+                                      setState(() {});
+                                    },
+                                  )
+                                : null,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: ScreenSize.height / 65,
+                        ),
+                        Text(
+                          'Current Password*',
                           style: TextStyle(
                               color: Colors.black45,
                               fontSize: ScreenSize.width / 25),
@@ -112,45 +152,6 @@ class _CreatepasswordViewState extends State<CreatepasswordView> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: ScreenSize.height / 40,
-                        ),
-                        Text(
-                          'New Password*',
-                          style: TextStyle(
-                              color: Colors.black45,
-                              fontSize: ScreenSize.width / 25),
-                        ),
-                        SizedBox(
-                          height: ScreenSize.height / 120,
-                        ),
-                        TextFormField(
-                          controller: _newpwd,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return '*Password Required';
-                            }
-                            return null;
-                          },
-                          obscureText: visible,
-                          decoration: InputDecoration(
-                            labelText: 'New Password',
-                            prefixIcon: Icon(Icons.lock_outline), // Email icon
-                            suffixIcon: _newpwd.text.isNotEmpty
-                                ? IconButton(
-                                    icon: Icon(Icons.visibility),
-                                    onPressed: () {
-                                      visible = !visible;
-                                      setState(() {});
-                                    },
-                                  )
-                                : null,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                     SizedBox(
@@ -160,8 +161,8 @@ class _CreatepasswordViewState extends State<CreatepasswordView> {
                       onPressed: () {
                         if (mykey.currentState!.validate()) {
                           setState(() {
-                            updateUserPassword(
-                                _pwd.text.trim(), _newpwd.text.trim(), context);
+                            changeEmail(
+                                _email.text.trim(), _pwd.text.trim(), context);
                           });
                         }
                       },
@@ -172,11 +173,11 @@ class _CreatepasswordViewState extends State<CreatepasswordView> {
                               BorderRadius.circular(20.0), // Rounded edges
                         ),
                         padding: EdgeInsets.symmetric(
-                            horizontal: ScreenSize.width / 3.3,
+                            horizontal: ScreenSize.width / 4,
                             vertical: ScreenSize.width / 40), // Button size
                       ),
                       child: Text(
-                        "Save",
+                        "Continue",
                         style: TextStyle(
                           color: Colors.white, // White text
                           fontSize: ScreenSize.width / 20, // Text size

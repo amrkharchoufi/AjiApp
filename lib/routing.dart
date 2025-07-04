@@ -3,6 +3,7 @@
 import 'package:ajiapp/services/accomodation_service/view/accomodation_view.dart';
 import 'package:ajiapp/services/auth/common/CreatePassword_view.dart';
 import 'package:ajiapp/services/auth/common/SignUp_view.dart';
+import 'package:ajiapp/services/auth/common/changeEmail_view.dart';
 import 'package:ajiapp/services/auth/common/forgotpassword_view.dart';
 import 'package:ajiapp/services/auth/common/login_view.dart';
 import 'package:ajiapp/services/common/ClientSpace.dart';
@@ -157,7 +158,8 @@ List<GetPage> routes = [
     name: Routes.MAP,
     page: () => MapView(),
   ),
-  GetPage(name: Routes.STADIUM_DETAILS, page: () => StadiumDetailsView())
+  GetPage(name: Routes.STADIUM_DETAILS, page: () => StadiumDetailsView()),
+  GetPage(name: Routes.CHANGE_EMAIL, page: () => ChangeemailView())
 ];
 
 abstract class Routes {
@@ -172,6 +174,7 @@ abstract class Routes {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const CREATE_PASSWORD = '/create-password';
   static const VERIFY_EMAIL = '/verify-email';
+  static const CHANGE_EMAIL = '/change-email';
 
   // App routes
   static const CLIENT_SPACE = '/client-space';

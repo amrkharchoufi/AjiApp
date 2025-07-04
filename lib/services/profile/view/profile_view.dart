@@ -246,48 +246,34 @@ class ProfileView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Change password",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.w500),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.CREATE_PASSWORD);
+                            },
+                            child: Text(
+                              "Change password",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: ScreenSize.width / 30,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                           Divider(),
-                          Text(
-                            "Payment methods",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.w500),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.CHANGE_EMAIL);
+                            },
+                            child: Text(
+                              "Change email",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: ScreenSize.width / 30,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                           Divider(),
                           Text(
                             "Language",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Divider(),
-                          Text(
-                            "Change phone number ",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Divider(),
-                          Text(
-                            "Change email",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Divider(),
-                          Text(
-                            "Country ",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: ScreenSize.width / 30,

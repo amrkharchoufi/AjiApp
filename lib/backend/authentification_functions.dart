@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:ajiapp/routing.dart';
-import 'package:ajiapp/settings/colors.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -103,6 +102,34 @@ void _showErrorDialog(BuildContext context, String message) {
     desc: message,
     btnOkOnPress: () {},
     btnOkColor: Colors.red,
+  ).show();
+}
+
+void _showSuccessDialog(BuildContext context, String message, String title) {
+  if (!context.mounted) return;
+
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.success,
+    animType: AnimType.rightSlide,
+    title: title,
+    desc: message,
+    btnOkOnPress: () {},
+    btnOkColor: Colors.green,
+  ).show();
+}
+
+void _showinfoDialog(BuildContext context, String message, String title) {
+  if (!context.mounted) return;
+
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.info,
+    animType: AnimType.rightSlide,
+    title: title,
+    desc: message,
+    btnOkOnPress: () {},
+    btnOkColor: Colors.blue,
   ).show();
 }
 
@@ -328,6 +355,150 @@ Future<void> resetPassword(String email, BuildContext context) async {
   }
 }
 
+Future<void> changeEmail(
+  String newEmail,
+  String currentPassword,
+  BuildContext context,
+) async {
+  late AwesomeDialog loadingDialog;
+
+  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  if (!emailRegex.hasMatch(newEmail)) {
+    _showErrorDialog(context, 'Please enter a valid email address.');
+    return;
+  }
+
+  final user = FirebaseAuth.instance.currentUser;
+
+  if (user == null) {
+    _showErrorDialog(context, 'No user is currently logged in.');
+    return;
+  }
+
+  try {
+    loadingDialog = AwesomeDialog(
+      context: context,
+      dialogType: DialogType.noHeader,
+      animType: AnimType.bottomSlide,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            SvgPicture.asset("assets/images/logoaji.svg"),
+            SizedBox(height: 16),
+            CircularProgressIndicator(),
+            SizedBox(height: 8),
+            Text('Updating email...'),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+      dismissOnTouchOutside: false,
+      dismissOnBackKeyPress: false,
+    )..show();
+
+    // Step 1: Re-authenticate the user with their current password
+    final credential = EmailAuthProvider.credential(
+      email: user.email!,
+      password: currentPassword,
+    );
+
+    await user.reauthenticateWithCredential(credential);
+
+    // Step 2: Update the email
+    await user.verifyBeforeUpdateEmail(newEmail);
+
+    if (!context.mounted) return;
+    loadingDialog.dismiss();
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.bottomSlide,
+      title: 'Email Updated',
+      desc: 'A confirmation link has been sent to your new email address.',
+      btnOkOnPress: () {
+        Navigator.pop(context);
+      },
+    ).show();
+  } on FirebaseAuthException catch (e) {
+    loadingDialog.dismiss();
+    switch (e.code) {
+      case 'email-already-in-use':
+        _showErrorDialog(
+            context, 'This email is already associated with another account.');
+        break;
+      case 'invalid-email':
+        _showErrorDialog(context, 'Invalid email format.');
+        break;
+      case 'wrong-password':
+        _showErrorDialog(context, 'The current password is incorrect.');
+        break;
+      case 'requires-recent-login':
+        _showErrorDialog(
+            context, 'You need to re-login to perform this action.');
+        break;
+      default:
+        _showErrorDialog(context, 'Error: ${e.message}');
+    }
+  } catch (e) {
+    if (context.mounted) {
+      loadingDialog.dismiss();
+      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    }
+  }
+}
+
+Future<void> updateUserPassword(
+  String currentPassword,
+  String newPassword,
+  BuildContext context,
+) async {
+  final user = FirebaseAuth.instance.currentUser;
+
+  if (user == null) {
+    _showErrorDialog(context, "No user is currently signed in.");
+    return;
+  }
+
+  try {
+    // Step 1: Re-authenticate the user
+    final credential = EmailAuthProvider.credential(
+      email: user.email!,
+      password: currentPassword,
+    );
+
+    await user.reauthenticateWithCredential(credential);
+
+    // Step 2: Update password
+    await user.updatePassword(newPassword);
+
+    _showSuccessDialog(context, "Your password has been updated successfully.",
+        "password update");
+  } on FirebaseAuthException catch (e) {
+    switch (e.code) {
+      case 'wrong-password':
+        _showErrorDialog(context, 'The current password is incorrect.');
+        break;
+      case 'weak-password':
+        _showErrorDialog(context, 'The new password is too weak.');
+        break;
+      case 'requires-recent-login':
+        _showErrorDialog(context, 'Please re-login and try again.');
+        break;
+      default:
+        _showErrorDialog(context, 'Error: ${e.message}');
+    }
+  } catch (e) {
+    _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+  }
+}
+
 void showLoadingDialog(BuildContext context, String text) {
   showDialog(
     context: context,
@@ -397,34 +568,29 @@ Future<void> signup(
       // Update display name
       await user.updateDisplayName(username);
 
-      // Save extra user data in Firestore
+      // Send verification email
+      await user.sendEmailVerification();
+
+      // Save user data in Firestore
       await FirebaseFirestore.instance.collection('user').doc(user.uid).set({
         'username': username,
         'email': email,
         'phone': phone,
         'createdAt': FieldValue.serverTimestamp(),
-        'isAdmin': false
+        'isAdmin': false,
+        'isEmailVerified': false,
       });
-      Navigator.of(context, rootNavigator: true).pop();
+
+      Navigator.of(context, rootNavigator: true).pop(); // close loading
       Get.back();
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Success'),
-          content: const Text('Account created successfully!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Get.back();
-                Get.toNamed(Routes.PROFILE);
-              },
-              child: Text('OK', style: TextStyle(color: ajired)),
-            ),
-          ],
-        ),
-      );
+
+      _showinfoDialog(
+          context,
+          'A verification link has been sent to your email. Please verify your email before logging in.',
+          'Verify Your Email');
     }
   } on FirebaseAuthException catch (e) {
+    Navigator.of(context, rootNavigator: true).pop();
     String errorMessage = 'An error occurred. Please try again.';
     if (e.code == 'email-already-in-use') {
       errorMessage = 'This email is already in use.';
@@ -433,9 +599,9 @@ Future<void> signup(
     } else if (e.code == 'invalid-email') {
       errorMessage = 'Invalid email format.';
     }
-    Navigator.of(context, rootNavigator: true).pop();
     _showErrorDialog(context, errorMessage);
   } catch (e) {
+    Navigator.of(context, rootNavigator: true).pop();
     debugPrint('Signup error: $e');
     _showErrorDialog(context, e.toString());
   }
