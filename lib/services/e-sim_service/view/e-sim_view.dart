@@ -2,6 +2,7 @@ import 'package:ajiapp/services/e-sim_service/controller/e-sim_controller.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/e-sim_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,10 +44,22 @@ class EsimView extends StatelessWidget {
                     () {
                       return Column(
                         children: controller.E_sims.map((plan) {
-                          return E_simWidget(
-                            data: plan["data"],
-                            durations: plan["durations"],
-                            price: plan["price"],
+                          return GestureDetector(
+                            onTap: () {
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.infoReverse,
+                                animType: AnimType.rightSlide,
+                                title: 'Available soon',
+                                desc: "this item will be available soon",
+                                btnCancelOnPress: () {},
+                              ).show();
+                            },
+                            child: E_simWidget(
+                              data: plan["data"],
+                              durations: plan["durations"],
+                              price: plan["price"],
+                            ),
                           );
                         }).toList(),
                       );

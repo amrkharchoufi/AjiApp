@@ -180,6 +180,7 @@ class HomePage extends StatelessWidget {
                         subtitle: ft.description,
                         backgroundImage: ft.Imageurl,
                         description: "Learn More",
+                        section: ft.section,
                       );
                     }),
                     const SizedBox(width: 10),

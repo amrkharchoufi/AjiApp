@@ -1,20 +1,42 @@
+import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FeatureCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String backgroundImage;
   final String description;
+  final String section;
 
-  const FeatureCard({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.backgroundImage,
-    required this.description,
-  });
+  const FeatureCard(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.backgroundImage,
+      required this.description,
+      required this.section});
+
+  void gotosection(String section) {
+    switch (section) {
+      case "E-sim":
+        Get.toNamed(Routes.ESIM);
+        break;
+      case "follow_your_team":
+        Get.toNamed(Routes.FOLLOWYOURTEAM);
+        break;
+      case "accomodation":
+        Get.toNamed(Routes.ACCOMMODATION);
+        break;
+      case "visit_morocco":
+        Get.toNamed(Routes.VISIT_MOROCCO);
+        break;
+      default:
+        return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,24 +114,29 @@ class FeatureCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: ScreenSize.width / 100),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            description,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: ScreenSize.width / 30,
+                      GestureDetector(
+                        onTap: () {
+                          gotosection(section);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              description,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: ScreenSize.width / 30,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_rounded,
-                            color: Colors.white,
-                            size: ScreenSize.width / 25,
-                          )
-                        ],
+                            Icon(
+                              Icons.arrow_forward_rounded,
+                              color: Colors.white,
+                              size: ScreenSize.width / 25,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),

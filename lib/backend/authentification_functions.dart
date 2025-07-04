@@ -35,6 +35,47 @@ Future<void> login(BuildContext context, String email, String password,
       await FirebaseAuth.instance.signOut();
       return;
     }
+    if (userSnapshot.get("isEmailVerified") == false) {
+      await userCredential.user!.reload(); // force refresh
+      final user = FirebaseAuth.instance.currentUser!;
+
+      if (user.emailVerified) {
+        await FirebaseFirestore.instance
+            .collection('user')
+            .doc(user.uid)
+            .update({'isEmailVerified': true});
+      } else {
+        Navigator.of(context, rootNavigator: true).pop();
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.rightSlide,
+          title: 'Sign In Problem',
+          desc: 'Please verify your email.',
+          btnOkText: "Resend Email",
+          btnOkOnPress: () async {
+            try {
+              await user.sendEmailVerification();
+              _showSuccessDialog(
+                context,
+                'A new verification link has been sent to your email.',
+                'Email Sent',
+              );
+            } catch (e) {
+              _showErrorDialog(context, 'Could not send email: $e');
+            } finally {
+              // 👇 Move signOut here
+              await FirebaseAuth.instance.signOut();
+            }
+          },
+          btnCancelText: "Cancel",
+          btnCancelOnPress: () async {
+            await FirebaseAuth.instance.signOut(); // also handle cancel
+          },
+        ).show();
+        return;
+      }
+    }
 
     // Save credentials if 'Remember Me' is checked
     if (rememberme) {
@@ -45,7 +86,6 @@ Future<void> login(BuildContext context, String email, String password,
 
     if (!context.mounted) return;
 
-    // Navigate based on role
     // Dismiss loading dialog
     Navigator.of(context, rootNavigator: true).pop();
     Get.back();
@@ -114,22 +154,10 @@ void _showSuccessDialog(BuildContext context, String message, String title) {
     animType: AnimType.rightSlide,
     title: title,
     desc: message,
-    btnOkOnPress: () {},
+    btnOkOnPress: () {
+      Navigator.of(context, rootNavigator: true).pop();
+    },
     btnOkColor: Colors.green,
-  ).show();
-}
-
-void _showinfoDialog(BuildContext context, String message, String title) {
-  if (!context.mounted) return;
-
-  AwesomeDialog(
-    context: context,
-    dialogType: DialogType.info,
-    animType: AnimType.rightSlide,
-    title: title,
-    desc: message,
-    btnOkOnPress: () {},
-    btnOkColor: Colors.blue,
   ).show();
 }
 
@@ -360,8 +388,6 @@ Future<void> changeEmail(
   String currentPassword,
   BuildContext context,
 ) async {
-  late AwesomeDialog loadingDialog;
-
   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   if (!emailRegex.hasMatch(newEmail)) {
     _showErrorDialog(context, 'Please enter a valid email address.');
@@ -376,32 +402,7 @@ Future<void> changeEmail(
   }
 
   try {
-    loadingDialog = AwesomeDialog(
-      context: context,
-      dialogType: DialogType.noHeader,
-      animType: AnimType.bottomSlide,
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          children: [
-            SvgPicture.asset("assets/images/logoaji.svg"),
-            SizedBox(height: 16),
-            CircularProgressIndicator(),
-            SizedBox(height: 8),
-            Text('Updating email...'),
-            SizedBox(height: 16),
-          ],
-        ),
-      ),
-      dismissOnTouchOutside: false,
-      dismissOnBackKeyPress: false,
-    )..show();
+    showLoadingDialog(context, "Updating email...");
 
     // Step 1: Re-authenticate the user with their current password
     final credential = EmailAuthProvider.credential(
@@ -414,8 +415,13 @@ Future<void> changeEmail(
     // Step 2: Update the email
     await user.verifyBeforeUpdateEmail(newEmail);
 
+    await FirebaseFirestore.instance
+    .collection('user')
+    .doc(user.uid)
+    .update({'email': user.email});
+
     if (!context.mounted) return;
-    loadingDialog.dismiss();
+    Navigator.of(context, rootNavigator: true).pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.success,
@@ -427,7 +433,7 @@ Future<void> changeEmail(
       },
     ).show();
   } on FirebaseAuthException catch (e) {
-    loadingDialog.dismiss();
+    Navigator.of(context, rootNavigator: true).pop();
     switch (e.code) {
       case 'email-already-in-use':
         _showErrorDialog(
@@ -448,7 +454,7 @@ Future<void> changeEmail(
     }
   } catch (e) {
     if (context.mounted) {
-      loadingDialog.dismiss();
+      Navigator.of(context, rootNavigator: true).pop();
       _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
@@ -459,42 +465,64 @@ Future<void> updateUserPassword(
   String newPassword,
   BuildContext context,
 ) async {
+  // Show loading dialog
+  showLoadingDialog(context, 'Loading...');
   final user = FirebaseAuth.instance.currentUser;
 
   if (user == null) {
+    Navigator.of(context, rootNavigator: true).pop();
     _showErrorDialog(context, "No user is currently signed in.");
     return;
   }
 
   try {
-    // Step 1: Re-authenticate the user
+    // Step 1: Re-authenticate
     final credential = EmailAuthProvider.credential(
       email: user.email!,
       password: currentPassword,
     );
-
     await user.reauthenticateWithCredential(credential);
 
-    // Step 2: Update password
-    await user.updatePassword(newPassword);
+    // Step 2: Check if the new password is different
+    if (currentPassword == newPassword) {
+      Navigator.of(context, rootNavigator: true).pop();
+      _showErrorDialog(context,
+          'The new password must be different from the current password.');
+      return;
+    }
 
-    _showSuccessDialog(context, "Your password has been updated successfully.",
-        "password update");
+    // Step 3: Update password
+    await user.updatePassword(newPassword);
+    Navigator.of(context, rootNavigator: true).pop();
+    // Step 4: Show success
+    _showSuccessDialog(
+      context,
+      "Your password has been updated successfully.",
+      "Password Updated",
+    );
+    Get.back(); // Or Navigator.pop(context) if you're not using GetX
   } on FirebaseAuthException catch (e) {
     switch (e.code) {
       case 'wrong-password':
+        Navigator.of(context, rootNavigator: true).pop();
         _showErrorDialog(context, 'The current password is incorrect.');
         break;
       case 'weak-password':
-        _showErrorDialog(context, 'The new password is too weak.');
+        Navigator.of(context, rootNavigator: true).pop();
+        _showErrorDialog(
+            context, 'The new password is too weak. Try a stronger one.');
         break;
       case 'requires-recent-login':
-        _showErrorDialog(context, 'Please re-login and try again.');
+        Navigator.of(context, rootNavigator: true).pop();
+        _showErrorDialog(
+            context, 'Please log in again and try updating your password.');
         break;
       default:
-        _showErrorDialog(context, 'Error: ${e.message}');
+        Navigator.of(context, rootNavigator: true).pop();
+        _showErrorDialog(context, 'Firebase error: ${e.message}');
     }
   } catch (e) {
+    Navigator.of(context, rootNavigator: true).pop();
     _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
   }
 }
@@ -517,10 +545,6 @@ void showLoadingDialog(BuildContext context, String text) {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SvgPicture.asset(
-              "assets/images/logoaji.svg",
-              width: 80,
-            ),
             const SizedBox(height: 20),
             const CircularProgressIndicator(),
             const SizedBox(height: 10),
@@ -568,7 +592,7 @@ Future<void> signup(
       // Update display name
       await user.updateDisplayName(username);
 
-      // Send verification email
+      // Send email verification
       await user.sendEmailVerification();
 
       // Save user data in Firestore
@@ -581,13 +605,16 @@ Future<void> signup(
         'isEmailVerified': false,
       });
 
-      Navigator.of(context, rootNavigator: true).pop(); // close loading
-      Get.back();
+      // Sign out to prevent unverified access
+      await FirebaseAuth.instance.signOut();
 
-      _showinfoDialog(
-          context,
-          'A verification link has been sent to your email. Please verify your email before logging in.',
-          'Verify Your Email');
+      Navigator.of(context, rootNavigator: true).pop(); // Close loading
+      // Show info dialog
+      _showSuccessDialog(
+        context,
+        'A verification link has been sent to your email. Please verify before logging in.',
+        'Verify Your Email',
+      );
     }
   } on FirebaseAuthException catch (e) {
     Navigator.of(context, rootNavigator: true).pop();
