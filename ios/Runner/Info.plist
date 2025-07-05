@@ -65,5 +65,11 @@
 		<array>
 			<integer>1</integer>
 		</array>
+		<key>NSUserNotificationAlertUsageDescription</key>
+		<string>This app uses alerts to notify you of important updates.</string>
+		<key>NSUserNotificationSoundUsageDescription</key>
+		<string>This app uses sounds for notifications.</string>
+		<key>NSUserNotificationBadgeUsageDescription</key>
+		<string>This app uses badges to indicate the number of unread notifications.</string>
 	</dict>
 </plist>
