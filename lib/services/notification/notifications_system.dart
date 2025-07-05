@@ -138,4 +138,9 @@ class NotificationService {
   Future<void> _subscribeToTopics() async {
     await _messaging.subscribeToTopic('all_users');
   }
+
+  Future<String> getFCMtoken() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    return token!;
+  }
 }

@@ -46,11 +46,14 @@ class WithoutVisaView extends StatelessWidget {
                   SizedBox(
                     width: ScreenSize.width / 30,
                   ),
-                  Text(
-                    controller.selectedvisa.country,
-                    style: TextStyle(
-                        fontSize: ScreenSize.width / 11,
-                        fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      controller.selectedvisa.country,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: ScreenSize.width / 11,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:ajiapp/routing.dart';
+import 'package:ajiapp/services/notification/notifications_system.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -77,6 +78,12 @@ Future<void> login(BuildContext context, String email, String password,
       }
     }
 
+    String FCMTOKEN = await NotificationService.instance.getFCMtoken();
+
+    await FirebaseFirestore.instance
+        .collection("user")
+        .doc(userCredential.user!.uid)
+        .update({"FCMtoken": FCMTOKEN});
     // Save credentials if 'Remember Me' is checked
     if (rememberme) {
       final prefs = await SharedPreferences.getInstance();
@@ -416,9 +423,9 @@ Future<void> changeEmail(
     await user.verifyBeforeUpdateEmail(newEmail);
 
     await FirebaseFirestore.instance
-    .collection('user')
-    .doc(user.uid)
-    .update({'email': user.email});
+        .collection('user')
+        .doc(user.uid)
+        .update({'email': user.email});
 
     if (!context.mounted) return;
     Navigator.of(context, rootNavigator: true).pop();
