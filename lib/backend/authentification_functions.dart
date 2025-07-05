@@ -229,6 +229,7 @@ Future<void> loginWithGoogle(BuildContext context) async {
       return;
     }
 
+    String FCMTOKEN = await NotificationService.instance.getFCMtoken();
     // Obtain authentication details
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
@@ -262,13 +263,14 @@ Future<void> loginWithGoogle(BuildContext context) async {
         'phone': user.phoneNumber ?? '',
         'createdAt': FieldValue.serverTimestamp(),
         'isAdmin': false,
+        "FCMtoken": FCMTOKEN
       });
     } else {
       // User already exists: don't overwrite existing values
       // But optionally update missing fields only (safe merge)
       Map<String, dynamic> existingData = docSnapshot.data() ?? {};
       Map<String, dynamic> updateData = {};
-
+      updateData['FCMtoken'] = FCMTOKEN;
       if ((existingData['username'] ?? '').isEmpty &&
           googleUser.displayName != null) {
         updateData['username'] = googleUser.displayName;
@@ -601,6 +603,7 @@ Future<void> signup(
 
       // Send email verification
       await user.sendEmailVerification();
+      String FCMTOKEN = await NotificationService.instance.getFCMtoken();
 
       // Save user data in Firestore
       await FirebaseFirestore.instance.collection('user').doc(user.uid).set({
@@ -610,6 +613,7 @@ Future<void> signup(
         'createdAt': FieldValue.serverTimestamp(),
         'isAdmin': false,
         'isEmailVerified': false,
+        "FCMtoken": FCMTOKEN
       });
 
       // Sign out to prevent unverified access
