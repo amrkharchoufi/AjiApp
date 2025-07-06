@@ -15,8 +15,6 @@ class user_model {
         email: data["email"] ?? "",
         name: data["username"] ?? "",
         phone: data["phone"] ?? "",
-        country: "unknown"
-        // data["city"] ?? ""
-        );
+        country: data["country"] ?? "unknown");
   }
 }

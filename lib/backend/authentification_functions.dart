@@ -32,7 +32,7 @@ Future<void> login(BuildContext context, String email, String password,
     // // Handle user data
     if (!userSnapshot.exists || userSnapshot.get("isAdmin") == true) {
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'User account not found');
+      showErrorDialog(context, 'User account not found');
       await FirebaseAuth.instance.signOut();
       return;
     }
@@ -57,13 +57,13 @@ Future<void> login(BuildContext context, String email, String password,
           btnOkOnPress: () async {
             try {
               await user.sendEmailVerification();
-              _showSuccessDialog(
+              showSuccessDialog(
                 context,
                 'A new verification link has been sent to your email.',
                 'Email Sent',
               );
             } catch (e) {
-              _showErrorDialog(context, 'Could not send email: $e');
+              showErrorDialog(context, 'Could not send email: $e');
             } finally {
               // 👇 Move signOut here
               await FirebaseAuth.instance.signOut();
@@ -107,13 +107,13 @@ Future<void> login(BuildContext context, String email, String password,
     if (context.mounted) {
       // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Database error: ${e.message}');
+      showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
       // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+      showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
 }
@@ -135,10 +135,10 @@ void _handleAuthError(BuildContext context, FirebaseAuthException e) {
       message = 'Network error. Please check your connection';
       break;
   }
-  _showErrorDialog(context, message);
+  showErrorDialog(context, message);
 }
 
-void _showErrorDialog(BuildContext context, String message) {
+void showErrorDialog(BuildContext context, String message) {
   if (!context.mounted) return;
 
   AwesomeDialog(
@@ -152,7 +152,7 @@ void _showErrorDialog(BuildContext context, String message) {
   ).show();
 }
 
-void _showSuccessDialog(BuildContext context, String message, String title) {
+void showSuccessDialog(BuildContext context, String message, String title) {
   if (!context.mounted) return;
 
   AwesomeDialog(
@@ -192,13 +192,13 @@ Future<void> signout(BuildContext context) async {
     if (context.mounted) {
       // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Database error: ${e.message}');
+      showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
       // Dismiss loading dialog
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+      showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
 }
@@ -225,7 +225,7 @@ Future<void> loginWithGoogle(BuildContext context) async {
     if (googleUser == null) {
       if (!context.mounted) return;
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Google sign-in canceled.');
+      showErrorDialog(context, 'Google sign-in canceled.');
       return;
     }
 
@@ -247,7 +247,7 @@ Future<void> loginWithGoogle(BuildContext context) async {
 
     if (user == null) {
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Authentication failed.');
+      showErrorDialog(context, 'Authentication failed.');
       return;
     }
 
@@ -301,12 +301,12 @@ Future<void> loginWithGoogle(BuildContext context) async {
   } on FirebaseException catch (e) {
     if (context.mounted) {
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Database error: ${e.message}');
+      showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+      showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
 }
@@ -316,7 +316,7 @@ Future<void> resetPassword(String email, BuildContext context) async {
 
   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   if (!emailRegex.hasMatch(email)) {
-    _showErrorDialog(context, 'Please enter a valid email address.');
+    showErrorDialog(context, 'Please enter a valid email address.');
     return;
   }
 
@@ -371,23 +371,23 @@ Future<void> resetPassword(String email, BuildContext context) async {
 
     switch (e.code) {
       case 'user-not-found':
-        _showErrorDialog(context, 'No account found with this email.');
+        showErrorDialog(context, 'No account found with this email.');
         break;
       case 'invalid-email':
-        _showErrorDialog(context, 'Invalid email format.');
+        showErrorDialog(context, 'Invalid email format.');
         break;
       default:
-        _showErrorDialog(context, 'Error: ${e.message}');
+        showErrorDialog(context, 'Error: ${e.message}');
     }
   } on FirebaseException catch (e) {
     if (context.mounted) {
       loadingDialog.dismiss();
-      _showErrorDialog(context, 'Database error: ${e.message}');
+      showErrorDialog(context, 'Database error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
       loadingDialog.dismiss();
-      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+      showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
 }
@@ -399,14 +399,14 @@ Future<void> changeEmail(
 ) async {
   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   if (!emailRegex.hasMatch(newEmail)) {
-    _showErrorDialog(context, 'Please enter a valid email address.');
+    showErrorDialog(context, 'Please enter a valid email address.');
     return;
   }
 
   final user = FirebaseAuth.instance.currentUser;
 
   if (user == null) {
-    _showErrorDialog(context, 'No user is currently logged in.');
+    showErrorDialog(context, 'No user is currently logged in.');
     return;
   }
 
@@ -445,26 +445,26 @@ Future<void> changeEmail(
     Navigator.of(context, rootNavigator: true).pop();
     switch (e.code) {
       case 'email-already-in-use':
-        _showErrorDialog(
+        showErrorDialog(
             context, 'This email is already associated with another account.');
         break;
       case 'invalid-email':
-        _showErrorDialog(context, 'Invalid email format.');
+        showErrorDialog(context, 'Invalid email format.');
         break;
       case 'wrong-password':
-        _showErrorDialog(context, 'The current password is incorrect.');
+        showErrorDialog(context, 'The current password is incorrect.');
         break;
       case 'requires-recent-login':
-        _showErrorDialog(
+        showErrorDialog(
             context, 'You need to re-login to perform this action.');
         break;
       default:
-        _showErrorDialog(context, 'Error: ${e.message}');
+        showErrorDialog(context, 'Error: ${e.message}');
     }
   } catch (e) {
     if (context.mounted) {
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+      showErrorDialog(context, 'Unexpected error: ${e.toString()}');
     }
   }
 }
@@ -480,7 +480,7 @@ Future<void> updateUserPassword(
 
   if (user == null) {
     Navigator.of(context, rootNavigator: true).pop();
-    _showErrorDialog(context, "No user is currently signed in.");
+    showErrorDialog(context, "No user is currently signed in.");
     return;
   }
 
@@ -495,7 +495,7 @@ Future<void> updateUserPassword(
     // Step 2: Check if the new password is different
     if (currentPassword == newPassword) {
       Navigator.of(context, rootNavigator: true).pop();
-      _showErrorDialog(context,
+      showErrorDialog(context,
           'The new password must be different from the current password.');
       return;
     }
@@ -504,7 +504,7 @@ Future<void> updateUserPassword(
     await user.updatePassword(newPassword);
     Navigator.of(context, rootNavigator: true).pop();
     // Step 4: Show success
-    _showSuccessDialog(
+    showSuccessDialog(
       context,
       "Your password has been updated successfully.",
       "Password Updated",
@@ -514,25 +514,25 @@ Future<void> updateUserPassword(
     switch (e.code) {
       case 'wrong-password':
         Navigator.of(context, rootNavigator: true).pop();
-        _showErrorDialog(context, 'The current password is incorrect.');
+        showErrorDialog(context, 'The current password is incorrect.');
         break;
       case 'weak-password':
         Navigator.of(context, rootNavigator: true).pop();
-        _showErrorDialog(
+        showErrorDialog(
             context, 'The new password is too weak. Try a stronger one.');
         break;
       case 'requires-recent-login':
         Navigator.of(context, rootNavigator: true).pop();
-        _showErrorDialog(
+        showErrorDialog(
             context, 'Please log in again and try updating your password.');
         break;
       default:
         Navigator.of(context, rootNavigator: true).pop();
-        _showErrorDialog(context, 'Firebase error: ${e.message}');
+        showErrorDialog(context, 'Firebase error: ${e.message}');
     }
   } catch (e) {
     Navigator.of(context, rootNavigator: true).pop();
-    _showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    showErrorDialog(context, 'Unexpected error: ${e.toString()}');
   }
 }
 
@@ -577,13 +577,8 @@ Future<bool> checkIfUserIsLoggedIn() async {
   return user != null;
 }
 
-Future<void> signup(
-  BuildContext context,
-  String email,
-  String password,
-  String username,
-  String phone,
-) async {
+Future<void> signup(BuildContext context, String email, String password,
+    String username, String phone, String country) async {
   try {
     // Show loading dialog
     showLoadingDialog(context, 'Signing up...');
@@ -613,6 +608,7 @@ Future<void> signup(
         'createdAt': FieldValue.serverTimestamp(),
         'isAdmin': false,
         'isEmailVerified': false,
+        'country': country,
         "FCMtoken": FCMTOKEN
       });
 
@@ -621,7 +617,7 @@ Future<void> signup(
 
       Navigator.of(context, rootNavigator: true).pop(); // Close loading
       // Show info dialog
-      _showSuccessDialog(
+      showSuccessDialog(
         context,
         'A verification link has been sent to your email. Please verify before logging in.',
         'Verify Your Email',
@@ -637,10 +633,10 @@ Future<void> signup(
     } else if (e.code == 'invalid-email') {
       errorMessage = 'Invalid email format.';
     }
-    _showErrorDialog(context, errorMessage);
+    showErrorDialog(context, errorMessage);
   } catch (e) {
     Navigator.of(context, rootNavigator: true).pop();
     debugPrint('Signup error: $e');
-    _showErrorDialog(context, e.toString());
+    showErrorDialog(context, e.toString());
   }
 }

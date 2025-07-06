@@ -19,6 +19,7 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
   final TextEditingController _username = TextEditingController();
   final TextEditingController _phone = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
+  String? selectedCountry;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,27 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
                         icon: Icons.phone_outlined,
                         validatorText: '*Phone number required',
                         Keyboardtype: TextInputType.phone),
+                    const SizedBox(height: 15),
+                    DropdownButtonFormField<String>(
+                      value: selectedCountry,
+                      decoration: InputDecoration(
+                        labelText: 'Country',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      hint: Text('Select a country'),
+                      items: controller.countries.map((country) {
+                        return DropdownMenuItem<String>(
+                          value: country,
+                          child: Text(country),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() => selectedCountry = value!);
+                      },
+                      validator: (value) =>
+                          value == null ? 'Please select a country' : null,
+                    ),
                     const SizedBox(height: 15),
                     _buildTextField(
                       label: 'Email Address',
@@ -144,12 +166,12 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
                             ? () {
                                 if (_formKey.currentState!.validate()) {
                                   signup(
-                                    context,
-                                    _email.text.trim(),
-                                    _pwd.text.trim(),
-                                    _username.text.trim(),
-                                    _phone.text.trim(),
-                                  );
+                                      context,
+                                      _email.text.trim(),
+                                      _pwd.text.trim(),
+                                      _username.text.trim(),
+                                      _phone.text.trim(),
+                                      selectedCountry!);
                                 }
                               }
                             : null,

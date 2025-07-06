@@ -17,6 +17,7 @@ import 'package:ajiapp/services/e-sim_service/view/e-sim_view.dart';
 import 'package:ajiapp/services/followyourteam_service/view/follow_your_team_view.dart';
 import 'package:ajiapp/services/food_service/food_view.dart.dart';
 import 'package:ajiapp/services/onboarding/view/onboarding_view.dart';
+import 'package:ajiapp/services/profile/view/edit_profile_view.dart';
 import 'package:ajiapp/services/profile/view/profile_view.dart';
 import 'package:ajiapp/services/splash/view/splash_view.dart';
 import 'package:ajiapp/services/ticket_service/view/ticket_view.dart';
@@ -159,7 +160,8 @@ List<GetPage> routes = [
     page: () => MapView(),
   ),
   GetPage(name: Routes.STADIUM_DETAILS, page: () => StadiumDetailsView()),
-  GetPage(name: Routes.CHANGE_EMAIL, page: () => ChangeemailView())
+  GetPage(name: Routes.CHANGE_EMAIL, page: () => ChangeemailView()),
+  GetPage(name: Routes.EDIT_PROFILE, page: () => EditProfileView())
 ];
 
 abstract class Routes {
@@ -175,6 +177,7 @@ abstract class Routes {
   static const CREATE_PASSWORD = '/create-password';
   static const VERIFY_EMAIL = '/verify-email';
   static const CHANGE_EMAIL = '/change-email';
+  static const EDIT_PROFILE = '/edit-profile';
 
   // App routes
   static const CLIENT_SPACE = '/client-space';

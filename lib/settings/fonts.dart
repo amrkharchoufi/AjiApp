@@ -1,3 +1,3 @@
-class myFonts{
-  static String fontFamily = 'Nunita';
+class myFonts {
+  static String fontFamily = 'Nunito';
 }

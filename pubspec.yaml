@@ -1,5 +1,5 @@
 name: ajiapp
-description: "A new Flutter project."
+description: "aji app your guide to Morocco"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+7
+version: 1.0.0+8
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
@@ -63,6 +63,7 @@ dependencies:
   lottie: ^3.3.1
   flutter_native_splash: ^2.4.4
   flutter_local_notifications: ^17.2.3
+  connectivity_plus: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -105,9 +106,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-    # - family: Nunita
-    #   fonts:
-    #     - asset: assets/fonts/nunita/NunitoSans-Regular.ttf
+  #   - family: Nunita
+  #     fonts:
+  #       - asset: assets/fonts/nunita/NunitoSans-Regular.ttf
   #       - asset: assets/fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF
   #         style: italic
   #   - family: Trajan Pro

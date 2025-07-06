@@ -1,11 +1,14 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:async';
 import 'package:ajiapp/services/coming-up_service/view/ComingUp_view.dart';
+import 'package:ajiapp/services/common/no_internet_view.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
 import 'package:ajiapp/services/common/available_soon.dart';
 import 'package:ajiapp/services/home/view/homepage_view.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,6 +21,33 @@ class Clientspace extends StatefulWidget {
 
 class ClientspaceState extends State<Clientspace> {
   int _selectedIndex = 0;
+  bool _isConnected = true;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _initConnectivity();
+    _connectivitySubscription =
+        Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  Future<void> _initConnectivity() async {
+    final result = await Connectivity().checkConnectivity();
+    _updateConnectionStatus(result);
+  }
+
+  void _updateConnectionStatus(ConnectivityResult result) {
+    setState(() {
+      _isConnected = result != ConnectivityResult.none;
+    });
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
 
   Widget _getPage(int index) {
     switch (index) {
@@ -70,7 +100,9 @@ class ClientspaceState extends State<Clientspace> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     SizeConfig().init(context);
-
+    if (!_isConnected) {
+      return const NoInternetPage();
+    }
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,

@@ -12,6 +12,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProfileController controller = Get.put(ProfileController());
+    ScreenSize.init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: beige,
@@ -71,30 +72,11 @@ class ProfileView extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        Stack(
-                          children: [
-                            CircleAvatar(
-                              radius: ScreenSize.width / 6,
-                              backgroundImage:
-                                  AssetImage("assets/images/profile.png"),
-                              backgroundColor: ajired,
-                            ),
-                            Positioned(
-                              right: 0,
-                              bottom: 0,
-                              child: Container(
-                                padding: EdgeInsets.all(ScreenSize.width / 40),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(50)),
-                                child: Icon(
-                                  Icons.edit,
-                                  color: ajired,
-                                  size: ScreenSize.width / 18,
-                                ),
-                              ),
-                            ),
-                          ],
+                        CircleAvatar(
+                          radius: ScreenSize.width / 6,
+                          backgroundImage:
+                              AssetImage("assets/images/profile.png"),
+                          backgroundColor: ajired,
                         ),
                         Text(
                           controller.currentuser.name,
@@ -245,17 +227,37 @@ class ProfileView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(14)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: ScreenSize.height / 120,
                         children: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.EDIT_PROFILE);
+                            },
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                "Edit profile",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: ScreenSize.width / 30,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          Divider(),
                           GestureDetector(
                             onTap: () {
                               Get.toNamed(Routes.CREATE_PASSWORD);
                             },
-                            child: Text(
-                              "Change password",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: ScreenSize.width / 30,
-                                  fontWeight: FontWeight.w500),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                "Change password",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: ScreenSize.width / 30,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
                           Divider(),
@@ -263,21 +265,27 @@ class ProfileView extends StatelessWidget {
                             onTap: () {
                               Get.toNamed(Routes.CHANGE_EMAIL);
                             },
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                "Change email",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: ScreenSize.width / 30,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          Divider(),
+                          SizedBox(
+                            width: double.infinity,
                             child: Text(
-                              "Change email",
+                              "Language",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: ScreenSize.width / 30,
                                   fontWeight: FontWeight.w500),
                             ),
-                          ),
-                          Divider(),
-                          Text(
-                            "Language",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: ScreenSize.width / 30,
-                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
