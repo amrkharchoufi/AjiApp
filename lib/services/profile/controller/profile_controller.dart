@@ -242,6 +242,7 @@ class ProfileController extends GetxController {
       Navigator.of(context, rootNavigator: true).pop();
       showErrorDialog(context, e.toString());
     } finally {
+      fetchuser();
       Navigator.of(context, rootNavigator: true).pop();
       showSuccessDialog(
         context,

@@ -1,4 +1,3 @@
-import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/available%20_soon_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +22,9 @@ class AvailableSoon extends StatelessWidget {
                         image: AssetImage("assets/images/background.png"),
                         fit: BoxFit.cover)),
                 child: Column(children: [
+                  SizedBox(
+                    height: ScreenSize.height / 40,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,23 +45,6 @@ class AvailableSoon extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.notifications_outlined,
-                            color: ajired,
-                            size: ScreenSize.width / 12,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.account_circle_outlined,
-                            color: ajired,
-                            size: ScreenSize.width / 12,
-                          )
-                        ],
-                      )
                     ],
                   ),
                   SizedBox(

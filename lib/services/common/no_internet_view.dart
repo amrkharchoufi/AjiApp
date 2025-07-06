@@ -1,5 +1,6 @@
 // lib/services/common/no_internet_view.dart
 import 'package:ajiapp/routing.dart';
+import 'package:ajiapp/settings/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,12 @@ class NoInternetPage extends StatelessWidget {
                     Get.snackbar("Error", "Still no internet connection");
                   }
                 },
-                child: const Text("Retry"),
+                style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(ajired)),
+                child: const Text(
+                  "Retry",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
