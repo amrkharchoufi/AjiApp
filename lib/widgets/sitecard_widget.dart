@@ -1,14 +1,15 @@
 import 'package:ajiapp/settings/size.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class SiteCard extends StatelessWidget {
   final String title;
-  final ImageProvider backgroundImage;
+  final String imageUrl;
 
   const SiteCard({
     super.key,
     required this.title,
-    required this.backgroundImage,
+    required this.imageUrl,
   });
 
   @override
@@ -31,21 +32,22 @@ class SiteCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         child: Stack(
           children: [
-            // Background image
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: backgroundImage,
-                  fit: BoxFit.fill,
-                ),
-              ),
+            // Background image using CachedNetworkImage
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.fill,
+              width: double.infinity,
+              height: double.infinity,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>
+                  const Center(child: Icon(Icons.error)),
             ),
 
             // Gradient overlay
             Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
-                  // This creates the gradient overlay effect
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -76,6 +78,7 @@ class SiteCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: ScreenSize.width / 25,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

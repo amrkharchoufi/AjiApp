@@ -1,9 +1,10 @@
 import 'package:ajiapp/services/coming-up_service/controller/comingup_controller.dart';
+import 'package:ajiapp/services/discover_service/controller/discover_controller.dart';
+import 'package:ajiapp/services/discover_service/view/discover_city.dart';
 import 'package:ajiapp/services/home/controller/home_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/coming-up_service/view/ComingUp_view.dart';
-import 'package:ajiapp/services/common/Discover_view.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
 import 'package:ajiapp/utils/svg_cache.dart';
 import 'package:ajiapp/widgets/matches_widget.dart';
@@ -272,37 +273,68 @@ class HomePage extends StatelessWidget {
 
   // Build the discover section with optimized list
   Widget _buildDiscoverSection() {
+    final DiscoverController controller = Get.find<DiscoverController>();
     return Column(
       children: [
-        SectionHeader(
-          title: "Discover",
-          actionWidget: Discover(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              "Discover",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 15),
         SizedBox(
             height: ScreenSize.height / 3.8,
             child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                spacing: ScreenSize.width / 20,
-                children: [
-                  SizedBox(width: 10),
-                  SiteCard(
-                    title: "Mausoleum of Mohammed V",
-                    backgroundImage: AssetImage("assets/images/city1.png"),
-                  ),
-                  SiteCard(
-                    title: "Hassan Tower",
-                    backgroundImage: AssetImage("assets/images/city2.png"),
-                  ),
-                  SiteCard(
-                    title: "Hassan II Mosque",
-                    backgroundImage: AssetImage("assets/images/mosque.png"),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-            )),
+                scrollDirection: Axis.horizontal,
+                child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return Row(
+                      children: List.generate(5, (index) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            left: index == 0 ? 10 : ScreenSize.width / 20,
+                            right: index == 4 ? 10 : 0,
+                          ),
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey.shade300,
+                            highlightColor: Colors.grey.shade100,
+                            child: Container(
+                              width: ScreenSize.width / 1.5,
+                              height: ScreenSize.height / 3.8,
+                              color: Colors.grey.shade300,
+                            ),
+                          ),
+                        );
+                      }),
+                    );
+                  } else {
+                    return Row(
+                      spacing: ScreenSize.width / 20,
+                      children: [
+                        SizedBox(width: 10),
+                        ...controller.discovers.map((disc) {
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(VisitMorrococityView(city: disc.name));
+                            },
+                            child: SiteCard(
+                              title: disc.name,
+                              imageUrl: disc.imageUrl,
+                            ),
+                          );
+                        }),
+                        SizedBox(width: 10),
+                      ],
+                    );
+                  }
+                }))),
       ],
     );
   }

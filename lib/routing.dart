@@ -161,7 +161,7 @@ List<GetPage> routes = [
   ),
   GetPage(name: Routes.STADIUM_DETAILS, page: () => StadiumDetailsView()),
   GetPage(name: Routes.CHANGE_EMAIL, page: () => ChangeemailView()),
-  GetPage(name: Routes.EDIT_PROFILE, page: () => EditProfileView())
+  GetPage(name: Routes.EDIT_PROFILE, page: () => EditProfileView()),
 ];
 
 abstract class Routes {
