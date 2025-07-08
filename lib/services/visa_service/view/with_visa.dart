@@ -2,10 +2,10 @@ import 'package:ajiapp/services/visa_service/controller/visa_conrtoller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WithVisa extends StatelessWidget {
   const WithVisa({super.key});
@@ -81,15 +81,10 @@ class WithVisa extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
-                AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.infoReverse,
-                  animType: AnimType.rightSlide,
-                  title: 'Available soon',
-                  desc: "this service will be available soon",
-                  btnCancelOnPress: () {},
-                ).show();
+              onPressed: () async {
+                final url = Uri.parse("https://www.acces-maroc.ma/#/");
+
+                await launchUrl(url, mode: LaunchMode.externalApplication);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: ajired,
