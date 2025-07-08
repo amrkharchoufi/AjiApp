@@ -2,6 +2,7 @@ import 'package:ajiapp/services/coming-up_service/controller/comingup_controller
 import 'package:ajiapp/services/discover_service/controller/discover_controller.dart';
 import 'package:ajiapp/services/discover_service/view/discover_city.dart';
 import 'package:ajiapp/services/home/controller/home_controller.dart';
+import 'package:ajiapp/services/tourisme_service/view/visit_morroco_view.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/coming-up_service/view/ComingUp_view.dart';
@@ -276,17 +277,9 @@ class HomePage extends StatelessWidget {
     final DiscoverController controller = Get.find<DiscoverController>();
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              "Discover",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        SectionHeader(
+          title: "Discover",
+          actionWidget: VisitMorrocoView(),
         ),
         const SizedBox(height: 15),
         SizedBox(
@@ -322,7 +315,7 @@ class HomePage extends StatelessWidget {
                         ...controller.discovers.map((disc) {
                           return GestureDetector(
                             onTap: () {
-                              Get.to(VisitMorrococityView(city: disc.name));
+                              Get.to(DiscovercityView(city: disc.name));
                             },
                             child: SiteCard(
                               title: disc.name,

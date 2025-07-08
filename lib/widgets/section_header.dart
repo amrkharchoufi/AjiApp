@@ -1,5 +1,6 @@
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -24,12 +25,7 @@ class SectionHeader extends StatelessWidget {
           GestureDetector(
             onTap: () {
               if (actionWidget == null) return;
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => actionWidget!,
-                ),
-              );
+              Get.to(actionWidget!);
             },
             child: Text("View all",
                 style: TextStyle(

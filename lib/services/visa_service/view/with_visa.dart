@@ -2,6 +2,7 @@ import 'package:ajiapp/services/visa_service/controller/visa_conrtoller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -41,17 +42,6 @@ class WithVisa extends StatelessWidget {
                     controller.selectedvisa.Imageurl,
                     width: ScreenSize.width / 4.5,
                     height: ScreenSize.width / 4.5,
-                    // placeholderBuilder: (context) => Shimmer.fromColors(
-                    //   baseColor: Colors.grey.shade300,
-                    //   highlightColor: Colors.grey.shade100,
-                    //   child: Container(
-                    //     width: ScreenSize.width / 4.5,
-                    //     height: ScreenSize.width / 4.5,
-                    //     decoration: BoxDecoration(
-                    //       shape: BoxShape.circle,
-                    //     ),
-                    //   ),
-                    // ),
                   ),
                   SizedBox(
                     width: ScreenSize.width / 30,
@@ -91,7 +81,16 @@ class WithVisa extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.infoReverse,
+                  animType: AnimType.rightSlide,
+                  title: 'Available soon',
+                  desc: "this service will be available soon",
+                  btnCancelOnPress: () {},
+                ).show();
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: ajired,
                 shape: RoundedRectangleBorder(

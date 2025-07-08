@@ -5,9 +5,9 @@ import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VisitMorrococityView extends GetView<TourismeController> {
+class DiscovercityView extends GetView<TourismeController> {
   final String city;
-  const VisitMorrococityView({super.key, this.city = "All the Country"});
+  const DiscovercityView({super.key, this.city = "All the Country"});
 
   @override
   Widget build(BuildContext context) {
