@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/services/auth/login/controller/login_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/auth/common/forgotpassword_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class LoginBottomSheetView extends StatefulWidget {
@@ -198,12 +201,33 @@ class _LoginBottomSheetViewState extends State<LoginBottomSheetView> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    TextButton(
-                      onPressed: () {
-                        loginWithGoogle(context);
-                      },
-                      child: Text('Login with Google Account',
-                          style: TextStyle(color: ajired)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      spacing: ScreenSize.width / 12,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            loginWithGoogle(context);
+                          },
+                          icon: SvgPicture.asset(
+                            "assets/icons/google-icon.svg",
+                            height: ScreenSize.width / 9,
+                            width: ScreenSize.width / 9,
+                          ),
+                        ),
+                        if (Platform.isIOS)
+                          IconButton(
+                            onPressed: () {
+                              loginWithApple(context);
+                            },
+                            icon: SvgPicture.asset(
+                              "assets/icons/apple-lg.svg",
+                              height: ScreenSize.width / 8.5,
+                              width: ScreenSize.width / 9,
+                            ),
+                          )
+                      ],
                     ),
                   ],
                 ),

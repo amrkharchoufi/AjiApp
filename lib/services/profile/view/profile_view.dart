@@ -277,14 +277,40 @@ class ProfileView extends StatelessWidget {
                             ),
                           ),
                           Divider(),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              "Language",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: ScreenSize.width / 30,
-                                  fontWeight: FontWeight.w500),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: Text('Delete Account'),
+                                  content: Text(
+                                      'Are you sure you want to delete your account permanently?'),
+                                  actions: [
+                                    TextButton(
+                                      child: Text('Cancel'),
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                    ),
+                                    TextButton(
+                                      child: Text('Delete'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        deleteUserAccount(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                "Delete profile",
+                                style: TextStyle(
+                                    color: ajired,
+                                    fontSize: ScreenSize.width / 30,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ),
                         ],

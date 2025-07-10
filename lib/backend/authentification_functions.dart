@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/notification/notifications_system.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 Future<void> login(BuildContext context, String email, String password,
     bool rememberme) async {
@@ -639,4 +642,254 @@ Future<void> signup(BuildContext context, String email, String password,
     debugPrint('Signup error: $e');
     showErrorDialog(context, e.toString());
   }
+}
+
+Future<void> loginWithApple(BuildContext context) async {
+  if (!Platform.isIOS) {
+    showErrorDialog(context, 'Apple Sign-in is only supported on iOS.');
+    return;
+  }
+
+  try {
+    // Show loading dialog
+    showLoadingDialog(context, 'Signing in with Apple...');
+
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+
+    String FCMTOKEN = await NotificationService.instance.getFCMtoken();
+
+    final oauthCredential = OAuthProvider("apple.com").credential(
+      idToken: appleCredential.identityToken,
+      accessToken: appleCredential.authorizationCode,
+    );
+
+    // Sign in with Firebase
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+    final user = userCredential.user;
+
+    if (user == null) {
+      Navigator.of(context, rootNavigator: true).pop();
+      showErrorDialog(context, 'Authentication failed.');
+      return;
+    }
+
+    final userDocRef =
+        FirebaseFirestore.instance.collection('user').doc(user.uid);
+    final docSnapshot = await userDocRef.get();
+
+    final displayName = (appleCredential.givenName != null &&
+            appleCredential.familyName != null)
+        ? '${appleCredential.givenName} ${appleCredential.familyName}'
+        : '';
+
+    final email = user.email ?? appleCredential.email;
+
+    if (!docSnapshot.exists) {
+      // First-time Apple sign-in
+      await userDocRef.set({
+        'username': displayName,
+        'email': email,
+        'phone': user.phoneNumber ?? '',
+        'createdAt': FieldValue.serverTimestamp(),
+        'isAdmin': false,
+        "FCMtoken": FCMTOKEN
+      });
+    } else {
+      // Update only missing fields
+      Map<String, dynamic> existingData = docSnapshot.data() ?? {};
+      Map<String, dynamic> updateData = {};
+      updateData['FCMtoken'] = FCMTOKEN;
+
+      if ((existingData['username'] ?? '').isEmpty && displayName.isNotEmpty) {
+        updateData['username'] = displayName;
+      }
+
+      if ((existingData['email'] ?? '').isEmpty && email != null) {
+        updateData['email'] = email;
+      }
+
+      if ((existingData['phone'] ?? '').isEmpty && user.phoneNumber != null) {
+        updateData['phone'] = user.phoneNumber;
+      }
+
+      if (updateData.isNotEmpty) {
+        await userDocRef.update(updateData);
+      }
+    }
+
+    if (!context.mounted) return;
+    Navigator.of(context, rootNavigator: true).pop();
+
+    Get.offNamed(Routes.PROFILE);
+  } on SignInWithAppleAuthorizationException catch (e) {
+    if (context.mounted) {
+      Navigator.of(context, rootNavigator: true).pop();
+      if (e.code == AuthorizationErrorCode.canceled) {
+        showErrorDialog(context, 'Apple sign-in was canceled.');
+      } else {
+        showErrorDialog(context, 'Apple sign-in error: ${e.message}');
+      }
+    }
+  } on FirebaseAuthException catch (e) {
+    if (context.mounted) {
+      Navigator.of(context, rootNavigator: true).pop();
+      _handleAuthError(context, e);
+    }
+  } on FirebaseException catch (e) {
+    if (context.mounted) {
+      Navigator.of(context, rootNavigator: true).pop();
+      showErrorDialog(context, 'Database error: ${e.message}');
+    }
+  } catch (e) {
+    if (context.mounted) {
+      Navigator.of(context, rootNavigator: true).pop();
+      showErrorDialog(context, 'Unexpected error: ${e.toString()}');
+    }
+  }
+}
+
+Future<void> deleteUserAccount(BuildContext context) async {
+  try {
+    showLoadingDialog(context, 'Deleting your account...');
+
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      Navigator.of(context, rootNavigator: true).pop();
+      showErrorDialog(context, 'No user is currently signed in.');
+      return;
+    }
+
+    // Delete Firestore user doc
+    final docRef = FirebaseFirestore.instance.collection('user').doc(user.uid);
+    await docRef.delete();
+
+    try {
+      await user.delete(); // attempt deletion
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        Navigator.of(context, rootNavigator: true).pop(); // close loader
+        bool reauthSuccess = await _reauthenticateUser(context, user);
+        if (!reauthSuccess) return;
+
+        // Try again after reauthentication
+        showLoadingDialog(context, 'Deleting your account...');
+        await user.delete();
+      } else {
+        rethrow;
+      }
+    }
+
+    await FirebaseAuth.instance.signOut();
+
+    if (!context.mounted) return;
+    Navigator.of(context, rootNavigator: true).pop();
+
+    Get.offAllNamed(Routes.CLIENT_SPACE);
+  } catch (e) {
+    if (context.mounted) {
+      Navigator.of(context, rootNavigator: true).pop();
+      showErrorDialog(context, 'Error deleting account: ${e.toString()}');
+    }
+  }
+}
+
+Future<bool> _reauthenticateUser(BuildContext context, User user) async {
+  try {
+    final providerId = user.providerData.first.providerId;
+
+    if (providerId == 'google.com') {
+      final googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        showErrorDialog(context, 'Google reauthentication canceled.');
+        return false;
+      }
+
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await user.reauthenticateWithCredential(credential);
+      return true;
+    }
+
+    if (providerId == 'apple.com') {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName
+        ],
+      );
+
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      await user.reauthenticateWithCredential(oauthCredential);
+      return true;
+    }
+
+    if (providerId == 'password') {
+      final password = await _promptPasswordDialog(context);
+      if (password == null) {
+        showErrorDialog(
+            context, 'Password is required to delete your account.');
+        return false;
+      }
+
+      final credential = EmailAuthProvider.credential(
+        email: user.email!,
+        password: password,
+      );
+
+      await user.reauthenticateWithCredential(credential);
+      return true;
+    }
+
+    showErrorDialog(
+        context, 'Unsupported authentication provider: $providerId');
+    return false;
+  } catch (e) {
+    showErrorDialog(context, 'Reauthentication failed: ${e.toString()}');
+    return false;
+  }
+}
+
+Future<String?> _promptPasswordDialog(BuildContext context) async {
+  final controller = TextEditingController();
+  return await showDialog<String>(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Re-enter Password'),
+        content: TextField(
+          controller: controller,
+          obscureText: true,
+          decoration: InputDecoration(
+            labelText: 'Password',
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, null),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: Text('Confirm'),
+          ),
+        ],
+      );
+    },
+  );
 }
