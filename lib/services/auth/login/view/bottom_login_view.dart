@@ -187,7 +187,7 @@ class _LoginBottomSheetViewState extends State<LoginBottomSheetView> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 7),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -200,7 +200,7 @@ class _LoginBottomSheetViewState extends State<LoginBottomSheetView> {
                         const Expanded(child: Divider()),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 7),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -217,15 +217,22 @@ class _LoginBottomSheetViewState extends State<LoginBottomSheetView> {
                           ),
                         ),
                         if (Platform.isIOS)
-                          IconButton(
-                            onPressed: () {
-                              loginWithApple(context);
-                            },
-                            icon: SvgPicture.asset(
-                              "assets/icons/apple-lg.svg",
-                              height: ScreenSize.width / 8.5,
-                              width: ScreenSize.width / 9,
-                            ),
+                          Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  loginWithApple(context);
+                                },
+                                icon: SvgPicture.asset(
+                                  "assets/icons/apple-lg.svg",
+                                  height: ScreenSize.width / 8.5,
+                                  width: ScreenSize.width / 9,
+                                ),
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 70,
+                              )
+                            ],
                           )
                       ],
                     ),

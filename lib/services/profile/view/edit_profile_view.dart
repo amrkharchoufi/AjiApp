@@ -22,10 +22,10 @@ class _EditProfileViewState extends State<EditProfileView> {
   String? selectedCountry;
   @override
   void initState() {
-    _username.text = controller.currentuser.name;
-    _phone.text = controller.currentuser.phone;
-    if (controller.currentuser.country != "unknown") {
-      selectedCountry = controller.currentuser.country;
+    _username.text = controller.currentuser.value.name;
+    _phone.text = controller.currentuser.value.phone;
+    if (controller.currentuser.value.country != "unknown") {
+      selectedCountry = controller.currentuser.value.country;
     }
     super.initState();
   }

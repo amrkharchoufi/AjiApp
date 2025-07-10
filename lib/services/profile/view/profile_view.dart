@@ -79,7 +79,7 @@ class ProfileView extends StatelessWidget {
                           backgroundColor: ajired,
                         ),
                         Text(
-                          controller.currentuser.name,
+                          controller.currentuser.value.name,
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: ScreenSize.width / 22,
@@ -119,7 +119,7 @@ class ProfileView extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  controller.currentuser.phone,
+                                  controller.currentuser.value.phone,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       color: Colors.black,
@@ -141,7 +141,7 @@ class ProfileView extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  controller.currentuser.email,
+                                  controller.currentuser.value.email,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       color: Colors.black,
@@ -168,7 +168,7 @@ class ProfileView extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  controller.currentuser.country,
+                                  controller.currentuser.value.country,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       color: Colors.black,

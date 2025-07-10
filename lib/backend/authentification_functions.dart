@@ -576,8 +576,26 @@ void showLoadingDialog(BuildContext context, String text) {
 }
 
 Future<bool> checkIfUserIsLoggedIn() async {
-  User? user = FirebaseAuth.instance.currentUser;
-  return user != null;
+  final user = FirebaseAuth.instance.currentUser;
+
+  if (user == null) return false;
+
+  try {
+    await user.reload(); // ⬅️ Refresh session with server
+    final refreshedUser = FirebaseAuth.instance.currentUser;
+
+    // Check if user still exists (after reload)
+    return refreshedUser != null;
+  } on FirebaseAuthException catch (e) {
+    // If user was deleted, Firebase may throw an error
+    if (e.code == 'user-not-found') {
+      await FirebaseAuth.instance.signOut(); // cleanup
+      return false;
+    }
+    rethrow;
+  } catch (_) {
+    return false;
+  }
 }
 
 Future<void> signup(BuildContext context, String email, String password,

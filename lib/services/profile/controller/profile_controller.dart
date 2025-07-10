@@ -9,7 +9,12 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   final RxBool isLoading = true.obs;
-  late user_model currentuser;
+  final Rx<user_model> currentuser = user_model(
+    email: '',
+    phone: '',
+    name: '',
+    country: 'unknown',
+  ).obs;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final List<String> countries = [
     'Afghanistan',
@@ -220,7 +225,7 @@ class ProfileController extends GetxController {
       User? user = FirebaseAuth.instance.currentUser;
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
           await _firestore.collection('user').doc(user!.uid).get();
-      currentuser =
+      currentuser.value =
           user_model.fromFirestore(snapshot.data() as Map<String, dynamic>);
     } catch (e) {
       // print(e.toString());
@@ -242,7 +247,7 @@ class ProfileController extends GetxController {
       Navigator.of(context, rootNavigator: true).pop();
       showErrorDialog(context, e.toString());
     } finally {
-      fetchuser();
+      await fetchuser();
       Navigator.of(context, rootNavigator: true).pop();
       showSuccessDialog(
         context,
