@@ -1,6 +1,7 @@
 import 'package:ajiapp/services/profile/controller/profile_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -167,25 +168,49 @@ class _EditProfileViewState extends State<EditProfileView> {
                         SizedBox(
                           height: ScreenSize.height / 120,
                         ),
-                        DropdownButtonFormField<String>(
+                        DropdownButtonFormField2<String>(
                           value: selectedCountry,
                           decoration: InputDecoration(
                             labelText: 'Country',
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          hint: Text('Select a country'),
+                          hint: const Text('Select a country'),
+                          isExpanded: true,
                           items: controller.countries.map((country) {
                             return DropdownMenuItem<String>(
                               value: country,
-                              child: Text(country),
+                              child: Text(
+                                country,
+                                style: const TextStyle(fontSize: 14),
+                              ),
                             );
                           }).toList(),
                           onChanged: (value) {
-                            setState(() => selectedCountry = value!);
+                            setState(() {
+                              selectedCountry = value!;
+                            });
                           },
                           validator: (value) =>
                               value == null ? 'Please select a country' : null,
+
+                          // ✅ Use this instead of dropdownDecoration
+                          dropdownStyleData: DropdownStyleData(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 8,
+                                  offset: Offset(0, 4),
+                                )
+                              ],
+                            ),
+                            maxHeight: ScreenSize.height / 4,
+                            width: ScreenSize.width / 1.5,
+                          ),
                         ),
                         const SizedBox(height: 15),
                       ],

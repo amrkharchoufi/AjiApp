@@ -118,13 +118,16 @@ class ProfileView extends StatelessWidget {
                                       fontSize: ScreenSize.width / 32,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text(
-                                  controller.currentuser.value.phone,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: ScreenSize.width / 32,
-                                      fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  width: ScreenSize.width / 4,
+                                  child: Text(
+                                    controller.currentuser.value.phone,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenSize.width / 32,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ),
@@ -140,13 +143,16 @@ class ProfileView extends StatelessWidget {
                                       fontSize: ScreenSize.width / 32,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text(
-                                  controller.currentuser.value.email,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: ScreenSize.width / 32,
-                                      fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  width: ScreenSize.width / 2.3,
+                                  child: Text(
+                                    controller.currentuser.value.email,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenSize.width / 32,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ),
@@ -167,13 +173,16 @@ class ProfileView extends StatelessWidget {
                                       fontSize: ScreenSize.width / 32,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text(
-                                  controller.currentuser.value.country,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: ScreenSize.width / 32,
-                                      fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  width: ScreenSize.width / 6,
+                                  child: Text(
+                                    controller.currentuser.value.country,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenSize.width / 32,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ),
@@ -189,12 +198,15 @@ class ProfileView extends StatelessWidget {
                                       fontSize: ScreenSize.width / 30,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text(
-                                  "English",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: ScreenSize.width / 30,
-                                      fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  width: ScreenSize.width / 8,
+                                  child: Text(
+                                    "English",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenSize.width / 30,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ),
