@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/auth/login/view/bottom_login_view.dart';
@@ -104,7 +106,9 @@ class HomeController extends GetxController
       backgroundColor: Colors.transparent,
       builder: (context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.6,
+          height: Platform.isIOS == true
+              ? MediaQuery.of(context).size.height * 0.7
+              : MediaQuery.of(context).size.height * 0.6,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(25)),

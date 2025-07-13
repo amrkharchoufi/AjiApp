@@ -1,8 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:io';
+
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/map_service/controller/map_controller.dart';
 import 'package:ajiapp/widgets/hotel_map_widget.dart';
+import 'package:apple_maps_flutter/apple_maps_flutter.dart' as apple;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -93,46 +96,84 @@ class _MapViewState extends State<MapView> {
           // 1) GoogleMap wrapped in Obx so it rebuilds once `positions` is ready:
           Obx(() {
             final List<LatLng> posList = controller.positions;
-            final Set<Marker> markers = {};
 
-            for (int i = 0; i < posList.length; i++) {
-              final loc = posList[i];
-              markers.add(
-                Marker(
-                  markerId: MarkerId('hotel_marker_$i'),
-                  position: loc,
-                  onTap: () {
-                    // Find the corresponding hotel index by matching Lat/Lng
-                    final int hotelIndex =
-                        controller.filteredHotels.indexWhere((hotel) {
-                      return hotel.location.latitude == loc.latitude &&
-                          hotel.location.longitude == loc.longitude;
-                    });
-                    if (hotelIndex != -1) {
-                      _scrollToIndex(hotelIndex);
-                    }
+            if (Platform.isIOS) {
+              final Set<apple.Annotation> appleMarkers = {};
+
+              for (int i = 0; i < posList.length; i++) {
+                final loc = posList[i];
+                appleMarkers.add(
+                  apple.Annotation(
+                    annotationId: apple.AnnotationId('hotel_marker_$i'),
+                    position: apple.LatLng(loc.latitude, loc.longitude),
+                    onTap: () {
+                      final int hotelIndex =
+                          controller.filteredHotels.indexWhere((hotel) {
+                        return hotel.location.latitude == loc.latitude &&
+                            hotel.location.longitude == loc.longitude;
+                      });
+                      if (hotelIndex != -1) {
+                        _scrollToIndex(hotelIndex);
+                      }
+                    },
+                  ),
+                );
+              }
+
+              return SizedBox.expand(
+                child: apple.AppleMap(
+                  initialCameraPosition: apple.CameraPosition(
+                    target: posList.isNotEmpty
+                        ? apple.LatLng(
+                            posList[0].latitude, posList[0].longitude)
+                        : const apple.LatLng(31.7917, -7.0926),
+                    zoom: 6,
+                  ),
+                  annotations: appleMarkers,
+                  onMapCreated: (apple.AppleMapController controller) {
+                    // No need to store AppleMap controller unless needed
                   },
                 ),
               );
-            }
+            } else {
+              final Set<Marker> googleMarkers = {};
 
-            return SizedBox.expand(
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  // list of all theLatlong
-                  target: posList.isNotEmpty
-                      ? posList[0]
-                      : const LatLng(
-                          31.7917, -7.0926), // Default to Morocco center
-                  zoom: 6,
+              for (int i = 0; i < posList.length; i++) {
+                final loc = posList[i];
+                googleMarkers.add(
+                  Marker(
+                    markerId: MarkerId('hotel_marker_$i'),
+                    position: loc,
+                    onTap: () {
+                      final int hotelIndex =
+                          controller.filteredHotels.indexWhere((hotel) {
+                        return hotel.location.latitude == loc.latitude &&
+                            hotel.location.longitude == loc.longitude;
+                      });
+                      if (hotelIndex != -1) {
+                        _scrollToIndex(hotelIndex);
+                      }
+                    },
+                  ),
+                );
+              }
+
+              return SizedBox.expand(
+                child: GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: posList.isNotEmpty
+                        ? posList[0]
+                        : const LatLng(31.7917, -7.0926),
+                    zoom: 6,
+                  ),
+                  onMapCreated: (GoogleMapController gmController) {
+                    _mapController = gmController;
+                  },
+                  markers: googleMarkers,
+                  cloudMapId: 'cd31d568b85381c8e142ab30',
                 ),
-                onMapCreated: (GoogleMapController gmController) {
-                  _mapController = gmController;
-                },
-                markers: markers,
-                cloudMapId: 'cd31d568b85381c8e142ab30',
-              ),
-            );
+              );
+            }
           }),
 
           // Filter section at the top

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:ajiapp/backend/authentification_functions.dart';
@@ -201,39 +203,69 @@ class _LoginBottomSheetViewState extends State<LoginBottomSheetView> {
                       ],
                     ),
                     const SizedBox(height: 7),
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: ScreenSize.width / 12,
+                      spacing: ScreenSize.height / 40,
                       children: [
-                        IconButton(
+                        if (Platform.isIOS)
+                          MaterialButton(
+                            onPressed: () {
+                              loginWithGoogle(context);
+                            },
+                            color: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height: ScreenSize.height / 15,
+                            minWidth: ScreenSize.width / 2,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: ScreenSize.width / 40,
+                              children: [
+                                SvgPicture.asset(
+                                    color: Colors.white,
+                                    height: ScreenSize.height / 30,
+                                    width: ScreenSize.width / 5,
+                                    "assets/icons/apple-lg.svg"),
+                                Text(
+                                  "Sign in with Apple",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: ScreenSize.width / 28,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        MaterialButton(
                           onPressed: () {
                             loginWithGoogle(context);
                           },
-                          icon: SvgPicture.asset(
-                            "assets/icons/google-icon.svg",
-                            height: ScreenSize.width / 9,
-                            width: ScreenSize.width / 9,
+                          color: beige,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        ),
-                        if (Platform.isIOS)
-                          Column(
+                          height: ScreenSize.height / 15,
+                          minWidth: ScreenSize.width / 2,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            spacing: ScreenSize.width / 40,
                             children: [
-                              IconButton(
-                                onPressed: () {
-                                  loginWithApple(context);
-                                },
-                                icon: SvgPicture.asset(
-                                  "assets/icons/apple-lg.svg",
-                                  height: ScreenSize.width / 8.5,
-                                  width: ScreenSize.width / 9,
+                              SvgPicture.asset(
+                                  height: ScreenSize.height / 30,
+                                  width: ScreenSize.width / 5,
+                                  "assets/icons/google-icon.svg"),
+                              Text(
+                                "Sign in with Google",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: ScreenSize.width / 28,
                                 ),
                               ),
-                              SizedBox(
-                                height: ScreenSize.width / 70,
-                              )
                             ],
-                          )
+                          ),
+                        ),
                       ],
                     ),
                   ],
