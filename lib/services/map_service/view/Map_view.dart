@@ -1,8 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:io';
-
-import 'package:ajiapp/routing.dart';
+import 'package:ajiapp/services/home/controller/home_controller.dart';
 import 'package:ajiapp/services/map_service/controller/map_controller.dart';
 import 'package:ajiapp/widgets/hotel_map_widget.dart';
 import 'package:apple_maps_flutter/apple_maps_flutter.dart' as apple;
@@ -22,8 +21,10 @@ class MapView extends StatefulWidget {
 class _MapViewState extends State<MapView> {
   final MapController controller = Get.put(MapController());
   final ScrollController _scrollController = ScrollController();
+  final HomeController controllerhome = Get.find<HomeController>();
 
   GoogleMapController? _mapController;
+  apple.AppleMapController? _appleMapController;
 
   /// Animate the horizontal ListView so that the card at [index] is perfectly centered.
   void _scrollToIndex(int index) {
@@ -72,7 +73,7 @@ class _MapViewState extends State<MapView> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.toNamed(Routes.NOTIFICATION);
+              controllerhome.checklogin(context, 1);
             },
             icon: Icon(
               Icons.notifications_outlined,
@@ -81,7 +82,9 @@ class _MapViewState extends State<MapView> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              controllerhome.checklogin(context, 0);
+            },
             icon: Icon(
               Icons.account_circle_outlined,
               color: ajired,
@@ -131,7 +134,7 @@ class _MapViewState extends State<MapView> {
                   ),
                   annotations: appleMarkers,
                   onMapCreated: (apple.AppleMapController controller) {
-                    // No need to store AppleMap controller unless needed
+                    _appleMapController = controller;
                   },
                 ),
               );
@@ -207,16 +210,30 @@ class _MapViewState extends State<MapView> {
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                           onTap: () async {
-                            // Center the map when a card is tapped:
-                            await _mapController?.animateCamera(
-                              CameraUpdate.newCameraPosition(
-                                CameraPosition(
-                                  target: hotel.location,
-                                  zoom: 17,
+                            final target = hotel.location;
+
+                            if (Platform.isIOS && _appleMapController != null) {
+                              await _appleMapController!.moveCamera(
+                                apple.CameraUpdate.newCameraPosition(
+                                  apple.CameraPosition(
+                                    target: apple.LatLng(
+                                        target.latitude, target.longitude),
+                                    zoom: 17,
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
+                            } else {
+                              await _mapController?.animateCamera(
+                                CameraUpdate.newCameraPosition(
+                                  CameraPosition(
+                                    target: target,
+                                    zoom: 17,
+                                  ),
+                                ),
+                              );
+                            }
                           },
+
                           // 3) Wrap each card in a SizedBox(width:280.0) so we know its exact width:
                           child: SizedBox(
                             width: 280.0,

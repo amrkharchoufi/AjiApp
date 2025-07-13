@@ -211,7 +211,7 @@ class _LoginBottomSheetViewState extends State<LoginBottomSheetView> {
                         if (Platform.isIOS)
                           MaterialButton(
                             onPressed: () {
-                              loginWithGoogle(context);
+                              loginWithApple(context);
                             },
                             color: Colors.black,
                             shape: RoundedRectangleBorder(
