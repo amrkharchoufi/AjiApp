@@ -67,6 +67,7 @@ dependencies:
   sign_in_with_apple: ^7.0.1
   dropdown_button2: ^2.3.9
   apple_maps_flutter: ^1.4.0
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

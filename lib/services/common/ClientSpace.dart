@@ -6,7 +6,6 @@ import 'package:ajiapp/services/common/no_internet_view.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/services/common/Service_view.dart';
-import 'package:ajiapp/services/common/available_soon.dart';
 import 'package:ajiapp/services/home/view/homepage_view.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -57,8 +56,6 @@ class ClientspaceState extends State<Clientspace> {
         return ComingUp();
       case 2:
         return const ServiceView();
-      case 3:
-        return const AvailableSoon();
       default:
         return const HomePage();
     }
@@ -156,17 +153,6 @@ class ClientspaceState extends State<Clientspace> {
                 ajired,
               ),
               label: 'Services',
-            ),
-            BottomNavigationBarItem(
-              icon: _getSvg(
-                "assets/icons/search_icon.svg",
-                Colors.brown,
-              ),
-              activeIcon: _getSvgactive(
-                "assets/icons/search_icon.svg",
-                ajired,
-              ),
-              label: 'Search',
             ),
           ],
         ),

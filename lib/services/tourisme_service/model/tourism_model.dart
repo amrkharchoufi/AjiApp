@@ -14,6 +14,7 @@ class TouristSpot {
   final String history; // Detailed historical information
   final double latitude; // For map view
   final double longitude; // For map view
+  final int likescount;
 
   TouristSpot({
     required this.id,
@@ -28,7 +29,8 @@ class TouristSpot {
     this.openingHours = "6:30 AM–10:45 PM", // Default value
     this.history = "", // Default value
     this.latitude = 0.0, // Default value
-    this.longitude = 0.0, // Default value
+    this.longitude = 0.0,
+    this.likescount = 0, // Default value
   });
 
   factory TouristSpot.fromFirestore(
@@ -48,6 +50,7 @@ class TouristSpot {
       history: data['history'] ?? '',
       latitude: (data['latitude'] ?? 0.0).toDouble(),
       longitude: (data['longitude'] ?? 0.0).toDouble(),
+      likescount: (data['likesCount'] ?? 0).toInt(),
     );
   }
 }

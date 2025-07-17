@@ -3,8 +3,8 @@
 import 'dart:io';
 
 import 'package:ajiapp/backend/authentification_functions.dart';
-import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
-import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
+import 'package:ajiapp/services/accomodation_service/controller/hotel_controller.dart';
+import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
@@ -16,20 +16,19 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class VisitMorrocoRedMoreView extends StatefulWidget {
-  final TouristSpot spot;
+class ViewMoreHotelView extends StatefulWidget {
+  final Hotel_model spot;
 
-  const VisitMorrocoRedMoreView({
+  const ViewMoreHotelView({
     super.key,
     required this.spot,
   });
 
   @override
-  State<VisitMorrocoRedMoreView> createState() =>
-      _VisitMorrocoRedMoreViewState();
+  State<ViewMoreHotelView> createState() => _ViewMoreHotelViewState();
 }
 
-class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
+class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
   late GoogleMapController _mapController;
   bool _isMapReady = false;
 
@@ -39,13 +38,15 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
   void initState() {
     super.initState();
     // Add marker for the tourist spot
-    if (widget.spot.latitude != 0 && widget.spot.longitude != 0) {
+    if (widget.spot.location.latitude != 0 &&
+        widget.spot.location.longitude != 0) {
       _markers.add(
         Marker(
           markerId: MarkerId(widget.spot.id),
-          position: LatLng(widget.spot.latitude, widget.spot.longitude),
+          position: LatLng(
+              widget.spot.location.latitude, widget.spot.location.longitude),
           infoWindow: InfoWindow(
-            title: widget.spot.name,
+            title: widget.spot.title,
             snippet: widget.spot.city,
           ),
         ),
@@ -58,19 +59,9 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
     return url.startsWith('http://') || url.startsWith('https://');
   }
 
-  // Open in maps app
-  Future<void> _openInMaps() async {
-    if (widget.spot.latitude == 0 || widget.spot.longitude == 0) return;
-
-    final url =
-        'https://www.google.com/maps/search/?api=1&query=${widget.spot.latitude},${widget.spot.longitude}';
-
-    await launch(url);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final TourismeController controller = Get.find<TourismeController>();
+    final HotelController controller = Get.find<HotelController>();
     ScreenSize.init(context);
     return Scaffold(
       body: Container(
@@ -225,7 +216,7 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                             children: [
                               // Title
                               Text(
-                                widget.spot.name,
+                                widget.spot.title,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: ScreenSize.width / 15,
@@ -259,10 +250,10 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                               // Opening hours
                               Row(
                                 children: [
-                                  Icon(Icons.watch_later_outlined),
+                                  Icon(Icons.attach_money),
                                   SizedBox(width: 5),
                                   Text(
-                                    widget.spot.openingHours,
+                                    widget.spot.price,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: ScreenSize.width / 35,
@@ -275,28 +266,28 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                               ),
 
                               // Rating
-                              Row(
-                                children: [
-                                  Text(
-                                    widget.spot.rating,
-                                    style: TextStyle(
-                                      fontSize: ScreenSize.width / 25,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                  ),
-                                  Text(
-                                    "(${widget.spot.ratingCount})",
-                                    style: TextStyle(
-                                      fontSize: ScreenSize.width / 30,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              // Row(
+                              //   children: [
+                              //     Text(
+                              //       widget.spot.rating,
+                              //       style: TextStyle(
+                              //         fontSize: ScreenSize.width / 25,
+                              //         color: Colors.black,
+                              //       ),
+                              //     ),
+                              //     Icon(
+                              //       Icons.star,
+                              //       color: Colors.yellow,
+                              //     ),
+                              //     Text(
+                              //       "(${widget.spot.ratingCount})",
+                              //       style: TextStyle(
+                              //         fontSize: ScreenSize.width / 30,
+                              //         color: Colors.black,
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                               SizedBox(
                                 height: ScreenSize.width / 40,
                               ),
@@ -319,34 +310,11 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                 height: ScreenSize.width / 20,
                               ),
 
-                              // Entry Fee
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: gold.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  widget.spot.entryFee,
-                                  style: TextStyle(
-                                    color: gold,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: ScreenSize.width / 35,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: ScreenSize.width / 20,
-                              ),
-
                               // History section title
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "History",
+                                  "Description",
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: ScreenSize.width / 20,
@@ -360,9 +328,9 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
 
                               // History content
                               Text(
-                                widget.spot.history.isNotEmpty
-                                    ? widget.spot.history
-                                    : "No historical information available.",
+                                widget.spot.description.isNotEmpty
+                                    ? widget.spot.description
+                                    : "No information available.",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: ScreenSize.width / 35,
@@ -374,8 +342,8 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                               ),
 
                               // Map section (if coordinates are available)
-                              if (widget.spot.latitude != 0 &&
-                                  widget.spot.longitude != 0) ...[
+                              if (widget.spot.location.latitude != 0 &&
+                                  widget.spot.location.longitude != 0) ...[
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
@@ -404,8 +372,10 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                               initialCameraPosition:
                                                   apple.CameraPosition(
                                                 target: apple.LatLng(
-                                                    widget.spot.latitude,
-                                                    widget.spot.longitude),
+                                                    widget
+                                                        .spot.location.latitude,
+                                                    widget.spot.location
+                                                        .longitude),
                                                 zoom: 14,
                                               ),
                                               annotations: {
@@ -414,8 +384,10 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                                       apple.AnnotationId(
                                                           widget.spot.id),
                                                   position: apple.LatLng(
-                                                      widget.spot.latitude,
-                                                      widget.spot.longitude),
+                                                      widget.spot.location
+                                                          .latitude,
+                                                      widget.spot.location
+                                                          .longitude),
                                                 ),
                                               },
                                             )
@@ -423,8 +395,10 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                               initialCameraPosition:
                                                   CameraPosition(
                                                 target: LatLng(
-                                                    widget.spot.latitude,
-                                                    widget.spot.longitude),
+                                                    widget
+                                                        .spot.location.latitude,
+                                                    widget.spot.location
+                                                        .longitude),
                                                 zoom: 14,
                                               ),
                                               markers: _markers,
@@ -443,7 +417,12 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
 
                               // View on Map button
                               ElevatedButton.icon(
-                                onPressed: _openInMaps,
+                                onPressed: () async {
+                                  final url = Uri.parse(widget.spot.Link);
+
+                                  await launchUrl(url,
+                                      mode: LaunchMode.externalApplication);
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: ajired,
                                   shape: RoundedRectangleBorder(
@@ -459,7 +438,7 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                   color: Colors.white,
                                 ),
                                 label: Text(
-                                  "View On Map",
+                                  "Book now",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,

@@ -1,11 +1,9 @@
-import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
-import 'package:ajiapp/services/tourisme_service/view/visit_morroco_city.dart';
+import 'package:ajiapp/services/discover_service/view/discover_visit_morroco_version.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class DiscovercityView extends GetView<TourismeController> {
+class DiscovercityView extends StatelessWidget {
   final String city;
   const DiscovercityView({super.key, this.city = "All the Country"});
 

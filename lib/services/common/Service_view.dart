@@ -35,7 +35,7 @@ class _ServiceViewState extends State<ServiceView> {
               height: ScreenSize.height / 10,
             ),
             ServicesWidget(
-              rownb: 3,
+              rownb: 2,
             )
           ],
         ),

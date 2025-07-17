@@ -16,6 +16,7 @@ class ProfileController extends GetxController {
     country: 'unknown',
   ).obs;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   final List<String> countries = [
     'Afghanistan',
     'Albania',

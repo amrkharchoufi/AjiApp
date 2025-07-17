@@ -53,8 +53,8 @@ class MapController extends GetxController {
       cities.add('All Cities');
 
       for (var doc in snapshot.docs) {
-        final hotel =
-            Hotel_model.fromFirestore(doc.data() as Map<String, dynamic>);
+        final hotel = Hotel_model.fromFirestore(
+            doc.data() as Map<String, dynamic>, doc.id);
         hotels.add(hotel);
         positions.add(hotel.location);
 

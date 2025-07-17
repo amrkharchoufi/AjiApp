@@ -1,9 +1,10 @@
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
+import 'package:ajiapp/services/accomodation_service/view/view_more_hotel_view.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:get/get.dart';
 
 class HotelWidget extends StatelessWidget {
   // Touristhotel object is required
@@ -162,11 +163,8 @@ class HotelWidget extends StatelessWidget {
                         height: ScreenSize.width / 50,
                       ),
                       MaterialButton(
-                        onPressed: () async {
-                          final url = Uri.parse(hotel.Link);
-
-                          await launchUrl(url,
-                              mode: LaunchMode.externalApplication);
+                        onPressed: () {
+                          Get.to(ViewMoreHotelView(spot: hotel));
                         },
                         color: ajired,
                         shape: RoundedRectangleBorder(
@@ -175,7 +173,7 @@ class HotelWidget extends StatelessWidget {
                         minWidth: SizeConfig.getBlockSizeHorizontal(35),
                         height: SizeConfig.getBlockSizeVertical(3),
                         child: Text(
-                          "Book Now",
+                          "Learn More",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
