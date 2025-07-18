@@ -26,6 +26,7 @@ class TourismeController extends GetxController {
   final RxBool isLoadingCities = true.obs;
   final RxBool isLoadingSpots = true.obs;
   final RxBool isLoadingTours = true.obs;
+  final RxBool isinteractionloading = true.obs;
   RxMap<String, bool> likedSpots = <String, bool>{}.obs;
   RxMap<String, bool> savedSpots = <String, bool>{}.obs;
   var likeCounts = <String, RxInt>{}.obs;
@@ -238,20 +239,25 @@ class TourismeController extends GetxController {
   }
 
   Future<void> loadUserInteractions() async {
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-    final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
-    final snapshot = await userRef.get();
+    try {
+      isinteractionloading.value = true;
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+      final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
+      final snapshot = await userRef.get();
 
-    if (snapshot.exists) {
-      final data = snapshot.data();
+      if (snapshot.exists) {
+        final data = snapshot.data();
 
-      final Map<String, dynamic>? liked = data?['likedSpots'];
-      final Map<String, dynamic>? saved = data?['savedSpots'];
+        final Map<String, dynamic>? liked = data?['likedSpots'];
+        final Map<String, dynamic>? saved = data?['savedSpots'];
 
-      likedSpots.assignAll(
-          liked?.map((key, value) => MapEntry(key, value == true)) ?? {});
-      savedSpots.assignAll(
-          saved?.map((key, value) => MapEntry(key, value == true)) ?? {});
+        likedSpots.assignAll(
+            liked?.map((key, value) => MapEntry(key, value == true)) ?? {});
+        savedSpots
+            .assignAll(saved?.map((key, value) => MapEntry(key, true)) ?? {});
+      }
+    } finally {
+      isinteractionloading.value = false;
     }
   }
 
@@ -300,19 +306,22 @@ class TourismeController extends GetxController {
   }
 
   Future<void> toggleSave(String spotId) async {
+    String type = "Tourisme";
     String userId = FirebaseAuth.instance.currentUser!.uid;
-    final isSaved = savedSpots[spotId] ?? false;
-
     final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
+    final isSaved = savedSpots.containsKey(spotId);
 
     if (!isSaved) {
+      // Save the spot with its type (e.g., "tourist_spot" or "accommodation")
       await userRef.set({
-        'savedSpots': {spotId: true}
+        'savedSpots': {spotId: type}
       }, SetOptions(merge: true));
-      savedSpots[spotId] = true; // update after success
+
+      savedSpots[spotId] = true;
     } else {
+      // Remove the spot
       await userRef.update({'savedSpots.$spotId': FieldValue.delete()});
-      savedSpots.remove(spotId); // or savedSpots[spotId] = false;
+      savedSpots.remove(spotId);
     }
   }
 

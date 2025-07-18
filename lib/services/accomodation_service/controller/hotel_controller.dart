@@ -101,8 +101,8 @@ class HotelController extends GetxController {
 
       likedSpots.assignAll(
           liked?.map((key, value) => MapEntry(key, value == true)) ?? {});
-      savedSpots.assignAll(
-          saved?.map((key, value) => MapEntry(key, value == true)) ?? {});
+      savedSpots
+          .assignAll(saved?.map((key, value) => MapEntry(key, true)) ?? {});
     }
   }
 
@@ -151,19 +151,22 @@ class HotelController extends GetxController {
   }
 
   Future<void> toggleSave(String spotId) async {
+    String type = "Accommodation";
     String userId = FirebaseAuth.instance.currentUser!.uid;
-    final isSaved = savedSpots[spotId] ?? false;
-
     final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
+    final isSaved = savedSpots.containsKey(spotId);
 
     if (!isSaved) {
+      // Save the spot with its type (e.g., "tourist_spot" or "accommodation")
       await userRef.set({
-        'savedSpots': {spotId: true}
+        'savedSpots': {spotId: type}
       }, SetOptions(merge: true));
-      savedSpots[spotId] = true; // update after success
+
+      savedSpots[spotId] = true;
     } else {
+      // Remove the spot
       await userRef.update({'savedSpots.$spotId': FieldValue.delete()});
-      savedSpots.remove(spotId); // or savedSpots[spotId] = false;
+      savedSpots.remove(spotId);
     }
   }
 

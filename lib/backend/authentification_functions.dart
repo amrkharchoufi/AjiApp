@@ -184,7 +184,7 @@ Future<void> signout(BuildContext context) async {
 
     // Dismiss loading dialog
     Navigator.of(context, rootNavigator: true).pop();
-    Get.back();
+    Get.offNamedUntil(Routes.CLIENT_SPACE, (route) => false);
   } on FirebaseAuthException catch (e) {
     if (context.mounted) {
       // Dismiss loading dialog

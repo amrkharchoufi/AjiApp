@@ -1,6 +1,7 @@
 import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/routing.dart';
 import 'package:ajiapp/services/profile/controller/profile_controller.dart';
+import 'package:ajiapp/services/profile/view/savedspots.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:flutter/material.dart';
@@ -211,6 +212,53 @@ class ProfileView extends StatelessWidget {
                               ],
                             ),
                           ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: ScreenSize.width / 20,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Activities",
+                          style: TextStyle(
+                              fontSize: ScreenSize.width / 13.5,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: ScreenSize.width / 60,
+                    ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(Savedspots());
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(ScreenSize.width / 25),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Row(
+                              spacing: ScreenSize.width / 35,
+                              children: [
+                                Icon(
+                                  Icons.bookmark,
+                                  color: ajired,
+                                ),
+                                Text(
+                                  "Saved posts",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: ScreenSize.width / 25),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),

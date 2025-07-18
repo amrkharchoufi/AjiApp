@@ -115,22 +115,22 @@ class Matchwidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  MaterialButton(
-                    onPressed: () {},
-                    color: ajired,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    minWidth: SizeConfig.getBlockSizeHorizontal(35),
-                    height: SizeConfig.getBlockSizeVertical(3),
-                    child: Text(
-                      "Learn More",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
-                      ),
-                    ),
-                  ),
+                  // MaterialButton(
+                  //   onPressed: () {},
+                  //   color: ajired,
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(10),
+                  //   ),
+                  //   minWidth: SizeConfig.getBlockSizeHorizontal(35),
+                  //   height: SizeConfig.getBlockSizeVertical(3),
+                  //   child: Text(
+                  //     "Learn More",
+                  //     style: TextStyle(
+                  //       color: Colors.white,
+                  //       fontSize: SizeConfig.getBlockSizeHorizontal(3.5),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:ajiapp/backend/authentification_functions.dart';
 import 'package:ajiapp/services/accomodation_service/controller/hotel_controller.dart';
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
+import 'package:ajiapp/services/profile/controller/save_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
@@ -177,6 +178,8 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
                                         onPressed: () async {
                                           bool logged =
                                               await checkIfUserIsLoggedIn();
+                                          await Get.find<SaveSpotController>()
+                                              .loadSavedPosts();
                                           if (logged) {
                                             await controller
                                                 .toggleSave(widget.spot.id);
