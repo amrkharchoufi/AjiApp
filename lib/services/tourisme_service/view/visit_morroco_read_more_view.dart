@@ -96,284 +96,301 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                   SizedBox(
                     height: ScreenSize.height / 120,
                   ),
-                  Obx(() {
-                    if (!controller.isinteractionloading.value) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  Container(
+                    width: ScreenSize.width / 1.1,
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(17),
+                    ),
+                    child: Column(
+                      children: [
+                        // Image
+                        Stack(
                           children: [
-                            CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(ajired),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              "Loading...",
-                              style: TextStyle(
-                                color: ajired,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                    return Container(
-                      width: ScreenSize.width / 1.1,
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(17),
-                      ),
-                      child: Column(
-                        children: [
-                          // Image
-                          Stack(
-                            children: [
-                              SizedBox(
-                                height: ScreenSize.width / 1.2,
-                                width: ScreenSize.width,
-                                child: _isNetworkImage(widget.spot.imageUrl)
-                                    ? CachedNetworkImage(
-                                        imageUrl: widget.spot.imageUrl,
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) => Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            Container(
-                                          color: Colors.grey[300],
-                                          child: Icon(
-                                            Icons.error,
-                                            color: Colors.red,
-                                            size: 50,
-                                          ),
-                                        ),
-                                      )
-                                    : Image.asset(
-                                        widget.spot.imageUrl,
-                                        fit: BoxFit.cover,
+                            SizedBox(
+                              height: ScreenSize.width / 1.2,
+                              width: ScreenSize.width,
+                              child: _isNetworkImage(widget.spot.imageUrl)
+                                  ? CachedNetworkImage(
+                                      imageUrl: widget.spot.imageUrl,
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) => Center(
+                                        child: CircularProgressIndicator(),
                                       ),
-                              ),
-                              Positioned(
-                                top: ScreenSize.height / 100,
-                                left: ScreenSize.width / 50,
-                                child: Obx(() {
-                                  return Row(
-                                    children: [
-                                      IconButton(
-                                          icon: Icon(
-                                            controller.likedSpots[
-                                                        widget.spot.id] ==
-                                                    true
-                                                ? Icons.favorite
-                                                : Icons
-                                                    .favorite_border_outlined,
-                                            color: Colors.red,
-                                          ),
-                                          style: ButtonStyle(
-                                              backgroundColor:
-                                                  WidgetStateProperty.all(
-                                                      Colors.white)),
-                                          onPressed: () async {
-                                            bool logged =
-                                                await checkIfUserIsLoggedIn();
-                                            if (logged) {
-                                              await controller
-                                                  .toggleLike(widget.spot.id);
-                                            } else {
-                                              Get.snackbar(
-                                                'Login required',
-                                                'Login to interacte with posts',
-                                                snackPosition:
-                                                    SnackPosition.BOTTOM,
-                                                backgroundColor: Colors.white,
-                                                colorText: Colors.black,
-                                                duration: Duration(seconds: 3),
-                                                margin: EdgeInsets.all(16),
-                                                borderRadius: 8,
-                                              );
-                                            }
-                                          }),
-                                      IconButton(
-                                          icon: Icon(
-                                            controller.savedSpots[
-                                                        widget.spot.id] ==
-                                                    true
-                                                ? Icons.bookmark
-                                                : Icons.bookmark_border,
-                                            color: Colors.amber,
-                                          ),
-                                          style: ButtonStyle(
-                                              backgroundColor:
-                                                  WidgetStateProperty.all(
-                                                      Colors.white)),
-                                          onPressed: () async {
-                                            bool logged =
-                                                await checkIfUserIsLoggedIn();
-                                            if (logged) {
-                                              await controller
-                                                  .toggleSave(widget.spot.id);
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                        color: Colors.grey[300],
+                                        child: Icon(
+                                          Icons.error,
+                                          color: Colors.red,
+                                          size: 50,
+                                        ),
+                                      ),
+                                    )
+                                  : Image.asset(
+                                      widget.spot.imageUrl,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                            Positioned(
+                              top: ScreenSize.height / 100,
+                              left: ScreenSize.width / 50,
+                              child: Obx(() {
+                                return Row(
+                                  children: [
+                                    IconButton(
+                                        icon: Icon(
+                                          controller.likedSpots[
+                                                      widget.spot.id] ==
+                                                  true
+                                              ? Icons.favorite
+                                              : Icons.favorite_border_outlined,
+                                          color: Colors.red,
+                                        ),
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStateProperty.all(
+                                                    Colors.white)),
+                                        onPressed: () async {
+                                          bool logged =
+                                              await checkIfUserIsLoggedIn();
+                                          if (logged) {
+                                            await controller
+                                                .toggleLike(widget.spot.id);
+                                          } else {
+                                            Get.snackbar(
+                                              'Login required',
+                                              'Login to interacte with posts',
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.white,
+                                              colorText: Colors.black,
+                                              duration: Duration(seconds: 3),
+                                              margin: EdgeInsets.all(16),
+                                              borderRadius: 8,
+                                            );
+                                          }
+                                        }),
+                                    IconButton(
+                                        icon: Icon(
+                                          controller.savedSpots[
+                                                      widget.spot.id] ==
+                                                  true
+                                              ? Icons.bookmark
+                                              : Icons.bookmark_border,
+                                          color: Colors.amber,
+                                        ),
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStateProperty.all(
+                                                    Colors.white)),
+                                        onPressed: () async {
+                                          bool logged =
+                                              await checkIfUserIsLoggedIn();
+
+                                          if (logged) {
+                                            await controller
+                                                .toggleSave(widget.spot.id);
+
+                                            // Only call if SaveSpotController is registered
+                                            if (Get.isRegistered<
+                                                SaveSpotController>()) {
                                               await Get.find<
                                                       SaveSpotController>()
                                                   .loadSavedPosts();
-                                            } else {
-                                              Get.snackbar(
-                                                'Login required',
-                                                'Login to interacte with posts',
-                                                snackPosition:
-                                                    SnackPosition.BOTTOM,
-                                                backgroundColor: Colors.white,
-                                                colorText: Colors.black,
-                                                duration: Duration(seconds: 3),
-                                                margin: EdgeInsets.all(16),
-                                                borderRadius: 8,
-                                              );
                                             }
-                                          }),
-                                    ],
-                                  );
-                                }),
-                              ),
-                            ],
-                          ),
+                                          } else {
+                                            Get.snackbar(
+                                              'Login required',
+                                              'Login to interact with posts',
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
+                                              backgroundColor: Colors.white,
+                                              colorText: Colors.black,
+                                              duration: Duration(seconds: 3),
+                                              margin: EdgeInsets.all(16),
+                                              borderRadius: 8,
+                                            );
+                                          }
+                                        }),
+                                  ],
+                                );
+                              }),
+                            ),
+                          ],
+                        ),
 
-                          // Content
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: ScreenSize.width / 20,
-                              vertical: ScreenSize.width / 20,
-                            ),
-                            width: ScreenSize.width,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(17),
-                            ),
-                            child: Column(
-                              children: [
-                                // Title
-                                Text(
-                                  widget.spot.name,
+                        // Content
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: ScreenSize.width / 20,
+                            vertical: ScreenSize.width / 20,
+                          ),
+                          width: ScreenSize.width,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(17),
+                          ),
+                          child: Column(
+                            children: [
+                              // Title
+                              Text(
+                                widget.spot.name,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: ScreenSize.width / 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 40,
+                              ),
+                              Obx(() {
+                                return Row(
+                                  children: [
+                                    Icon(
+                                      Icons.favorite,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "${controller.likeCounts[widget.spot.id]}",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenSize.width / 35,
+                                      ),
+                                    )
+                                  ],
+                                );
+                              }),
+                              SizedBox(
+                                height: ScreenSize.width / 40,
+                              ),
+
+                              // Opening hours
+                              Row(
+                                children: [
+                                  Icon(Icons.watch_later_outlined),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    widget.spot.openingHours,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: ScreenSize.width / 35,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 40,
+                              ),
+
+                              // Rating
+                              Row(
+                                children: [
+                                  Text(
+                                    widget.spot.rating,
+                                    style: TextStyle(
+                                      fontSize: ScreenSize.width / 25,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                  ),
+                                  Text(
+                                    "(${widget.spot.ratingCount})",
+                                    style: TextStyle(
+                                      fontSize: ScreenSize.width / 30,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 40,
+                              ),
+
+                              // Location
+                              Row(
+                                children: [
+                                  Icon(Icons.location_on),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    widget.spot.city,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: ScreenSize.width / 35,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 20,
+                              ),
+
+                              // Entry Fee
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: gold.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Text(
+                                  widget.spot.entryFee,
+                                  style: TextStyle(
+                                    color: gold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: ScreenSize.width / 35,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 20,
+                              ),
+
+                              // History section title
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "History",
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: ScreenSize.width / 15,
+                                    fontSize: ScreenSize.width / 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: ScreenSize.width / 40,
-                                ),
-                                Obx(() {
-                                  return Row(
-                                    children: [
-                                      Icon(
-                                        Icons.favorite,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        "${controller.likeCounts[widget.spot.id]}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: ScreenSize.width / 35,
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                }),
-                                SizedBox(
-                                  height: ScreenSize.width / 40,
-                                ),
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 40,
+                              ),
 
-                                // Opening hours
-                                Row(
-                                  children: [
-                                    Icon(Icons.watch_later_outlined),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      widget.spot.openingHours,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: ScreenSize.width / 35,
-                                      ),
-                                    )
-                                  ],
+                              // History content
+                              Text(
+                                widget.spot.history.isNotEmpty
+                                    ? widget.spot.history
+                                    : "No historical information available.",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: ScreenSize.width / 35,
                                 ),
-                                SizedBox(
-                                  height: ScreenSize.width / 40,
-                                ),
+                                textAlign: TextAlign.justify,
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 20,
+                              ),
 
-                                // Rating
-                                Row(
-                                  children: [
-                                    Text(
-                                      widget.spot.rating,
-                                      style: TextStyle(
-                                        fontSize: ScreenSize.width / 25,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                    ),
-                                    Text(
-                                      "(${widget.spot.ratingCount})",
-                                      style: TextStyle(
-                                        fontSize: ScreenSize.width / 30,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: ScreenSize.width / 40,
-                                ),
-
-                                // Location
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      widget.spot.city,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: ScreenSize.width / 35,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: ScreenSize.width / 20,
-                                ),
-
-                                // Entry Fee
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: gold.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Text(
-                                    widget.spot.entryFee,
-                                    style: TextStyle(
-                                      color: gold,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: ScreenSize.width / 35,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: ScreenSize.width / 20,
-                                ),
-
-                                // History section title
+                              // Map section (if coordinates are available)
+                              if (widget.spot.latitude != 0 &&
+                                  widget.spot.longitude != 0) ...[
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "History",
+                                    "Location",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: ScreenSize.width / 20,
@@ -384,249 +401,216 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                 SizedBox(
                                   height: ScreenSize.width / 40,
                                 ),
-
-                                // History content
-                                Text(
-                                  widget.spot.history.isNotEmpty
-                                      ? widget.spot.history
-                                      : "No historical information available.",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: ScreenSize.width / 35,
+                                Container(
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border:
+                                        Border.all(color: Colors.grey.shade300),
                                   ),
-                                  textAlign: TextAlign.justify,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Platform.isIOS
+                                          ? apple.AppleMap(
+                                              initialCameraPosition:
+                                                  apple.CameraPosition(
+                                                target: apple.LatLng(
+                                                    widget.spot.latitude,
+                                                    widget.spot.longitude),
+                                                zoom: 14,
+                                              ),
+                                              annotations: {
+                                                apple.Annotation(
+                                                  annotationId:
+                                                      apple.AnnotationId(
+                                                          widget.spot.id),
+                                                  position: apple.LatLng(
+                                                      widget.spot.latitude,
+                                                      widget.spot.longitude),
+                                                ),
+                                              },
+                                            )
+                                          : GoogleMap(
+                                              initialCameraPosition:
+                                                  CameraPosition(
+                                                target: LatLng(
+                                                    widget.spot.latitude,
+                                                    widget.spot.longitude),
+                                                zoom: 14,
+                                              ),
+                                              markers: _markers,
+                                              onMapCreated: (controller) {
+                                                _mapController = controller;
+                                                setState(() {
+                                                  _isMapReady = true;
+                                                });
+                                              },
+                                            )),
                                 ),
                                 SizedBox(
                                   height: ScreenSize.width / 20,
                                 ),
-
-                                // Map section (if coordinates are available)
-                                if (widget.spot.latitude != 0 &&
-                                    widget.spot.longitude != 0) ...[
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      "Location",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: ScreenSize.width / 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: ScreenSize.width / 40,
-                                  ),
-                                  Container(
-                                    height: 200,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                          color: Colors.grey.shade300),
-                                    ),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: Platform.isIOS
-                                            ? apple.AppleMap(
-                                                initialCameraPosition:
-                                                    apple.CameraPosition(
-                                                  target: apple.LatLng(
-                                                      widget.spot.latitude,
-                                                      widget.spot.longitude),
-                                                  zoom: 14,
-                                                ),
-                                                annotations: {
-                                                  apple.Annotation(
-                                                    annotationId:
-                                                        apple.AnnotationId(
-                                                            widget.spot.id),
-                                                    position: apple.LatLng(
-                                                        widget.spot.latitude,
-                                                        widget.spot.longitude),
-                                                  ),
-                                                },
-                                              )
-                                            : GoogleMap(
-                                                initialCameraPosition:
-                                                    CameraPosition(
-                                                  target: LatLng(
-                                                      widget.spot.latitude,
-                                                      widget.spot.longitude),
-                                                  zoom: 14,
-                                                ),
-                                                markers: _markers,
-                                                onMapCreated: (controller) {
-                                                  _mapController = controller;
-                                                  setState(() {
-                                                    _isMapReady = true;
-                                                  });
-                                                },
-                                              )),
-                                  ),
-                                  SizedBox(
-                                    height: ScreenSize.width / 20,
-                                  ),
-                                ],
-
-                                // View on Map button
-                                ElevatedButton.icon(
-                                  onPressed: _openInMaps,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: ajired,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(14),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: ScreenSize.width / 12,
-                                      vertical: ScreenSize.width / 40,
-                                    ),
-                                  ),
-                                  icon: Icon(
-                                    Icons.map,
-                                    color: Colors.white,
-                                  ),
-                                  label: Text(
-                                    "View On Map",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: (ScreenSize.width / 22),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: ScreenSize.width / 40,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Reviews",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: ScreenSize.width / 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    TextButton.icon(
-                                      onPressed: () async {
-                                        bool logged =
-                                            await checkIfUserIsLoggedIn();
-                                        if (logged) {
-                                          controller
-                                              .showReviewDialog(widget.spot.id);
-                                        } else {
-                                          Get.snackbar(
-                                            'Login required',
-                                            'Login to interacte with posts',
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            backgroundColor: Colors.white,
-                                            colorText: Colors.black,
-                                            duration: Duration(seconds: 3),
-                                            margin: EdgeInsets.all(16),
-                                            borderRadius: 8,
-                                          );
-                                        }
-                                      },
-                                      icon: Icon(Icons.rate_review),
-                                      label: Text("Add Review"),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: ScreenSize.width / 40,
-                                ),
-                                Obx(() {
-                                  if (!controller.loadedReviewSpots
-                                      .contains(widget.spot.id)) {
-                                    controller.loadReviews(widget.spot.id);
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  }
-
-                                  final spotReviews =
-                                      controller.reviews[widget.spot.id] ?? [];
-
-                                  if (spotReviews.isEmpty) {
-                                    return const Text("No reviews yet.");
-                                  }
-
-                                  return Column(
-                                    children: [
-                                      ...controller.reviews[widget.spot.id]!
-                                          .map<Widget>((review) {
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 8.0),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: ajired,
-                                                child: Icon(Icons.person,
-                                                    color: Colors.white),
-                                              ),
-                                              const SizedBox(width: 12),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: Text(
-                                                            review['userName'] ??
-                                                                'Anonymous',
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 14),
-                                                          ),
-                                                        ),
-                                                        RatingBarIndicator(
-                                                          rating:
-                                                              (review['rating'] ??
-                                                                      0)
-                                                                  .toDouble(),
-                                                          itemBuilder: (context,
-                                                                  _) =>
-                                                              const Icon(
-                                                                  Icons.star,
-                                                                  color: Colors
-                                                                      .amber),
-                                                          itemCount: 5,
-                                                          itemSize: 16.0,
-                                                          direction:
-                                                              Axis.horizontal,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(height: 4),
-                                                    Text(
-                                                      review['comment'] ?? '',
-                                                      softWrap: true,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      }),
-                                    ],
-                                  );
-                                })
                               ],
-                            ),
+
+                              // View on Map button
+                              ElevatedButton.icon(
+                                onPressed: _openInMaps,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: ajired,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: ScreenSize.width / 12,
+                                    vertical: ScreenSize.width / 40,
+                                  ),
+                                ),
+                                icon: Icon(
+                                  Icons.map,
+                                  color: Colors.white,
+                                ),
+                                label: Text(
+                                  "View On Map",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: (ScreenSize.width / 22),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 40,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Reviews",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: ScreenSize.width / 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextButton.icon(
+                                    onPressed: () async {
+                                      bool logged =
+                                          await checkIfUserIsLoggedIn();
+                                      if (logged) {
+                                        controller
+                                            .showReviewDialog(widget.spot.id);
+                                      } else {
+                                        Get.snackbar(
+                                          'Login required',
+                                          'Login to interacte with posts',
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.white,
+                                          colorText: Colors.black,
+                                          duration: Duration(seconds: 3),
+                                          margin: EdgeInsets.all(16),
+                                          borderRadius: 8,
+                                        );
+                                      }
+                                    },
+                                    icon: Icon(Icons.rate_review),
+                                    label: Text("Add Review"),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: ScreenSize.width / 40,
+                              ),
+                              Obx(() {
+                                if (!controller.loadedReviewSpots
+                                    .contains(widget.spot.id)) {
+                                  controller.loadReviews(widget.spot.id);
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+
+                                final spotReviews =
+                                    controller.reviews[widget.spot.id] ?? [];
+
+                                if (spotReviews.isEmpty) {
+                                  return const Text("No reviews yet.");
+                                }
+
+                                return Column(
+                                  children: [
+                                    ...controller.reviews[widget.spot.id]!
+                                        .map<Widget>((review) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8.0),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor: ajired,
+                                              child: Icon(Icons.person,
+                                                  color: Colors.white),
+                                            ),
+                                            const SizedBox(width: 12),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          review['userName'] ??
+                                                              'Anonymous',
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 14),
+                                                        ),
+                                                      ),
+                                                      RatingBarIndicator(
+                                                        rating:
+                                                            (review['rating'] ??
+                                                                    0)
+                                                                .toDouble(),
+                                                        itemBuilder: (context,
+                                                                _) =>
+                                                            const Icon(
+                                                                Icons.star,
+                                                                color: Colors
+                                                                    .amber),
+                                                        itemCount: 5,
+                                                        itemSize: 16.0,
+                                                        direction:
+                                                            Axis.horizontal,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 4),
+                                                  Text(
+                                                    review['comment'] ?? '',
+                                                    softWrap: true,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                  ],
+                                );
+                              })
+                            ],
                           ),
-                        ],
-                      ),
-                    );
-                  }),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     height: ScreenSize.width / 10,
                   ),

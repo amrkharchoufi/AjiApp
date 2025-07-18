@@ -50,12 +50,12 @@ class TourismeController extends GetxController {
     // Prioritize loading cities first since they're needed for the filter
     fetchCities().then((_) {
       // Then load tourist spots and tours
-      fetchTouristSpots();
-      fetchTours();
       final userId = FirebaseAuth.instance.currentUser?.uid;
       if (userId != null) {
         loadUserInteractions();
       }
+      fetchTouristSpots();
+      fetchTours();
     });
     super.onInit();
   }
@@ -239,25 +239,20 @@ class TourismeController extends GetxController {
   }
 
   Future<void> loadUserInteractions() async {
-    try {
-      isinteractionloading.value = true;
-      String userId = FirebaseAuth.instance.currentUser!.uid;
-      final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
-      final snapshot = await userRef.get();
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
+    final snapshot = await userRef.get();
 
-      if (snapshot.exists) {
-        final data = snapshot.data();
+    if (snapshot.exists) {
+      final data = snapshot.data();
 
-        final Map<String, dynamic>? liked = data?['likedSpots'];
-        final Map<String, dynamic>? saved = data?['savedSpots'];
+      final Map<String, dynamic>? liked = data?['likedSpots'];
+      final Map<String, dynamic>? saved = data?['savedSpots'];
 
-        likedSpots.assignAll(
-            liked?.map((key, value) => MapEntry(key, value == true)) ?? {});
-        savedSpots
-            .assignAll(saved?.map((key, value) => MapEntry(key, true)) ?? {});
-      }
-    } finally {
-      isinteractionloading.value = false;
+      likedSpots.assignAll(
+          liked?.map((key, value) => MapEntry(key, value == true)) ?? {});
+      savedSpots
+          .assignAll(saved?.map((key, value) => MapEntry(key, true)) ?? {});
     }
   }
 

@@ -178,15 +178,22 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
                                         onPressed: () async {
                                           bool logged =
                                               await checkIfUserIsLoggedIn();
-                                          await Get.find<SaveSpotController>()
-                                              .loadSavedPosts();
+
                                           if (logged) {
                                             await controller
                                                 .toggleSave(widget.spot.id);
+
+                                            // Only call if SaveSpotController is registered
+                                            if (Get.isRegistered<
+                                                SaveSpotController>()) {
+                                              await Get.find<
+                                                      SaveSpotController>()
+                                                  .loadSavedPosts();
+                                            }
                                           } else {
                                             Get.snackbar(
                                               'Login required',
-                                              'Login to interacte with posts',
+                                              'Login to interact with posts',
                                               snackPosition:
                                                   SnackPosition.BOTTOM,
                                               backgroundColor: Colors.white,
