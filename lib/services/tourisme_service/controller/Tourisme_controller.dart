@@ -265,7 +265,8 @@ class TourismeController extends GetxController {
 
     // ✅ Update UI immediately
     likedSpots[spotId] = newLikeStatus;
-    likedSpots.refresh();
+    likedSpots.update(spotId, (value) => newLikeStatus,
+        ifAbsent: () => newLikeStatus);
 
     if (likeCounts.containsKey(spotId)) {
       likeCounts[spotId]!.value += newLikeStatus ? 1 : -1;
