@@ -57,6 +57,9 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
         ),
       );
     }
+    if (!Get.isRegistered<HotelController>()) {
+      Get.lazyPut(() => HotelController());
+    }
     final controller = Get.find<HotelController>();
 
     // Initialize from controller
@@ -90,9 +93,6 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
 
   @override
   Widget build(BuildContext context) {
-    if (!Get.isRegistered<HotelController>()) {
-      Get.lazyPut(() => HotelController());
-    }
     final HotelController controller = Get.find<HotelController>();
     ScreenSize.init(context);
     return Scaffold(

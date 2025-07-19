@@ -56,6 +56,9 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
         ),
       );
     }
+    if (!Get.isRegistered<TourismeController>()) {
+      Get.lazyPut(() => TourismeController());
+    }
     final controller = Get.find<TourismeController>();
 
     // Initialize from controller
@@ -109,9 +112,6 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
 
   @override
   Widget build(BuildContext context) {
-    if (!Get.isRegistered<TourismeController>()) {
-      Get.lazyPut(() => TourismeController());
-    }
     final TourismeController controller = Get.find<TourismeController>();
     ScreenSize.init(context);
     return Scaffold(
