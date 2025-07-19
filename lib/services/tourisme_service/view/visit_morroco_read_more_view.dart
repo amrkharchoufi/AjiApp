@@ -233,22 +233,21 @@ final TourismeController controller = Get.find<TourismeController>();
                                 height: ScreenSize.width / 40,
                               ),
                               Obx(() {
-                                return Row(
-                                  children: [
-                                    Icon(
-                                      Icons.favorite,
-                                    ),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      "${controller.likeCounts[widget.spot.id]}",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: ScreenSize.width / 35,
-                                      ),
-                                    )
-                                  ],
-                                );
-                              }),
+  final count = controller.likeCounts[widget.spot.id]?.value ?? 0;
+  return Row(
+    children: [
+      Icon(Icons.favorite),
+      SizedBox(width: 5),
+      Text(
+        "$count",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: ScreenSize.width / 35,
+        ),
+      )
+    ],
+  );
+}),
                               SizedBox(
                                 height: ScreenSize.width / 40,
                               ),
