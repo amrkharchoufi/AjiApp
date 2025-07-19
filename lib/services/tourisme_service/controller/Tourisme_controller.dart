@@ -260,63 +260,93 @@ class TourismeController extends GetxController {
     final String userId = FirebaseAuth.instance.currentUser!.uid;
 
     // Get current like status (default to false if null)
-    final isLiked = likedSpots[spotId] ?? false;
+    final bool isLiked = likedSpots[spotId] ?? false;
+    final bool newLikeStatus = !isLiked;
 
-    // Toggle local like state
-    likedSpots[spotId] = !isLiked;
+    // ✅ Update UI immediately
+    likedSpots[spotId] = newLikeStatus;
 
-    // References
+    if (likeCounts.containsKey(spotId)) {
+      likeCounts[spotId]!.value += newLikeStatus ? 1 : -1;
+    } else {
+      likeCounts[spotId] = RxInt(newLikeStatus ? 1 : 0);
+    }
+
+    // 🕒 Continue backend updates in background
     final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
     final spotRef =
         FirebaseFirestore.instance.collection("tourist_spots").doc(spotId);
 
-    if (!isLiked) {
-      // ✅ User is liking the spot
-      await userRef.set({
-        'likedSpots': {spotId: true}
-      }, SetOptions(merge: true));
+    try {
+      if (newLikeStatus) {
+        // Firestore: like
+        await userRef.set({
+          'likedSpots': {spotId: true}
+        }, SetOptions(merge: true));
 
-      await spotRef.update({'likesCount': FieldValue.increment(1)});
-
-      // 🔁 Update local like count state
-      if (likeCounts.containsKey(spotId)) {
-        likeCounts[spotId]!.value += 1;
+        await spotRef.update({'likesCount': FieldValue.increment(1)});
       } else {
-        likeCounts[spotId] = RxInt(1);
+        // Firestore: unlike
+        await userRef.update({'likedSpots.$spotId': FieldValue.delete()});
+
+        await spotRef.update({'likesCount': FieldValue.increment(-1)});
       }
-    } else {
-      // ❌ User is unliking the spot
-      await userRef.update({'likedSpots.$spotId': FieldValue.delete()});
+    } catch (e) {
+      // ❌ Revert UI if error occurs
+      likedSpots[spotId] = isLiked; // revert to old state
 
-      await spotRef.update({'likesCount': FieldValue.increment(-1)});
-
-      // 🔁 Update local like count state
       if (likeCounts.containsKey(spotId)) {
-        likeCounts[spotId]!.value =
-            (likeCounts[spotId]!.value - 1).clamp(0, double.infinity).toInt();
-      } else {
-        likeCounts[spotId] = RxInt(0);
+        likeCounts[spotId]!.value += isLiked ? 1 : -1;
       }
+
+      Get.snackbar('Error', 'Something went wrong. Please try again.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.white,
+          colorText: Colors.black);
     }
   }
 
   Future<void> toggleSave(String spotId) async {
-    String type = "Tourisme";
-    String userId = FirebaseAuth.instance.currentUser!.uid;
+    const String type = "Tourisme";
+    final String userId = FirebaseAuth.instance.currentUser!.uid;
     final userRef = FirebaseFirestore.instance.collection('user').doc(userId);
-    final isSaved = savedSpots.containsKey(spotId);
 
-    if (!isSaved) {
-      // Save the spot with its type (e.g., "tourist_spot" or "accommodation")
-      await userRef.set({
-        'savedSpots': {spotId: type}
-      }, SetOptions(merge: true));
+    final bool isSaved = savedSpots.containsKey(spotId);
+    final bool newSavedStatus = !isSaved;
 
+    // ✅ Update UI instantly
+    if (newSavedStatus) {
       savedSpots[spotId] = true;
     } else {
-      // Remove the spot
-      await userRef.update({'savedSpots.$spotId': FieldValue.delete()});
       savedSpots.remove(spotId);
+    }
+
+    // 🕒 Continue backend logic
+    try {
+      if (newSavedStatus) {
+        // Firestore: Save
+        await userRef.set({
+          'savedSpots': {spotId: type}
+        }, SetOptions(merge: true));
+      } else {
+        // Firestore: Unsave
+        await userRef.update({'savedSpots.$spotId': FieldValue.delete()});
+      }
+    } catch (e) {
+      // ❌ Revert UI if error occurs
+      if (newSavedStatus) {
+        savedSpots.remove(spotId);
+      } else {
+        savedSpots[spotId] = true;
+      }
+
+      Get.snackbar(
+        'Error',
+        'Failed to update saved post. Please try again.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
     }
   }
 

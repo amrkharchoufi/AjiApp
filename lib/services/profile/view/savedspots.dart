@@ -8,11 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Savedspots extends StatelessWidget {
-  const Savedspots({super.key});
-
+  Savedspots({super.key});
+  final SaveSpotController controller = Get.put(SaveSpotController());
+  final PageController _pageController = PageController(viewportFraction: 0.95);
+  final PageController _pageControllerhotel =
+      PageController(viewportFraction: 0.95);
+  final RxInt currentPageIndexhotel = 0.obs;
+  final RxInt currentPageIndexspots = 0.obs;
   @override
   Widget build(BuildContext context) {
-    final SaveSpotController controller = Get.put(SaveSpotController());
     SizeConfig().init(context);
     return Scaffold(
         body: Container(
@@ -97,18 +101,55 @@ class Savedspots extends StatelessWidget {
                           height: ScreenSize.height / 2.3,
                           child: controller.isLoading.value
                               ? _buildLoadingIndicator()
-                              : _buildTouristSpotsList(controller),
+                              : _buildTouristSpotsList(),
                         ),
+                        // Scrolling Dots Indicator
+                        Obx(() {
+                          if (controller.savedTouristSpots.isEmpty &&
+                              !controller.isLoading.value) {
+                            return SizedBox.shrink(); // Don't show anything
+                          }
+                          if (controller.savedTouristSpots.length == 1) {
+                            return SizedBox.shrink();
+                          }
 
-                        SizedBox(
-                          height: ScreenSize.width / 20,
-                        ),
+                          int maxDots = 3;
+                          int active = currentPageIndexspots.value % maxDots;
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(maxDots, (index) {
+                                return AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 6),
+                                  height: 10,
+                                  width: index == active ? 24 : 10,
+                                  decoration: BoxDecoration(
+                                    color: index == active
+                                        ? ajired
+                                        : Colors.grey.withOpacity(0.4),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: index == active
+                                        ? [
+                                            BoxShadow(
+                                              color: ajired.withOpacity(0.3),
+                                              blurRadius: 6,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ]
+                                        : [],
+                                  ),
+                                );
+                              }),
+                            ),
+                          );
+                        }),
                       ],
                     );
                   }),
-                  SizedBox(
-                    height: ScreenSize.height / 100,
-                  ),
                   Row(
                     children: [
                       Padding(
@@ -160,12 +201,54 @@ class Savedspots extends StatelessWidget {
                       children: [
                         // Tourist spots section with loading indicator
                         SizedBox(
-                          height: ScreenSize.height / 2.3,
+                          height: ScreenSize.height / 3,
                           child: controller.isLoading.value
                               ? _buildLoadingIndicator()
                               : _buildaccommodationsList(controller),
                         ),
+                        // Scrolling Dots Indicator
+                        Obx(() {
+                          if (controller.savedAccommodations.isEmpty &&
+                              !controller.isLoading.value) {
+                            return SizedBox.shrink(); // Don't show anything
+                          }
+                          if (controller.savedAccommodations.length == 1) {
+                            return SizedBox.shrink();
+                          }
+                          int maxDots = 3;
+                          int active = currentPageIndexhotel.value % maxDots;
 
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(maxDots, (index) {
+                                return AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 6),
+                                  height: 10,
+                                  width: index == active ? 24 : 10,
+                                  decoration: BoxDecoration(
+                                    color: index == active
+                                        ? ajired
+                                        : Colors.grey.withOpacity(0.4),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: index == active
+                                        ? [
+                                            BoxShadow(
+                                              color: ajired.withOpacity(0.3),
+                                              blurRadius: 6,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ]
+                                        : [],
+                                  ),
+                                );
+                              }),
+                            ),
+                          );
+                        }),
                         SizedBox(
                           height: ScreenSize.width / 20,
                         ),
@@ -180,62 +263,69 @@ class Savedspots extends StatelessWidget {
       ),
     ));
   }
-}
+
+  // Tourist spots horizontal list
+  Widget _buildTouristSpotsList() {
+    return PageView.builder(
+      controller: _pageController,
+      onPageChanged: (index) {
+        currentPageIndexspots.value = index;
+      },
+      itemCount: controller.savedTouristSpots.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.width / 100),
+          child: VisitMorrocoCard1(
+            spot: controller.savedTouristSpots[index],
+            designred: false,
+            width: ScreenSize.width / 1.08,
+            height: ScreenSize.height / 2.3,
+          ),
+        );
+      },
+    );
+  }
 
 // Tourist spots horizontal list
-Widget _buildTouristSpotsList(SaveSpotController controller) {
-  return ListView.builder(
-    scrollDirection: Axis.horizontal,
-    itemBuilder: (context, index) => Row(children: [
-      SizedBox(width: ScreenSize.width / 30),
-      VisitMorrocoCard1(
-        spot: controller.savedTouristSpots[index],
-        designred: false,
-        width: ScreenSize.width / 1.06,
-        height: ScreenSize.height / 2.3,
-      ),
-      if (index == controller.savedTouristSpots.length - 1)
-        SizedBox(width: ScreenSize.width / 30),
-    ]),
-    itemCount: controller.savedTouristSpots.length,
-  );
-}
-
-// Tourist spots horizontal list
-Widget _buildaccommodationsList(SaveSpotController controller) {
-  return ListView.builder(
-    scrollDirection: Axis.horizontal,
-    itemBuilder: (context, index) => Row(children: [
-      SizedBox(width: ScreenSize.width / 30),
-      HotelWidget(
-        key: ValueKey('hotel-${controller.savedAccommodations[index].title}'),
-        hotel: controller.savedAccommodations[index],
-      ),
-      if (index == controller.savedAccommodations.length - 1)
-        SizedBox(width: ScreenSize.width / 30),
-    ]),
-    itemCount: controller.savedAccommodations.length,
-  );
-}
+  Widget _buildaccommodationsList(SaveSpotController controller) {
+    return PageView.builder(
+      controller: _pageControllerhotel,
+      onPageChanged: (index) {
+        currentPageIndexhotel.value = index;
+      },
+      itemCount: controller.savedAccommodations.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.width / 80),
+          child: HotelWidget(
+            key: ValueKey(
+                'hotel-${controller.savedAccommodations[index].title}'),
+            hotel: controller.savedAccommodations[index],
+          ),
+        );
+      },
+    );
+  }
 
 // Clean loading indicator with brand color
-Widget _buildLoadingIndicator() {
-  return Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(ajired),
-        ),
-        SizedBox(height: 16),
-        Text(
-          "Loading...",
-          style: TextStyle(
-            color: ajired,
-            fontWeight: FontWeight.w500,
+  Widget _buildLoadingIndicator() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(ajired),
           ),
-        ),
-      ],
-    ),
-  );
+          SizedBox(height: 16),
+          Text(
+            "Loading...",
+            style: TextStyle(
+              color: ajired,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

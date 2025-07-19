@@ -1,5 +1,3 @@
-// lib/services/tourisme_service/view/visit_morocco_home.dart
-
 import 'package:ajiapp/services/tourisme_service/controller/Tourisme_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
@@ -7,16 +5,29 @@ import 'package:ajiapp/widgets/visit_morroco_card1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VisitMoroccoHome extends StatelessWidget {
+class VisitMoroccoHome extends StatefulWidget {
   const VisitMoroccoHome({super.key});
 
   @override
+  State<VisitMoroccoHome> createState() => _VisitMoroccoHomeState();
+}
+
+class _VisitMoroccoHomeState extends State<VisitMoroccoHome> {
+  final TourismeController controller = Get.find<TourismeController>();
+  final PageController _pageController = PageController(viewportFraction: 0.95);
+  final RxInt currentPageIndex = 0.obs;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TourismeController controller = Get.find<TourismeController>();
     ScreenSize.init(context);
 
     return Obx(() {
-      // Show empty state message when no data is available and not loading
       if (controller.touristSpots.isEmpty &&
           controller.tours.isEmpty &&
           !controller.isLoadingSpots.value &&
@@ -25,26 +36,16 @@ class VisitMoroccoHome extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.travel_explore,
-                size: 64,
-                color: Colors.grey,
-              ),
+              Icon(Icons.travel_explore, size: 64, color: Colors.grey),
               SizedBox(height: 20),
               Text(
                 "No tourist spots available",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
               SizedBox(height: 10),
               Text(
                 "Please add tourist spots",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
             ],
           ),
@@ -53,7 +54,6 @@ class VisitMoroccoHome extends StatelessWidget {
 
       return Column(
         children: [
-          // Most Visited Tourist Spots Section
           Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenSize.height / 60),
             child: Row(
@@ -67,27 +67,62 @@ class VisitMoroccoHome extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: ScreenSize.width / 40,
-          ),
+          SizedBox(height: ScreenSize.width / 40),
 
-          // Tourist spots section with loading indicator
+          // Tourist Spots Section
           SizedBox(
-            height: ScreenSize.height / 2.3,
-            child: controller.isLoadingSpots.value
-                ? _buildLoadingIndicator()
-                : _buildTouristSpotsList(controller),
-          ),
+              height: ScreenSize.height / 2.3,
+              child: controller.isLoadingSpots.value
+                  ? _buildLoadingIndicator()
+                  : _buildtouristspots()),
 
-          SizedBox(
-            height: ScreenSize.width / 20,
-          ),
+          // Scrolling Dots Indicator
+          Obx(() {
+            if (controller.isLoadingSpots.value ||
+                controller.touristSpots.isEmpty) {
+              return SizedBox.shrink(); // Don't show anything
+            }
+
+            int maxDots = 3;
+            int active = currentPageIndex.value % maxDots;
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(maxDots, (index) {
+                  return AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    margin: const EdgeInsets.symmetric(horizontal: 6),
+                    height: 10,
+                    width: index == active ? 24 : 10,
+                    decoration: BoxDecoration(
+                      color: index == active
+                          ? ajired
+                          : Colors.grey.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: index == active
+                          ? [
+                              BoxShadow(
+                                color: ajired.withOpacity(0.3),
+                                blurRadius: 6,
+                                offset: Offset(0, 2),
+                              ),
+                            ]
+                          : [],
+                    ),
+                  );
+                }),
+              ),
+            );
+          }),
+
+          SizedBox(height: ScreenSize.width / 20),
         ],
       );
     });
   }
 
-  // Clean loading indicator with brand color
   Widget _buildLoadingIndicator() {
     return Center(
       child: Column(
@@ -99,32 +134,31 @@ class VisitMoroccoHome extends StatelessWidget {
           SizedBox(height: 16),
           Text(
             "Loading...",
-            style: TextStyle(
-              color: ajired,
-              fontWeight: FontWeight.w500,
-            ),
+            style: TextStyle(color: ajired, fontWeight: FontWeight.w500),
           ),
         ],
       ),
     );
   }
 
-  // Tourist spots horizontal list
-  Widget _buildTouristSpotsList(TourismeController controller) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) => Row(children: [
-        SizedBox(width: ScreenSize.width / 30),
-        VisitMorrocoCard1(
-          spot: controller.touristSpots[index],
-          designred: false,
-          width: ScreenSize.width / 1.06,
-          height: ScreenSize.height / 2.3,
-        ),
-        if (index == controller.touristSpots.length - 1)
-          SizedBox(width: ScreenSize.width / 30),
-      ]),
+  Widget _buildtouristspots() {
+    return PageView.builder(
+      controller: _pageController,
+      onPageChanged: (index) {
+        currentPageIndex.value = index;
+      },
       itemCount: controller.touristSpots.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.width / 100),
+          child: VisitMorrocoCard1(
+            spot: controller.touristSpots[index],
+            designred: false,
+            width: ScreenSize.width / 1.08,
+            height: ScreenSize.height / 2.3,
+          ),
+        );
+      },
     );
   }
 }
