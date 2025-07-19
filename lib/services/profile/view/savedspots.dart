@@ -103,7 +103,7 @@ class Savedspots extends StatelessWidget {
                               ? _buildLoadingIndicator()
                               : _buildTouristSpotsList(),
                         ),
-                        // Scrolling Dots Indicator
+                        // Scrolling Dots Indicators
                         Obx(() {
                           if (controller.savedTouristSpots.isEmpty &&
                               !controller.isLoading.value) {
@@ -112,7 +112,6 @@ class Savedspots extends StatelessWidget {
                           if (controller.savedTouristSpots.length == 1) {
                             return SizedBox.shrink();
                           }
-
                           int maxDots = 3;
                           int active = currentPageIndexspots.value % maxDots;
 

@@ -62,10 +62,10 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
 
   @override
   Widget build(BuildContext context) {
-if (!Get.isRegistered<HotelController>()) {
-  Get.lazyPut(() => HotelController());
-}
-final HotelController controller = Get.find<HotelController>();
+    if (!Get.isRegistered<HotelController>()) {
+      Get.lazyPut(() => HotelController());
+    }
+    final HotelController controller = Get.find<HotelController>();
     ScreenSize.init(context);
     return Scaffold(
       body: Container(
@@ -84,7 +84,7 @@ final HotelController controller = Get.find<HotelController>();
               child: Column(
                 children: [
                   MyappbarWidget(
-                    title: "Visit Morocco",
+                    title: "Accommodation",
                   ),
                   SizedBox(
                     height: ScreenSize.height / 120,
@@ -240,14 +240,15 @@ final HotelController controller = Get.find<HotelController>();
                                 height: ScreenSize.width / 40,
                               ),
                               Obx(() {
+                                final count = controller
+                                        .likeCounts[widget.spot.id]?.value ??
+                                    0;
                                 return Row(
                                   children: [
-                                    Icon(
-                                      Icons.favorite,
-                                    ),
+                                    Icon(Icons.favorite),
                                     SizedBox(width: 5),
                                     Text(
-                                      "${controller.likeCounts[widget.spot.id]}",
+                                      "$count",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: ScreenSize.width / 35,
@@ -599,7 +600,7 @@ final HotelController controller = Get.find<HotelController>();
               ),
             ),
             MyappbarWidget(
-              title: "Visit Morocco",
+              title: "Accomodation",
             ),
           ],
         ),

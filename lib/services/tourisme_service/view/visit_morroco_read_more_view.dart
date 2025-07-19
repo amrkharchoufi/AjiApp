@@ -72,9 +72,9 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
   @override
   Widget build(BuildContext context) {
     if (!Get.isRegistered<TourismeController>()) {
-  Get.lazyPut(() => TourismeController());
-}
-final TourismeController controller = Get.find<TourismeController>();
+      Get.lazyPut(() => TourismeController());
+    }
+    final TourismeController controller = Get.find<TourismeController>();
     ScreenSize.init(context);
     return Scaffold(
       body: Container(
@@ -136,74 +136,92 @@ final TourismeController controller = Get.find<TourismeController>();
                                     ),
                             ),
                             Positioned(
-  top: ScreenSize.height / 100,
-  left: ScreenSize.width / 50,
-  child: Row(
-    children: [
-      Obx(() {
-        final isLiked = controller.likedSpots[widget.spot.id] == true;
-        return IconButton(
-          icon: Icon(
-            isLiked ? Icons.favorite : Icons.favorite_border_outlined,
-            color: Colors.red,
-          ),
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(Colors.white),
-          ),
-          onPressed: () async {
-            bool logged = await checkIfUserIsLoggedIn();
-            if (logged) {
-              await controller.toggleLike(widget.spot.id);
-            } else {
-              Get.snackbar(
-                'Login required',
-                'Login to interacte with posts',
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.white,
-                colorText: Colors.black,
-                duration: Duration(seconds: 3),
-                margin: EdgeInsets.all(16),
-                borderRadius: 8,
-              );
-            }
-          },
-        );
-      }),
-      Obx(() {
-        final isSaved = controller.savedSpots[widget.spot.id] == true;
-        return IconButton(
-          icon: Icon(
-            isSaved ? Icons.bookmark : Icons.bookmark_border,
-            color: Colors.amber,
-          ),
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all(Colors.white),
-          ),
-          onPressed: () async {
-            bool logged = await checkIfUserIsLoggedIn();
-            if (logged) {
-              await controller.toggleSave(widget.spot.id);
-              if (Get.isRegistered<SaveSpotController>()) {
-                await Get.find<SaveSpotController>().loadSavedPosts();
-              }
-            } else {
-              Get.snackbar(
-                'Login required',
-                'Login to interacte with posts',
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.white,
-                colorText: Colors.black,
-                duration: Duration(seconds: 3),
-                margin: EdgeInsets.all(16),
-                borderRadius: 8,
-              );
-            }
-          },
-        );
-      }),
-    ],
-  ),
-)
+                              top: ScreenSize.height / 100,
+                              left: ScreenSize.width / 50,
+                              child: Row(
+                                children: [
+                                  Obx(() {
+                                    final isLiked =
+                                        controller.likedSpots[widget.spot.id] ==
+                                            true;
+                                    return IconButton(
+                                      icon: Icon(
+                                        isLiked
+                                            ? Icons.favorite
+                                            : Icons.favorite_border_outlined,
+                                        color: Colors.red,
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            WidgetStateProperty.all(
+                                                Colors.white),
+                                      ),
+                                      onPressed: () async {
+                                        bool logged =
+                                            await checkIfUserIsLoggedIn();
+                                        if (logged) {
+                                          await controller
+                                              .toggleLike(widget.spot.id);
+                                        } else {
+                                          Get.snackbar(
+                                            'Login required',
+                                            'Login to interacte with posts',
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.white,
+                                            colorText: Colors.black,
+                                            duration: Duration(seconds: 3),
+                                            margin: EdgeInsets.all(16),
+                                            borderRadius: 8,
+                                          );
+                                        }
+                                      },
+                                    );
+                                  }),
+                                  Obx(() {
+                                    final isSaved =
+                                        controller.savedSpots[widget.spot.id] ==
+                                            true;
+                                    return IconButton(
+                                      icon: Icon(
+                                        isSaved
+                                            ? Icons.bookmark
+                                            : Icons.bookmark_border,
+                                        color: Colors.amber,
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            WidgetStateProperty.all(
+                                                Colors.white),
+                                      ),
+                                      onPressed: () async {
+                                        bool logged =
+                                            await checkIfUserIsLoggedIn();
+                                        if (logged) {
+                                          await controller
+                                              .toggleSave(widget.spot.id);
+                                          if (Get.isRegistered<
+                                              SaveSpotController>()) {
+                                            await Get.find<SaveSpotController>()
+                                                .loadSavedPosts();
+                                          }
+                                        } else {
+                                          Get.snackbar(
+                                            'Login required',
+                                            'Login to interacte with posts',
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.white,
+                                            colorText: Colors.black,
+                                            duration: Duration(seconds: 3),
+                                            margin: EdgeInsets.all(16),
+                                            borderRadius: 8,
+                                          );
+                                        }
+                                      },
+                                    );
+                                  }),
+                                ],
+                              ),
+                            )
                           ],
                         ),
 
@@ -233,21 +251,23 @@ final TourismeController controller = Get.find<TourismeController>();
                                 height: ScreenSize.width / 40,
                               ),
                               Obx(() {
-  final count = controller.likeCounts[widget.spot.id]?.value ?? 0;
-  return Row(
-    children: [
-      Icon(Icons.favorite),
-      SizedBox(width: 5),
-      Text(
-        "$count",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: ScreenSize.width / 35,
-        ),
-      )
-    ],
-  );
-}),
+                                final count = controller
+                                        .likeCounts[widget.spot.id]?.value ??
+                                    0;
+                                return Row(
+                                  children: [
+                                    Icon(Icons.favorite),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "$count",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenSize.width / 35,
+                                      ),
+                                    )
+                                  ],
+                                );
+                              }),
                               SizedBox(
                                 height: ScreenSize.width / 40,
                               ),
@@ -269,7 +289,6 @@ final TourismeController controller = Get.find<TourismeController>();
                               SizedBox(
                                 height: ScreenSize.width / 40,
                               ),
-
                               // Rating
                               Row(
                                 children: [
