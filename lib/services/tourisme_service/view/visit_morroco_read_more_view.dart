@@ -71,8 +71,10 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => TourismeController());
-    final TourismeController controller = Get.find<TourismeController>();
+    if (!Get.isRegistered<TourismeController>()) {
+  Get.lazyPut(() => TourismeController());
+}
+final TourismeController controller = Get.find<TourismeController>();
     ScreenSize.init(context);
     return Scaffold(
       body: Container(
