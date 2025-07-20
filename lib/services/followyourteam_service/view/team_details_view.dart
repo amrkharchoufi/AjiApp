@@ -118,36 +118,36 @@ class TeamDetailsView extends StatelessWidget {
                               ),
                             ),
                             //book ur ticket button
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Handle button press
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: ajired,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "Book Your Ticket",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize:
-                                            SizeConfig.getBlockSizeHorizontal(
-                                                4),
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.end,
+                            //   children: [
+                            //     Padding(
+                            //       padding: const EdgeInsets.symmetric(
+                            //           horizontal: 20, vertical: 10),
+                            //       child: ElevatedButton(
+                            //         onPressed: () {
+                            //           // Handle button press
+                            //         },
+                            //         style: ElevatedButton.styleFrom(
+                            //           backgroundColor: ajired,
+                            //           shape: RoundedRectangleBorder(
+                            //             borderRadius: BorderRadius.circular(12),
+                            //           ),
+                            //         ),
+                            //         child: Text(
+                            //           "Book Your Ticket",
+                            //           style: TextStyle(
+                            //             color: Colors.white,
+                            //             fontSize:
+                            //                 SizeConfig.getBlockSizeHorizontal(
+                            //                     4),
+                            //             fontWeight: FontWeight.w600,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                           ],
                         ),
                       ),
