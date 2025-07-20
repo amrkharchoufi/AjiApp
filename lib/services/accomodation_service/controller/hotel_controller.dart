@@ -31,9 +31,12 @@ class HotelController extends GetxController {
   void onInit() {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     if (userId != null) {
-      loadUserInteractions();
+      loadUserInteractions().then((_) {
+        fetchHotels(); // Load hotels AFTER interactions
+      });
+    } else {
+      fetchHotels(); // Load hotels directly
     }
-    fetchHotels();
     super.onInit();
   }
 

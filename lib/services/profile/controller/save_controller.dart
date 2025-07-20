@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ajiapp/services/accomodation_service/model/hotel_model.dart';
 import 'package:ajiapp/services/tourisme_service/model/tourism_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +29,6 @@ class SaveSpotController extends GetxController {
       if (data == null || !data.containsKey('savedSpots')) return;
 
       final savedSpots = Map<String, dynamic>.from(data['savedSpots']);
-      log(savedSpots.toString());
       savedTouristSpots.clear();
       savedAccommodations.clear();
 
@@ -60,7 +57,6 @@ class SaveSpotController extends GetxController {
         }
       }
     } finally {
-      log(savedTouristSpots.toString());
       isLoading.value = false;
     }
   }

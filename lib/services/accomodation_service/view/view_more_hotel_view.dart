@@ -9,6 +9,7 @@ import 'package:ajiapp/services/profile/controller/save_controller.dart';
 import 'package:ajiapp/settings/colors.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
+import 'package:ajiapp/widgets/service_name_widget.dart';
 import 'package:apple_maps_flutter/apple_maps_flutter.dart' as apple;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
       );
     }
     if (!Get.isRegistered<HotelController>()) {
-      Get.lazyPut(() => HotelController());
+      Get.put(HotelController()); // Use put instead of lazyPut
     }
     final controller = Get.find<HotelController>();
 
@@ -269,7 +270,7 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
                               Obx(() {
                                 final count = controller
                                         .likeCounts[widget.spot.id]?.value ??
-                                    0;
+                                    widget.spot.likesCount;
                                 return Row(
                                   children: [
                                     Icon(Icons.favorite),
@@ -626,8 +627,16 @@ class _ViewMoreHotelViewState extends State<ViewMoreHotelView> {
                 ],
               ),
             ),
-            MyappbarWidget(
-              title: "Accomodation",
+            Column(
+              children: [
+                AppBar(
+                  backgroundColor: ajired,
+                  elevation: 0,
+                  scrolledUnderElevation: 0,
+                  iconTheme: IconThemeData(color: Colors.white),
+                ),
+                ServiceNameWidget(name: "Accommodation")
+              ],
             ),
           ],
         ),
