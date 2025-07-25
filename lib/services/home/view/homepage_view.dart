@@ -250,9 +250,9 @@ class HomePage extends StatelessWidget {
                   spacing: ScreenSize.width / 20,
                   children: [
                     const SizedBox(width: 10),
-                    ...controller.events.map((evt) {
+                    ...controller.events.take(5).map((evt) {
                       return Matchwidget(
-                        width: ScreenSize.width,
+                        width: ScreenSize.width / 1.05,
                         height: ScreenSize.height / 4,
                         ImagePath: evt.imageUrl,
                         MatchTitleaway: evt.awayteam,

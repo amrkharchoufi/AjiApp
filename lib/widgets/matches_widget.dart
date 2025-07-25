@@ -61,6 +61,7 @@ class Matchwidget extends StatelessWidget {
                       Text(
                         MatchTitlehome,
                         softWrap: true,
+                        textAlign: TextAlign.center,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -79,6 +80,7 @@ class Matchwidget extends StatelessWidget {
                       Text(
                         MatchTitleaway,
                         softWrap: true,
+                        textAlign: TextAlign.center,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

@@ -76,6 +76,7 @@ class ComingUp extends StatelessWidget {
                           );
                         } else {
                           return Column(
+                            spacing: ScreenSize.height / 60,
                             children: controller.events.map((event) {
                               return Matchwidget(
                                 width: ScreenSize.width,
