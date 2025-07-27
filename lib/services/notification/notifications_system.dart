@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -39,7 +40,7 @@ class NotificationService {
       criticalAlert: false,
     );
 
-    print('Permission status: ${settings.authorizationStatus}');
+    log('Permission status: ${settings.authorizationStatus}');
   }
 
   Future<void> setupFlutterNotifications() async {

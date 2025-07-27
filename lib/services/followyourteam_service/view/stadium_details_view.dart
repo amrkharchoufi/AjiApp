@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class StadiumDetailsView extends StatelessWidget {
@@ -13,6 +14,20 @@ class StadiumDetailsView extends StatelessWidget {
   final FixtureController controller = Get.put(FixtureController());
   CarouselSliderController carouselSliderController =
       CarouselSliderController();
+
+  Future<void> _openInMaps() async {
+    if (controller.selectedstd.latitude == 0 ||
+        controller.selectedstd.longitude == 0) {
+      return;
+    }
+
+    final url =
+        'https://www.google.com/maps/search/?api=1&query=${controller.selectedstd.latitude},${controller.selectedstd.longitude}';
+
+    // ignore: deprecated_member_use
+    await launch(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -47,6 +62,7 @@ class StadiumDetailsView extends StatelessWidget {
                   children: [
                     Text(
                       controller.selectedstd.name,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: SizeConfig.getBlockSizeHorizontal(6)),
@@ -140,7 +156,7 @@ class StadiumDetailsView extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         fontSize:
                                             SizeConfig.getBlockSizeHorizontal(
-                                                4)),
+                                                3.5)),
                                   ),
                                   Text(
                                     "Capacity:",
@@ -148,7 +164,7 @@ class StadiumDetailsView extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         fontSize:
                                             SizeConfig.getBlockSizeHorizontal(
-                                                4)),
+                                                3.5)),
                                   ),
                                   Text(
                                     "Inauguration:",
@@ -156,7 +172,7 @@ class StadiumDetailsView extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         fontSize:
                                             SizeConfig.getBlockSizeHorizontal(
-                                                4)),
+                                                3.5)),
                                   ),
                                   Text(
                                     "Home ground for:",
@@ -164,41 +180,42 @@ class StadiumDetailsView extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         fontSize:
                                             SizeConfig.getBlockSizeHorizontal(
-                                                4)),
+                                                3.5)),
                                   ),
                                 ],
                               ),
-                              Column(
-                                spacing: SizeConfig.getBlockSizeVertical(1.5),
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    controller.selectedstd.city,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize:
-                                            SizeConfig.getBlockSizeHorizontal(
-                                                4)),
-                                  ),
-                                  Text(controller.selectedstd.capacity,
+                              Flexible(
+                                child: Column(
+                                  spacing: SizeConfig.getBlockSizeVertical(1.5),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      controller.selectedstd.city,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize:
                                               SizeConfig.getBlockSizeHorizontal(
-                                                  4))),
-                                  Text(controller.selectedstd.inauguration,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize:
-                                              SizeConfig.getBlockSizeHorizontal(
-                                                  4))),
-                                  Text(controller.selectedstd.homeGroundFor,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize:
-                                              SizeConfig.getBlockSizeHorizontal(
-                                                  4)))
-                                ],
+                                                  3.5)),
+                                    ),
+                                    Text(controller.selectedstd.capacity,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: SizeConfig
+                                                .getBlockSizeHorizontal(3.5))),
+                                    Text(controller.selectedstd.inauguration,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: SizeConfig
+                                                .getBlockSizeHorizontal(3.5))),
+                                    Text(controller.selectedstd.homeGroundFor,
+                                        softWrap: true,
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: SizeConfig
+                                                .getBlockSizeHorizontal(3.5)))
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -218,7 +235,7 @@ class StadiumDetailsView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               MaterialButton(
-                                onPressed: () {},
+                                onPressed: _openInMaps,
                                 color: ajired,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),

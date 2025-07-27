@@ -242,7 +242,7 @@ class HotelController extends GetxController {
       reviews[spotId] = snapshot.docs.map((doc) => doc.data()).toList();
       loadedReviewSpots.add(spotId); // Mark as loaded
     } catch (e) {
-      print("Error loading reviews: $e");
+      log("Error loading reviews: $e");
     }
   }
 

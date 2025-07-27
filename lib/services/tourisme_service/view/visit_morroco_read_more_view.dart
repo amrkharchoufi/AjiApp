@@ -313,11 +313,16 @@ class _VisitMorrocoRedMoreViewState extends State<VisitMorrocoRedMoreView> {
                                 children: [
                                   Icon(Icons.watch_later_outlined),
                                   SizedBox(width: 5),
-                                  Text(
-                                    widget.spot.openingHours,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: ScreenSize.width / 35,
+                                  Flexible(
+                                    child: Text(
+                                      widget.spot.openingHours,
+                                      softWrap: true,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: ScreenSize.width / 35,
+                                      ),
                                     ),
                                   )
                                 ],
