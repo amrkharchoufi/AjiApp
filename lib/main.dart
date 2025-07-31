@@ -42,8 +42,16 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Aji App',
       initialBinding: InitBindings(),
+      builder: (context, child) {
+        // Override text scaling
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
       theme: ThemeData(
         fontFamily: myFonts.fontFamily,
+
         // Optimize material animations
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
