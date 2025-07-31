@@ -178,11 +178,7 @@ class HomePage extends StatelessWidget {
                     const SizedBox(width: 10),
                     ...controller.fts.map((ft) {
                       return FeatureCard(
-                        title: ft.title,
-                        subtitle: ft.description,
-                        backgroundImage: ft.Imageurl,
-                        description: "Learn More",
-                        section: ft.section,
+                        feature: ft,
                       );
                     }),
                     const SizedBox(width: 10),

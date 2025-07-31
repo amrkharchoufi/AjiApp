@@ -1,40 +1,37 @@
 import 'package:ajiapp/routing.dart';
+import 'package:ajiapp/services/home/model/feature_model.dart';
 import 'package:ajiapp/settings/size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeatureCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String backgroundImage;
-  final String description;
-  final String section;
+  final FeatureModel feature;
 
-  const FeatureCard(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.backgroundImage,
-      required this.description,
-      required this.section});
+  const FeatureCard({super.key, required this.feature});
 
-  void gotosection(String section) {
-    switch (section) {
-      case "E-sim":
-        Get.toNamed(Routes.ESIM);
-        break;
-      case "follow_your_team":
-        Get.toNamed(Routes.FOLLOWYOURTEAM);
-        break;
-      case "accomodation":
-        Get.toNamed(Routes.ACCOMMODATION);
-        break;
-      case "visit_morocco":
-        Get.toNamed(Routes.VISIT_MOROCCO);
-        break;
-      default:
-        return;
+  Future<void> gotosection(FeatureModel ft) async {
+    if (ft.featureType == "internal") {
+      switch (ft.serviceType) {
+        case "E-sim":
+          Get.toNamed(Routes.ESIM);
+          break;
+        case "follow_your_team":
+          Get.toNamed(Routes.FOLLOWYOURTEAM);
+          break;
+        case "accomodation":
+          Get.toNamed(Routes.ACCOMMODATION);
+          break;
+        case "visit_morocco":
+          Get.toNamed(Routes.VISIT_MOROCCO);
+          break;
+        default:
+          return;
+      }
+    } else {
+      final url = Uri.parse(ft.externalLink);
+      await launchUrl(url, mode: LaunchMode.externalApplication);
     }
   }
 
@@ -51,14 +48,14 @@ class FeatureCard extends StatelessWidget {
           clipper: DoorContentClipper(),
           child: GestureDetector(
             onTap: () {
-              gotosection(section);
+              gotosection(feature);
             },
             child: Stack(
               children: [
                 // Background image
                 Positioned.fill(
                   child: CachedNetworkImage(
-                    imageUrl: backgroundImage,
+                    imageUrl: feature.Imageurl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -98,7 +95,7 @@ class FeatureCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
+                          feature.title,
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -109,7 +106,7 @@ class FeatureCard extends StatelessWidget {
                         ),
                         SizedBox(height: ScreenSize.width / 100),
                         Text(
-                          subtitle,
+                          feature.description,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: ScreenSize.width / 35,
@@ -122,7 +119,7 @@ class FeatureCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              description,
+                              "Learn more",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: ScreenSize.width / 30,
