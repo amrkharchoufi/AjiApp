@@ -118,7 +118,7 @@ class OnboardingView extends StatelessWidget {
                             "Skip >",
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: ScreenSize.width / 24,
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
@@ -139,12 +139,12 @@ class OnboardingView extends StatelessWidget {
                               child: Text(
                                 controller.currentPage.value ==
                                         controller.onboardingData.length - 1
-                                    ? "Getstarted"
+                                    ? "Get started"
                                     : "Continue",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 20,
+                                  fontSize: ScreenSize.width / 22,
                                 ),
                               ),
                             ),

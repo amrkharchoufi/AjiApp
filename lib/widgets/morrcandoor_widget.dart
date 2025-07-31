@@ -49,76 +49,76 @@ class FeatureCard extends StatelessWidget {
         painter: DoorFramePainter(),
         child: ClipPath(
           clipper: DoorContentClipper(),
-          child: Stack(
-            children: [
-              // Background image
-              Positioned.fill(
-                child: CachedNetworkImage(
-                  imageUrl: backgroundImage,
-                  fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () {
+              gotosection(section);
+            },
+            child: Stack(
+              children: [
+                // Background image
+                Positioned.fill(
+                  child: CachedNetworkImage(
+                    imageUrl: backgroundImage,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
 
-              // Gradient overlay
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: ScreenSize.width / 4,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withAlpha((0.9 * 255).toInt()),
-                        ]),
+                // Gradient overlay
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    height: ScreenSize.width / 4,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withAlpha((0.9 * 255).toInt()),
+                          ]),
+                    ),
                   ),
                 ),
-              ),
-              // Text content
-              Positioned(
-                bottom: ScreenSize.width / 30,
-                left: ScreenSize.width / 46,
-                right: ScreenSize.width / 80,
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: ScreenSize.width / 50),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(179, 0, 0, 0),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: ScreenSize.width / 30,
+                // Text content
+                Positioned(
+                  bottom: ScreenSize.width / 30,
+                  left: ScreenSize.width / 46,
+                  right: ScreenSize.width / 80,
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: ScreenSize.width / 50),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(179, 0, 0, 0),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: ScreenSize.width / 30,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: ScreenSize.width / 100),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: ScreenSize.width / 35,
+                        SizedBox(height: ScreenSize.width / 100),
+                        Text(
+                          subtitle,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: ScreenSize.width / 35,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: ScreenSize.width / 100),
-                      GestureDetector(
-                        onTap: () {
-                          gotosection(section);
-                        },
-                        child: Row(
+                        SizedBox(height: ScreenSize.width / 100),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
@@ -137,12 +137,12 @@ class FeatureCard extends StatelessWidget {
                             )
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
