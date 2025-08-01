@@ -6,11 +6,13 @@ class StadiumModel {
   final String description;
   final String inauguration;
   final String homeGroundFor;
-  final double latitude; // For map view
-  final double longitude; // For map view
+  final double latitude;
+  final double longitude;
+  final int apiVenueId;
 
   StadiumModel({
     required this.name,
+    required this.apiVenueId,
     required this.city,
     required this.imageUrl,
     required this.capacity,
@@ -25,6 +27,7 @@ class StadiumModel {
     return StadiumModel(
       name: data['title'] ?? "empty",
       city: data['location'] ?? "empty",
+      apiVenueId: data['apiVenueId'] ?? 0,
       imageUrl: data['imageUrl'],
       capacity: data["capacity"] ?? "empty",
       description: data["description"] ?? "empty",

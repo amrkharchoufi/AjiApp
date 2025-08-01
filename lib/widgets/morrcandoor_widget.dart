@@ -14,7 +14,7 @@ class FeatureCard extends StatelessWidget {
   Future<void> gotosection(FeatureModel ft) async {
     if (ft.featureType == "internal") {
       switch (ft.serviceType) {
-        case "E-sim":
+        case "e-sim":
           Get.toNamed(Routes.ESIM);
           break;
         case "follow_your_team":
@@ -23,7 +23,7 @@ class FeatureCard extends StatelessWidget {
         case "accomodation":
           Get.toNamed(Routes.ACCOMMODATION);
           break;
-        case "visit_morocco":
+        case "tourist_spots":
           Get.toNamed(Routes.VISIT_MOROCCO);
           break;
         default:

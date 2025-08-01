@@ -22,6 +22,8 @@ class FixtureController extends GetxController {
   var allStadiums = <StadiumModel>[].obs;
   late StadiumModel selectedstd;
 
+
+
   // UI state variables
   var isLoading = true.obs;
   var isloadingstd = true.obs;
@@ -115,7 +117,9 @@ class FixtureController extends GetxController {
       'fixture': fixture,
       'leagueid': leagueid,
       'season': season,
-      'api_token': api_token
+      'api_token': api_token,
+      'stadiums': stadiumsinfo,
+      
     });
   }
 

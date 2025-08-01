@@ -81,9 +81,8 @@ class TeamDetailsView extends StatelessWidget {
                                 children: [
                                   matchWidget(controller.fixture),
                                   customDivider(),
-                                  stadiumWidget([
-                                    "https://www.hok.com/wp-content/uploads/2023/06/2023_0607_StadiumoftheFutureRendering-2_1900.jpg"
-                                  ]),
+                                  stadiumWidget([controller.stadium.imageUrl],
+                                      controller),
                                   customDivider(),
                                   Obx(
                                     () => tabs(
@@ -246,7 +245,7 @@ class TeamDetailsView extends StatelessWidget {
     );
   }
 
-  Widget stadiumWidget(List<String> images) {
+  Widget stadiumWidget(List<String> images, controller) {
     CarouselSliderController carouselSliderController =
         CarouselSliderController();
     return Column(
@@ -268,9 +267,12 @@ class TeamDetailsView extends StatelessWidget {
                 items: images.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
-                      return CachedNetworkImage(
-                        imageUrl: i,
-                        fit: BoxFit.cover,
+                      return SizedBox(
+                        width: Get.width,
+                        child: CachedNetworkImage(
+                          imageUrl: i,
+                          fit: BoxFit.cover,
+                        ),
                       );
                     },
                   );
@@ -332,7 +334,7 @@ class TeamDetailsView extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          "Prince Moulay Abdellah Stadium",
+                          controller.stadium.name,
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         Center(
@@ -345,7 +347,7 @@ class TeamDetailsView extends StatelessWidget {
                                 size: 16,
                               ),
                               Text(
-                                "Rabat",
+                                controller.stadium.city,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12),
                               )

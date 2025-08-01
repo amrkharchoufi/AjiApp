@@ -2,6 +2,7 @@ class FixtureSimple {
   final int id;
   final String date;
   final String venue;
+  final int venueId;
   final TeamSimple homeTeam;
   final TeamSimple awayTeam;
 
@@ -9,6 +10,7 @@ class FixtureSimple {
     required this.id,
     required this.date,
     required this.venue,
+    required this.venueId,
     required this.homeTeam,
     required this.awayTeam,
   });
@@ -18,6 +20,7 @@ class FixtureSimple {
       id: json['fixture']['id'],
       date: json['fixture']['date'],
       venue: json['fixture']['venue']['name'] ?? 'Unknown Venue',
+      venueId: json['fixture']['venue']['id'] ?? 0,
       homeTeam: TeamSimple.fromJson(json['teams']['home']),
       awayTeam: TeamSimple.fromJson(json['teams']['away']),
     );

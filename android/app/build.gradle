@@ -42,7 +42,7 @@ android {
         applicationId = "com.ajiapp.app"
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
-        versionCode = 1 //generateVersionCode()
+        versionCode = generateVersionCode()
         versionName = flutter.versionName
         multiDexEnabled true
     }
@@ -59,6 +59,8 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
+            shrinkResources false  // <-- disable shrinking
+        minifyEnabled false    // optionally disable minification too
         }
     }
 }

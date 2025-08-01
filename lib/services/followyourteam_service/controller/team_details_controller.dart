@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:ajiapp/services/followyourteam_service/model/fixture_model.dart';
+import 'package:ajiapp/services/followyourteam_service/model/stadium_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -10,6 +11,8 @@ class TeamDetailsController extends GetxController {
   late int leagueid;
   late FixtureSimple fixture;
   late String api_token;
+  var stadiumsinfo = <StadiumModel>[].obs;
+  late StadiumModel stadium;
 
   // Tab selection
   Rx<int> tabIndex = 0.obs;
@@ -26,11 +29,29 @@ class TeamDetailsController extends GetxController {
     leagueid = Get.arguments['leagueid'];
     fixture = Get.arguments['fixture'];
     api_token = Get.arguments['api_token'];
-
+    stadiumsinfo.value = Get.arguments['stadiums'];
+    getStadium();
     // Fetch standings data when controller is initialized
     fetchStandings();
 
     super.onInit();
+  }
+
+  getStadium() {
+    stadium = stadiumsinfo.firstWhere(
+      (stadium) => stadium.apiVenueId == fixture.venueId,
+      orElse: () => StadiumModel(
+        name: "Unknown Stadium",
+        apiVenueId: 0,
+        city: "Unknown City",
+        imageUrl:
+            "https://firebasestorage.googleapis.com/v0/b/ajiapp-d436f.firebasestorage.app/o/stadiums%2F1753662942090_3cf54388-6b61-4c85-8d55-7e379d9d1639.png?alt=media&token=73f45c00-a97e-453a-9b65-cc23b7670d64",
+        capacity: "0",
+        description: "No description available",
+        inauguration: "Unknown",
+        homeGroundFor: "Unknown",
+      ),
+    );
   }
 
   void changeTabIndex(int index) {
