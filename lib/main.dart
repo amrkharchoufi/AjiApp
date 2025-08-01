@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       getPages: routes,
-      initialRoute: Routes.ONBOARDING,
+      initialRoute: Routes.SPLASH,
       debugShowCheckedModeBanner: false,
 
       // Use faster transition

@@ -2,9 +2,16 @@ import 'package:ajiapp/settings/size.dart';
 import 'package:ajiapp/widgets/call_widget.dart';
 import 'package:ajiapp/widgets/myappbar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ImportantctView extends StatelessWidget {
   const ImportantctView({super.key});
+  Future<void> launchurl() async {
+    final url = 'https://ajiapp.com/';
+
+    await launch(url);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +39,48 @@ class ImportantctView extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                  child: CallWidget(
-                    name: 'Contact',
-                    img: "assets/icons/aji_icon.svg",
-                    number: "0661777073",
-                  ),
-                ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        launchurl();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: SizeConfig.getBlockSizeVertical(7.5),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [
+                            BoxShadow(
+                              // ignore: deprecated_member_use
+                              color: Colors.black.withOpacity(0.15),
+                              blurRadius: 2,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Contact",
+                              style: TextStyle(
+                                fontSize: SizeConfig.getBlockSizeHorizontal(6),
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(
+                              width: SizeConfig.getBlockSizeHorizontal(1.5),
+                            ),
+                            SvgPicture.asset(
+                              "assets/icons/aji_icon.svg",
+                            ),
+                          ],
+                        ),
+                      ),
+                    )),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
