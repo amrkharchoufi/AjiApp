@@ -13,14 +13,6 @@ class ImageCacheManager {
   static const List<String> _commonAssetImages = [
     'assets/images/background.png',
     'assets/images/secondbackground.png',
-    'assets/images/follow_featured.jpg',
-    'assets/images/sim.jpg',
-    'assets/images/matchday.jpg',
-    'assets/images/upcomingpic1.jpg',
-    'assets/images/upcomingpic2.jpg',
-    'assets/images/city1.png',
-    'assets/images/city2.png',
-    'assets/images/mosque.png',
   ];
 
   /// Pre-cache commonly used images to improve app startup performance
