@@ -115,7 +115,7 @@ class _SignupBottomSheetViewState extends State<SignupBottomSheetView> {
                     _buildTextField(
                       label: 'Email',
                       controller: _email,
-                      icon: Icons.account_circle_outlined,
+                      icon: Icons.email,
                       validatorText: '*Email required',
                     ),
                     const SizedBox(height: 15),
